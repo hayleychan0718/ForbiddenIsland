@@ -1,4 +1,4 @@
-package island;
+package island.enums;
 
 public enum Names {Watchtower,
     		WhisperingGarden,

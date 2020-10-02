@@ -1,4 +1,6 @@
-package island;
+package island.board;
+
+import island.enums.Names;
 
 public class Tile {
 	// Tile can be "flooded" or "unflooded"
