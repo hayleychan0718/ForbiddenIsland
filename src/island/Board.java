@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Board{
 	
-	private boolean hasTile;
+	/*private boolean hasTile;
 	
 	public Board(){
 		this.hasTile = false;
@@ -16,7 +16,7 @@ public class Board{
 	
 	public void setTile(boolean setTile) {
 		this.hasTile = setTile; 
-	}
+	}*/
 	
 	public void makeBoard() {
         Tile[][] board = new Tile[6][6];
