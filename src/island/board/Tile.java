@@ -1,17 +1,15 @@
 package island.board;
 
+import java.util.ArrayList;
 import island.enums.Names;
 
 public class Tile {
-	// Tile can be "flooded" or "unflooded"
-	private boolean isFlooded;
-	// Tile is present or gone
-	private boolean isPresent;
-	// Tile has x and y coordinates
-	private final int x, y;
-	// Tile has a name
-	private final Names name;
+	private boolean isFlooded; // Tile can be "flooded" or "unflooded"
+	private boolean isPresent; // Tile is present or gone
+	private final Names name;  // Tile has a name
+	private int[] location, up, down, left, right; 
 	/* Tile is associated with treasure variable?? */
+	
 	
 	/* When a Tile object is initialised, the tile is present, unflooded, 
 	 * and a random (x,y) coordinate is passed in.	
@@ -19,9 +17,12 @@ public class Tile {
 	public Tile(Names name, int x, int y) {
 		this.isFlooded = false;
 		this.isPresent = true;
-		this.x = x;
-		this.y = y;
 		this.name = name;
+		this.location = new int[] {x, y};
+		this.up = new int[] {x, y+1};
+		this.down = new int[] {x, y-1};
+		this.left = new int[] {x-1, y};
+		this.right = new int[] {x+1, y};
 	}
 	
 	// Getters
@@ -40,14 +41,11 @@ public class Tile {
 	public boolean isPresent() {
 		return isPresent;
 	}
-/*	
-	public void getDiagonal() {
-
-	}
 	
-	public void getAdjacent() {
+/*	public void getDiagonal() {
 
 	}*/
+	
 	
 	// Setters
 	public void setFlood(boolean flood) {
