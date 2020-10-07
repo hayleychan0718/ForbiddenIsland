@@ -26,8 +26,24 @@ public class Tile {
 	}
 	
 	// Getters
-	public void getTileCoordinates() {
-		System.out.println("(" + x + ", " + y + ")");
+	public int[] getLocation() {
+		return location;
+	}
+	
+	public int[] getUp() {
+		return up;
+	}
+	
+	public int[] getDown() {
+		return down;
+	}
+	
+	public int[] getLeft() {
+		return left;
+	}
+	
+	public int[] getRight() {
+		return right;
 	}
 	
 	public boolean isFlooded() {
@@ -56,5 +72,11 @@ public class Tile {
 		this.isPresent = present;
 	}
 	
+	/*
+	 * Tests
+	 */
+	public static void main(String[] args) {
+		Tile tile = new Tile(Names.BreakersBridge, 0, 2);
+	}
 
 }
