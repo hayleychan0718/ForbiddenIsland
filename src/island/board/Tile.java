@@ -7,7 +7,8 @@ public class Tile {
 	private boolean isFlooded; // Tile can be "flooded" or "unflooded"
 	private boolean isPresent; // Tile is present or gone
 	private final Names name;  // Tile has a name
-	private int[] location, up, down, left, right; 
+	private int[] location, up, down, left, right; // Coordinates of adjacent tiles
+	private int[] northEast, southEast, southWest, northWest; // Coordinates of diagonal tiles
 	/* Tile is associated with treasure variable?? */
 	
 	
@@ -23,6 +24,10 @@ public class Tile {
 		this.down = new int[] {x, y-1};
 		this.left = new int[] {x-1, y};
 		this.right = new int[] {x+1, y};
+		this.northEast = new int[] {x+1, y+1};
+		this.southEast = new int[] {x+1, y-1};
+		this.southWest = new int[] {x-1, y-1};
+		this.northWest = new int[] {x-1, y+1};
 	}
 	
 	// Getters
