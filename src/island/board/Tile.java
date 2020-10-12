@@ -1,13 +1,12 @@
 package island.board;
 
-import java.util.ArrayList;
 import island.enums.Names;
 
 public class Tile {
 	private boolean isFlooded; // Tile can be "flooded" or "unflooded"
 	private boolean isPresent; // Tile is present or gone
 	private final Names name;  // Tile has a name
-	private int[] location, up, down, left, right; // Coordinates of adjacent tiles
+	private int[] location, north, south, east, west; // Coordinates of adjacent tiles
 	private int[] northEast, southEast, southWest, northWest; // Coordinates of diagonal tiles
 	/* Tile is associated with treasure variable?? */
 	
@@ -20,36 +19,91 @@ public class Tile {
 		this.isPresent = true;
 		this.name = name;
 		this.location = new int[] {x, y};
-		this.up = new int[] {x, y+1};
-		this.down = new int[] {x, y-1};
-		this.left = new int[] {x-1, y};
-		this.right = new int[] {x+1, y};
+		this.north = new int[] {x, y+1};
+		this.south = new int[] {x, y-1};
+		this.west = new int[] {x-1, y};
+		this.east = new int[] {x+1, y};
 		this.northEast = new int[] {x+1, y+1};
 		this.southEast = new int[] {x+1, y-1};
 		this.southWest = new int[] {x-1, y-1};
 		this.northWest = new int[] {x-1, y+1};
 	}
 	
-	// Getters
+	/*
+	 *  Tile getters
+	 */
+	public Tile getNorthTile() {
+		return Board.getInstance().thisTile(north[0], north[1]);
+	}
+	
+	public Tile getSouthTile() {
+		return Board.getInstance().thisTile(south[0], south[1]);
+	}
+	
+	public Tile getEastTile() {
+		return Board.getInstance().thisTile(east[0], east[1]);
+	}
+	
+	public Tile getWestTile() {
+		return Board.getInstance().thisTile(west[0], west[1]);
+	}
+	
+	public Tile getNorthEastTile() {
+		return Board.getInstance().thisTile(northEast[0], northEast[1]);
+	}
+	
+	public Tile getSouthEastTile() {
+		return Board.getInstance().thisTile(southEast[0], southEast[1]);
+	}
+	
+	public Tile getSouthWestTile() {
+		return Board.getInstance().thisTile(southWest[0], southWest[1]);
+	}
+	
+	public Tile getNorthWestTile() {
+		return Board.getInstance().thisTile(northWest[0], northWest[1]);
+	}
+	
+	/*
+	 * Coordinates getters (Might not need them)
+	 */
 	public int[] getLocation() {
 		return location;
 	}
 	
-	public int[] getUp() {
-		return up;
+	public int[] getNorth() {
+		return north;
 	}
 	
-	public int[] getDown() {
-		return down;
+	public int[] getSouth() {
+		return south;
 	}
 	
-	public int[] getLeft() {
-		return left;
+	public int[] getEast() {
+		return east;
 	}
 	
-	public int[] getRight() {
-		return right;
+	public int[] getWest() {
+		return west;
 	}
+	
+	public int[] getNorthEast() {
+		return northEast;
+	}
+	
+	public int[] getSouthEast() {
+		return southEast;
+	}
+	
+	public int[] getSouthWest() {
+		return southWest;
+	}
+	
+	public int[] getNorthWest() {
+		return northWest;
+	}
+	
+	
 	
 	public boolean isFlooded() {
 		return isFlooded;
@@ -63,9 +117,6 @@ public class Tile {
 		return isPresent;
 	}
 	
-/*	public void getDiagonal() {
-
-	}*/
 	
 	
 	// Setters
@@ -77,11 +128,4 @@ public class Tile {
 		this.isPresent = present;
 	}
 	
-	/*
-	 * Tests
-	 */
-	public static void main(String[] args) {
-		Tile tile = new Tile(Names.BreakersBridge, 0, 2);
-	}
-
 }
