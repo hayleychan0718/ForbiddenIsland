@@ -2,7 +2,7 @@ package island.board;
 
 import java.util.*;
 
-import island.enums.Names;
+import island.enums.TileNames;
 
 /*
  * Singleton class Board
@@ -12,7 +12,7 @@ public class Board{
 	//private boolean hasTile;
     private static Board boardInstance = null; 
     private Tile[][] board = new Tile[6][6];
-    private ArrayList<Names> tileNames = new ArrayList<Names>(EnumSet.allOf(Names.class));
+    private ArrayList<TileNames> tileNames = new ArrayList<TileNames>(EnumSet.allOf(TileNames.class));
     private int islandTiles[][] = {{0,2},{0,3},{1,1},{1,2},{1,3},{1,4},{2,0},{2,1},{2,2},
     		{2,3},{2,4},{2,5},{3,0},{3,1},{3,2},{3,3},{3,4},{3,5},{4,1},
     		{4,2},{4,3},{4,4},{5,2},{5,3}};
@@ -49,7 +49,7 @@ public class Board{
         }
     }
     
-    public Tile getTile(Names name) {
+    public Tile getTile(TileNames name) {
         for(int[] x: islandTiles) {
         	if(board[x[0]][x[1]].getName() == name) {
         		return board[x[0]][x[1]];
@@ -80,7 +80,7 @@ public class Board{
 	public static void main(String[] args) {
 		Board board = Board.getInstance();
 		board.printBoard();
-		Tile tile1 = board.getTile(Names.TwilightHollow);
+		Tile tile1 = board.getTile(TileNames.TwilightHollow);
 		Tile tile2 = board.thisTile(4, 4);
 		
 		System.out.println(Arrays.toString(tile1.getLocation()));

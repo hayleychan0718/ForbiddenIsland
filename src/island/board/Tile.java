@@ -1,20 +1,18 @@
 package island.board;
 
-import island.enums.Names;
+import island.enums.TileNames;
 
 public class Tile {
 	private boolean isFlooded; // Tile can be "flooded" or "unflooded"
 	private boolean isPresent; // Tile is present or gone
-	private final Names name;  // Tile has a name
+	private final TileNames name;  // Tile has a name
 	private int[] location, north, south, east, west; // Coordinates of adjacent tiles
 	private int[] northEast, southEast, southWest, northWest; // Coordinates of diagonal tiles
-	/* Tile is associated with treasure variable?? */
-	
 	
 	/* When a Tile object is initialised, the tile is present, unflooded, 
 	 * and a random (x,y) coordinate is passed in.	
 	 */
-	public Tile(Names name, int x, int y) {
+	public Tile(TileNames name, int x, int y) {
 		this.isFlooded = false;
 		this.isPresent = true;
 		this.name = name;
@@ -109,15 +107,13 @@ public class Tile {
 		return isFlooded;
 	}
 	
-	public Names getName() {
+	public TileNames getName() {
 		return name;
 	}
 	
 	public boolean isPresent() {
 		return isPresent;
 	}
-	
-	
 	
 	// Setters
 	public void setFlood(boolean flood) {
