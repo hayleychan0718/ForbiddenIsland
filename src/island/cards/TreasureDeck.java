@@ -4,6 +4,6 @@ import island.enums.Names;
 
 public class TreasureDeck {
 	
-	private final Names name;
+	//private final Names name;
 
 }
