@@ -45,7 +45,9 @@ public class Board{
     public void printBoard() {
         for(int[] x: islandTiles) {
             System.out.println(board[x[0]][x[1]].getName());
-            System.out.println(Arrays.toString(board[x[0]][x[1]].getLocation())); 
+            System.out.println(Arrays.toString(board[x[0]][x[1]].getLocation()));
+            System.out.println("Is flooded: " + board[x[0]][x[1]].isFlooded());
+            System.out.println();
         }
     }
     
@@ -80,18 +82,24 @@ public class Board{
 	public static void main(String[] args) {
 		Board board = Board.getInstance();
 		board.printBoard();
-		Tile tile1 = board.getTile(TileNames.TwilightHollow);
-		Tile tile2 = board.thisTile(4, 4);
+		Tile tile1 = board.getTile(TileNames.CaveOfEmbers);
+		Tile tile2 = board.thisTile(0, 2);
 		
 		System.out.println(Arrays.toString(tile1.getLocation()));
+		System.out.println("Treasure tile: " + tile1.hasTreasure());
 		
 		if(tile2.getNorthTile() == null) {
-			System.out.println("No north tile"); 
-		}
+			System.out.println("Out of island"); 
+		}else
+			System.out.println(tile2.getNorthTile().getName());
 		
-		if(tile2.getWestTile().isPresent() && tile2.getWestTile() != null) {
-			System.out.println(tile2.getWestTile().getName());
-			System.out.println(Arrays.toString(tile2.getWestTile().getLocation()));
+		if(tile2.getWestTile() != null) {
+			if(tile2.isPresent()) {
+				System.out.println(tile2.getWestTile().getName());
+				System.out.println(Arrays.toString(tile2.getWestTile().getLocation()));
+			}
+		}else {
+			System.out.println("Out of island");
 		}
 	}
 	
