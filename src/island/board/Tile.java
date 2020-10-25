@@ -115,6 +115,15 @@ public class Tile {
 		return isPresent;
 	}
 	
+	public boolean hasTreasure() {
+		if(name==TileNames.TempleOfTheSun || name==TileNames.TempleOfTheMoon || name==TileNames.HowlingGarden ||
+				name == TileNames.WhisperingGarden || name==TileNames.CaveOfShadows || name==TileNames.CaveOfEmbers ||
+				name == TileNames.CoralPalace || name == TileNames.TidalPalace) {
+			return true;
+		} else
+			return false;
+	}
+	
 	// Setters
 	public void setFlood(boolean flood) {
 		this.isFlooded = flood;
