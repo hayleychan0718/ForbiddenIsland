@@ -17,7 +17,15 @@ public enum TileNames {
 	CrimsonForest ("Crimson Forest"),
 	IronGate ("Iron Gate"),
 	SilverGate ("Silver Gate"),
-	PhantomRock ("Phantom Rock");
+	PhantomRock ("Phantom Rock"),
+	TempleOfTheSun ("Temple of The Sun"),
+	TempleOfTheMoon ("Temple of The Moon"),
+	HowlingGarden ("Howling Garden"), 
+	WhisperingGarden ("Whispering Garden"),
+	CaveOfShadows ("Cafe of Shadows"),
+	CaveOfEmbers ("Cave of Embers"),
+	CoralPalace ("Coral Palace"),
+	TidalPalace ("Tidal Palace");
 	
 	private final String name;
 	
