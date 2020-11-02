@@ -12,7 +12,7 @@ public enum TreasureNames {
 		this.name = name;
 	}
 	
-	public String getName() {
+	public String getString() {
 		return name;
 	}
 	

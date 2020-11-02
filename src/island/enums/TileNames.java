@@ -33,7 +33,7 @@ public enum TileNames {
 		this.name = name;
 	}
 	
-	public String getName() {
+	public String getString() {
 		return name;
 	}
 }
