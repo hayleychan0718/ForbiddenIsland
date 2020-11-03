@@ -34,56 +34,56 @@ public class Tile {
 		if(north[1] >= 6 || north[1] < 0 || north[0] >= 6 || north[0] < 0) {
 			return null;
 		}else
-			return Board.getInstance().thisTile(north[0], north[1]);
+			return Board.getInstance().getTile(north[0], north[1]);
 	}
 	
 	public Tile getSouthTile() {
 		if(south[1] >= 6 || south[1] < 0 || south[0] >= 6 || south[0] < 0) {
 			return null;
 		}else
-			return Board.getInstance().thisTile(south[0], south[1]);
+			return Board.getInstance().getTile(south[0], south[1]);
 	}
 	
 	public Tile getEastTile() {
 		if(east[1] >= 6 || east[1] < 0 || east[0] >= 6 || east[0] < 0) {
 			return null;
 		}else
-			return Board.getInstance().thisTile(east[0], east[1]);
+			return Board.getInstance().getTile(east[0], east[1]);
 	}
 	
 	public Tile getWestTile() {
 		if(west[1] >= 6 || west[1] < 0 || west[0] >= 6 || west[0] < 0) {
 			return null;
 		}else
-			return Board.getInstance().thisTile(west[0], west[1]);
+			return Board.getInstance().getTile(west[0], west[1]);
 	}
 	
 	public Tile getNorthEastTile() {
 		if(northEast[1] >= 6 || northEast[1] < 0 || northEast[0] >= 6 || northEast[0] < 0) {
 			return null;
 		}else
-			return Board.getInstance().thisTile(northEast[0], northEast[1]);
+			return Board.getInstance().getTile(northEast[0], northEast[1]);
 	}
 	
 	public Tile getSouthEastTile() {
 		if(southEast[1] >= 6 || southEast[1] < 0 || southEast[0] >= 6 || southEast[0] < 0) {
 			return null;
 		}else
-			return Board.getInstance().thisTile(southEast[0], southEast[1]);
+			return Board.getInstance().getTile(southEast[0], southEast[1]);
 	}
 	
 	public Tile getSouthWestTile() {
 		if(southWest[1] >= 6 || southWest[1] < 0 || southWest[0] >= 6 || southWest[0] < 0) {
 			return null;
 		}else
-			return Board.getInstance().thisTile(southWest[0], southWest[1]);
+			return Board.getInstance().getTile(southWest[0], southWest[1]);
 	}
 	
 	public Tile getNorthWestTile() {
 		if(northWest[1] >= 6 || northWest[1] < 0 || northWest[0] >= 6 || northWest[0] < 0) {
 			return null;
 		}else
-			return Board.getInstance().thisTile(northWest[0], northWest[1]);
+			return Board.getInstance().getTile(northWest[0], northWest[1]);
 	}
 	
 	/*
@@ -147,6 +147,7 @@ public class Tile {
 		} else
 			return false;
 	}
+	
 	
 	// Setters
 	public void setFlood(boolean flood) {
