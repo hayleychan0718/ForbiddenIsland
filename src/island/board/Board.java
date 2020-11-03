@@ -45,10 +45,22 @@ public class Board{
     public void printBoard() {
         for(int[] x: islandTiles) {
             System.out.println(board[x[0]][x[1]].getName());
-            System.out.println(Arrays.toString(board[x[0]][x[1]].getLocation()));
-            System.out.println("Is flooded: " + board[x[0]][x[1]].isFlooded());
+            System.out.println("Coord: " + Arrays.toString(board[x[0]][x[1]].getLocation()));
+            System.out.println("Flooded: " + board[x[0]][x[1]].isFlooded());
+            System.out.println("Present: " + board[x[0]][x[1]].isPresent());
             System.out.println();
         }
+    	
+        
+        /*for(int i=0; i<6; i++) {
+        	System.out.println();
+        	for(int j=0; j<6; j++) {
+        		if(board[i][j] == null) 
+        			System.out.printf("%25s", "blank");
+        		else 
+        			System.out.printf("%25s", board[i][j].getName().getString());
+        	}
+        }*/    	
     }
     
     public Tile getTile(TileNames name) {
@@ -64,43 +76,12 @@ public class Board{
     	return board[x][y];
     }
 	
-    /*
-     * Don't think this is needed?
-     * 
-    public void hasTile(int x, int y) {
-    	if(board[x][y] == null) {
-    		this.hasTile = false;
-    	} else
-    		this.hasTile = true;
-    }
-    */
-    
-	
 	/*
 	 * Tests
 	 */
 	public static void main(String[] args) {
 		Board board = Board.getInstance();
 		board.printBoard();
-		Tile tile1 = board.getTile(TileNames.CaveOfEmbers);
-		Tile tile2 = board.thisTile(0, 2);
-		
-		System.out.println(Arrays.toString(tile1.getLocation()));
-		System.out.println("Treasure tile: " + tile1.hasTreasure());
-		
-		if(tile2.getNorthTile() == null) {
-			System.out.println("Out of island"); 
-		}else
-			System.out.println(tile2.getNorthTile().getName());
-		
-		if(tile2.getWestTile() != null) {
-			if(tile2.isPresent()) {
-				System.out.println(tile2.getWestTile().getName());
-				System.out.println(Arrays.toString(tile2.getWestTile().getLocation()));
-			}
-		}else {
-			System.out.println("Out of island");
-		}
 	}
 	
 }
