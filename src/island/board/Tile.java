@@ -17,14 +17,14 @@ public class Tile {
 		this.isPresent = true;
 		this.name = name;
 		this.location = new int[] {x, y};
-		this.north = new int[] {x, y+1};
-		this.south = new int[] {x, y-1};
-		this.west = new int[] {x-1, y};
-		this.east = new int[] {x+1, y};
-		this.northEast = new int[] {x+1, y+1};
-		this.southEast = new int[] {x+1, y-1};
-		this.southWest = new int[] {x-1, y-1};
-		this.northWest = new int[] {x-1, y+1};
+		this.north = new int[] {x-1, y};
+		this.south = new int[] {x+1, y};
+		this.west = new int[] {x, y-1};
+		this.east = new int[] {x, y+1};
+		this.northEast = new int[] {x-1, y+1};
+		this.southEast = new int[] {x+1, y+1};
+		this.southWest = new int[] {x+1, y-1};
+		this.northWest = new int[] {x-1, y-1};
 	}
 	
 	/*
