@@ -63,9 +63,18 @@ public class Board{
         } */   	
     }
     
-    public Tile getTile(TileNames name) {
+    /*public Tile getTile(TileNames name) {
         for(int[] x: islandTiles) {
         	if(board[x[0]][x[1]].getName() == name) {
+        		return board[x[0]][x[1]];
+        	}
+        }
+        return null; // never needed
+    }*/
+    
+	public Tile getTile(String name) {
+        for(int[] x: islandTiles) {
+        	if(board[x[0]][x[1]].getNameString() == name) {
         		return board[x[0]][x[1]];
         	}
         }
@@ -88,5 +97,6 @@ public class Board{
 			System.out.println(Arrays.toString(tile1.getEastTile().getLocation()));
 		}
 	}
+
 	
 }
