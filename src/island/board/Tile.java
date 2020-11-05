@@ -135,6 +135,10 @@ public class Tile {
 		return name;
 	}
 	
+	public String getNameString() {
+		return name.getString();
+	}
+	
 	public boolean isPresent() {
 		return isPresent;
 	}
