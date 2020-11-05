@@ -60,7 +60,7 @@ public class Board{
         		else 
         			System.out.printf("%25s", board[i][j].getName().getString());
         	}
-        }*/    	
+        } */   	
     }
     
     public Tile getTile(TileNames name) {
@@ -72,7 +72,7 @@ public class Board{
         return null; // never needed
     }
     
-    public Tile thisTile(int x, int y) {
+    public Tile getTile(int x, int y) {
     	return board[x][y];
     }
 	
@@ -82,6 +82,11 @@ public class Board{
 	public static void main(String[] args) {
 		Board board = Board.getInstance();
 		board.printBoard();
+		
+		Tile tile1 = board.getTile(2,5);
+		if(tile1.getEastTile() != null) {
+			System.out.println(Arrays.toString(tile1.getEastTile().getLocation()));
+		}
 	}
 	
 }
