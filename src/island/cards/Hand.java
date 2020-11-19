@@ -3,6 +3,7 @@ package island.cards;
 import java.util.HashSet;
 import java.util.Set;
 
+//Need to be able to discard cards
 
 public class Hand {
 	private Set<TreasureDeckCard> hand;

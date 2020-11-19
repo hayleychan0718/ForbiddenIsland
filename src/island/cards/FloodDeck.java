@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Stack;
 
-import gameplay.WaterMeter;
+import gameLogic.WaterMeter;
 import island.board.Board;
 import island.board.Tile;
 import island.enums.TileNames;

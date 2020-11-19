@@ -1,4 +1,4 @@
-package gameplay;
+package gameLogic;
 
 public class HelicopterLift {
 	

@@ -1,5 +1,7 @@
 package island.board;
 
+import java.util.LinkedList;
+
 import island.enums.TileNames;
 
 public class Tile {
@@ -125,6 +127,29 @@ public class Tile {
 		return northWest;
 	}
 	
+	public LinkedList<Tile> getAdjacentTiles(){
+		LinkedList<Tile> adjacentTiles = new LinkedList<Tile>();
+		adjacentTiles.add(getNorthTile());
+		adjacentTiles.add(getWestTile());
+		adjacentTiles.add(getSouthTile());
+		adjacentTiles.add(getEastTile());
+		
+		return adjacentTiles;
+	}
+	
+	public LinkedList<Tile> getAdjacentDiagonal(){
+		LinkedList<Tile> adjacentDiagonalTiles = new LinkedList<Tile>();
+		adjacentDiagonalTiles.add(getNorthTile());
+		adjacentDiagonalTiles.add(getNorthWestTile());
+		adjacentDiagonalTiles.add(getWestTile());
+		adjacentDiagonalTiles.add(getSouthWestTile());
+		adjacentDiagonalTiles.add(getSouthTile());
+		adjacentDiagonalTiles.add(getSouthEastTile());
+		adjacentDiagonalTiles.add(getEastTile());
+		adjacentDiagonalTiles.add(getEastTile());
+		
+		return adjacentDiagonalTiles;
+	}
 	
 	
 	public boolean isFlooded() {
