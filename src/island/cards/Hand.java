@@ -19,4 +19,8 @@ public class Hand {
 	public Set<TreasureDeckCard> getCards(){
 		return hand;
 	}
+	
+	public void removeCard(TreasureDeckCard card) {
+		hand.remove(card);
+	}
 }
