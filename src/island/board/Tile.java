@@ -3,6 +3,7 @@ package island.board;
 import java.util.LinkedList;
 
 import island.enums.TileNames;
+import island.enums.TreasureNames;
 
 public class Tile {
 	private boolean isFlooded; // Tile can be "flooded" or "unflooded"
@@ -177,6 +178,23 @@ public class Tile {
 			return false;
 	}
 	
+	// Use this function with hasTreasure() == true
+	public TreasureNames getTreasure() {
+		if(name == TileNames.TempleOfTheMoon || name == TileNames.TempleOfTheSun) {
+			return TreasureNames.TheEarthStone;
+		}
+		else if(name == TileNames.WhisperingGarden || name == TileNames.HowlingGarden) {
+			return TreasureNames.TheStatueOfTheWind;
+		}
+		else if(name == TileNames.CaveOfEmbers || name == TileNames.CaveOfShadows) {
+			return TreasureNames.TheCrystalOfFire;
+		}
+		else if(name == TileNames.CoralPalace || name == TileNames.TidalPalace) {
+			return TreasureNames.TheOceansChalice;
+		}
+		else
+			return null;
+	}
 	
 	// Setters
 	public void setFlood(boolean flood) {
@@ -186,5 +204,4 @@ public class Tile {
 	public void setPresent(boolean present) {
 		this.isPresent = present;
 	}
-	
 }
