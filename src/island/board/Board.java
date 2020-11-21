@@ -89,10 +89,13 @@ public class Board{
     public ArrayList<Tile> listOfTiles(){
     	ArrayList<Tile> list = new ArrayList<Tile>();
         for(int[] x: islandTiles) {
+        	if(board[x[0]][x[1]].isPresent() == true)
         	list.add(board[x[0]][x[1]]);
         }
         return list;
     }
+    
+    
     
 	/*
 	 * Tests
