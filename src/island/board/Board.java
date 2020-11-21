@@ -63,14 +63,14 @@ public class Board{
         } */   	
     }
     
-    /*public Tile getTile(TileNames name) {
+    public Tile getTile(TileNames name) {
         for(int[] x: islandTiles) {
         	if(board[x[0]][x[1]].getName() == name) {
         		return board[x[0]][x[1]];
         	}
         }
         return null; // never needed
-    }*/
+    }
     
 	public Tile getTile(String name) {
         for(int[] x: islandTiles) {
@@ -85,6 +85,15 @@ public class Board{
     	return board[x][y];
     }
 	
+    
+    public ArrayList<Tile> listOfTiles(){
+    	ArrayList<Tile> list = new ArrayList<Tile>();
+        for(int[] x: islandTiles) {
+        	list.add(board[x[0]][x[1]]);
+        }
+        return list;
+    }
+    
 	/*
 	 * Tests
 	 */
@@ -96,6 +105,8 @@ public class Board{
 		if(tile1.getEastTile() != null) {
 			System.out.println(Arrays.toString(tile1.getEastTile().getLocation()));
 		}
+		
+		System.out.println(board.listOfTiles().get(1).getNameString());
 	}
 
 	
