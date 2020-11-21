@@ -54,6 +54,18 @@ public class PlayerList {
     	return playerList;
     }
     
+    //Returns a list of the other players
+    public List<Player> getListOfOtherPlayers(int playerNumber){
+    	ArrayList<Player> otherListOfPlayers= new ArrayList<Player>(); 
+    	for(Player player: playerList) {
+    		if (player.playerNumber!=playerNumber) {
+    			otherListOfPlayers.add(player);
+    		}
+    	}
+    	return otherListOfPlayers;
+    	
+    }
+    
     
 	//===========================================================
 	// Singleton destroyer for unit testing ONLY
