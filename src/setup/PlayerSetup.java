@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import gameLogic.PlayerAction;
 import players.*;
 import players.PlayerList;
 
@@ -22,17 +23,14 @@ public class PlayerSetup {
 
 
 	public int setNumofPlayers(Scanner scannerIn) {
+		int userInput;
 		Integer numOfPlayers = 0;
 		System.out.println("Enter the number of players playing, this must be be of the range 2 to 4:");
 
-		numOfPlayers=scannerIn.nextInt();
-		while(numOfPlayers<=2 || numOfPlayers>=4) { //invalid input , breaks when valid input enterd
-			System.out.println("You have Entered an invalid input, the range is 2 to 4 ");
-			numOfPlayers=scannerIn.nextInt();
+		userInput=PlayerAction.acceptableInput(2, 4);
+		numOfPlayers=userInput;
 	
-		}
 		return numOfPlayers;
-
 	}
 
 	public void createPlayer(int playerNumber, Scanner scannerIn) {
