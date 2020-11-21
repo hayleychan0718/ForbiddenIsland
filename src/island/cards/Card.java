@@ -1,7 +1,12 @@
 package island.cards;
 
+
+// Not sure if gonna use
 public abstract class Card {
-	private Enum name;
+	protected String name;
 	
+	public String getName() {
+		return name;
+	}
 	
 }

@@ -11,7 +11,7 @@ import island.board.Tile;
 import island.enums.TileNames;
 
 
-public class FloodDeck{
+public class FloodDeck extends Deck{
     private static FloodDeck floodDeckInstance = null; 
     private static Stack<FloodCard> floodStack = new Stack<FloodCard>();
     private static Stack<FloodCard> discardStack = new Stack<FloodCard>();
@@ -32,7 +32,7 @@ public class FloodDeck{
      */
 	public static FloodDeck getInstance(){
         if(floodDeckInstance == null){
-            floodDeckInstance = new FloodDeck();
+        	floodDeckInstance = new FloodDeck();
         }
         return floodDeckInstance;
     }
@@ -40,7 +40,7 @@ public class FloodDeck{
 	/*
 	 * Flooding at start of game
 	 */
-	public void startFlood() {
+	public void startGame() {
 		Board board = Board.getInstance();
 		for(int i=0;i<6;i++) {
 			FloodCard card = floodStack.pop();
@@ -56,11 +56,12 @@ public class FloodDeck{
 	// TODO: Double check how to "get" water level with Liam
 	public void drawCard() {
 		Board board = Board.getInstance();
-		for(int i=0;i<WaterMeter.getWaterLevel();i++) {
+		WaterMeter waterMeter = WaterMeter.getinstance();
+		for(int i=1;i<=waterMeter.getWaterLevel();i++) {
 			if(floodStack.isEmpty()) {
-				FloodDeck.reshuffle();
+				reshuffle();
 			}
-			FloodCard card = floodStack.pop();
+			FloodCard card = (FloodCard) floodStack.pop();
 			Tile tileToFlood = board.getTile(card.getName());
 			if(!tileToFlood.isFlooded() && tileToFlood.isPresent()) {
 				tileToFlood.setFlood(true);
@@ -75,7 +76,7 @@ public class FloodDeck{
 	/*
 	 * Method that reshuffles the discard pile and places back into the flood deck
 	 */
-	protected static void reshuffle() {
+	public void reshuffle() {
 		Collections.shuffle(discardStack);
 		while(!discardStack.isEmpty()){
 			floodStack.push(discardStack.pop());
@@ -91,7 +92,7 @@ public class FloodDeck{
 		Board board = Board.getInstance();
 		board.printBoard();
 		System.out.println("Discard pile: " + FloodDeck.discardStack.size());
-		floodDeck.startFlood();
+		floodDeck.startGame();
 		System.out.println("AFTER FLOODING\n");
 		System.out.println("Discard pile: " + FloodDeck.discardStack.size());
 		board.printBoard();
@@ -99,8 +100,6 @@ public class FloodDeck{
 		System.out.println("Flood from water meter");
 		board.printBoard();
 		System.out.println("Discard pile: " + FloodDeck.discardStack.size());
-		floodDeck.drawCard();
-		floodDeck.drawCard();
 		floodDeck.drawCard();
 		System.out.println("Discard pile: " + FloodDeck.discardStack.size());
 		board.printBoard();
