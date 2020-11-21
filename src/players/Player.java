@@ -9,6 +9,7 @@ import island.board.Tile;
 import island.cards.Card;
 import island.cards.Hand;
 import island.cards.TreasureDeck;
+import island.cards.TreasureDeckCard;
 import pawns.Pawn;
 
 public class Player {
@@ -21,6 +22,7 @@ public class Player {
 	protected Pawn playerPawn;
 	protected int playerActions;
 	//protected playerTreasure;
+	protected String playerTreasure;
 
 
 	//constructor
@@ -40,7 +42,7 @@ public class Player {
 		LinkedList<Tile> moveableTiles = pawnTile.getAdjacentTiles();
 		System.out.println("Tile you can move to:");
 		for(Tile tile: moveableTiles) {	//Checks if the tiles are present if not removes them
-			if(tile.isPresent()==false || tile==null ) {
+			if(tile.isPresent()==false || tile==null ) { // Why or null
 				moveableTiles.remove(tile);
 			}
 			else {
@@ -74,39 +76,38 @@ public class Player {
 		return getStandardMoveableTiles();
 	}
 
-	public LinkedList<Player> giveTreasureCard() { //need hand and list of pawns
+	//Method Returns the list of Players the current player can give cards to
+	public LinkedList<Player> giveTreasureCard() { 
 		LinkedList<Player> playersForTreasureCard = new LinkedList <Player>();
 		PlayerList playerList = PlayerList.getInstance();
 
-		//How do I the player of this class
-		for (Player playerInList:playerList.getListOfPlayers()) { //Need to create a list of players
-			if (playerInList.getPlayerNumber()!=getPlayerNumber() && getPlayerPawnTile()==playerInList.getPlayerPawnTile()) {	//Checks if another pawn is on the same tile as the players pawn, checks that it is not itself als
-				playersForTreasureCard.add(playerInList);
+		for (Player otherPlayer:playerList.getListOfOtherPlayers(playerNumber)) { //creates a list of the other players using the current player number
+			if(playerPawn.getPawnTile()==otherPlayer.getPlayerPawnTile())
+				playersForTreasureCard.add(otherPlayer);
 			}
-		}
 		return playersForTreasureCard;
 	}
 
 	public boolean captureTreasure() { // need hand  WILL STAY
-		ArrayList<Card> cardsToDiscard = new ArrayList <Card>();
+		ArrayList<TreasureDeckCard> cardsToDiscard = new ArrayList <TreasureDeckCard>();
 		if(playerTreasure!=null) {
 			System.out.println("You cannot capture a treasure, since you already hold one");
 			return false;
 		}
-		for(TreasureDeck cardInHand:playerHand.getCards()) {
-			if(cardInHand.getTreasureType() == getPlayerPawnTile().getTreasureType()) { //checks if card in hand matches treasure associated with the tile the player is on 
+		for(TreasureDeckCard cardInHand:playerHand.getCards()) {
+			if(cardInHand.getName() == getPlayerPawnTile().getTreasure().getString()) { //checks if card in hand matches treasure associated with the tile the player is on 
 				cardsToDiscard.add(cardInHand);
 			}
 		}
 
 		if(cardsToDiscard.size()>=4) {     //can it be greater, im guessing you would discard them all even if 5 //maybe in another class
-			for(Card card:cardsToDiscard) {
-			playerHand.discard(card);
+			for(TreasureDeckCard card:cardsToDiscard) {
+			playerHand.removeCard(card);
 			}
-			playerTreasure = getPlayerPawnTile().getTreasureType();
-			return true;
+			playerTreasure = getPlayerPawnTile().getTreasure().getString(); //Gets the string representation of the treasure
+			return true;	//The player has captured a treasure
 		}
-		else return false;
+		else return false; //The player was unable to capture a treasure
 	}
 
 	public void giveCard() {
