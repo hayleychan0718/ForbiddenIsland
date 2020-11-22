@@ -34,4 +34,10 @@ public class Hand {
 		}
 	}
 	
+	//Give card to another player
+	public void giveCard(TreasureDeckCard given, Hand Recieved) {
+		removeCard(given);
+		Recieved.addCard(given);
+	}
+	
 }
