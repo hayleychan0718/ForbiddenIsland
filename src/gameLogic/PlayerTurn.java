@@ -10,12 +10,14 @@ public class PlayerTurn {
 	private Player player;
 	private Scanner inputScanner;
 	private Board board;
+	private PlayerAction action;
 
 
 	public PlayerTurn(Player player, Scanner inputScanner ) {
 		this.player=player;
 		this.inputScanner=inputScanner;
 		this.board= Board.getInstance();
+	    action=new PlayerAction(player);
 	}
 
 	//Printout the available options for a players turn
@@ -64,7 +66,7 @@ public class PlayerTurn {
 			case 2:
 				tryShoreUp();
 			case 3:
-				tryGiveTreasreCard();
+				tryGiveTreasureCard();
 				break;
 			case 4:
 				tryCaptureTreasure();
@@ -80,9 +82,22 @@ public class PlayerTurn {
 
 	}
 	public void tryMove() {
-		PlayerAction movement = new PlayerAction(player);
-		movement.doStandardMovement(inputScanner);
+		action.doStandardMovement(inputScanner);
 	}
+	
+	public void tryShoreUp() {
+		action.shoreUpTiles(inputScanner);
+	}
+	
+	public void tryGiveTreasureCard() {
+		action.giveCard(inputScanner);
+	}
+	
+	public void tryCaptureTreasure() {
+		action.captureTreasure();
+	}
+	
+	
 	
 	
 
