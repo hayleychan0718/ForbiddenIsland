@@ -23,4 +23,23 @@ public class Hand {
 	public void removeCard(TreasureDeckCard card) {
 		hand.remove(card);
 	}
+	
+	public void printHand() {
+		int i =0;
+		System.out.println("Your Hand is as folllows: ");
+		for(Card cardInHand:hand) {
+			System.out.println(hand.get(cardInHand).getName +  "[" + i + "]");
+			i++;
+		}
+	}
+	
+	public void giveCard(TreasureDeckCard given, Hand recieved) {
+		this.hand.remove(given); //why doesn't remove card work
+		recieved.addCard(given);
+	}
+	
+	//Need list of playable cards return the lost
+	//Also print them out and show there index like what i have doene for moveable tiles in player class
+	
+	//discard list of cards
 }
