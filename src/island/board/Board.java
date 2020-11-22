@@ -86,8 +86,8 @@ public class Board{
     }
 	
     
-    public ArrayList<Tile> listOfTiles(){
-    	ArrayList<Tile> list = new ArrayList<Tile>();
+    public LinkedList<Tile> listOfTiles(){
+    	LinkedList<Tile> list = new LinkedList<Tile>();
         for(int[] x: islandTiles) {
         	list.add(board[x[0]][x[1]]);
         }
