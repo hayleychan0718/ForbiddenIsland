@@ -1,9 +1,8 @@
 package island.cards;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
-
-//Need to be able to discard cards
 
 public class Hand {
 	private ArrayList<TreasureDeckCard> hand;
@@ -12,9 +11,18 @@ public class Hand {
 		this.hand = new ArrayList<TreasureDeckCard>();
 	}
 	
-	// If more than 5 cards: ask player to remove one. Where do we do this?
 	public void addCard(TreasureDeckCard card){
 		hand.add(card);
+		if(hand.size() == 6) {
+			System.out.println("Cannot have more than 5 cards in hand! Remove one.");
+			printHand();
+			System.out.print("\nEnter number of card you want to remove: ");
+		    @SuppressWarnings("resource")
+			Scanner scanner = new Scanner(System.in);  
+		    int chosen = scanner.nextInt();  
+		    hand.remove(chosen);
+		    printHand();
+		}
 	}
 	
 	public ArrayList<TreasureDeckCard> getCards(){
@@ -26,8 +34,8 @@ public class Hand {
 	}
 	
 	public void printHand() {
-		int index = 1;
-		System.out.println("Your hand: ");
+		int index = 0;
+		System.out.println("\nYour hand: ");
 		for(int i=0; i<hand.size(); i++) {
 			System.out.println(index + ". " + hand.get(i).getName());
 			index++;
