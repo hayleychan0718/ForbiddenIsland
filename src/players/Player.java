@@ -122,7 +122,10 @@ public class Player {
 	public ArrayList<TreasureDeckCard> showHand(){
 		return playerHand.getCards();
 	}
-
+	
+	public Hand getHand() {
+		return playerHand;
+	}
 
 	//Needs associated pawn class
 	public Tile getPlayerPawnTile() {
