@@ -35,10 +35,15 @@ public class Hand {
 	
 	public void printHand() {
 		int index = 0;
-		System.out.println("\nYour hand: ");
-		for(int i=0; i<hand.size(); i++) {
-			System.out.println(index + ". " + hand.get(i).getName());
-			index++;
+		if(hand.size()==0) {
+			System.out.println("Your hand is empty.");
+		}
+		else {
+			System.out.println("\nYour hand: ");
+			for(int i=0; i<hand.size(); i++) {
+				System.out.println(index + ". " + hand.get(i).getName());
+				index++;
+			}
 		}
 	}
 	
