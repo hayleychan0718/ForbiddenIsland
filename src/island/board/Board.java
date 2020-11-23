@@ -95,6 +95,15 @@ public class Board{
         return list;
     }
     
+    public ArrayList<Tile> listOfFloodedTiles(){
+    	ArrayList<Tile> list = new ArrayList<Tile>();
+    	for(int i=0; i<listOfTiles().size(); i++) {
+    		if(listOfTiles().get(i).isFlooded() == true) {
+    			list.add(listOfTiles().get(i));
+    		}
+    	}
+    	return list;
+    }
     
     
 	/*

@@ -15,14 +15,12 @@ public class SandbagCard extends TreasureDeckCard{
 		System.out.println("Play Sandbag Card...\n");
 		System.out.println("Tiles you can shore up:");
 		Board board = Board.getInstance();
-		ArrayList<Tile> listOfTiles = board.listOfTiles();
+		ArrayList<Tile> listOfFloodedTiles = board.listOfFloodedTiles();
 		int index = 0;
 
-		for(int i=0;i<listOfTiles.size();i++) {
-			if(listOfTiles.get(i).isFlooded() == true) {
-				System.out.println(listOfTiles.get(i).getNameString() + " [" + index + "]");
-				index++;
-			}
+		for(int i=0;i<listOfFloodedTiles.size();i++) {
+			System.out.println(listOfFloodedTiles.get(i).getNameString() + " [" + index + "]");
+			index++;
 		}
 	}
 	
