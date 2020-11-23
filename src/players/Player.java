@@ -29,7 +29,7 @@ public class Player {
 	public Player(String playerName, int playerNumber) { //Duplicte player number
 		this.playerName=playerName;
 		this.playerNumber=playerNumber;
-		//Player hand
+		this.playerHand = new Hand();
 		this.canTakeTurn = true;
 		playerActions=3;
 		//player pawn
