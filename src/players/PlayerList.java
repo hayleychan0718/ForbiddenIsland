@@ -66,6 +66,11 @@ public class PlayerList {
     	
     }
     
+    public void printListOfPlayers() {
+    	for(int i=0; i<playerList.size(); i++) {
+        	System.out.println(i+1 + ". " + playerList.get(i).getName());
+    	}
+    }
     
 	//===========================================================
 	// Singleton destroyer for unit testing ONLY
