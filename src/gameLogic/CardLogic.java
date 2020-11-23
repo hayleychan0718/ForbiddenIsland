@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import island.board.Board;
 import island.board.Tile;
+import island.cards.FloodDeck;
 import island.cards.Hand;
 import island.cards.HelicopterCard;
 import island.cards.SandbagCard;
@@ -50,7 +51,8 @@ public class CardLogic {
 				System.out.println("Do you want to:\n[0] Move player(s) to another tile? or\n[1] Lift off Fool's Landing?");
 				int in = PlayerAction.acceptableInput(0, 1);
 				if(in == 0) {
-					doHelicopter(userInput);
+					playableCards.get(userInput).play();
+					doHelicopter();
 				}
 				else
 					// TODO: Implement Lift Off
@@ -81,7 +83,7 @@ public class CardLogic {
 		}while(picking != 0);
 	}
 	
-	public void doHelicopter(int userInput) {
+	public void doHelicopter() {
 		@SuppressWarnings("resource")
 		Scanner s = new Scanner(System.in);
 		ArrayList<Tile> listOfTiles = Board.getInstance().listOfTiles();
@@ -89,9 +91,7 @@ public class CardLogic {
 		ArrayList<Player> chosenPlayers = new ArrayList<Player>();
 		String yn = "y";
 		boolean repeat = true;
-		
-		playableCards.get(userInput).play();
-		
+				
 		System.out.println("Which tile do you want to move to? ");
 		int tileIndex = PlayerAction.acceptableInput(0, listOfTiles.size());
 
@@ -116,13 +116,22 @@ public class CardLogic {
 			System.out.print("Moving " + chosenPlayers.get(i).getName() + " to " + listOfTiles.get(tileIndex).getNameString() +  "...\n");
 			chosenPlayers.get(i).movePlayerPawn(listOfTiles.get(tileIndex));
 		}		
-		
-		
 	}
 	
 	
 	public void doSandbag() {
-		
+		ArrayList<Tile> tiles = Board.getInstance().listOfFloodedTiles();
+		if(tiles.size()==0) {
+			System.out.println("Choose another card.");
+			pickCard();
+		}
+		else {
+			System.out.println("\nChoose the tile: ");
+			int tileIndex = PlayerAction.acceptableInput(0, tiles.size());
+			Tile tileToShoreUp = Board.getInstance().getTile(tiles.get(tileIndex).getNameString());
+			tileToShoreUp.setFlood(true);
+			System.out.println("Shored up " + tileToShoreUp.getNameString());
+		}
 	}
 	
 	
@@ -143,7 +152,11 @@ public class CardLogic {
 		theHand.addCard(new WaterRiseCard());
 		theHand.addCard(new TreasureCard(TreasureNames.TheCrystalOfFire));
 		theHand.addCard(new TreasureCard(TreasureNames.TheEarthStone));
-
+		
+		Board board = Board.getInstance();
+		FloodDeck floodDeck = FloodDeck.getInstance();
+		floodDeck.startGame();
+		
 		CardLogic cl = new CardLogic(player);
 		cl.pickCard();
 	}
