@@ -119,7 +119,7 @@ public class Player {
 		return playerName;
 	}
 
-	public List<Card> showHand{
+	public ArrayList<TreasureDeckCard> showHand(){
 		return playerHand.getCards();
 	}
 
