@@ -1,15 +1,11 @@
 package players;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
-
-import island.board.Tile;
-import island.cards.Card;
-import island.cards.Hand;
-import island.cards.TreasureDeck;
-import island.cards.TreasureDeckCard;
+/**
+ * Abstract Class that sets up the base player class
+ */
+import java.util.*;
+import island.board.*;
+import island.cards.*;
 import pawns.Pawn;
 
 public class Player {
@@ -21,8 +17,8 @@ public class Player {
 	private boolean canTakeTurn; //Not sure needed if one person out game is over
 	protected Pawn playerPawn;
 	protected int playerActions;
-	//protected playerTreasure;
-	protected String playerTreasure;
+	protected Board board;
+	protected ArrayList<String> playerTreasures;
 
 
 	//constructor
@@ -32,10 +28,14 @@ public class Player {
 		//Player hand
 		this.canTakeTurn = true;
 		playerActions=3;
+		board=Board.getInstance();
 		//player pawn
 		//Randomly select player role
 	}
-
+	/**
+	 * Method the returns the available tiles for standard movement
+	 * 
+	 */
 	public LinkedList<Tile> getStandardMoveableTiles() {  //returns the moveable tiles //having order makes it easier to understand were tiles areList
 		int i =0;
 		Tile pawnTile  = getPlayerPawnTile();
@@ -73,11 +73,13 @@ public class Player {
 	}
 	
 	public LinkedList<Tile> getFocredMoveableTile(){ //occurs when the player is one a oceantile
+		System.out.println("You are forced to move as the tile you are on is no longer present\n");
 		return getStandardMoveableTiles();
 	}
 
 	//Method Returns the list of Players the current player can give cards to
 	public LinkedList<Player> giveTreasureCard() { 
+		int i =0;
 		LinkedList<Player> playersForTreasureCard = new LinkedList <Player>();
 		PlayerList playerList = PlayerList.getInstance();
 
@@ -88,39 +90,32 @@ public class Player {
 		return playersForTreasureCard;
 	}
 
-	public boolean captureTreasure() { // need hand  WILL STAY
+	//Method returns whether a treasure was captured or not
+	public boolean captureTreasure() { // need hand  WILL STAY //SMELL
 		ArrayList<TreasureDeckCard> cardsToDiscard = new ArrayList <TreasureDeckCard>();
-		if(playerTreasure!=null) {
-			System.out.println("You cannot capture a treasure, since you already hold one");
-			return false;
-		}
+		
 		for(TreasureDeckCard cardInHand:playerHand.getCards()) {
 			if(cardInHand.getName() == getPlayerPawnTile().getTreasure().getString()) { //checks if card in hand matches treasure associated with the tile the player is on 
 				cardsToDiscard.add(cardInHand);
 			}
 		}
-
 		if(cardsToDiscard.size()>=4) {     //can it be greater, im guessing you would discard them all even if 5 //maybe in another class
-			for(TreasureDeckCard card:cardsToDiscard) {
+			for(TreasureDeckCard card:cardsToDiscard) { //Remove this with move card list
 			playerHand.removeCard(card);
 			}
-			playerTreasure = getPlayerPawnTile().getTreasure().getString(); //Gets the string representation of the treasure
+			playerTreasures.add(getPlayerPawnTile().getTreasure().getString()); //Gets the string representation of the treasure
 			return true;	//The player has captured a treasure
 		}
 		else return false; //The player was unable to capture a treasure
 	}
-
-	public void giveCard() {
-		//Need hand class , this will add cards to the players hand
-	}
-
 	//Returns players name
 	public String getName() {
 		return playerName;
 	}
 
-	public List<Card> showHand{
-		return playerHand.getCards();
+	//Returns the players hand
+	public Hand getHand(){
+		return playerHand;
 	}
 
 
@@ -135,12 +130,12 @@ public class Player {
 	public boolean CanTakeTurn() {
 		return canTakeTurn;
 	}
-
+	//Moves the players pawn
 	public void movePlayerPawn(Tile tile) {
 		playerPawn.movePawn(tile);
 		//Maybe pawn moves links with player role
 	}
-
+	//Returns the players number
 	public int getPlayerNumber() {
 		return playerNumber;
 	}
@@ -157,6 +152,7 @@ public class Player {
 		return playerActions;
 	}
 
-
-
 }
+
+
+
