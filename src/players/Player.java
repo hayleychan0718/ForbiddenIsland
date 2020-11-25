@@ -25,7 +25,7 @@ public class Player {
 	public Player(String playerName, int playerNumber) { //Duplicte player number
 		this.playerName=playerName;
 		this.playerNumber=playerNumber;
-		//Player hand
+		this.playerHand = new Hand();
 		this.canTakeTurn = true;
 		playerActions=3;
 		board=Board.getInstance();
@@ -52,13 +52,13 @@ public class Player {
 		}
 		return moveableTiles;
 	}
-	
+
 	public LinkedList<Tile> getShoreableTiles() {  //returns the shoreable tiles
 		int i =0;
 		Tile pawnTile  =getPlayerPawnTile();
 		LinkedList<Tile> shoreableTiles = pawnTile.getAdjacentTiles();
 		System.out.println("Tile you can shore up to:");
-		
+
 		for(Tile tile: shoreableTiles) {
 			if(tile.isFlooded() ==false || tile==null ) {
 				shoreableTiles.remove(tile);
@@ -71,7 +71,7 @@ public class Player {
 		return shoreableTiles;
 
 	}
-	
+
 	public LinkedList<Tile> getFocredMoveableTile(){ //occurs when the player is one a oceantile
 		System.out.println("You are forced to move as the tile you are on is no longer present\n");
 		return getStandardMoveableTiles();
@@ -86,14 +86,14 @@ public class Player {
 		for (Player otherPlayer:playerList.getListOfOtherPlayers(playerNumber)) { //creates a list of the other players using the current player number
 			if(playerPawn.getPawnTile()==otherPlayer.getPlayerPawnTile())
 				playersForTreasureCard.add(otherPlayer);
-			}
+		}
 		return playersForTreasureCard;
 	}
 
 	//Method returns whether a treasure was captured or not
 	public boolean captureTreasure() { // need hand  WILL STAY //SMELL
 		ArrayList<TreasureDeckCard> cardsToDiscard = new ArrayList <TreasureDeckCard>();
-		
+
 		for(TreasureDeckCard cardInHand:playerHand.getCards()) {
 			if(cardInHand.getName() == getPlayerPawnTile().getTreasure().getString()) { //checks if card in hand matches treasure associated with the tile the player is on 
 				cardsToDiscard.add(cardInHand);
@@ -101,7 +101,7 @@ public class Player {
 		}
 		if(cardsToDiscard.size()>=4) {     //can it be greater, im guessing you would discard them all even if 5 //maybe in another class
 			for(TreasureDeckCard card:cardsToDiscard) { //Remove this with move card list
-			playerHand.removeCard(card);
+				playerHand.removeCard(card);
 			}
 			playerTreasures.add(getPlayerPawnTile().getTreasure().getString()); //Gets the string representation of the treasure
 			return true;	//The player has captured a treasure
@@ -113,11 +113,13 @@ public class Player {
 		return playerName;
 	}
 
-	//Returns the players hand
-	public Hand getHand(){
-		return playerHand;
+	public ArrayList<TreasureDeckCard> showHand(){
+		return playerHand.getCards();
 	}
 
+	public Hand getHand() {
+		return playerHand;
+	}
 
 	//Needs associated pawn class
 	public Tile getPlayerPawnTile() {
@@ -139,15 +141,15 @@ public class Player {
 	public int getPlayerNumber() {
 		return playerNumber;
 	}
-	
+
 	public void decrementPlayerActions() {
 		playerActions--;
 	}
-	
+
 	public void restockPlayerActions() {
 		playerActions=3;
 	}
-	
+
 	public int getPlayerActions() {
 		return playerActions;
 	}
