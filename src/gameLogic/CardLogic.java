@@ -1,24 +1,18 @@
 package gameLogic;
 
-import java.awt.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import island.board.Board;
 import island.board.Tile;
-import island.cards.FloodDeck;
 import island.cards.Hand;
-import island.cards.HelicopterCard;
-import island.cards.SandbagCard;
-import island.cards.TreasureCard;
 import island.cards.TreasureDeckCard;
-import island.cards.WaterRiseCard;
-import island.enums.TreasureNames;
 import players.Player;
 import players.PlayerList;
 
 public class CardLogic {
 
+	// Test comment to test git
 	private Player player;
 	private Hand playerHand;
 	ArrayList<TreasureDeckCard> playableCards;
@@ -128,36 +122,9 @@ public class CardLogic {
 		else {
 			System.out.println("\nChoose the tile: ");
 			int tileIndex = PlayerAction.acceptableInput(0, tiles.size());
-			Tile tileToShoreUp = Board.getInstance().getTile(tiles.get(tileIndex).getNameString());
-			tileToShoreUp.setFlood(true);
+			Tile tileToShoreUp = Board.getInstance().getTile(tiles.get(tileIndex).getNameString()); // Ask Robert
+			tileToShoreUp.setFlood(false);
 			System.out.println("Shored up " + tileToShoreUp.getNameString());
 		}
-	}
-	
-	
-	/*
-	 * Tests
-	 */
-	public static void main (String args[]) {
-		Player player = new Player("Hayley", 1);
-		Player player2 = new Player("Ben", 2);
-		PlayerList playerList = PlayerList.getInstance();
-		playerList.addPlayer(player);
-		playerList.addPlayer(player2);
-		SandbagCard card = new SandbagCard();
-		Hand theHand = player.getHand();
-		
-		theHand.addCard(new HelicopterCard());
-		theHand.addCard(card);
-		theHand.addCard(new WaterRiseCard());
-		theHand.addCard(new TreasureCard(TreasureNames.TheCrystalOfFire));
-		theHand.addCard(new TreasureCard(TreasureNames.TheEarthStone));
-		
-		Board board = Board.getInstance();
-		FloodDeck floodDeck = FloodDeck.getInstance();
-		floodDeck.startGame();
-		
-		CardLogic cl = new CardLogic(player);
-		cl.pickCard();
 	}
 }
