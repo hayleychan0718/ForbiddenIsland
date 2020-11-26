@@ -13,6 +13,7 @@ import players.PlayerList;
 public class CardLogic {
 
 	// Test comment to test git
+	
 	private Player player;
 	private Hand playerHand;
 	ArrayList<TreasureDeckCard> playableCards;
