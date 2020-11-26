@@ -22,7 +22,7 @@ public enum TileNames {
 	TempleOfTheMoon ("Temple of The Moon"),
 	HowlingGarden ("Howling Garden"), 
 	WhisperingGarden ("Whispering Garden"),
-	CaveOfShadows ("Cafe of Shadows"),
+	CaveOfShadows ("Cave of Shadows"),
 	CaveOfEmbers ("Cave of Embers"),
 	CoralPalace ("Coral Palace"),
 	TidalPalace ("Tidal Palace");

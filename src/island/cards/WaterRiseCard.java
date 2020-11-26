@@ -9,11 +9,14 @@ public class WaterRiseCard extends TreasureDeckCard{
 	}
 	
 	public void play() {
+		System.out.println("Play Water Rise card...");
 		WaterMeter waterMeter = WaterMeter.getinstance();
 		FloodDeck floodDeck = FloodDeck.getInstance();
 
 		waterMeter.increaseWaterLevel();
+		System.out.println("Water Level increased.\nCurrent water level: " + waterMeter.getWaterLevel());
 		floodDeck.reshuffle();
+		System.out.println("Flood Deck reshuffled.");
 	}
 	
 }

@@ -8,20 +8,21 @@ import island.board.Tile;
 public class HelicopterCard extends TreasureDeckCard{
 	
 	public HelicopterCard() {
-		super.name = "Helicopter";
+		super.name = "Helicopter Lift";
 	}
 	
 	public void play() {
-		System.out.println("Tiles you can move to:");
 		Board board = Board.getInstance();
-		ArrayList<Tile> list = board.listOfTiles();
+		ArrayList<Tile> listOfTiles = board.listOfTiles();
+
 		int index = 0;
-		
-		for(int i=0; i<list.size();i++) {
-			System.out.println(list.get(i).getNameString() + "[" + index + "]");
+
+		System.out.println("\nPlay Helicopter Lift card...");
+		System.out.println("\nTiles you can move to:");
+		for(int i=0; i<listOfTiles.size();i++) {
+			System.out.println(listOfTiles.get(i).getNameString() + "[" + index + "]");
 			index++;
 		}
-
 	}
 	
 	// Observer?

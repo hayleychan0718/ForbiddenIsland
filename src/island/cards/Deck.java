@@ -1,10 +1,22 @@
 package island.cards;
 
+import java.util.Collections;
 import java.util.Stack;
 
-// Can we use this abstract class?
 public abstract class Deck {
-    public abstract void drawCard();
-    public abstract void startGame();
-	 
+	// Abstract method 
+	public abstract void startGame();
+	
+	/**
+	 * Reshuffles the discard stack and places into the main stack
+	 * @param mainStack The main deck of cards
+	 * @param discardStack The discard pile
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public void reshuffle(Stack mainStack, Stack discardStack) {
+		Collections.shuffle(discardStack);
+		while(!discardStack.isEmpty()){
+			mainStack.push(discardStack.pop());
+		}
+	}
 }

@@ -53,13 +53,12 @@ public class FloodDeck extends Deck{
 	/*
 	 * Drawing number of flood cards equal to water meter level and flooding those tiles
 	 */
-	// TODO: Double check how to "get" water level with Liam
 	public void drawCard() {
 		Board board = Board.getInstance();
 		WaterMeter waterMeter = WaterMeter.getinstance();
 		for(int i=1;i<=waterMeter.getWaterLevel();i++) {
 			if(floodStack.isEmpty()) {
-				reshuffle();
+				super.reshuffle(floodStack, discardStack);
 			}
 			FloodCard card = (FloodCard) floodStack.pop();
 			Tile tileToFlood = board.getTile(card.getName());
@@ -73,36 +72,11 @@ public class FloodDeck extends Deck{
 		}
 	}
 	
-	/*
-	 * Method that reshuffles the discard pile and places back into the flood deck
-	 */
-	public void reshuffle() {
-		Collections.shuffle(discardStack);
-		while(!discardStack.isEmpty()){
-			floodStack.push(discardStack.pop());
-		}
+	public Stack<FloodCard> getStack(){
+		return floodStack;
 	}
 	
-	
-	/*
-	 * Tests
-	 */
-	public static void main(String[] args) {
-		FloodDeck floodDeck = FloodDeck.getInstance();
-		Board board = Board.getInstance();
-		board.printBoard();
-		System.out.println("Discard pile: " + FloodDeck.discardStack.size());
-		floodDeck.startGame();
-		System.out.println("AFTER FLOODING\n");
-		System.out.println("Discard pile: " + FloodDeck.discardStack.size());
-		board.printBoard();
-		floodDeck.drawCard();
-		System.out.println("Flood from water meter");
-		board.printBoard();
-		System.out.println("Discard pile: " + FloodDeck.discardStack.size());
-		floodDeck.drawCard();
-		System.out.println("Discard pile: " + FloodDeck.discardStack.size());
-		board.printBoard();
+	public Stack<FloodCard> getDiscardPile(){
+		return discardStack;
 	}
-
 }
