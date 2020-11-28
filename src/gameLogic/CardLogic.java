@@ -28,7 +28,6 @@ public class CardLogic {
 	public void pickCard() {
 	//	int userInput();
 		int picking = 0;
-
 		do{
 			System.out.println("Pick one of the cards you wish to play");
 		//	System.out.println("/n enter " + playableCards.size() + "[Return] to cancel action"); 
@@ -36,45 +35,12 @@ public class CardLogic {
 			int userInput = PlayerAction.acceptableInput(0, playableCards.size());
 			
 		//	if(userInput==playableCardsPlayers.size()) return; 	//cancels action // Hayley: not sure what this does
-			
-			switch(playableCards.get(userInput).getName()) {
-			case "Water Rise":
-				playableCards.get(userInput).play();
-				playerHand.removeCard(playableCards.get(userInput));		
-				break;
-			case "Helicopter Lift":
-				System.out.println("Do you want to:\n[0] Move player(s) to another tile? or\n[1] Lift off Fool's Landing?");
-				int in = PlayerAction.acceptableInput(0, 1);
-				if(in == 0) {
-					playableCards.get(userInput).play();
-					doHelicopter();
-				}
-				else
-					// TODO: Implement Lift Off
-				playerHand.removeCard(playableCards.get(userInput));		
-				break;
-			case "Sandbag":
-				playableCards.get(userInput).play();
-				doSandbag();
-				playerHand.removeCard(playableCards.get(userInput));		
-				break;
-			case "The Crystal of Fire":
-				playableCards.get(userInput).play();
+			playableCards.get(userInput).play();
+			if(playableCards.get(userInput).getName() == "Treasure") {
 				picking = 1;
-				break;
-			case "The Oceans Chalice":
-				playableCards.get(userInput).play();
-				picking = 1;
-				break;
-			case "The Statue of The Wind":
-				playableCards.get(userInput).play();
-				picking = 1;
-				break;
-			case "The Earth Stone":
-				playableCards.get(userInput).play();
-				picking = 1;
-				break;
 			}
+			else
+				playerHand.removeCard(playableCards.get(userInput));		
 		}while(picking != 0);
 	}
 	
