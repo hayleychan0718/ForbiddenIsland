@@ -42,7 +42,7 @@ public class Player {
 		LinkedList<Tile> moveableTiles = pawnTile.getAdjacentTiles();
 		System.out.println("Tile you can move to:");
 		for(Tile tile: moveableTiles) {	//Checks if the tiles are present if not removes them
-			if(tile.isPresent()==false || tile==null ) { // Why or null
+			if(tile.isPresent()==false) { // Why or null
 				moveableTiles.remove(tile);
 			}
 			else {
@@ -56,14 +56,13 @@ public class Player {
 	public LinkedList<Tile> getShoreableTiles() {  //returns the shoreable tiles
 		int i =0;
 		Tile pawnTile  =getPlayerPawnTile();
-		LinkedList<Tile> shoreableTiles = pawnTile.getAdjacentTiles();
+		LinkedList<Tile> adjacentTiles = pawnTile.getAdjacentTiles(); //Can also shore up tile player is standing on
+		LinkedList<Tile> shoreableTiles = new LinkedList();
 		System.out.println("Tile you can shore up to:");
 
-		for(Tile tile: shoreableTiles) {
-			if(tile.isFlooded() ==false || tile==null ) {
-				shoreableTiles.remove(tile);
-			}
-			else {
+		for(Tile tile: adjacentTiles) {
+			if(tile.isFlooded() ==true) {
+				shoreableTiles.add(tile);
 				System.out.println( tile.getName() + "[" + i + "]");
 				i++;
 			}
@@ -155,6 +154,7 @@ public class Player {
 	}
 
 }
+
 
 
 
