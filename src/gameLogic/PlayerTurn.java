@@ -23,7 +23,7 @@ public class PlayerTurn {
 	//Printout the available options for a players turn
 
 	private void printOptions() {
-		System.out.println("You have the following availabe options");
+		System.out.println("You have the following available options");
 		System.out.println("[1] Move Pawn");
 		System.out.println("[2] Shore Up Tile");
 		System.out.println("[3] Give Treasure Card");
@@ -78,8 +78,6 @@ public class PlayerTurn {
 			}
 		} 
 
-
-
 	}
 	public void tryMove() {
 		action.doStandardMovement(inputScanner);
@@ -98,8 +96,4 @@ public class PlayerTurn {
 	}
 	
 	
-	
-	
-
-
 }

@@ -1,12 +1,11 @@
 package players;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 //Do we need insertion order for list are all these methods necessary.
 //Need to figure out player List and how to deal with statics.
-
-//Singleton Class for managing the list of Players in a game of Cluedo
 //Write a static method that has return type object of this singleton class. Here, the concept of Lazy initialization is used to write this static method.
 public class PlayerList {
 
@@ -55,8 +54,8 @@ public class PlayerList {
     }
     
     //Returns a list of the other players
-    public List<Player> getListOfOtherPlayers(int playerNumber){
-    	ArrayList<Player> otherListOfPlayers= new ArrayList<Player>(); 
+    public LinkedList<Player> getListOfOtherPlayers(int playerNumber){
+    	LinkedList<Player> otherListOfPlayers= new LinkedList<Player>(); 
     	for(Player player: playerList) {
     		if (player.playerNumber!=playerNumber) {
     			otherListOfPlayers.add(player);

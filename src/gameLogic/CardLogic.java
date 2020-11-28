@@ -96,7 +96,7 @@ public class CardLogic {
 			int playerIndex = PlayerAction.acceptableInput(0, playerList.getListOfPlayers().size());
 			if(chosenPlayers.contains(playerList.getPlayer(playerIndex))) {
 				System.out.println(playerList.getPlayer(playerIndex).getName() + " is already chosen.");
-			}
+			} //could create a new list and remove player each time so no option of other player
 			else
 				chosenPlayers.add(playerList.getPlayer(playerIndex));			
 			System.out.println("Do you want to choose another player? (Y/N)");

@@ -9,8 +9,7 @@ public class Diver extends Player {
 
 	private Diver(String playerName, int playerNumber) {
 		super(playerName,playerNumber); //player class constructor
-		Board board = Board.getInstance();
-		Pawn playerPawn=new Pawn(board.getTile("Iron Gate")); //Gets the Bronze Gate Tile and sets it as pawn starter tile
+		playerPawn=new Pawn(board.getTile("Iron Gate")); //Gets the Bronze Gate Tile and sets it as pawn starter tile
 		//Hand constructed in super class(player)
 
 	}

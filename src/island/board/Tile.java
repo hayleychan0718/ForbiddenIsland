@@ -1,5 +1,6 @@
 package island.board;
 
+import java.util.Collections;
 import java.util.LinkedList;
 
 import island.enums.TileNames;
@@ -135,6 +136,8 @@ public class Tile {
 		adjacentTiles.add(getSouthTile());
 		adjacentTiles.add(getEastTile());
 		
+		adjacentTiles.removeAll(Collections.singleton(null));
+		
 		return adjacentTiles;
 	}
 	
@@ -148,6 +151,8 @@ public class Tile {
 		adjacentDiagonalTiles.add(getSouthEastTile());
 		adjacentDiagonalTiles.add(getEastTile());
 		adjacentDiagonalTiles.add(getEastTile());
+		
+		adjacentDiagonalTiles.removeAll(Collections.singleton(null));
 		
 		return adjacentDiagonalTiles;
 	}
