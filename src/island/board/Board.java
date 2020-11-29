@@ -105,20 +105,42 @@ public class Board{
     	return list;
     }
     
+	public ArrayList<Tile> listOfNearestTiles(Tile tile){
+    	int loc[] = tile.getLocation();
+    	ArrayList<Tile> nearestTiles = new ArrayList<Tile>();
+    	int iter = 0;
+    
+    	while(nearestTiles.isEmpty()) {
+    		iter++;
+    		for(int i = loc[0]-iter; i<=loc[0]+iter; i++) {
+    			for(int j = loc[1]-iter; j<=loc[1]+iter; j++) {
+    				if(getTile(i,j) != null && getTile(i,j).isPresent() && getTile(i,j)!=tile) 
+    					nearestTiles.add(getTile(i,j));
+    			}
+    		}
+    	}
+    	return nearestTiles;
+    }
     
 	/*
 	 * Tests
 	 */
 	public static void main(String[] args) {
 		Board board = Board.getInstance();
-		board.printBoard();
-		
-		Tile tile1 = board.getTile(2,5);
-		if(tile1.getEastTile() != null) {
-			System.out.println(Arrays.toString(tile1.getEastTile().getLocation()));
+		Tile tile = board.getTile(3, 3);
+		LinkedList<Tile> surrounding = tile.getAdjacentDiagonal();
+
+		for(int i=0; i<surrounding.size(); i++) {
+			surrounding.get(i).setFlood(true);
+			surrounding.get(i).setPresent(false);
 		}
 		
-		System.out.println(board.listOfTiles().get(1).getNameString());
+		ArrayList<Tile> list = board.listOfNearestTiles(tile);		
+
+		for(int i=0; i<list.size();i++) {
+			System.out.println(list.get(i).getNameString());
+			System.out.println(Arrays.toString(list.get(i).getLocation()));
+		}
 	}
 
 	
