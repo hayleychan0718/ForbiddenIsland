@@ -12,12 +12,16 @@ import island.enums.TileNames;
 
 
 public class FloodDeck extends Deck{
+	/*
+	 * Instance variables
+	 */
     private static FloodDeck floodDeckInstance = null; 
     private static Stack<FloodCard> floodStack = new Stack<FloodCard>();
     private static Stack<FloodCard> discardStack = new Stack<FloodCard>();
     
-    /*
-     * Flood deck in the beginning
+    // Constructor 
+    /**
+     * Creates a shuffled stack of flood cards.
      */
     public FloodDeck() {
         ArrayList<TileNames> tileNames = new ArrayList<TileNames>(EnumSet.allOf(TileNames.class));
@@ -27,7 +31,7 @@ public class FloodDeck extends Deck{
         }
     }
     
-    /*
+    /**
      * Create an instance of FloodDeck
      */
 	public static FloodDeck getInstance(){
@@ -37,21 +41,9 @@ public class FloodDeck extends Deck{
         return floodDeckInstance;
     }
 	
-	/*
-	 * Flooding at start of game
-	 */
-	public void startGame() {
-		Board board = Board.getInstance();
-		for(int i=0;i<6;i++) {
-			FloodCard card = floodStack.pop();
-			Tile tileToFlood = board.getTile(card.getName());
-			tileToFlood.setFlood(true);
-			discardStack.push(card);
-		}
-	}
 	
-	/*
-	 * Drawing number of flood cards equal to water meter level and flooding those tiles
+	/**
+	 * Draws the number of flood cards equal to water meter level and floods those tiles
 	 */
 	public void drawCard() {
 		Board board = Board.getInstance();
@@ -72,10 +64,18 @@ public class FloodDeck extends Deck{
 		}
 	}
 	
+	/**
+	 * Get the flood deck
+	 * @return The flood stack
+	 */
 	public Stack<FloodCard> getStack(){
 		return floodStack;
 	}
 	
+	/**
+	 * Get the flood discard pile
+	 * @return The flood discard stack
+	 */
 	public Stack<FloodCard> getDiscardPile(){
 		return discardStack;
 	}
