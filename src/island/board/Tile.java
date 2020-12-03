@@ -151,7 +151,7 @@ public class Tile {
 		adjacentDiagonalTiles.add(getSouthTile());
 		adjacentDiagonalTiles.add(getSouthEastTile());
 		adjacentDiagonalTiles.add(getEastTile());
-		adjacentDiagonalTiles.add(getEastTile());
+		adjacentDiagonalTiles.add(getNorthEastTile());
 		
 		adjacentDiagonalTiles.removeAll(Collections.singleton(null)); //Remove Null Tiles
 		

@@ -1,12 +1,10 @@
 package island.cards;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Stack;
 
 import island.enums.TreasureNames;
-import players.Player;
-import players.PlayerList;
+
 
 public class TreasureDeck extends Deck{
 	/*
@@ -71,15 +69,18 @@ public class TreasureDeck extends Deck{
 	}
 	
 	/**
-	 * Give 2 cards to each player at the beginning of the game
+	 * Gets the main treasure deck
+	 * @return The main treasure stack
 	 */
-	public void startGame() {
-		List<Player> listOfPlayers = PlayerList.getInstance().getListOfPlayers();
-		for(int i=0;i<listOfPlayers.size();i++) {
-			for(int j=0; j<2; j++) {
-				TreasureDeckCard card = treasureStack.pop();
-				listOfPlayers.get(i).getHand().addCard(card);
-			}
-		}
+	public Stack<TreasureDeckCard> getStack(){
+		return treasureStack;
+	}
+	
+	/**
+	 * Gets the treasure discard pile
+	 * @return The treasure discard stack
+	 */
+	public Stack<TreasureDeckCard> getDiscardPile(){
+		return discardStack;
 	}
 }

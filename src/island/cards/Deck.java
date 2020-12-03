@@ -4,9 +4,6 @@ import java.util.Collections;
 import java.util.Stack;
 
 public abstract class Deck {
-	// Abstract method 
-	public abstract void startGame();
-	
 	/**
 	 * Reshuffles the discard stack and places into the main stack
 	 * @param mainStack The main deck of cards
