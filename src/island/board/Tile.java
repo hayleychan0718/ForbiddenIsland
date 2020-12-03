@@ -1,5 +1,6 @@
 package island.board;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 
@@ -129,20 +130,20 @@ public class Tile {
 		return northWest;
 	}
 	
-	public LinkedList<Tile> getAdjacentTiles(){
-		LinkedList<Tile> adjacentTiles = new LinkedList<Tile>();
+	public ArrayList<Tile> getAdjacentTiles(){
+		ArrayList<Tile> adjacentTiles = new ArrayList<Tile>();
 		adjacentTiles.add(getNorthTile());
 		adjacentTiles.add(getWestTile());
 		adjacentTiles.add(getSouthTile());
 		adjacentTiles.add(getEastTile());
 		
-		adjacentTiles.removeAll(Collections.singleton(null));
+		adjacentTiles.removeAll(Collections.singleton(null)); //Remove Null Tiles
 		
 		return adjacentTiles;
 	}
 	
-	public LinkedList<Tile> getAdjacentDiagonal(){
-		LinkedList<Tile> adjacentDiagonalTiles = new LinkedList<Tile>();
+	public ArrayList<Tile> getAdjacentDiagonal(){
+		ArrayList<Tile> adjacentDiagonalTiles = new ArrayList<Tile>();
 		adjacentDiagonalTiles.add(getNorthTile());
 		adjacentDiagonalTiles.add(getNorthWestTile());
 		adjacentDiagonalTiles.add(getWestTile());
@@ -152,7 +153,7 @@ public class Tile {
 		adjacentDiagonalTiles.add(getEastTile());
 		adjacentDiagonalTiles.add(getEastTile());
 		
-		adjacentDiagonalTiles.removeAll(Collections.singleton(null));
+		adjacentDiagonalTiles.removeAll(Collections.singleton(null)); //Remove Null Tiles
 		
 		return adjacentDiagonalTiles;
 	}
