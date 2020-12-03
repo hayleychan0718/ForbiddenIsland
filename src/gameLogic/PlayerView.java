@@ -15,4 +15,14 @@ public class PlayerView {
 			playerView = new PlayerView();
 			return playerView;
 	}
+	
+	
+	public PlayerController getController() {
+		return controller;
+	}
+	
+	public void setController(PlayerController controller) {
+		this.controller = controller;
+		
+	}
 	}
