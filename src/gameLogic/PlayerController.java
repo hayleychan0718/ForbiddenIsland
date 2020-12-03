@@ -40,7 +40,13 @@ public class PlayerController {
 		return player.getPlayersForTreasureCard();
 	}
 	
+	public boolean canCaptureTreasure(Player player) {
+		return player.canCaptureTreasure();
+	}
 	
+	public void shoreUpTile(Tile tile) {
+		tile.setFlood(false);
+	}
 	
 	
 	
