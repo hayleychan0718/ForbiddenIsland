@@ -1,8 +1,9 @@
 package gameLogic;
 import java.util.ArrayList;
-
 import island.board.*;
 import players.*;
+
+//Class to implement the player controller
 public class PlayerController {
 	
 	private PlayerView view;
@@ -23,11 +24,31 @@ public class PlayerController {
 		this.view = view;
 	}
 	
-	
+	public ArrayList<Tile> getStandardMoveTiles(Player player){
+		return player.getStandardMoveableTiles();
+	}
 	
 	public ArrayList<Tile> getShoreableTiles(Player player){
 		return player.getShoreableTiles();
 	}
+	
+	public ArrayList<Tile> getForcedMovementTiles(Player player){
+		return player.getFocredMoveableTiles();
+	}
+	
+	public ArrayList<Player> getPlayersForTreasureCard(Player player){
+		return player.getPlayersForTreasureCard();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }
