@@ -1,9 +1,20 @@
 package utility;
 
 import java.util.Scanner;
+/**
+ * Class uses to hold utility functions
+ * @author Liam Fitzgerald
+ *
+ */
 
-public class UtilityFuniton {
+public class Utility {
 	
+	/**
+	 * Ensures the users enters an integer within the acceptable range
+	 * @param min , minimum option
+	 * @param max , maximum option
+	 * @return , returns a valid input
+	 */
 	public static int acceptableInput(int min,int max) { //Checks if input is acceptable by using the size of the actions lists //Maybe interface
 		int userInput=-1;
 		Scanner inputScanner = new Scanner(System.in);	//Close scanner possibly
@@ -28,7 +39,7 @@ public class UtilityFuniton {
 				continue;
 			}
 		}
-		inputScanner.close();
+		//inputScanner.close();
 		return userInput;
 	}
 
