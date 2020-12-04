@@ -4,8 +4,12 @@ package players;
  * Abstract Class that sets up the base player class
  */
 import java.util.*;
+
+import javax.management.MBeanTrustPermission;
+
 import island.board.*;
 import island.cards.*;
+import island.enums.TreasureNames;
 import pawns.Pawn;
 
 public class Player {
@@ -19,6 +23,7 @@ public class Player {
 	protected int playerActions;
 	protected Board board;
 	protected ArrayList<String> playerTreasures;
+	private Observer observer;
 
 
 
@@ -68,7 +73,6 @@ public class Player {
 	public ArrayList<Tile> getFocredMoveableTiles(){ //occurs when the player is one a oceantile
 		return getStandardMoveableTiles();
 	}
-
 	//Method Returns the list of Players the current player can give cards to
 	public ArrayList<Player> getPlayersForTreasureCard() { 
 		ArrayList<Player> playersForTreasureCard = new ArrayList <Player>();
@@ -81,10 +85,11 @@ public class Player {
 		return playersForTreasureCard;
 	}
 
-	//Method returns whether a treasure was captured or not
+	//Method returns whether a treasure was captured or not//What about if no teasure on tile
 	public boolean canCaptureTreasure() {
 		ArrayList<TreasureDeckCard> matchingTreasureCards = matchingTreasureCards();
-
+		if(!onTreasureTile()) return false;
+		
 		if(matchingTreasureCards.size()>=4) {
 			CaptureTreasure();
 			playerHand.getCards().removeAll(matchingTreasureCards);
@@ -98,6 +103,14 @@ public class Player {
 		Tile pawnTile = getPlayerPawnTile();
 		
 		pawnTile.getTreasure().captureTreasure();
+	}
+	
+	public boolean onTreasureTile() {
+		if(getTreasure()==null) {
+			return false;
+		}
+		else {System.out.println(getTreasure());}
+		return true;
 	}
 
 	public ArrayList<TreasureDeckCard> matchingTreasureCards() {
@@ -123,19 +136,20 @@ public class Player {
 		}
 	}
 	
+	public void giveCard(TreasureDeckCard toGive, Hand toRecieve) {
+		playerHand.giveCard(toGive, toRecieve);
+	}
 	
-
-//	public boolean canGiveTreausreCard() {
-//		ArrayList<Player> playersForTreasureCard = giveTreasureCard();
-//
-//		if(playersForTreasureCard.isEmpty()) {
-//			System.out.println("There is no players to give a treasure card to \n");
-//			return false;
-//		}
-//		else {
-//			return true;
-//		}
-//	}
+	public void endTurn() {
+		playerActions=0;
+	}
+	
+	public boolean update() {
+		if(!getPlayerPawnTile().isPresent()) {
+			return true;
+		}
+		else return false;
+	}
 
 	@Override
 	public String toString() {
@@ -163,6 +177,10 @@ public class Player {
 	public Tile getPlayerPawnTile() {
 		return 	playerPawn.getPawnTile();
 		//	return  ///
+	}
+	
+	public TreasureNames getTreasure() {
+		return getPlayerPawnTile().getTreasure();
 	}
 
 
