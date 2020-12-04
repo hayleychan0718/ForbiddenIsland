@@ -41,4 +41,10 @@ public enum TreasureNames {
 	public void captureTreasure() {
 		this.captured = true;
 	}
+	/*
+	 * Overriding the toString Method to return name
+	 */
+	public String toString() {
+		return name;
+	}
 }
