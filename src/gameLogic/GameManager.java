@@ -78,6 +78,7 @@ public class GameManager {
 
 		for(Player player: listSunkenPlayers)
 			if(player.getFocredMoveableTiles().isEmpty()) {
+				
 				Gameover();
 			}
 		playerView.doForcedMovement(inputScanner, player);
