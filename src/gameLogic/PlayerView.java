@@ -31,50 +31,95 @@ public class PlayerView {
 
 	}
 
-	public void shoreUp(Scanner scannerIn, Player player) {
+	public void printOptions() {
+		System.out.println("You have the following available options");
+		System.out.println("[1] Move Pawn");
+		System.out.println("[2] Shore Up Tile");
+		System.out.println("[3] Give Treasure Card");
+		System.out.println("[4] Capture Treasure");
+		System.out.println("[5] Show Board");
+		System.out.println("[0] End Turn");
+	}
+
+	public void printStartOfTurn(Player player) {
+		System.out.println("It is now" + player + "'s turn \n");
+	}
+
+	public void selectOption(Scanner inputScanner, Player player) {
+
+		int userInput = Utility.acceptableInput(0, 6, inputScanner);
+
+		switch(userInput) {
+		case 0:
+			shoreUp(inputScanner, player);
+			break;
+		default:
+			break;
+		}
+	}
+
+	
+	public void shoreUp(Scanner inputScanner, Player player) {
 		ArrayList<Tile> shoreableTiles = controller.getShoreableTiles(player);
 
-		if(!canTilesBeShoredUp(shoreableTiles)) return;
-		
-		int userInput=Utility.acceptableInput(0, shoreableTiles.size());
-		if(userInput==shoreableTiles.size()) return;
+		if(!canDoTileAction(shoreableTiles, "shore up")) return;
+
+		int userInput=Utility.acceptableInput(0, shoreableTiles.size(), inputScanner); 
 		Tile SelectedTile=shoreableTiles.get(userInput);
 		controller.shoreUpTile(SelectedTile);
 		shoreableTiles.remove(userInput);
-		
+
 		if(player instanceof Engineer & !shoreableTiles.isEmpty()) {
 			System.out.println("/nYou are an Engineer so you may shore up another tile");
 			Utility.printOptions(shoreableTiles);
-			userInput=Utility.acceptableInput(0, shoreableTiles.size()-1); //No option to cancel what if now empthy ?
+			userInput=Utility.acceptableInput(0, shoreableTiles.size()-1, inputScanner); 
 			SelectedTile=shoreableTiles.get(userInput);
 			controller.shoreUpTile(SelectedTile);
 		}
 		controller.decementPlayerAction(player);
-}
+	}
 	
-	public boolean canTilesBeShoredUp(ArrayList<Tile> shoreableTiles) {
-		
-		if(shoreableTiles.isEmpty()) {
-			System.out.println("There is no Tiles to shore up");
+	public boolean canDoTileAction(ArrayList<Tile> tileOptions, String typeOfTileAction) {
+
+		if(tileOptions.isEmpty()) {
+			System.out.println("There is no Tiles to " + typeOfTileAction);
 			return false;
 		}
 		else {
-			System.out.println("You can shore up the following Tiles");
-			Utility.printOptions(shoreableTiles);
-			System.out.println("/n enter" + shoreableTiles.size() + "[Return] to cancel action");
+			System.out.println("You can " +  typeOfTileAction + "the following Tiles");
+			Utility.printOptions(tileOptions);
+			System.out.println("/n enter" + tileOptions.size() + "[Return] to cancel action");
 			return true;
 		}
+
+	}
+	
+	public void doStandardMovement(Scanner inputScanner, Player player){ 
+		ArrayList<Tile> moveableTiles = controller.getStandardMoveTiles(player);
+		
+		if(!canDoTileAction(moveableTiles, "move to")) return;
+		
+		int userInput = Utility.acceptableInput(0, moveableTiles.size(), inputScanner);
+		if(userInput==moveableTiles.size()) return;
+		
+		Tile selectedTile = moveableTiles.get(userInput);
+		controller.movePlayerPawn(player, selectedTile);
+		System.out.println("Your pawn has been moved to " + selectedTile);
+		controller.decementPlayerAction(player);
+	}
+
+
+	public boolean isTurnOver(Player player) {
 		
 	}
 
 
+	public static void main(String[] args) {
+		Player Liam = new Player("Liam",1); 
+		ArrayList<Player> optionList = new ArrayList<Player>();
+		optionList.add(Liam);
 
-public static void main(String[] args) {
-	Player Liam = new Player("Liam",1); 
-	ArrayList<Player> optionList = new ArrayList<Player>();
-	optionList.add(Liam);
-
-	PlayerView view = PlayerView.getInstanace();
-	Utility.printOptions(optionList);
-}
+		PlayerView view = PlayerView.getInstanace();
+		Utility.printOptions(optionList);
+	}
 }
