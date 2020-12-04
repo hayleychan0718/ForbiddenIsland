@@ -60,9 +60,11 @@ public class PlayerController {
 		return player.getPlayersForTreasureCard();
 	}
 	
-	public boolean canCaptureTreasure(Player player) {
-		return player.canCaptureTreasure();
+	public void movePlayerPawn(Player player, Tile tile) {
+		player.movePlayerPawn(tile);
 	}
+	
+	
 	
 	
 	
