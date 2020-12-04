@@ -1,5 +1,6 @@
 package gameLogic;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import players.Player;
@@ -12,16 +13,20 @@ public class GameManager {
 
 	private boolean isGameOver;
 	private PlayerList listOfPlayers;
+	private PlayerController playerController;
+	private PlayerView playerView;
 
 	//Singlton class
-	private GameManager() {
+	private GameManager(PlayerController playerController, PlayerView playerView) {
 		isGameOver=false;
 		listOfPlayers= PlayerList.getInstance();
+		this.playerController=playerController;
+		this.playerView=playerView;
 	}
 
-	public static GameManager getInstance() {
+	public static GameManager getInstance(PlayerController playerController,PlayerView playerView) {
 		if(theGameManager == null) {
-			theGameManager = new GameManager();
+			theGameManager = new GameManager(playerController, playerView);
 		}
 		return theGameManager;
 	}
@@ -33,21 +38,36 @@ public class GameManager {
 		PlayerTurn currentTurn;
 
 		while(!isGameOver) { //Will keep looping over tile game is over
-			for (Player currentPlayer: listOfPlayers.getListOfPlayers()) {
-
-				currentTurn = new PlayerTurn(currentPlayer, inputScanner);
-				currentTurn.doTurn();
-				didWinGame = PlayerTurn. // Check did win
-				didLoseGame = //
-				if(didWinGame) {
-					winGame();
-				}
-				if(didLoseGame) {
-					loseGame();
-				}
-			}
+			  doTurn(inputScanner);
 		}
+		
+			
+	public void doTurn(Scanner inputScanner) {
 
+		boolean isTurnOver=false;
+		ArrayList<Player> playerList = playerController.getModel(); //The model is the list of players
+
+		for(Player player:playerList) { //Loops through the players
+			//Possibly check Ocean tile
+			playerView.printStartOfTurn(player);
+
+			while (!isTurnOver) { //Does the turn
+				playerView.printOptions();
+				playerView.selectOption(inputScanner, player);	//Select One of the printed options
+				isTurnOver=isTurnOver(player);	//View uses controller to check if the player still has actions
+			} 
+		}
+	}
+
+	public boolean isTurnOver(Player player) {
+		int remainingPlayerActions = player.getPlayerActions();
+
+		if(remainingPlayerActions==0) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 }

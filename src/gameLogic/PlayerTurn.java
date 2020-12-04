@@ -1,9 +1,11 @@
 package gameLogic;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import island.board.Board;
 import players.Player;
+import players.PlayerList;
 
 public class PlayerTurn {
 
@@ -11,89 +13,21 @@ public class PlayerTurn {
 	private Scanner inputScanner;
 	private Board board;
 	private PlayerAction action;
+	private PlayerController playerController;
+	private PlayerView playerView;
+	private boolean gameOver;
 
 
 	public PlayerTurn(Player player, Scanner inputScanner ) {
 		this.player=player;
 		this.inputScanner=inputScanner;
 		this.board= Board.getInstance();
-	    action=new PlayerAction(player);
+		action=new PlayerAction(player);
 	}
 
 	//Printout the available options for a players turn
 
-	private void printOptions() {
-		System.out.println("You have the following available options");
-		System.out.println("[1] Move Pawn");
-		System.out.println("[2] Shore Up Tile");
-		System.out.println("[3] Give Treasure Card");
-		System.out.println("[4] Capture Treasure");
-		System.out.println("[5] Show Board");
-		System.out.println("[0] End Turn");
-	}
 
-	public void doTurn() {
 
-		boolean isInputValid;
-		boolean isTurnOver=false;
-		int userInput;
 
-		System.out.println("It is now " + player.getName() + "'s turn."); // Maybe have them press enter to begin
-
-		//Possibly check Ocean tile
-
-		while (!isTurnOver) {
-
-			printOptions();
-			isInputValid=false;
-			userInput = 0;
-
-			while(!isInputValid) {
-				userInput = inputScanner.nextInt();	//What happens if string is entered
-
-				if((userInput >=0) && (userInput <=5)) {
-					isInputValid =true;
-				}
-			}
-
-			switch(userInput) {
-			case 0:
-				isTurnOver = true;
-				break;
-			case 1:
-				tryMove();
-				break; 
-			case 2:
-				tryShoreUp();
-			case 3:
-				tryGiveTreasureCard();
-				break;
-			case 4:
-				tryCaptureTreasure();
-				break;
-			case 5:
-				board.printBoard();
-				break;
-			default:
-			}
-		} 
-
-	}
-	public void tryMove() {
-		action.doStandardMovement(inputScanner);
-	}
-	
-	public void tryShoreUp() {
-		action.shoreUpTiles(inputScanner);
-	}
-	
-	public void tryGiveTreasureCard() {
-		action.giveCard(inputScanner);
-	}
-	
-	public void tryCaptureTreasure() {
-		action.captureTreasure();
-	}
-	
-	
 }
