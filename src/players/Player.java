@@ -21,6 +21,9 @@ public class Player {
 	protected ArrayList<String> playerTreasures;
 
 
+
+	//Maybe add getter for shoreable tiles and give card so don't have to recreate.
+
 	//constructor
 	public Player(String playerName, int playerNumber) { //Duplicte player number
 		this.playerName=playerName;
@@ -36,50 +39,39 @@ public class Player {
 	 * Method the returns the available tiles for standard movement
 	 * 
 	 */
-	public LinkedList<Tile> getStandardMoveableTiles() {  //returns the moveable tiles //having order makes it easier to understand were tiles areList
-		int i =0;
+	public ArrayList<Tile> getStandardMoveableTiles() {  //returns the moveable tiles //having order makes it easier to understand were tiles areList
 		Tile pawnTile  = getPlayerPawnTile();
-		LinkedList<Tile> moveableTiles = pawnTile.getAdjacentTiles();
-		System.out.println("Tile you can move to:");
+		ArrayList<Tile> moveableTiles = pawnTile.getAdjacentTiles();
+
 		for(Tile tile: moveableTiles) {	//Checks if the tiles are present if not removes them
 			if(tile.isPresent()==false) { // Why or null
-				moveableTiles.remove(tile);
-			}
-			else {
-				System.out.println( tile.getName() + "["+ i + "]");	//prints the tiles you can move to, Is this bad practice
-				i++;
+				moveableTiles.remove(tile); //Not sure has this been fixed, amy remove tile mid loop
 			}
 		}
 		return moveableTiles;
 	}
 
-	public LinkedList<Tile> getShoreableTiles() {  //returns the shoreable tiles
-		int i =0;
+	public ArrayList<Tile> getShoreableTiles() {  //returns the shoreable tiles
 		Tile pawnTile  =getPlayerPawnTile();
-		LinkedList<Tile> adjacentTiles = pawnTile.getAdjacentTiles(); //Can also shore up tile player is standing on
-		LinkedList<Tile> shoreableTiles = new LinkedList();
-		System.out.println("Tile you can shore up to:");
+		ArrayList<Tile> adjacentTiles = pawnTile.getAdjacentTiles(); //Can also shore up tile player is standing on
+		adjacentTiles.add(pawnTile); //Players tile may also be flooded
+		ArrayList<Tile> shoreableTiles = new ArrayList<Tile>();
 
 		for(Tile tile: adjacentTiles) {
 			if(tile.isFlooded() ==true) {
 				shoreableTiles.add(tile);
-				System.out.println( tile.getName() + "[" + i + "]");
-				i++;
 			}
 		}
 		return shoreableTiles;
-
 	}
 
-	public LinkedList<Tile> getFocredMoveableTile(){ //occurs when the player is one a oceantile
-		System.out.println("You are forced to move as the tile you are on is no longer present\n");
+	public ArrayList<Tile> getFocredMoveableTiles(){ //occurs when the player is one a oceantile
 		return getStandardMoveableTiles();
 	}
 
 	//Method Returns the list of Players the current player can give cards to
-	public LinkedList<Player> giveTreasureCard() { 
-		int i =0;
-		LinkedList<Player> playersForTreasureCard = new LinkedList <Player>();
+	public ArrayList<Player> getPlayersForTreasureCard() { 
+		ArrayList<Player> playersForTreasureCard = new ArrayList <Player>();
 		PlayerList playerList = PlayerList.getInstance();
 
 		for (Player otherPlayer:playerList.getListOfOtherPlayers(playerNumber)) { //creates a list of the other players using the current player number
@@ -90,23 +82,70 @@ public class Player {
 	}
 
 	//Method returns whether a treasure was captured or not
-	public boolean captureTreasure() { // need hand  WILL STAY //SMELL
-		ArrayList<TreasureDeckCard> cardsToDiscard = new ArrayList <TreasureDeckCard>();
+	public boolean canCaptureTreasure() {
+		ArrayList<TreasureDeckCard> matchingTreasureCards = matchingTreasureCards();
+
+		if(matchingTreasureCards.size()>=4) {
+			CaptureTreasure();
+			playerHand.getCards().removeAll(matchingTreasureCards);
+			return true;
+		}
+		return false;
+
+	}
+	
+	public void CaptureTreasure() {
+		Tile pawnTile = getPlayerPawnTile();
+		
+		pawnTile.getTreasure().captureTreasure();
+	}
+
+	public ArrayList<TreasureDeckCard> matchingTreasureCards() {
+		ArrayList<TreasureDeckCard> matchingTreasureCards = new ArrayList <TreasureDeckCard>();
 
 		for(TreasureDeckCard cardInHand:playerHand.getCards()) {
 			if(cardInHand.getName() == getPlayerPawnTile().getTreasure().getString()) { //checks if card in hand matches treasure associated with the tile the player is on 
-				cardsToDiscard.add(cardInHand);
+				matchingTreasureCards.add(cardInHand);
 			}
 		}
-		if(cardsToDiscard.size()>=4) {     //can it be greater, im guessing you would discard them all even if 5 //maybe in another class
-			for(TreasureDeckCard card:cardsToDiscard) { //Remove this with move card list
-				playerHand.removeCard(card);
-			}
-			playerTreasures.add(getPlayerPawnTile().getTreasure().getString()); //Gets the string representation of the treasure
-			return true;	//The player has captured a treasure
-		}
-		else return false; //The player was unable to capture a treasure
+		return matchingTreasureCards;
 	}
+
+	public boolean canShoreUp() {
+		ArrayList<Tile> shoreableTiles = getShoreableTiles();
+
+		if(shoreableTiles.isEmpty()) {
+			System.out.println("There are no tiles available to shore up \n");
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+	
+	
+
+//	public boolean canGiveTreausreCard() {
+//		ArrayList<Player> playersForTreasureCard = giveTreasureCard();
+//
+//		if(playersForTreasureCard.isEmpty()) {
+//			System.out.println("There is no players to give a treasure card to \n");
+//			return false;
+//		}
+//		else {
+//			return true;
+//		}
+//	}
+
+	@Override
+	public String toString() {
+		return playerName;
+	}
+
+	public String getRole() {
+		return this.getClass().getSimpleName();
+	}
+
 	//Returns players name
 	public String getName() {
 		return playerName;
@@ -125,6 +164,7 @@ public class Player {
 		return 	playerPawn.getPawnTile();
 		//	return  ///
 	}
+
 
 	//Need to make attribute in player role
 
@@ -152,6 +192,7 @@ public class Player {
 	public int getPlayerActions() {
 		return playerActions;
 	}
+
 
 }
 
