@@ -38,17 +38,18 @@ public class GameManager {
 		PlayerTurn currentTurn;
 
 		while(!isGameOver) { //Will keep looping over tile game is over
-			  doTurn(inputScanner);
+			doTurn(inputScanner);
 		}
-		
-			
+	}
+
+
 	public void doTurn(Scanner inputScanner) {
 
 		boolean isTurnOver=false;
 		ArrayList<Player> playerList = playerController.getModel(); //The model is the list of players
 
 		for(Player player:playerList) { //Loops through the players
-			//Possibly check Ocean tile
+			sunkenPlayers(inputScanner); //Takes care of sunken Players
 			playerView.printStartOfTurn(player);
 
 			while (!isTurnOver) { //Does the turn
@@ -69,5 +70,21 @@ public class GameManager {
 			return false;
 		}
 	}
+
+	public void sunkenPlayers(Scanner inputScanner) {
+		ArrayList<Player> listSunkenPlayers = PlayerObserver.getInstance().sunkenPlayers();
+
+		if(listSunkenPlayers.isEmpty()) return; //No players are sunk
+
+		for(Player player: listSunkenPlayers)
+			if(player.getFocredMoveableTiles().isEmpty()) {
+				Gameover();
+			}
+		playerView.doForcedMovement(inputScanner, player);
+
+		return;
+	}
+
+
 
 }
