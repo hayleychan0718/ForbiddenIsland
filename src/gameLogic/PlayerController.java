@@ -36,6 +36,10 @@ public class PlayerController {
 		return player.getFocredMoveableTiles();
 	}
 	
+	public void decementPlayerAction(Player player) {
+		player.decrementPlayerActions();
+	}
+	
 	public ArrayList<Player> getPlayersForTreasureCard(Player player){
 		return player.getPlayersForTreasureCard();
 	}
@@ -48,6 +52,17 @@ public class PlayerController {
 		tile.setFlood(false);
 	}
 	
+	public ArrayList<Player> getModel(){
+		return model;
+	}
+	
+	public ArrayList<Player> getPlayerForTreasureCard(Player player){
+		return player.getPlayersForTreasureCard();
+	}
+	
+	public boolean canCaptureTreasure(Player player) {
+		return player.canCaptureTreasure();
+	}
 	
 	
 	
