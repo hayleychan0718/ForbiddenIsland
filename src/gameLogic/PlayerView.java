@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import island.board.Tile;
+import island.cards.Hand;
+import island.cards.TreasureDeckCard;
 import island.enums.TreasureNames;
 import players.Engineer;
 import players.Player;
@@ -21,7 +23,6 @@ public class PlayerView {
 			playerView = new PlayerView();
 		return playerView;
 	}
-
 
 	public PlayerController getController() {
 		return controller;
@@ -52,15 +53,25 @@ public class PlayerView {
 
 		switch(userInput) {
 		case 0:
-			shoreUp(
-);
+			EndTurn();
+		case 1:
+			doStandardMovement(inputScanner, player);
 			break;
-		default:
+		case 2:
+			shoreUp(inputScanner, player);
+			break;
+		case 3:
+			giveTreasureCard(player, inputScanner);
+			break;
+		case 4:
+			CaptureTreasure(player);
+			break;
+		case 5:
+			showBoard();
 			break;
 		}
 	}
 
-	
 	public void shoreUp(Scanner inputScanner, Player player) {
 		ArrayList<Tile> shoreableTiles = controller.getShoreableTiles(player);
 
@@ -110,7 +121,6 @@ public class PlayerView {
 		controller.decementPlayerAction(player);
 	}
 	
-	
 	public void doForcedMovement(Scanner inputScanner, Player player) {
 		ArrayList<Tile> moveableTiles = controller.getForcedMovementTiles(player);
 		
@@ -123,11 +133,11 @@ public class PlayerView {
 		System.out.println("Your pawn has been moved to " + selectedTile);
 	}
 	
-	
-	public void doCaptureTreasure(Player player) {
+	public void CaptureTreasure(Player player) {
 		
 		if(controller.canCaptureTreasure(player)) {
 			System.out.println("You have captured the treasure:" + controller.getTreasure(player));
+			controller.decementPlayerAction(player);
 			return;
 		}
 		if(controller.getTreasure(player)==null) {
@@ -138,13 +148,48 @@ public class PlayerView {
 		return;
 	}
 	
+	public Player selectPlayerForTreasureCard(Player player, Scanner inputScanner) {
+		ArrayList<Player> playersForTreasureCard =controller.getPlayerForTreasureCard(player);
+		
+		if (playersForTreasureCard.isEmpty()) {
+			System.out.println("There are no players to give treasure cards to");
+			return null;
+		}
+		Utility.printOptions(playersForTreasureCard);
+		int userInput = Utility.acceptableInput(0, playersForTreasureCard.size(), inputScanner); //No option to cancel movement
+		Player selectedPlayer = playersForTreasureCard.get(userInput);
+		return selectedPlayer;
+	}
 	
 
-
-	public boolean isTurnOver(Player player) {
+	public void giveTreasureCard(Player player , Scanner inputScanner) {
+		 ArrayList<TreasureDeckCard> currentPlayersCards = player.getHand().getCards();
 		
-	}
+		Player selectedPlayer = selectPlayerForTreasureCard(player,inputScanner);
+		Hand selectedPlayerHand = controller.getPlayerHand(selectedPlayer);
 
+		if(!canDoCardAction(currentPlayersCards)) return;
+	
+		int userInput = Utility.acceptableInput(0, currentPlayersCards.size(), inputScanner);
+		TreasureDeckCard selectedCard = currentPlayersCards.get(userInput);
+		controller.giveCard(selectedCard, selectedPlayerHand, player);
+		controller.decementPlayerAction(player);
+	}
+	
+	public boolean canDoCardAction(ArrayList<TreasureDeckCard> cardOptions) {
+
+		if(cardOptions.isEmpty()) {
+			System.out.println("You have no cards to give");
+			return false;
+		}
+		else {
+			System.out.println("You can give the following cards:");
+			Utility.printOptions(cardOptions);
+			System.out.println("/n enter" + cardOptions.size() + "[Return] to cancel action");
+			return true;
+		}
+
+	}
 
 	public static void main(String[] args) {
 		Player Liam = new Player("Liam",1); 
