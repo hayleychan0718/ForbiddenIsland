@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import island.board.Tile;
+import island.enums.TreasureNames;
 import players.Engineer;
 import players.Player;
 import utility.Utility;
@@ -51,7 +52,8 @@ public class PlayerView {
 
 		switch(userInput) {
 		case 0:
-			shoreUp(inputScanner, player);
+			shoreUp(
+);
 			break;
 		default:
 			break;
@@ -107,6 +109,36 @@ public class PlayerView {
 		System.out.println("Your pawn has been moved to " + selectedTile);
 		controller.decementPlayerAction(player);
 	}
+	
+	
+	public void doForcedMovement(Scanner inputScanner, Player player) {
+		ArrayList<Tile> moveableTiles = controller.getForcedMovementTiles(player);
+		
+		if(!canDoTileAction(moveableTiles,"move to")) return;
+		
+		int userInput = Utility.acceptableInput(0, moveableTiles.size()-1, inputScanner); //No option to cancel movement
+		
+		Tile selectedTile = moveableTiles.get(userInput);
+		controller.movePlayerPawn(player, selectedTile);
+		System.out.println("Your pawn has been moved to " + selectedTile);
+	}
+	
+	
+	public void doCaptureTreasure(Player player) {
+		
+		if(controller.canCaptureTreasure(player)) {
+			System.out.println("You have captured the treasure:" + controller.getTreasure(player));
+			return;
+		}
+		if(controller.getTreasure(player)==null) {
+			System.out.println("You are not on a treasure tile\n");
+			return;
+		}
+		System.out.println("You dont have the required card to capture the treasure");
+		return;
+	}
+	
+	
 
 
 	public boolean isTurnOver(Player player) {
