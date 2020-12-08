@@ -15,7 +15,7 @@ public class WaterRiseCard extends TreasureDeckCard{
 
 		waterMeter.increaseWaterLevel();
 		System.out.println("Water Level increased.\nCurrent water level: " + waterMeter.getWaterLevel());
-		floodDeck.reshuffle();
+		floodDeck.reshuffle(floodDeck.getStack(), floodDeck.getDiscardPile());
 		System.out.println("Flood Deck reshuffled.");
 	}
 	
