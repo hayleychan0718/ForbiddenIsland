@@ -58,7 +58,7 @@ public class FloodDeck extends Deck{
 				tileToFlood.setFlood(true);
 			}
 			else if(tileToFlood.isFlooded()) {
-				tileToFlood.setPresent(false);
+				tileToFlood.sinkTile();
 			}
 			discardStack.push(card);
 		}
