@@ -5,8 +5,11 @@
 
 package gameLogic;
 
+import observers.GameOverObserver;
+
 public class WaterMeter {
 	
+	private GameOverObserver gameOverObserver;
 	private static WaterMeter theWaterMeter;
 	private int waterLevel;
 	
@@ -31,6 +34,10 @@ public class WaterMeter {
 	
 	public void increaseWaterLevel() {
 		waterLevel++;
+		// Notify observer to end game when water level has reached 5
+		if(waterLevel==5) {
+			gameOverObserver.update();
+		}
 	}
 	
 	public int getWaterLevel() {
