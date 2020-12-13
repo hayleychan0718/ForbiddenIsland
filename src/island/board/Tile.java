@@ -6,8 +6,10 @@ import java.util.LinkedList;
 
 import island.enums.TileNames;
 import island.enums.TreasureNames;
+import observers.GameObserver;
 
-public class Tile {
+public class Tile{
+	private GameObserver observer;
 	private boolean isFlooded; // Tile can be "flooded" or "unflooded"
 	private boolean isPresent; // Tile is present or gone
 	private final TileNames name;  // Tile has a name
@@ -211,7 +213,12 @@ public class Tile {
 		this.isFlooded = flood;
 	}
 	
-	public void setPresent(boolean present) {
-		this.isPresent = present;
+	public void sinkTile() {
+		this.isPresent = false;
+		if(name == TileNames.FoolsLanding || name == TileNames.TempleOfTheMoon && name == TileNames.TempleOfTheSun || 
+			name == TileNames.WhisperingGarden && name == TileNames.HowlingGarden || name == TileNames.CaveOfEmbers && 
+			name == TileNames.CaveOfShadows || name == TileNames.CoralPalace && name == TileNames.TidalPalace) {
+			observer.update();
+		}
 	}
 }
