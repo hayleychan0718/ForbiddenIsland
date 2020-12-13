@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import island.board.Board;
 import island.board.Tile;
 import island.cards.Hand;
 import island.cards.TreasureDeckCard;
+import island.enums.TileNames;
 import island.enums.TreasureNames;
 import players.Engineer;
 import players.Player;
@@ -191,6 +193,35 @@ public class PlayerView {
 
 	}
 
+	public boolean notifyPlayer(TileNames tile, Player player) {
+		System.out.println(tile + " is about to sink! Do you want to save it?");
+		System.out.println("[0] No\n[1] Yes");
+		int userInput = Utility.acceptableInput(0, 1);
+		if(userInput==1) {
+			controller.decementPlayerAction(player);
+			controller.saveTile(tile);
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	public void treasureLost() {
+		ArrayList<Tile> sunkTiles = Board.getInstance().listOfSunkTiles();
+		Tile lastTile = sunkTiles.get(sunkTiles.size() - 1);
+		
+		System.out.println(lastTile.getNameString() + " has sunk before the treasure was captured!");
+		System.out.println("Game over...");
+	}
+	
+	public void foolsLost() {
+		System.out.println("Fool's Landing has sunk!\nGame over...");
+	}
+	
+	public void waterLost() {
+		System.out.println("Water meter has reached 5!\nGamer over...");
+	}
+	
 	public static void main(String[] args) {
 		Player Liam = new Player("Liam",1); 
 		ArrayList<Player> optionList = new ArrayList<Player>();

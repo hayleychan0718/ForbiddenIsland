@@ -1,6 +1,7 @@
 package gameLogic;
 import java.util.ArrayList;
 import island.board.*;
+import island.enums.TileNames;
 import players.*;
 
 //Class to implement the player controller
@@ -52,6 +53,10 @@ public class PlayerController {
 		tile.setFlood(false);
 	}
 	
+	public void saveTile(TileNames tile){
+		Board.getInstance().getTile(tile).saveTile();
+	}
+	
 	public ArrayList<Player> getModel(){
 		return model;
 	}
@@ -63,8 +68,6 @@ public class PlayerController {
 	public void movePlayerPawn(Player player, Tile tile) {
 		player.movePlayerPawn(tile);
 	}
-	
-	
 	
 	
 	

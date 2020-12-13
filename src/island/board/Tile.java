@@ -2,14 +2,15 @@ package island.board;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
+import java.util.EnumSet;
+import java.util.Map;
 
 import island.enums.TileNames;
 import island.enums.TreasureNames;
-import observers.GameObserver;
+import observers.GameOverObserver;
 
 public class Tile{
-	private GameObserver observer;
+	private GameOverObserver gameOverObserver;
 	private boolean isFlooded; // Tile can be "flooded" or "unflooded"
 	private boolean isPresent; // Tile is present or gone
 	private final TileNames name;  // Tile has a name
@@ -213,12 +214,18 @@ public class Tile{
 		this.isFlooded = flood;
 	}
 	
-	public void sinkTile() {
+	
+	public void sinkTile() {	
 		this.isPresent = false;
-		if(name == TileNames.FoolsLanding || name == TileNames.TempleOfTheMoon && name == TileNames.TempleOfTheSun || 
-			name == TileNames.WhisperingGarden && name == TileNames.HowlingGarden || name == TileNames.CaveOfEmbers && 
-			name == TileNames.CaveOfShadows || name == TileNames.CoralPalace && name == TileNames.TidalPalace) {
-			observer.update();
+		// If a treasure tile or Fool's Landing is being sunk, update observer to notify player(s) if 
+		// able to save the tile
+		if(this.hasTreasure() || name.getString() == TileNames.FoolsLanding.getString()) {
+			gameOverObserver.update(name);
 		}
 	}
+	
+	public void saveTile() {
+		this.isPresent = true;
+	}
+	
 }
