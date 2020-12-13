@@ -1,5 +1,6 @@
 package utility;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 /**
  * Class uses to hold utility functions
@@ -17,8 +18,8 @@ public class Utility {
 	 */
 	public static int acceptableInput(int min,int max) { //Checks if input is acceptable by using the size of the actions lists //Maybe interface
 		int userInput=-1;
-		Scanner inputScanner = new Scanner(System.in);	//Close scanner possibly
 		boolean acceptableInput = false;
+		Scanner inputScanner = new Scanner(System.in);
 
 		while(acceptableInput == false) {
 
@@ -39,8 +40,20 @@ public class Utility {
 				continue;
 			}
 		}
-		//inputScanner.close();
+		inputScanner.close();
 		return userInput;
+	}
+	
+	/**
+	 * Prints out any list of options in the desired format
+	 * @param <T>
+	 * @param optionList
+	 */
+	public static <T> void printOptions(ArrayList<T> optionList) {
+		int i = 0;
+		for(Object o: optionList) {
+			System.out.println(o.toString() + " [" + i + "]");
+		}
 	}
 
 }
