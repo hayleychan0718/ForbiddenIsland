@@ -158,6 +158,10 @@ public class Tile {
 		return adjacentDiagonalTiles;
 	}
 	
+	public String toString() {
+		return getNameString();
+	}
+	
 	
 	public boolean isFlooded() {
 		return isFlooded;
