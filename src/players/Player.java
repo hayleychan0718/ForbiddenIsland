@@ -18,7 +18,6 @@ public class Player {
 	private String playerName;
 	protected int playerNumber;
 	private Hand playerHand;
-	private boolean canTakeTurn; //Not sure needed if one person out game is over
 	protected Pawn playerPawn;
 	protected int playerActions;
 	protected Board board;
@@ -34,8 +33,7 @@ public class Player {
 		this.playerName=playerName;
 		this.playerNumber=playerNumber;
 		this.playerHand = new Hand();
-		this.canTakeTurn = true;
-		playerActions=3;
+		playerActions=0;
 		board=Board.getInstance();
 		//player pawn
 		//Randomly select player role
@@ -46,11 +44,12 @@ public class Player {
 	 */
 	public ArrayList<Tile> getStandardMoveableTiles() {  //returns the moveable tiles //having order makes it easier to understand were tiles areList
 		Tile pawnTile  = getPlayerPawnTile();
-		ArrayList<Tile> moveableTiles = pawnTile.getAdjacentTiles();
-
-		for(Tile tile: moveableTiles) {	//Checks if the tiles are present if not removes them
-			if(tile.isPresent()==false) { // Why or null
-				moveableTiles.remove(tile); //Not sure has this been fixed, amy remove tile mid loop
+		ArrayList<Tile> adjcacent = pawnTile.getAdjacentTiles();
+		ArrayList<Tile> moveableTiles = new ArrayList<Tile>();
+		
+		for(Tile tile: adjcacent) {	//Checks if the tiles are present if not removes them
+			if(tile.isPresent()==true) { // Why or null
+				moveableTiles.add(tile); //Not sure has this been fixed, amy remove tile mid loop
 			}
 		}
 		return moveableTiles;
@@ -153,7 +152,7 @@ public class Player {
 
 	@Override
 	public String toString() {
-		return playerName;
+		return playerName + " (" + this.getClass().getSimpleName() + ")";
 	}
 
 	public String getRole() {
@@ -183,12 +182,12 @@ public class Player {
 		return getPlayerPawnTile().getTreasure();
 	}
 
+	public void ReStockActions() {
+		playerActions +=3;
+	}
 
 	//Need to make attribute in player role
 
-	public boolean CanTakeTurn() {
-		return canTakeTurn;
-	}
 	//Moves the players pawn
 	public void movePlayerPawn(Tile tile) {
 		playerPawn.movePawn(tile);
@@ -203,8 +202,12 @@ public class Player {
 		playerActions--;
 	}
 
-	public void restockPlayerActions() {
+	public void reStockActions() {
 		playerActions=3;
+	}
+	
+	public void emptyActions() {
+		playerActions=0;
 	}
 
 	public int getPlayerActions() {

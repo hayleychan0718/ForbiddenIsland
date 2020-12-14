@@ -11,8 +11,7 @@ public class Engineer extends Player {
 
 	private Engineer(String playerName, int playerNumber) {
 		super(playerName,playerNumber); //player class constructor
-		Board board = Board.getInstance();
-		Pawn playerPawn=new Pawn(board.getTile("Bronze Gate")); //Gets the Bronze Gate Tile and sets it as pawn starter tile
+		playerPawn=new Pawn(board.getTile("Bronze Gate")); //Gets the Bronze Gate Tile and sets it as pawn starter tile
 		//Hand constructed in super class(player)
 	}
 

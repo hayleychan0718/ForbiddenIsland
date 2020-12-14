@@ -9,8 +9,7 @@ public class Navigator extends Player {
 
 	private Navigator(String playerName, int playerNumber) {
 		super(playerName,playerNumber); //player class constructor
-		Board board = Board.getInstance();
-		Pawn playerPawn=new Pawn(board.getTile("Golden Gate")); //Gets the Bronze Gate Tile and sets it as pawn starter tile
+		playerPawn=new Pawn(board.getTile("Golden Gate")); //Gets the Bronze Gate Tile and sets it as pawn starter tile
 
 	}
 

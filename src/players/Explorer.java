@@ -1,5 +1,6 @@
 package players;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import island.board.Board;
@@ -12,8 +13,7 @@ public class Explorer extends Player {
 
 	private Explorer(String playerName, int playerNumber) {
 		super(playerName,playerNumber); //player class constructor
-		Board board = Board.getInstance();
-		Pawn playerPawn=new Pawn(board.getTile("Copper Gate")); //Gets the Bronze Gate Tile and sets it as pawn starter tile
+		playerPawn=new Pawn(board.getTile("Copper Gate")); //Gets the Bronze Gate Tile and sets it as pawn starter tile
 
 	}
 
@@ -29,18 +29,14 @@ public class Explorer extends Player {
 	}
 	
 	@Override
-	public LinkedList<Tile> getFocredMoveableTile(){ //overridden as explorer cans swim diagonal tiles
-		int i=0;
+	public ArrayList<Tile> getFocredMoveableTiles(){ //overridden as explorer cans swim diagonal tiles
 		Tile pawnTile = getPlayerPawnTile();
-		LinkedList<Tile> moveableTiles = pawnTile.getAdjacentDiagonal();
+		ArrayList<Tile> moveableTiles = pawnTile.getAdjacentDiagonal();
 		for(Tile tile: moveableTiles) {	//Checks if the tiles are present if not removes them
-			if(tile.isPresent()==false || tile==null ) {
+			if(tile.isPresent()==false) {
 				moveableTiles.remove(tile);
 			}
-			else {
-				System.out.println("Tiles you can move to:" + tile.getName() + i +"("+i+")");	//prints the tiles you can move to, Is this bad practice
-				i++;
-			}
+			
 		}
 		return moveableTiles;
 	}
