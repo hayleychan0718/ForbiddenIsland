@@ -1,9 +1,13 @@
 package gameLogic;
 import java.util.ArrayList;
 import island.board.*;
+
 import island.cards.Hand;
 import island.cards.TreasureDeckCard;
 import island.enums.TreasureNames;
+
+import island.enums.TileNames;
+
 import players.*;
 
 //Class to implement the player controller
@@ -55,6 +59,12 @@ public class PlayerController {
 		tile.setFlood(false);
 	}
 
+	
+	public void saveTile(TileNames tile){
+		Board.getInstance().getTile(tile).saveTile();
+	}
+	
+
 	public ArrayList<Player> getModel(){
 		return model;
 	}
@@ -66,6 +76,7 @@ public class PlayerController {
 	public void movePlayerPawn(Player player, Tile tile) {
 		player.movePlayerPawn(tile);
 	}
+
 
 	public TreasureNames getTileTreasure(Player player) {
 		return player.getTreasure();
@@ -90,15 +101,4 @@ public class PlayerController {
 	public void emptyActions(Player player) {
 		player.emptyActions();
 	}
-
-
-
-
-
-
-
-
-
-
-
 }
