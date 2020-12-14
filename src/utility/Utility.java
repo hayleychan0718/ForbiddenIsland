@@ -14,13 +14,12 @@ public class Utility {
 	 * Ensures the users enters an integer within the acceptable range
 	 * @param min , minimum option
 	 * @param max , maximum option
+	 * @param inputScanner TODO
 	 * @return , returns a valid input
 	 */
-	public static int acceptableInput(int min,int max) { //Checks if input is acceptable by using the size of the actions lists //Maybe interface
+	public static int acceptableInput(int min,int max, Scanner inputScanner) { //Checks if input is acceptable by using the size of the actions lists //Maybe interface
 		int userInput=-1;
 		boolean acceptableInput = false;
-		Scanner inputScanner = new Scanner(System.in);
-
 		while(acceptableInput == false) {
 
 			if(inputScanner.hasNextInt() == true) {	//Checks if what is entered is an integer
@@ -40,7 +39,7 @@ public class Utility {
 				continue;
 			}
 		}
-		inputScanner.close();
+		//inputScanner.close();
 		return userInput;
 	}
 	
@@ -53,6 +52,16 @@ public class Utility {
 		int i = 0;
 		for(Object o: optionList) {
 			System.out.println(o.toString() + " [" + i + "]");
+			i++;
+		}
+	}
+	
+	public static void sleep(long time) {
+		try {
+			Thread.sleep(time);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
