@@ -11,15 +11,14 @@ public class PlayerSetupController {
 	
 	private static PlayerSetupController controller = null;
 	
-	public static PlayerSetupController getInstance(PlayerSetup model, PlayerSetupView view) {
+	public static PlayerSetupController getInstance(PlayerSetup model) {
 		if(controller ==null)
-			controller = new PlayerSetupController(model, view);
+			controller = new PlayerSetupController(model);
 		return controller;
 	}
 	
-	private PlayerSetupController(PlayerSetup model, PlayerSetupView view) {
+	private PlayerSetupController(PlayerSetup model) {
 		this.model=model;
-		this.view=view;
 	}
 	
 	public ArrayList<String> getRoleList(){
@@ -36,5 +35,9 @@ public class PlayerSetupController {
 	
 	public void addPlayer(Player player) {
 		model.addPlayer(player);
+	}
+	
+	public ArrayList<Player> getListofPlayers() {
+		return model.getPlayerList();
 	}
 }

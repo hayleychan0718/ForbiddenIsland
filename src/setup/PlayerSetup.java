@@ -9,7 +9,6 @@ import java.util.stream.IntStream;
 
 import javax.tools.DiagnosticCollector;
 
-import gameLogic.PlayerAction;
 import island.board.Board;
 import players.*;
 import utility.Utility;
@@ -47,6 +46,10 @@ public class PlayerSetup {
 	
 	public void addPlayer(Player player) {
 		playerList.addPlayer(player);
+	}
+	
+	public ArrayList<Player> getPlayerList(){
+		return playerList.getListOfPlayers();
 	}
 }
  

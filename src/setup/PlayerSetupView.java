@@ -9,6 +9,7 @@ import players.Engineer;
 import players.Explorer;
 import players.Messenger;
 import players.Navigator;
+import players.Player;
 import players.PlayerList;
 import utility.Utility;
 
@@ -23,12 +24,13 @@ public class PlayerSetupView {
 		return playerSetupView;
 	}
 	
-	public int setNumofPlayers() {
+	public int setNumofPlayers(Scanner inputScanner) {
 		int userInput;
 		Integer numOfPlayers = 0;
 		System.out.println("Enter the number of players playing, this must be be of the range 2 to 4:");
 
-		userInput=Utility.acceptableInput(2, 4);		
+		userInput=Utility.acceptableInput(2, 4, inputScanner);	
+		inputScanner.nextLine();
 		numOfPlayers=userInput;
 	 
 		return numOfPlayers;
@@ -36,12 +38,11 @@ public class PlayerSetupView {
 
 	public void createPlayer(int playerNumber, Scanner inputScanner) { //Change using strings
 		ArrayList<String> listofRoles = controller.getRoleList();
-		
-		System.out.println("\nYou are Player number:"+ playerNumber + "\n");
+
+		System.out.println("You are Player number:"+ playerNumber + "\n");
 		System.out.println("Please Enter Your Name:");
 		String playerName = inputScanner.nextLine();
 
-		controller.shuffleRoles();
 
 		switch(listofRoles.get(0)){
 		case "Diver":
@@ -72,26 +73,43 @@ public class PlayerSetupView {
 		default:
 			break;
 		}
-		System.out.println("Your Role is: " + listofRoles.get(0));
+		System.out.println("Your Role is: " + listofRoles.get(0) + "\n");
 		controller.removeRole(0); //Makes that another player cannot be assigned that role by removing it from the list
 	}
 
-	public void createPlayers() {
+	public void createPlayers(Scanner inputScanner) {
 		int numOfPlayers=0;
 		
-		numOfPlayers= setNumofPlayers();
-		Scanner inputScanner = new Scanner(System.in);
+		numOfPlayers= setNumofPlayers(inputScanner);
 			for(int i = 1; i< numOfPlayers+1; i++) {	//Start from player 1
 				createPlayer(i, inputScanner);
 				}
+			printListofPlayers();
 		}
 	
-	public static void main(String[] args) {
-		PlayerSetup playerSetup = Play;
-		playerSetup.createPlayers();
-		PlayerList.getInstance().printListOfPlayers();
-		
+	public void setController(PlayerSetupController controller) {
+		this.controller=controller;
 	}
+	
+	  public void printListofPlayers() {
+		  ArrayList<Player> playerList = controller.getListofPlayers();
+	    	for(Player player: playerList) {
+	        	System.out.println(player);
+	    	}
+	    }
+	  
+//	  public void setUpPlayers(Scanner inputScanner) {
+//		    PlayerSetup model = PlayerSetup.getInstance();
+//			
+//			PlayerSetupController controller = PlayerSetupController.getInstance(model);
+//			
+//			PlayerSetupView view = PlayerSetupView.getInstance();
+//			
+//			view.createPlayers(inputScanner);
+//			
+//	  }	
+		
+	
 }
 
-}
+
