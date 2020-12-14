@@ -11,7 +11,7 @@ public class PlayerList {
 
 	
 	private static PlayerList thePlayerList;
-	private List<Player> playerList;
+	private ArrayList<Player> playerList;
 	
 	
 	
@@ -49,13 +49,13 @@ public class PlayerList {
     	playerList.add(newPlayer);
     }
     
-    public List<Player> getListOfPlayers(){
+    public ArrayList<Player> getListOfPlayers(){
     	return playerList;
     }
     
     //Returns a list of the other players
-    public LinkedList<Player> getListOfOtherPlayers(int playerNumber){
-    	LinkedList<Player> otherListOfPlayers= new LinkedList<Player>(); 
+    public ArrayList<Player> getListOfOtherPlayers(int playerNumber){
+    	ArrayList<Player> otherListOfPlayers= new ArrayList<Player>(); 
     	for(Player player: playerList) {
     		if (player.playerNumber!=playerNumber) {
     			otherListOfPlayers.add(player);
@@ -63,12 +63,6 @@ public class PlayerList {
     	}
     	return otherListOfPlayers;
     	
-    }
-    
-    public void printListOfPlayers() {
-    	for(int i=0; i<playerList.size(); i++) {
-        	System.out.println(i+1 + ". " + playerList.get(i).getName());
-    	}
     }
     
 	//===========================================================
