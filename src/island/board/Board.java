@@ -103,6 +103,16 @@ public class Board{
     	return nearestTiles;
     }
 	
+   public ArrayList<Tile> listOfSunkTiles(){
+	   	ArrayList<Tile> list = new ArrayList<Tile>();
+	   	for(int i=0; i<listOfTiles().size(); i++) {
+	   		if(listOfTiles().get(i).isPresent() == false) {
+	   			list.add(listOfTiles().get(i));
+	   		}
+	   	}
+	   	return list;
+	   }
+	
 	public int[][] getIslandTiles() {
 		return islandTiles;
 	}
@@ -132,5 +142,6 @@ public class Board{
 //		}
 //	}
 
+	// Commit test comment
 	
 }
