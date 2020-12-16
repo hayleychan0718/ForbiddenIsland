@@ -42,26 +42,7 @@ public class Board{
     /*
      * Just prints out the name of tile followed by coordinates of tile
      */
-    public void printBoard() {
-        for(int[] x: islandTiles) {
-            System.out.println(board[x[0]][x[1]].getName());
-            System.out.println("Coord: " + Arrays.toString(board[x[0]][x[1]].getLocation()));
-            System.out.println("Flooded: " + board[x[0]][x[1]].isFlooded());
-            System.out.println("Present: " + board[x[0]][x[1]].isPresent());
-            System.out.println();
-        }
-    	
-        
-        /*for(int i=0; i<6; i++) {
-        	System.out.println();
-        	for(int j=0; j<6; j++) {
-        		if(board[i][j] == null) 
-        			System.out.printf("%25s", "blank");
-        		else 
-        			System.out.printf("%25s", board[i][j].getName().getString());
-        	}
-        } */   	
-    }
+ 
     
     public Tile getTile(TileNames name) {
         for(int[] x: islandTiles) {
@@ -121,27 +102,35 @@ public class Board{
     	}
     	return nearestTiles;
     }
+	
+	public int[][] getIslandTiles() {
+		return islandTiles;
+	}
+	
+	public Tile[][] getBoard() {
+		return board;
+	}
     
 	/*
 	 * Tests
 	 */
-	public static void main(String[] args) {
-		Board board = Board.getInstance();
-		Tile tile = board.getTile(3, 3);
-		LinkedList<Tile> surrounding = tile.getAdjacentDiagonal();
-
-		for(int i=0; i<surrounding.size(); i++) {
-			surrounding.get(i).setFlood(true);
-			surrounding.get(i).setPresent(false);
-		}
-		
-		ArrayList<Tile> list = board.listOfNearestTiles(tile);		
-
-		for(int i=0; i<list.size();i++) {
-			System.out.println(list.get(i).getNameString());
-			System.out.println(Arrays.toString(list.get(i).getLocation()));
-		}
-	}
+//	public static void main(String[] args) {
+//		Board board = Board.getInstance();
+//		Tile tile = board.getTile(3, 3);
+//		LinkedList<Tile> surrounding = tile.getAdjacentDiagonal();
+//
+//		for(int i=0; i<surrounding.size(); i++) {
+//			surrounding.get(i).setFlood(true);
+//			surrounding.get(i).setPresent(false);
+//		}
+//		
+//		ArrayList<Tile> list = board.listOfNearestTiles(tile);		
+//
+//		for(int i=0; i<list.size();i++) {
+//			System.out.println(list.get(i).getNameString());
+//			System.out.println(Arrays.toString(list.get(i).getLocation()));
+//		}
+//	}
 
 	
 }
