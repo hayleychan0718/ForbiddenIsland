@@ -9,15 +9,14 @@ import island.cards.Hand;
 import island.cards.TreasureDeckCard;
 import players.Player;
 import players.PlayerList;
+import utility.Utility;
 
 public class CardLogic {
-
-	// Test comment to test git
 	
 	private Player player;
 	private Hand playerHand;
 	ArrayList<TreasureDeckCard> playableCards;
-
+	
 	
 	public CardLogic(Player player) {
 		this.player=player;
@@ -25,24 +24,10 @@ public class CardLogic {
 		this.playableCards = playerHand.getCards();
 	}
 	
-	public void pickCard() {
-	//	int userInput();
-		int picking = 0;
-		do{
-			System.out.println("Pick one of the cards you wish to play");
-		//	System.out.println("/n enter " + playableCards.size() + "[Return] to cancel action"); 
-			playerHand.printHand();
-			int userInput = PlayerAction.acceptableInput(0, playableCards.size());
-			
-		//	if(userInput==playableCardsPlayers.size()) return; 	//cancels action // Hayley: not sure what this does
-			playableCards.get(userInput).play();
-			if(playableCards.get(userInput).getName() == "Treasure") {
-				picking = 1;
-			}
-			else
-				playerHand.removeCard(playableCards.get(userInput));		
-		}while(picking != 0);
+	public void play(int userInput) {
+		playableCards.get(userInput).play();
 	}
+
 	
 	public void doHelicopter() {
 		@SuppressWarnings("resource")
@@ -54,12 +39,12 @@ public class CardLogic {
 		boolean repeat = true;
 				
 		System.out.println("Which tile do you want to move to? ");
-		int tileIndex = PlayerAction.acceptableInput(0, listOfTiles.size());
+		int tileIndex = Utility.acceptableInput(0, listOfTiles.size());
 
 		while(repeat == true){
 			System.out.println("Who do you want to move to " + listOfTiles.get(tileIndex).getNameString() + "?");
 			playerList.printListOfPlayers();
-			int playerIndex = PlayerAction.acceptableInput(0, playerList.getListOfPlayers().size());
+			int playerIndex = Utility.acceptableInput(0, playerList.getListOfPlayers().size());
 			if(chosenPlayers.contains(playerList.getPlayer(playerIndex))) {
 				System.out.println(playerList.getPlayer(playerIndex).getName() + " is already chosen.");
 			} //could create a new list and remove player each time so no option of other player
@@ -88,7 +73,7 @@ public class CardLogic {
 		}
 		else {
 			System.out.println("\nChoose the tile: ");
-			int tileIndex = PlayerAction.acceptableInput(0, tiles.size());
+			int tileIndex = Utility.acceptableInput(0, tiles.size());
 			Tile tileToShoreUp = Board.getInstance().getTile(tiles.get(tileIndex).getNameString()); // Ask Robert
 			tileToShoreUp.setFlood(false);
 			System.out.println("Shored up " + tileToShoreUp.getNameString());
