@@ -14,7 +14,8 @@ public class GameManager {
 	private boolean isGameOver;
 	private PlayerList playerList;
 
-	//Singlton class
+	
+	
 	private GameManager() {
 		isGameOver=false;
 		playerList= PlayerList.getInstance();

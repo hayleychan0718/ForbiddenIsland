@@ -108,7 +108,7 @@ public class Player {
 		if(getTreasure()==null) {
 			return false;
 		}
-		else {System.out.println(getTreasure());}
+		//else {System.out.println(getTreasure());}
 		return true;
 	}
 
@@ -127,7 +127,7 @@ public class Player {
 		ArrayList<Tile> shoreableTiles = getShoreableTiles();
 
 		if(shoreableTiles.isEmpty()) {
-			System.out.println("There are no tiles available to shore up \n");
+			//System.out.println("There are no tiles available to shore up \n");
 			return false;
 		}
 		else {
