@@ -236,9 +236,9 @@ public class Tile{
 				PlayerObserver.getInstance().updateSunk(player);
 			}
 			
-			if(this.hasTreasure() || name.getString() == TileNames.FoolsLanding.getString()) {
-				gameOverObserver.update(name);
-			}
+//			if(this.hasTreasure() || name.getString() == TileNames.FoolsLanding.getString()) {
+//				gameOverObserver.update(name);
+//			}
 		}
 	}
 	
