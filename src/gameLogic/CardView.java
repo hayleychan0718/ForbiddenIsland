@@ -1,5 +1,6 @@
 package gameLogic;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import island.cards.Hand;
@@ -44,3 +45,26 @@ public class CardView {
 		}while(picking != 0);
 	}
 }
+
+
+//if(card isintance of Helicopter) {
+//	getlistofplayers
+//	Choosingplayers
+//	selected tile 
+//}
+//else {
+//	shoreup(tiles):
+//}
+
+//Hleiocpter(){
+//	select card Method();
+//	printoptions(controller.getplayablecard); //Pick card
+//	
+//	System.out.println(card.intro()); //" YOU played helicoter card you can move to: , You played sandbag card " String intor method for both
+//	
+//	printoptions(card.options); // Helicopter return all non sunk  tiles , sandbag returns all flodded tiles
+//	selectedTile= acceptableinput(options.size);
+//	
+//	
+//	
+//}
