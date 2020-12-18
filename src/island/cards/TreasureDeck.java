@@ -11,8 +11,8 @@ public class TreasureDeck extends Deck{
 	 * Instance variables
 	 */
     private static TreasureDeck treasureDeckInstance = null; 
-    private static Stack<TreasureDeckCard> treasureStack = new Stack<TreasureDeckCard>();
-    private static Stack<TreasureDeckCard> discardStack = new Stack<TreasureDeckCard>();
+    private static Stack<Card> treasureStack = new Stack<Card>();
+    private static Stack<Card> discardStack = new Stack<Card>();
 
     /*
      * TreasureDeck constructor
@@ -72,7 +72,7 @@ public class TreasureDeck extends Deck{
 	 * Gets the main treasure deck
 	 * @return The main treasure stack
 	 */
-	public Stack<TreasureDeckCard> getStack(){
+	public Stack<Card> getStack(){
 		return treasureStack;
 	}
 	
@@ -80,7 +80,7 @@ public class TreasureDeck extends Deck{
 	 * Gets the treasure discard pile
 	 * @return The treasure discard stack
 	 */
-	public Stack<TreasureDeckCard> getDiscardPile(){
+	public Stack<Card> getDiscardPile(){
 		return discardStack;
 	}
 }

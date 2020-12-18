@@ -1,7 +1,6 @@
 package island.cards;
 
 
-// Not sure if gonna use
 public abstract class Card {
 	protected String name;
 	
