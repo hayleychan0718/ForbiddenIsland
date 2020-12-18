@@ -13,7 +13,7 @@ import players.PlayerList;
 public class MessengerTest {
 
 	@Test
-	public void test() {
+	public void playersForTreasureCard() {
 		Messenger tester1 =  Messenger.getInstance("Test1", 1);
 		Diver tester2 =  Diver.getInstance("Test2", 2);
 		Engineer tester3 =  Engineer.getInstance("Test3", 2);

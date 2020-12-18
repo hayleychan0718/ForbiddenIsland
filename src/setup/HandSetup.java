@@ -17,7 +17,7 @@ public class HandSetup {
 	
 	public static HandSetup getInstance() {
 		if(handSetup == null)
-			handSetup = new PlayerSetup();
+			handSetup = new HandSetup();
 		return handSetup;
 	}
 	

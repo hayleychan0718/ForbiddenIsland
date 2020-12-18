@@ -1,4 +1,4 @@
-package gameLogic;
+package observers;
 
 import java.util.ArrayList;
 
