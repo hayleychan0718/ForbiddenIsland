@@ -13,11 +13,15 @@ public class HandSetup {
 	 */
 	private TreasureDeck treasureDeck;
 	private List<Player> listOfPlayers;
-
+	private static HandSetup handSetup;
 	
-	/**
-	 * Constructor for HandSetup
-	 */
+	public static HandSetup getInstance() {
+		if(handSetup == null)
+			handSetup = new PlayerSetup();
+		return handSetup;
+	}
+	
+	
 	public HandSetup() {
 		this.treasureDeck = TreasureDeck.getInstance();
 		this.listOfPlayers = PlayerList.getInstance().getListOfPlayers();
