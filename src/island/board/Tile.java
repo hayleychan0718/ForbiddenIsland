@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Map;
 
-import gameLogic.PlayerObserver;
+import observers.PlayerObserver;
 import island.enums.TileNames;
 import island.enums.TreasureNames;
 //import observers.GameOverObserver;

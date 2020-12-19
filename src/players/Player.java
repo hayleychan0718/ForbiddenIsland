@@ -12,7 +12,7 @@ import island.cards.*;
 import island.enums.TreasureNames;
 import pawns.Pawn;
 
-public class Player {
+public abstract class Player {
 
 
 	private String playerName;
@@ -90,7 +90,7 @@ public class Player {
 		if(!onTreasureTile()) return false;
 		
 		if(matchingTreasureCards.size()>=4) {
-			CaptureTreasure();
+			captureTreasure();
 			playerHand.getCards().removeAll(matchingTreasureCards);
 			return true;
 		}
@@ -98,7 +98,7 @@ public class Player {
 
 	}
 	
-	public void CaptureTreasure() {
+	public void captureTreasure() {
 		Tile pawnTile = getPlayerPawnTile();
 		
 		pawnTile.getTreasure().captureTreasure();

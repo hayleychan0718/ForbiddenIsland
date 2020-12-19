@@ -13,11 +13,15 @@ public class HandSetup {
 	 */
 	private TreasureDeck treasureDeck;
 	private List<Player> listOfPlayers;
-
+	private static HandSetup handSetup;
 	
-	/**
-	 * Constructor for HandSetup
-	 */
+	public static HandSetup getInstance() {
+		if(handSetup == null)
+			handSetup = new HandSetup();
+		return handSetup;
+	}
+	
+	
 	public HandSetup() {
 		this.treasureDeck = TreasureDeck.getInstance();
 		this.listOfPlayers = PlayerList.getInstance().getListOfPlayers();
@@ -27,10 +31,10 @@ public class HandSetup {
 	 * Give 2 cards to each player at the beginning of the game
 	 */
 	public void startGame() {
-		for(int i=0;i<listOfPlayers.size();i++) {
-			for(int j=0; j<2; j++) {
+		for(Player player:listOfPlayers) {
+			for(int i=0; i<2; i++) {
 				Card card = treasureDeck.getStack().pop();
-				listOfPlayers.get(i).getHand().addCard(card);
+				player.getHand().addCard(card);
 			}
 		}
 	}

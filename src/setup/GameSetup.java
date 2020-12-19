@@ -3,10 +3,9 @@ package setup;
 import java.util.Scanner;
 
 import gameLogic.GameView;
-import gameLogic.PlayerController;
 import gameLogic.*;
 import island.board.Board;
-import players.PlayerList;
+import players.*;
 
 public class GameSetup {
 
@@ -24,6 +23,7 @@ public class GameSetup {
 		Scanner inputScanner = new Scanner(System.in);
 		Board.getInstance();
 		playerSetup(inputScanner);
+		HandSetup.getInstance().startGame();
 		playerActions();
 		
 		gameManagerSetup(inputScanner);

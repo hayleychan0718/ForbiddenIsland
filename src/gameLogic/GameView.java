@@ -3,7 +3,8 @@ package gameLogic;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import players.Player;
+import players.*;
+import observers.*;
 import utility.Utility;
 
 public class GameView {
