@@ -214,7 +214,7 @@ public class PlayerView {
 		controller.emptyActions(player);
 	}
 
-	public boolean notifyPlayer(TileNames tile, Player player) {
+	public boolean notifyPlayer(Scanner inputScanner, Tile tile, Player player) {
 		System.out.println(tile + " is about to sink! Do you want to save it?");
 		System.out.println("[0] No\n[1] Yes");
 		int userInput = Utility.acceptableInput(0, 1, inputScanner);
