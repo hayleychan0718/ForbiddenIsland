@@ -4,6 +4,7 @@ import java.util.List;
 
 import island.cards.Card;
 import island.cards.TreasureDeck;
+import island.cards.WaterRiseCard;
 import players.Player;
 import players.PlayerList;
 
@@ -31,9 +32,13 @@ public class HandSetup {
 	 * Give 2 cards to each player at the beginning of the game
 	 */
 	public void startGame() {
-		for(Player player:listOfPlayers) {
-			for(int i=0; i<2; i++) {
+		for(Player player: listOfPlayers) {
+			for(int j=0; j<2; j++) {
 				Card card = treasureDeck.getStack().pop();
+				while(card instanceof WaterRiseCard) {
+					treasureDeck.getDiscardPile().add(card);
+					card = treasureDeck.getStack().pop();
+				}
 				player.getHand().addCard(card);
 			}
 		}
