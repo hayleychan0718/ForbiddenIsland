@@ -112,26 +112,6 @@ public class Board{
     	}
     	return nearestTiles;
     }
-	//How to loop using object
-	public ArrayList<Tile> sunkTiles(){
-    	ArrayList<Tile> list = new ArrayList<Tile>();
-    	for(Tile tile: listOfTiles()) {
-    		if(tile.isPresent() == false) {
-    			list.add(tile);
-    		}
-    	}
-    	return list;
-    }
-	
-//   public ArrayList<Tile> listOfSunkTiles(){
-//	   	ArrayList<Tile> list = new ArrayList<Tile>();
-//	   	for(int i=0; i<listOfTiles().size(); i++) {
-//	   		if(listOfTiles().get(i).isPresent() == false) {
-//	   			list.add(listOfTiles().get(i));
-//	   		}
-//	   	}
-//	   	return list;
-//	   }
 	
 	public int[][] getIslandTiles() {
 		return islandTiles;

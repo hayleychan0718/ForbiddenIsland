@@ -90,5 +90,8 @@ public class GameView {
 		this.controller=controller;
 	}
 
+	public void gameWin() {
+		System.out.println("Lifting off Fool's Landing...\nYou win!");
+	}
 
 }

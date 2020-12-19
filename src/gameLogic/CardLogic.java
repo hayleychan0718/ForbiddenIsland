@@ -6,77 +6,60 @@ import java.util.Scanner;
 import island.board.Board;
 import island.board.Tile;
 import island.cards.Hand;
+import island.cards.HelicopterCard;
+import island.cards.SandbagCard;
 import island.cards.TreasureDeckCard;
+import island.cards.WaterRiseCard;
+import island.enums.TreasureNames;
 import players.Player;
 import players.PlayerList;
 import utility.Utility;
 
 public class CardLogic {
 	
-	private Player player;
-	private Hand playerHand;
-	ArrayList<TreasureDeckCard> playableCards;
-	
+	private ArrayList<TreasureDeckCard> playableCards;
 	
 	public CardLogic(Player player) {
-		this.player=player;
-		this.playerHand=player.getHand();
-		this.playableCards = playerHand.getCards();
-	}
-	
-	public void play(int userInput) {
-		playableCards.get(userInput).play();
+		this.playableCards = player.getHand().getPlayableCards();
 	}
 
-	
-	public void doHelicopter() {
-		@SuppressWarnings("resource")
-		Scanner s = new Scanner(System.in);
-		ArrayList<Tile> listOfTiles = Board.getInstance().listOfTiles();
-		PlayerList playerList = PlayerList.getInstance();
-		ArrayList<Player> chosenPlayers = new ArrayList<Player>();
-		String yn = "y";
-		boolean repeat = true;
-				
-		System.out.println("Which tile do you want to move to? ");
-		int tileIndex = Utility.acceptableInput(0, listOfTiles.size());
-
-		while(repeat == true){
-			System.out.println("Who do you want to move to " + listOfTiles.get(tileIndex).getNameString() + "?");
-			playerList.printListOfPlayers();
-			int playerIndex = Utility.acceptableInput(0, playerList.getListOfPlayers().size());
-			if(chosenPlayers.contains(playerList.getPlayer(playerIndex))) {
-				System.out.println(playerList.getPlayer(playerIndex).getName() + " is already chosen.");
-			} //could create a new list and remove player each time so no option of other player
-			else
-				chosenPlayers.add(playerList.getPlayer(playerIndex));			
-			System.out.println("Do you want to choose another player? (Y/N)");
-		    yn = s.nextLine();
-		    if(yn.equals("y") || yn.equals("Y")) 
-		    	repeat = true;
-		    else if(yn.equals("n") || yn.equals("N"))
-		    	repeat = false;
-		}
-		
-		for(int i=0; i<chosenPlayers.size();i++) {
-			System.out.print("Moving " + chosenPlayers.get(i).getName() + " to " + listOfTiles.get(tileIndex).getNameString() +  "...\n");
-			chosenPlayers.get(i).movePlayerPawn(listOfTiles.get(tileIndex));
-		}		
+	public void remove(int userInput) {
+		playableCards.remove(userInput);
 	}
 	
+	public void playHelicopter(Tile chosenTile, ArrayList<Player> chosenPlayers) {
+		HelicopterCard.play(chosenTile, chosenPlayers);
+	}
 	
-	public void doSandbag() {
-		ArrayList<Tile> tiles = Board.getInstance().listOfFloodedTiles();
-		if(tiles.size()==0) {
-			System.out.println("Choose another card.");
-			pickCard();
+	public boolean canWinHelicopter() {
+		ArrayList<Player> playersList = PlayerList.getInstance().getListOfPlayers();
+        TreasureNames treasureNames[] = TreasureNames.values();
+		int onFoolsLanding = 0;
+		int treasuresCaptured = 0;
+		for(Player player: playersList) {
+			if(player.getPlayerPawnTile().getNameString() == "Fool's Landing") {
+				onFoolsLanding++;
+			}
 		}
-		else {
-			System.out.println("\nChoose the tile: ");
-			int tileIndex = Utility.acceptableInput(0, tiles.size());
-			Tile tileToShoreUp = Board.getInstance().getTile(tiles.get(tileIndex).getNameString()); // Ask Robert
-			tileToShoreUp.setFlood(false);
-			System.out.println("Shored up " + tileToShoreUp.getNameString());
+		for(TreasureNames treasure: treasureNames) {
+			if(treasure.isCaptured())
+				treasuresCaptured++;
 		}
+		if(onFoolsLanding == playersList.size() && treasuresCaptured == TreasureNames.values().length)
+			return true;
+		else 
+			return false;
+	}
+	
+	public void winHelicopter() {
+		HelicopterCard.win();
+	}
+	
+	public void playSandbag(Tile chosenTile) {
+		SandbagCard.play(chosenTile);
+	}
+	
+	public void doWaterRise() {
+		WaterRiseCard.play();
 	}
 }

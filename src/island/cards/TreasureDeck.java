@@ -3,6 +3,7 @@ package island.cards;
 import java.util.Collections;
 import java.util.Stack;
 
+import gameLogic.CardView;
 import island.enums.TreasureNames;
 
 
@@ -65,7 +66,13 @@ public class TreasureDeck extends Deck{
 		if(treasureStack.isEmpty()) {
 			super.reshuffle(treasureStack, discardStack);
 		}
-		hand.addCard(treasureStack.pop());
+		Card drawnCard = treasureStack.pop();
+		if(drawnCard instanceof WaterRiseCard) {
+			CardView.getInstance().doWaterRise();
+			discardStack.add(drawnCard);
+		}
+		else
+			hand.addCard(treasureStack.pop());
 	}
 	
 	/**

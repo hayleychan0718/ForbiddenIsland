@@ -60,8 +60,8 @@ public class PlayerController {
 	}
 
 	
-	public void saveTile(TileNames tile){
-		Board.getInstance().getTile(tile).saveTile();
+	public void saveTile(Tile tile){
+		tile.saveTile();
 	}
 	
 

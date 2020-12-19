@@ -65,6 +65,11 @@ public class PlayerList {
     	
     }
     
+    public ArrayList<Player> getPlayersForHelicopter(){
+    	ArrayList<Player> playersForHelicopter = new ArrayList<>(playerList);
+    	return playersForHelicopter;
+    }
+    
 	//===========================================================
 	// Singleton destroyer for unit testing ONLY
 	//===========================================================

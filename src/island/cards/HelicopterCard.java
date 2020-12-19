@@ -2,8 +2,10 @@ package island.cards;
 
 import java.util.ArrayList;
 
+import gameLogic.GameView;
 import island.board.Board;
 import island.board.Tile;
+import players.Player;
 
 public class HelicopterCard extends TreasureDeckCard{
 	
@@ -11,31 +13,13 @@ public class HelicopterCard extends TreasureDeckCard{
 		super.name = "Helicopter Lift";
 	}
 	
-	public void play() {
-		Board board = Board.getInstance();
-		ArrayList<Tile> listOfTiles = board.listOfTiles();
-
-		int index = 0;
-
-		System.out.println("\nPlay Helicopter Lift card...");
-		System.out.println("\nTiles you can move to:");
-		for(int i=0; i<listOfTiles.size();i++) {
-			System.out.println(listOfTiles.get(i).getNameString() + "[" + index + "]");
-			index++;
+	public static void play(Tile chosenTile, ArrayList<Player> chosenPlayers) {
+		for (Player player: chosenPlayers) {
+			player.movePlayerPawn(chosenTile);
 		}
 	}
-	
-	// Observer?
-	// IF: all players have all four treasures AND: everyone is on the Fool's Landing
-	// then: 
 
-	public void win() {
-		
-		/*
-		 * check if all players have the treasure
-		 * gameover() = true
-		 */
-	}
-	
-
+	public static void win() {
+		GameView.getInstance().gameWin(); 
+	} 
 }
