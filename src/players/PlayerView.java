@@ -1,48 +1,47 @@
+/**
+ * View to implement the user interface for Player class
+ * @author Liam Fitzgerald
+ */
 package players;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
-
-
 import gameLogic.WaterMeter;
 import island.board.Board;
 import island.board.Tile;
-import island.cards.Card;
-import island.cards.Hand;
-import island.cards.TreasureCard;
-import island.cards.TreasureDeckCard;
-import island.enums.TileNames;
-import island.enums.TreasureNames;
-import observers.GameOverObserver;
-import players.Engineer;
-import players.Player;
+import island.cards.*;
 import utility.Utility;
 
-//Class to implement the player view
+
 public class PlayerView {
 
 	private PlayerController controller;
 	private static PlayerView playerView = null;
 
+	
 	public static PlayerView getInstanace() {
 		if(playerView == null)
 			playerView = new PlayerView();
 		return playerView;
 	}
-
-	//No Constructor
-
+	
 	public PlayerController getController() {
 		return controller;
 	}
 
+	/**
+	 * Sets the controller for the view
+	 * @param controller
+	 */
 	public void setController(PlayerController controller) {
 		this.controller = controller;
 
 	}
 
+	/**
+	 * Prints available playable options to user
+	 */
 	public void printOptions() {
 		System.out.println("\nYou have the following available options");
 		System.out.println("[1] Move Pawn");
@@ -55,6 +54,11 @@ public class PlayerView {
 		System.out.println("[0] End Turn");
 	}
 
+	/**
+	 * Enables a player to select a playable option with inputScanner
+	 * @param inputScanner
+	 * @param player
+	 */
 	public void selectOption(Scanner inputScanner, Player player) {
 
 		int userInput = Utility.acceptableInput(0, 7, inputScanner);
@@ -79,14 +83,19 @@ public class PlayerView {
 			showBoard();
 			break;
 		case 6:
-			runCardView(inputScanner, player.getHand(), player);
+			runCardView(inputScanner, player.getHand(), player);  //CANT DO THIS YOU ARE ACCESSING THE MODEL
 			break;
 		case 7:
-			printHand(player.getHand());
+			printHand(player.getHand()); //CANT DO THIS YOU ARE ACCESSING THE MODEL
 			break;
 		}
 	}
 	
+	/**
+	 * User interface for a player to do the shore up action
+	 * @param inputScanner
+	 * @param player
+	 */
 	public void shoreUp(Scanner inputScanner, Player player) {
 		ArrayList<Tile> shoreableTiles = controller.getShoreableTiles(player);
 
@@ -107,6 +116,13 @@ public class PlayerView {
 		controller.decementPlayerAction(player);
 	}
 
+
+	/**
+	 * Checks whether the user can do a voluntary tile action either shore up or standard movement
+	 * @param tileOptions
+	 * @param typeOfTileAction Either "shore up" or "move to "
+	 * @return
+	 */
 	public boolean canDoTileAction(ArrayList<Tile> tileOptions, String typeOfTileAction) {
 
 		if(tileOptions.isEmpty()) {
@@ -122,6 +138,11 @@ public class PlayerView {
 
 	}
 	
+	/**
+	 * User interface for a player to do the standard movement action
+	 * @param inputScanner
+	 * @param player
+	 */
 	public void doStandardMovement(Scanner inputScanner, Player player){  
 		ArrayList<Tile> moveableTiles = controller.getStandardMoveTiles(player); //Sand Bag will get tiles you can shore up
 
@@ -136,6 +157,11 @@ public class PlayerView {
 		controller.decementPlayerAction(player); //Use controller to discard card.
 	}
 
+	/**
+	 * User Interface for when a player must do forced movement
+	 * @param inputScanner
+	 * @param player
+	 */
 	public void doForcedMovement(Scanner inputScanner, Player player) {
 		ArrayList<Tile> moveableTiles = controller.getForcedMovementTiles(player);
 		System.out.println("\n" + player + " must move their tile has been sunk!");
@@ -148,6 +174,10 @@ public class PlayerView {
 		System.out.println("Your pawn has been moved to " + selectedTile);
 	}
 
+	/**
+	 * User interface for when a player try to capture treasure
+	 * @param player
+	 */
 	public void CaptureTreasure(Player player) {
 
 		if(controller.canCaptureTreasure(player)) {
@@ -163,6 +193,12 @@ public class PlayerView {
 		return;
 	}
 
+	/**
+	 * Returns selected player for treasure card for inputed player
+	 * @param player
+	 * @param inputScanner
+	 * @return selected player or null
+	 */
 	public Player selectPlayerForTreasureCard(Player player, Scanner inputScanner) {
 		ArrayList<Player> playersForTreasureCard =controller.getPlayerForTreasureCard(player);
 
@@ -176,13 +212,17 @@ public class PlayerView {
 		return selectedPlayer;
 	}
 
-	//Needs to be altered slightly should check i
+	/**
+	 * Takes player are input and this player can give a card to another player, give treasure card action
+	 * @param player
+	 * @param inputScanner
+	 */
 	public void giveTreasureCard(Player player , Scanner inputScanner) {
 		
 		Player selectedPlayer = selectPlayerForTreasureCard(player,inputScanner);
 		if(selectedPlayer==null) return;
 		
-		ArrayList<TreasureDeckCard> currentPlayersCards = player.getHand().getCards();
+		ArrayList<TreasureDeckCard> currentPlayersCards = controller.getPlayerCards(player);
 
 		
 		Hand selectedPlayerHand = controller.getPlayerHand(selectedPlayer);
@@ -195,6 +235,11 @@ public class PlayerView {
 		controller.decementPlayerAction(player);
 	}
 
+	/**
+	 * Checks whether a player has a card to give
+	 * @param cardOptions
+	 * @return
+	 */
 	public boolean canDoCardAction(ArrayList<TreasureDeckCard> cardOptions) {
 
 		if(cardOptions.isEmpty()) {
@@ -210,6 +255,9 @@ public class PlayerView {
 
 	}
 	
+	/**
+	 * Prints the board to the user
+	 */
 	public void showBoard() {
 		Tile[][] board = controller.getboard();
 		int[][] islandTiles = controller.getIslandTiles();
@@ -244,15 +292,15 @@ public class PlayerView {
 	
 	
 	public void runCardView(Scanner inputScanner, Hand playerHand, Player player) {
-		ArrayList<TreasureDeckCard> playableCards = playerHand.getPlayableCards();
+		ArrayList<TreasureDeckCard> playableCards = playerHand.getPlayableCards(); 
 		ArrayList<Card> allCards = playerHand.getCards();
 		if(cardOptions(playerHand)) {
 			int userInput = Utility.acceptableInput(0, playableCards.size(), inputScanner);
-			if(userInput==playableCards.size()) return;  //If they want to cancel Movement
+			if(userInput==playableCards.size()) return; 
 
-			switch(playableCards.get(userInput).getName()) {
+			switch(playableCards.get(userInput).getName()) { 
 			case "Helicopter Lift":
-				doHelicopter(inputScanner, playerHand, allCards.get(userInput), player);
+				doHelicopter(inputScanner, playerHand, allCards.get(userInput), player); 
 				break;
 			case "Sandbag":
 				doSandbag(inputScanner, playerHand, allCards.get(userInput), player);
@@ -268,7 +316,7 @@ public class PlayerView {
 		int i=0, none=0;
 		for(Card card: cards) {
 			if(card instanceof TreasureDeckCard) {
-				System.out.println(card.getName() + " [" + i + "]");
+				System.out.println(card.getName() + " [" + i + "]"); 
 				i++;
 			}
 			else if(card instanceof TreasureCard) {
