@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 public class Hand {
 	private ArrayList<Card> hand;
-	private ArrayList<TreasureDeckCard> playableCards;
 	
 	public Hand(){
 		this.hand = new ArrayList<Card>();
@@ -36,9 +35,11 @@ public class Hand {
 	}
 	
 	public ArrayList<TreasureDeckCard> getPlayableCards() {
+		ArrayList playableCards = new ArrayList();
+		
 		for(Card card: hand) {
 			if(!(card instanceof TreasureCard)) {
-				this.playableCards.add((TreasureDeckCard) card);
+				playableCards.add((TreasureDeckCard) card);
 			}
 		}
 		return playableCards;
