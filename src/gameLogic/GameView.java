@@ -8,6 +8,7 @@ import island.board.Tile;
 import island.cards.Card;
 import island.cards.Hand;
 import island.cards.TreasureDeck;
+import island.cards.TreasureDeckCard;
 import players.*;
 import observers.*;
 import utility.Utility;
@@ -75,14 +76,25 @@ public class GameView {
 		for(Card card: cardsDrawn) {
 			System.out.println("Adding " + card.getName() + " to " + player.getName() + "'s hand...");
 		}
-				
-		if(playerHand.getCards().size()==6) {
-			System.out.println("Cannot have more than 5 cards in hand! Remove one.");
+		if(playerHand.getCards().size()>=6) {
+			tooManyCardsPrompt(player, playerHand, inputScanner);
+		}
+		ArrayList<TreasureDeckCard> playableCards = playerHand.getPlayableCards();
+		if(!playableCards.isEmpty())
+				controller.runCardView(inputScanner, player);
+	}
+	
+	public void tooManyCardsPrompt(Player player, Hand playerHand, Scanner inputScanner) {
+		ArrayList<Card> cards = playerHand.getCards();
+		int numCardsToRemove = cards.size()-5;
+		
+		System.out.println("Cannot have more than 5 cards in hand! Remove " + numCardsToRemove + ".");
+		while(cards.size()>=6) {
 			PlayerView.getInstanace().printHand(player);
 			System.out.print("\nEnter index of card you want to remove: ");
-			int userInput = Utility.acceptableInput(0, playerHand.getCards().size(), inputScanner);
-			System.out.println("Removed " + playerHand.getCards().get(userInput).getName());
-			controller.removeFromHand(playerHand.getCards().get(userInput), player);
+			int userInput = Utility.acceptableInput(0, cards.size()-1, inputScanner);
+			System.out.println("Removed " + cards.get(userInput).getName());
+			controller.removeFromHand(cards.get(userInput), player);
 		}
 	}
 	

@@ -1,5 +1,6 @@
 package gameLogic;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import island.board.Tile;
 import island.cards.Card;
@@ -56,6 +57,10 @@ public class GameController {
 	
 	public Hand getHand(Player player) {
 		return player.getHand();
+	}
+
+	public void runCardView(Scanner inputScanner, Player player) {
+		model.runCardView(inputScanner, player);
 	}
 
 }

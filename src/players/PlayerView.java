@@ -286,11 +286,11 @@ public class PlayerView {
 	
 	public void runCardView(Scanner inputScanner, Player player) {
 		Hand playerHand = controller.getPlayerHand(player);
-		ArrayList<TreasureDeckCard> playableCards = playerHand.getPlayableCards(); 
+		ArrayList<TreasureDeckCard> playableCards = playerHand.getPlayableCards();
 		if(cardOptions(player)) {
-			int userInput = Utility.acceptableInput(0, playableCards.size(), inputScanner); //0,1,2   0-3
+			int userInput = Utility.acceptableInput(0, playableCards.size(), inputScanner); 
 			if(userInput==playableCards.size()) return; 
-
+			
 			switch(playableCards.get(userInput).getName()) { 
 			case "Helicopter Lift":
 				doHelicopter(inputScanner, playerHand, playableCards.get(userInput), player); 
@@ -346,7 +346,7 @@ public class PlayerView {
 	}
 	
 	// Used in doHelicopter()
-	private boolean helicopterPrompt(Scanner inputScanner) { //Need to give option for cancel or use size -1
+	private boolean helicopterPrompt(Scanner inputScanner) { 
 		System.out.println("\nPlay Helicopter Lift card...");
 		System.out.println("Do you want to\nMove one or more pawns to any other tile? [0] or\nLift your team off Fool's Landing for the win? [1]");
 		int helicopterChosen = Utility.acceptableInput(0, 1, inputScanner);
@@ -407,7 +407,7 @@ public class PlayerView {
 			System.out.println("Tiles you can shore up:");
 			Utility.printOptions(listOfFloodedTiles);
 			System.out.println("\nChoose the tile: ");
-			int tileIndex = Utility.acceptableInput(0, listOfFloodedTiles.size(), inputScanner);
+			int tileIndex = Utility.acceptableInput(0, listOfFloodedTiles.size()-1, inputScanner);
 			Tile chosenTile = listOfFloodedTiles.get(tileIndex);
 
 			controller.doSandbag(chosenTile, player);
@@ -425,17 +425,13 @@ public class PlayerView {
 	
 	public void printHand(Player player) {
 		Hand playerHand = controller.getPlayerHand(player);
-		int index = 0;
 		ArrayList<Card> hand = playerHand.getCards();
 		if(hand.size()==0) {
 			System.out.println("Your hand is empty.");
 		}
 		else {
-			System.out.println("\nYour hand: "); //Use utility
-			for(int i=0; i<hand.size(); i++) {
-				System.out.println(index + ". " + hand.get(i).getName());
-				index++;
-			}
+			System.out.println("Your hand: ");
+			Utility.printOptions(hand);
 		}
 	}
 	public void showBoard() {
@@ -453,6 +449,7 @@ public class PlayerView {
 		System.out.println("Fools landing is in captials [ FL ] ");
 		System.out.println("Your choosen symbol will replace the inital of the Tile ");
 	}
+
 	
 //	public static void main(String[] args) {
 //		Player Liam = new Player("Liam",1); 
