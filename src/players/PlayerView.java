@@ -274,13 +274,14 @@ public class PlayerView {
 		int userInput = Utility.acceptableInput(0, 1, inputScanner); //0-2 option 
 		if(userInput==1) {
 			controller.decementPlayerAction(player);
-			controller.saveTile(tile);
 			System.out.println(tile + " is saved!");
 			return true;
 		}
-		else
+		else {
 			System.out.println(tile + " is sunk!");
+			tile.setNotPresent();
 			return false;
+		}
 	}
 	
 	
@@ -306,7 +307,7 @@ public class PlayerView {
 	private boolean cardOptions(Player player) {
 		Hand playerHand = controller.getPlayerHand(player);
 		ArrayList<TreasureDeckCard> playableCards = playerHand.getPlayableCards();
-		System.out.println("Playable cards:\n");
+		System.out.println("Playable cards:");
 		if(!playableCards.isEmpty()) {
 			Utility.printOptions(playableCards);
 			System.out.println("Enter " + playableCards.size() + " to cancel action");
