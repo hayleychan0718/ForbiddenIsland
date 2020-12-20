@@ -2,11 +2,10 @@ package players;
 
 /**
  * Abstract Class that sets up the base player class
+ * Extended by Diver,Engineer,Explorer,Messenger,Navigator,Pilot
+ * @author Liam Fitzgerald
  */
 import java.util.*;
-
-import javax.management.MBeanTrustPermission;
-
 import island.board.*;
 import island.cards.*;
 import island.enums.TreasureNames;
@@ -16,63 +15,76 @@ public abstract class Player {
 
 
 	private String playerName;
+	private String symbol;
 	protected int playerNumber;
 	private Hand playerHand;
 	protected Pawn playerPawn;
 	protected int playerActions;
 	protected Board board;
-	protected ArrayList<String> playerTreasures;
-	private Observer observer;
+	
 
-
-
-	//Maybe add getter for shoreable tiles and give card so don't have to recreate.
-
-	//constructor
-	public Player(String playerName, int playerNumber) { //Duplicte player number
+	/**
+	 * Creates everything needed for Player class
+	 * @param playerName
+	 * @param playerNumber
+	 * @param symbol that the player wants to be represented by on the board
+	 */
+	public Player(String playerName, int playerNumber, String symbol) { 
 		this.playerName=playerName;
 		this.playerNumber=playerNumber;
 		this.playerHand = new Hand();
+		this.symbol=symbol;
 		playerActions=0;
 		board=Board.getInstance();
-		//player pawn
-		//Randomly select player role
 	}
+	
 	/**
-	 * Method the returns the available tiles for standard movement
-	 * 
+	 * Gets the current list of move able tile for the player
+	 * @return moveableTiles
 	 */
-	public ArrayList<Tile> getStandardMoveableTiles() {  //returns the moveable tiles //having order makes it easier to understand were tiles areList
+	public ArrayList<Tile> getStandardMoveableTiles() {  
 		Tile pawnTile  = getPlayerPawnTile();
 		ArrayList<Tile> adjcacent = pawnTile.getAdjacentTiles();
 		ArrayList<Tile> moveableTiles = new ArrayList<Tile>();
 		
-		for(Tile tile: adjcacent) {	//Checks if the tiles are present if not removes them
-			if(tile.isPresent()==true) { // Why or null
-				moveableTiles.add(tile); //Not sure has this been fixed, amy remove tile mid loop
+		for(Tile tile: adjcacent) {	
+			if(tile.isPresent()==true) {
+				moveableTiles.add(tile); 
 			}
 		}
 		return moveableTiles;
 	}
 
-	public ArrayList<Tile> getShoreableTiles() {  //returns the shoreable tiles
+	/**
+	 * Gets the current list of tiles that a player can shore up
+	 * @return shoreableTiles
+	 */
+	public ArrayList<Tile> getShoreableTiles() {  
 		Tile pawnTile  =getPlayerPawnTile();
-		ArrayList<Tile> adjacentTiles = pawnTile.getAdjacentTiles(); //Can also shore up tile player is standing on
+		ArrayList<Tile> adjacentTiles = pawnTile.getAdjacentTiles(); 
 		adjacentTiles.add(pawnTile); //Players tile may also be flooded
 		ArrayList<Tile> shoreableTiles = new ArrayList<Tile>();
 
 		for(Tile tile: adjacentTiles) {
-			if(tile.isFlooded() ==true) {
+			if(tile.isFlooded() ==true && tile.isPresent()) {
 				shoreableTiles.add(tile);
 			}
 		}
 		return shoreableTiles;
 	}
 
-	public ArrayList<Tile> getFocredMoveableTiles(){ //occurs when the player is one a oceantile
+	/**
+	 * Gets the list of tiles a player can move to when their tile has been sunk
+	 * @return ForcedMoveableTiles
+	 */
+	public ArrayList<Tile> getFocredMoveableTiles(){ 
 		return getStandardMoveableTiles();
 	}
-	//Method Returns the list of Players the current player can give cards to
+	
+	/**
+	 * Gets the list the list of Players a player can give a card to
+	 * @return
+	 */
 	public ArrayList<Player> getPlayersForTreasureCard() { 
 		ArrayList<Player> playersForTreasureCard = new ArrayList <Player>();
 		PlayerList playerList = PlayerList.getInstance();
@@ -84,9 +96,12 @@ public abstract class Player {
 		return playersForTreasureCard;
 	}
 
-	//Method returns whether a treasure was captured or not//What about if no teasure on tile
+	/**
+	 * Checks whether a player can capture a treasure, if true captures the treasure
+	 * @return true/false
+	 */
 	public boolean canCaptureTreasure() {
-		ArrayList<TreasureDeckCard> matchingTreasureCards = matchingTreasureCards();
+		ArrayList<Card> matchingTreasureCards = matchingTreasureCards();
 		if(!onTreasureTile()) return false;
 		
 		if(matchingTreasureCards.size()>=4) {
@@ -98,43 +113,41 @@ public abstract class Player {
 
 	}
 	
+	//Captures the treasure
 	public void captureTreasure() {
 		Tile pawnTile = getPlayerPawnTile();
 		
 		pawnTile.getTreasure().captureTreasure();
 	}
 	
+	//Checks whether on treasure tile
 	public boolean onTreasureTile() {
 		if(getTreasure()==null) {
 			return false;
 		}
-		//else {System.out.println(getTreasure());}
 		return true;
 	}
 
-	public ArrayList<TreasureDeckCard> matchingTreasureCards() {
-		ArrayList<TreasureDeckCard> matchingTreasureCards = new ArrayList <TreasureDeckCard>();
+	/**
+	 * Returns a list of cards from the players hand that match the current treasure tile
+	 * @return matchingTreasureCards
+	 */
+	public ArrayList<Card> matchingTreasureCards() {
+		ArrayList<Card> matchingTreasureCards = new ArrayList <Card>();
 
-		for(TreasureDeckCard cardInHand:playerHand.getCards()) {
-			if(cardInHand.getName() == getPlayerPawnTile().getTreasure().getString()) { //checks if card in hand matches treasure associated with the tile the player is on 
+		for(Card cardInHand:playerHand.getCards()) {
+			if(cardInHand.getName() == getPlayerPawnTile().getTreasure().getString()) { //may need null check before 
 				matchingTreasureCards.add(cardInHand);
 			}
 		}
 		return matchingTreasureCards;
 	}
-
-	public boolean canShoreUp() {
-		ArrayList<Tile> shoreableTiles = getShoreableTiles();
-
-		if(shoreableTiles.isEmpty()) {
-			//System.out.println("There are no tiles available to shore up \n");
-			return false;
-		}
-		else {
-			return true;
-		}
-	}
 	
+	/**
+	 * Gives a cad to another player
+	 * @param toGive
+	 * @param toRecieve
+	 */
 	public void giveCard(TreasureDeckCard toGive, Hand toRecieve) {
 		playerHand.giveCard(toGive, toRecieve);
 	}
@@ -142,29 +155,22 @@ public abstract class Player {
 	public void endTurn() {
 		playerActions=0;
 	}
-	
-	public boolean update() {
-		if(!getPlayerPawnTile().isPresent()) {
-			return true;
-		}
-		else return false;
-	}
 
 	@Override
 	public String toString() {
 		return playerName + " (" + this.getClass().getSimpleName() + ")";
 	}
 
-	public String getRole() {
-		return this.getClass().getSimpleName();
-	}
+//	public String getRole() {
+//		return this.getClass().getSimpleName();
+//	}
 
 	//Returns players name
 	public String getName() {
 		return playerName;
 	}
 
-	public ArrayList<TreasureDeckCard> showHand(){
+	public ArrayList<Card> showHand(){
 		return playerHand.getCards();
 	}
 
@@ -175,7 +181,6 @@ public abstract class Player {
 	//Needs associated pawn class
 	public Tile getPlayerPawnTile() {
 		return 	playerPawn.getPawnTile();
-		//	return  ///
 	}
 	
 	public TreasureNames getTreasure() {
@@ -186,14 +191,11 @@ public abstract class Player {
 		playerActions +=3;
 	}
 
-	//Need to make attribute in player role
-
 	//Moves the players pawn
 	public void movePlayerPawn(Tile tile) {
 		playerPawn.movePawn(tile);
-		//Maybe pawn moves links with player role
 	}
-	//Returns the players number
+
 	public int getPlayerNumber() {
 		return playerNumber;
 	}
@@ -212,6 +214,10 @@ public abstract class Player {
 
 	public int getPlayerActions() {
 		return playerActions;
+	}
+	
+	public String getSymbol() {
+		return symbol;
 	}
 
 
