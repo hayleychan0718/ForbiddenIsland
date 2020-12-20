@@ -269,7 +269,7 @@ public class PlayerView {
 	}
 
 	public boolean notifyPlayer(Scanner inputScanner, Tile tile, Player player) {
-		System.out.println(tile + " is about to sink! Do you want to save it?");
+		System.out.println(tile + " is about to sink! Does " + player + " want to save it?");
 		System.out.println("[0] No\n[1] Yes");
 		int userInput = Utility.acceptableInput(0, 1, inputScanner); //0-2 option 
 		if(userInput==1) {
@@ -430,7 +430,7 @@ public class PlayerView {
 			System.out.println("Your hand is empty.");
 		}
 		else {
-			System.out.println("Your hand: ");
+			System.out.println("\nYour hand: ");
 			Utility.printOptions(hand);
 		}
 	}
