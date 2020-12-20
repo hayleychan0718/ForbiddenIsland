@@ -42,8 +42,8 @@ public class GameController {
 		return model.isGameOver();
 	}
 
-	public ArrayList<Card> treasureDeckTurn(Hand playerHand, Player player) {
-		return model.drawTreasureDeck(playerHand, player);
+	public ArrayList<Card> treasureDeckTurn(Player player) {
+		return model.drawTreasureDeck(player);
 	}
 	
 	public ArrayList<Tile> floodDeckTurn() {
@@ -53,7 +53,10 @@ public class GameController {
 	public void removeFromHand(Card card, Player player) {
 		model.removeFromHand(card, player);
 	}
-
+	
+	public Hand getHand(Player player) {
+		return player.getHand();
+	}
 
 }
 

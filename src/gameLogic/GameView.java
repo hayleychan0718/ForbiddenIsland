@@ -62,22 +62,23 @@ public class GameView {
 				Utility.sleep(1500);
 				isTurnOver=controller.isTurnOver(player);	//View uses controller to check if the player still has actions
 			} 
-			treasureDeckTurn(player.getHand(), player, inputScanner);
+			treasureDeckTurn(player, inputScanner);
 			floodDeckTurn();
 		}
 
 	}
 
-	public void treasureDeckTurn(Hand playerHand, Player player, Scanner inputScanner) {
+	public void treasureDeckTurn(Player player, Scanner inputScanner) {
 		System.out.println("\nDrawing 2 cards from treasure deck...");
-		ArrayList<Card> cardsDrawn = controller.treasureDeckTurn(player.getHand(), player);
+		Hand playerHand = controller.getHand(player);
+		ArrayList<Card> cardsDrawn = controller.treasureDeckTurn(player);
 		for(Card card: cardsDrawn) {
 			System.out.println("Adding " + card.getName() + " to " + player.getName() + "'s hand...");
 		}
 				
-		if(player.getHand().getCards().size()==6) {
+		if(playerHand.getCards().size()==6) {
 			System.out.println("Cannot have more than 5 cards in hand! Remove one.");
-			PlayerView.getInstanace().printHand(playerHand);
+			PlayerView.getInstanace().printHand(player);
 			System.out.print("\nEnter index of card you want to remove: ");
 			int userInput = Utility.acceptableInput(0, playerHand.getCards().size(), inputScanner);
 			controller.removeFromHand(playerHand.getCards().get(userInput), player);

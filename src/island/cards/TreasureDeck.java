@@ -64,7 +64,7 @@ public class TreasureDeck extends Deck{
 	 * Draw a card from the treasure deck and add to hand
 	 * @param hand The player's hand 
 	 */
-	public ArrayList<Card> drawCard(Hand hand, Player player) {
+	public ArrayList<Card> drawCard(Player player) {
 		ArrayList<Card> drawnCardList = new ArrayList<Card>();
 		for(int i=1;i<=2;i++) {
 			if(treasureStack.isEmpty()) {
@@ -76,7 +76,7 @@ public class TreasureDeck extends Deck{
 				discardStack.add(drawnCard);
 			}
 			else {
-				hand.addCard(drawnCard);
+				player.getHand().addCard(drawnCard);
 				drawnCardList.add(drawnCard);
 			}				
 		}
