@@ -32,13 +32,14 @@ public class GameOverObserver {
 	public void update(Tile tile) {
 		PlayerView playerView = PlayerView.getInstanace();
 
-		sunkTiles.add(tile);
 		if(playerBeside(tile)) {
 			if(!playerView.notifyPlayer(inputScanner , tile, player)) {
+				sunkTiles.add(tile);
 				invokeLoseGame(tile);
 			}
 		}
 		else {
+			sunkTiles.add(tile);
 			invokeLoseGame(tile);
 		}
 	}
@@ -52,7 +53,7 @@ public class GameOverObserver {
 	
 	public boolean playerBeside(Tile tile) {
 		for(Player player: playersList) {
-			for(Tile t: player.getAdjacentSunkTiles()) {
+			for(Tile t: player.getShoreableTiles()) {
 				if(t == tile) {
 					this.player = player;
 					return true;

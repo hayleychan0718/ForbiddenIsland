@@ -227,6 +227,10 @@ public class Tile{
 //		}
 //	}
 	public void sinkTile() { //Set changed
+		if(this.hasTreasure() || name.getString() == TileNames.FoolsLanding.getString()) {
+			gameOverObserver.update(this);
+			return;
+		}
 		this.isPresent=false;
 		PlayerList playerList = PlayerList.getInstance();
 		
@@ -236,13 +240,11 @@ public class Tile{
 				PlayerObserver.getInstance().updateSunk(player);
 			}
 		}
-		if(this.hasTreasure() || name.getString() == TileNames.FoolsLanding.getString()) {
-			gameOverObserver.update(this);
-		}
+
 	}
 	
-	public void saveTile() {
-		this.isPresent = true;
+	public void setNotPresent() {
+		this.isPresent = false;
 	}
 	
 	public String initials() {
