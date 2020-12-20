@@ -1,8 +1,11 @@
 package island.board;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import island.enums.TileNames;
+import players.Player;
+import players.PlayerList;
 
 /*
  * Singleton class Board
@@ -126,6 +129,8 @@ public class Board{
 		return Math.sqrt(dx*dx + dy*dy);
 
 	}
+    
+    
 
 	
 	public int[][] getIslandTiles() {
@@ -134,6 +139,49 @@ public class Board{
 	
 	public Tile[][] getBoard() {
 		return board;
+	}
+	
+	public String showBoard() {
+		List<String> stringTiles = new ArrayList<String>();
+
+		for(Tile[] row : board) {
+			if(row !=null) {
+				for(Tile col : row) {
+
+					if(col!=null) {
+						stringTiles.add("[ " +tileForBoard(col) + " ]");
+					}
+					else
+						stringTiles.add("      ");	
+				}
+				stringTiles.add("\n");
+			}
+		}
+		String concatenated=stringTiles.stream().collect(Collectors.joining(""));
+		return concatenated;
+	}
+
+	public String tileForBoard(Tile col) {
+		ArrayList<Player> playerList = PlayerList.getInstance().getListOfPlayers();
+
+		for(Player player: playerList) {
+			if(player.getPlayerPawnTile()==col) {
+				if(col.isFlooded())
+					return player.getSymbol().concat("!")  ;
+				if(col.hasTreasure())
+					return player.getSymbol().concat("*")  ;
+
+				return player.getSymbol();
+			}
+		}
+
+		if(col.isPresent()==false) {
+			String out;
+			return out = " ";
+		}
+
+		return col.initials();
+
 	}
     
 	/*
