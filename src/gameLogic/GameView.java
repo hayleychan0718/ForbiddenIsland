@@ -86,11 +86,11 @@ public class GameView {
 	
 	public void tooManyCardsPrompt(Player player, Hand playerHand, Scanner inputScanner) {
 		ArrayList<Card> cards = playerHand.getCards();
+		int numCardsToRemove = cards.size()-5;
 		
-		System.out.println("Cannot have more than 5 cards in hand! Remove one.");
-		PlayerView.getInstanace().printHand(player);
-		
-		while(playerHand.getCards().size()>=6) {
+		System.out.println("Cannot have more than 5 cards in hand! Remove " + numCardsToRemove + ".");
+		while(cards.size()>=6) {
+			PlayerView.getInstanace().printHand(player);
 			System.out.print("\nEnter index of card you want to remove: ");
 			int userInput = Utility.acceptableInput(0, cards.size()-1, inputScanner);
 			System.out.println("Removed " + cards.get(userInput).getName());
