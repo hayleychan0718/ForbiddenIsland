@@ -81,6 +81,7 @@ public class GameView {
 			PlayerView.getInstanace().printHand(player);
 			System.out.print("\nEnter index of card you want to remove: ");
 			int userInput = Utility.acceptableInput(0, playerHand.getCards().size(), inputScanner);
+			System.out.println("Removed " + playerHand.getCards().get(userInput).getName());
 			controller.removeFromHand(playerHand.getCards().get(userInput), player);
 		}
 	}
