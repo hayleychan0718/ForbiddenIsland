@@ -96,22 +96,37 @@ public class Board{
     	return list;
     }
     
-	public ArrayList<Tile> listOfNearestTiles(Tile tile){
-    	int loc[] = tile.getLocation();
-    	ArrayList<Tile> nearestTiles = new ArrayList<Tile>();
-    	int iter = 0;
-    
-    	while(nearestTiles.isEmpty()) {
-    		iter++;
-    		for(int i = loc[0]-iter; i<=loc[0]+iter; i++) {
-    			for(int j = loc[1]-iter; j<=loc[1]+iter; j++) {
-    				if(getTile(i,j) != null && getTile(i,j).isPresent() && getTile(i,j)!=tile) 
-    					nearestTiles.add(getTile(i,j));
-    			}
+    /**
+     * Returns a list of all the present tiles
+     * @return presentTiles
+     */
+    public ArrayList<Tile> listOfPresentTiles(){
+    	ArrayList<Tile> presentTiles = new ArrayList<Tile>();
+    	for(Tile tile: listOfTiles()) {
+    		if(tile.isPresent() == true) {
+    			presentTiles.add(tile);
     		}
     	}
-    	return nearestTiles;
+    	return presentTiles;
     }
+    
+    /**
+     * Returns the distance as double between two tiles
+     * @param currentTile
+     * @param otherTile
+     * @return distance
+     */
+    public static Double getDistance(Tile currentTile, Tile otherTile) {
+		int locInput[] = currentTile.getLocation();
+		int locCurrent[] = otherTile.getLocation();
+
+		int dx = locInput[0] - locCurrent[0];
+		int dy = locInput[1] - locCurrent[1];
+
+		return Math.sqrt(dx*dx + dy*dy);
+
+	}
+
 	
 	public int[][] getIslandTiles() {
 		return islandTiles;
