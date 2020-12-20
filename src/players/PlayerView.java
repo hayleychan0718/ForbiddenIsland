@@ -83,10 +83,10 @@ public class PlayerView {
 			showBoard();
 			break;
 		case 6:
-			runCardView(inputScanner, player.getHand(), player);  //CANT DO THIS YOU ARE ACCESSING THE MODEL
+			runCardView(inputScanner, player);  
 			break;
 		case 7:
-			printHand(player.getHand()); //CANT DO THIS YOU ARE ACCESSING THE MODEL
+			printHand(player); 
 			break;
 		}
 	}
@@ -291,7 +291,8 @@ public class PlayerView {
 	}
 	
 	
-	public void runCardView(Scanner inputScanner, Hand playerHand, Player player) {
+	public void runCardView(Scanner inputScanner, Player player) {
+		Hand playerHand = controller.getPlayerHand(player);
 		ArrayList<TreasureDeckCard> playableCards = playerHand.getPlayableCards(); 
 		ArrayList<Card> allCards = playerHand.getCards();
 		if(cardOptions(playerHand)) {
@@ -356,7 +357,7 @@ public class PlayerView {
 			controller.winHelicopter(player);
 		else{
 			System.out.println("Can't lift off yet!\n");
-			runCardView(inputScanner, playerHand, player);
+			runCardView(inputScanner, player);
 		}
 	}
 	
@@ -415,7 +416,7 @@ public class PlayerView {
 		
 		if(listOfFloodedTiles.size()==0) {
 			System.out.println("Choose another card.");
-			runCardView(inputScanner, playerHand, player);
+			runCardView(inputScanner, player);
 		}
 		else
 			System.out.println("Play Sandbag Card...\n");
@@ -438,7 +439,8 @@ public class PlayerView {
 		System.out.println("Flood Deck reshuffled.");
 	}
 	
-	public void printHand(Hand playerHand) {
+	public void printHand(Player player) {
+		Hand playerHand = controller.getPlayerHand(player);
 		int index = 0;
 		ArrayList<Card> hand = playerHand.getCards();
 		if(hand.size()==0) {
