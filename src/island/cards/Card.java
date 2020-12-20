@@ -9,7 +9,7 @@ public abstract class Card {
 	}
 	
 	public String toString() {
-		return name;
+		return getName();
 	}
 	
 }
