@@ -23,7 +23,7 @@ public class Hand {
 		TreasureDeck.getInstance().getDiscardPile().add(card);
 	}
 	
-/*	public void removeCard(int cardIndex) {
+	/*public void removeCard(int cardIndex) {
 		hand.remove(cardIndex);
 	}*/
 	
@@ -34,7 +34,7 @@ public class Hand {
 	}
 	
 	public ArrayList<TreasureDeckCard> getPlayableCards() {
-		ArrayList playableCards = new ArrayList();
+		ArrayList<TreasureDeckCard> playableCards = new ArrayList<TreasureDeckCard>();
 		
 		for(Card card: hand) {
 			if(!(card instanceof TreasureCard)) {
