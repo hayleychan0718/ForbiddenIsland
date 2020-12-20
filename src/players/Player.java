@@ -6,6 +6,9 @@ package players;
  * @author Liam Fitzgerald
  */
 import java.util.*;
+
+import org.junit.Assert;
+
 import island.board.*;
 import island.cards.*;
 import island.enums.TreasureNames;
@@ -85,24 +88,30 @@ public abstract class Player {
 	 * Gets the list the list of Players a player can give a card to
 	 * @return
 	 */
-	public ArrayList<Player> getPlayersForTreasureCard() { 
-		ArrayList<Player> playersForTreasureCard = new ArrayList <Player>();
+	public ArrayList<Player> getPlayersForCard() { 
+		ArrayList<Player> playersForCard = new ArrayList <Player>();
 		PlayerList playerList = PlayerList.getInstance();
 
 		for (Player otherPlayer:playerList.getListOfOtherPlayers(playerNumber)) { //creates a list of the other players using the current player number
 			if(playerPawn.getPawnTile()==otherPlayer.getPlayerPawnTile())
-				playersForTreasureCard.add(otherPlayer);
+				playersForCard.add(otherPlayer);
 		}
-		return playersForTreasureCard;
+		return playersForCard;
 	}
 
 	/**
 	 * Checks whether a player can capture a treasure, if true captures the treasure
 	 * @return true/false
 	 */
+	//ArrayList<Card> matchingTreasureCards
 	public boolean canCaptureTreasure() {
-		ArrayList<Card> matchingTreasureCards = matchingTreasureCards();
-		if(!onTreasureTile()) return false;
+         ArrayList<Card> matchingTreasureCards = matchingTreasureCards();
+		if(!onTreasureTile()) {
+			System.out.println("not on treasure tile");
+			return false;
+		}
+		
+		System.out.println(matchingTreasureCards);
 		
 		if(matchingTreasureCards.size()>=4) {
 			captureTreasure();
@@ -120,12 +129,12 @@ public abstract class Player {
 		pawnTile.getTreasure().captureTreasure();
 	}
 	
-	//Checks whether on treasure tile
+	//Checks whether on treasure tile This is not working correctly
 	public boolean onTreasureTile() {
-		if(getTreasure()==null) {
-			return false;
+		if(getPlayerPawnTile().hasTreasure()) {
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	/**
@@ -148,7 +157,7 @@ public abstract class Player {
 	 * @param toGive
 	 * @param toRecieve
 	 */
-	public void giveCard(TreasureDeckCard toGive, Hand toRecieve) {
+	public void giveCard(Card toGive, Hand toRecieve) {
 		playerHand.giveCard(toGive, toRecieve);
 	}
 	
@@ -186,6 +195,7 @@ public abstract class Player {
 	public TreasureNames getTreasure() {
 		return getPlayerPawnTile().getTreasure();
 	}
+	
 
 	public void ReStockActions() {
 		playerActions +=3;
@@ -220,6 +230,52 @@ public abstract class Player {
 		return symbol;
 	}
 
+	
+	public static void main (String[] args) {
+
+		
+        Engineer test =  Engineer.getInstance("Test1", 1,"%");
+		
+		PlayerList.getInstance().addPlayer(test);
+		
+		Tile treasureTile=Board.getInstance().getTile("Temple of the Sun");
+//		
+     	test.movePlayerPawn(treasureTile);
+//		
+
+//
+		Board board = Board.getInstance();
+		
+		System.out.println(board.showBoard());
+		
+		for(int i=0; i<=4; i++) {
+			TreasureCard treasure = new TreasureCard(TreasureNames.TheEarthStone);
+			test.getHand().addCard(treasure);
+		}
+		
+		
+		
+		//System.out.println(test.matchingTreasureCards());
+		ArrayList<Card> matchingTreasureCards= test.matchingTreasureCards();
+		System.out.println(test.getHand().getCards());
+		
+		System.out.println(matchingTreasureCards.size());
+		System.out.println(matchingTreasureCards);
+		System.out.println(test.canCaptureTreasure());
+		
+		System.out.println(board.showBoard());
+		
+		System.out.println(test.getTreasure().isCaptured());
+		
+		System.out.println(test.getHand().getCards());
+
+		
+		//System.out.println(test.canCaptureTreasure(test.matchingTreasureCards()));
+
+		
+		
+		
+	}
 
 }
 
