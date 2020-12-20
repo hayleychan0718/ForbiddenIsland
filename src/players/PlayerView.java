@@ -133,7 +133,7 @@ public class PlayerView {
 			return false;
 		}
 		else {
-			System.out.println("You can " +  typeOfTileAction + "the following Tiles");
+			System.out.println("You can " +  typeOfTileAction + " the following Tiles");
 			Utility.printOptions(tileOptions);
 			System.out.println("Enter " + tileOptions.size() + " to cancel action");
 			return true;
@@ -228,7 +228,8 @@ public class PlayerView {
 		if(selectedPlayer==null) return;
 		
 		ArrayList<Card> currentPlayersCards = controller.getPlayerCards(player);
-
+		System.out.println("Test straight from player" + player.getHand().getCards());
+		System.out.println("Test1:" + currentPlayersCards);
 		
 		Hand selectedPlayerHand = controller.getPlayerHand(selectedPlayer);
 
@@ -240,11 +241,12 @@ public class PlayerView {
 		
 		Card selectedCard = currentPlayersCards.get(userInput);
 		controller.giveCard(selectedCard, selectedPlayerHand, player);
+		System.out.println("You have given" + selectedCard + "to" + selectedPlayer);
 		controller.decementPlayerAction(player);
 	}
 
 	/**
-	 * Checks whether a player has a card to give
+	 * Checks whether a player has a card to give and prints cards
 	 * @param cardOptions
 	 * @return
 	 */
@@ -256,16 +258,11 @@ public class PlayerView {
 		}
 		else {
 			System.out.println("You can give the following cards:");
-			Utility.printOptions(cardOptions);
 			System.out.println("Enter " + cardOptions.size() + " to cancel action");
 			return true;
 		}
 
 	}
-	
-	/**
-	 * Prints the board to the user
-	 */
 		
 	public void endTurn(Player player) {
 		controller.emptyActions(player);
