@@ -326,7 +326,7 @@ public class PlayerView {
 	}
 	
 	public void doHelicopter(Scanner inputScanner, Hand playerHand, Card card, Player player) {
-		ArrayList<Player> playersForHelicopter = PlayerList.getInstance().getPlayersForHelicopter();
+		ArrayList<Player> playersForHelicopter = PlayerList.getInstance().getPlayersForHelicopter(); //NO need for this method
 		ArrayList<Tile> listOfTiles = Board.getInstance().listOfTiles();
 
 		if(!helicopterPrompt(inputScanner)) {
@@ -353,7 +353,7 @@ public class PlayerView {
 	}
 	
 	// Used in doHelicopter()
-	private boolean helicopterPrompt(Scanner inputScanner) {
+	private boolean helicopterPrompt(Scanner inputScanner) { //Need to give option for cancel or use size -1
 		System.out.println("\nPlay Helicopter Lift card...");
 		System.out.println("Do you want to\nMove one or more pawns to any other tile? [0] or\nLift your team off Fool's Landing for the win? [1]");
 		int helicopterChosen = Utility.acceptableInput(0, 1, inputScanner);
@@ -381,16 +381,16 @@ public class PlayerView {
 			int playerIndex = Utility.acceptableInput(0, playersForHelicopter.size(), inputScanner);
 			chosenPlayers.add(playersForHelicopter.get(playerIndex));	
 			playersForHelicopter.remove(playerIndex);
-			if(!playersForHelicopter.isEmpty()) {
+			if(!playersForHelicopter.isEmpty()) { 
 				System.out.println("Do you want to choose another player?\nYes [0]\nNo [1]");
-				int choice = Utility.acceptableInput(0, 1, inputScanner);
+				int choice = Utility.acceptableInput(0, 1, inputScanner); //Cancel option
 				if(choice == 0) 
-			    	repeat = true;
-			    else if(choice == 1)
-			    	repeat = false;
+			    	repeat = true;     // no need for this
+			    else if(choice == 1) //CLean this up only need one condition in loop
+			    	repeat = false;     
 			}
 			else
-				repeat = false;
+				repeat = false;  //What is this for//
 		}	
 		return chosenPlayers;
 	}
@@ -398,12 +398,12 @@ public class PlayerView {
 	// Used in doHelicopter()
 	private void movingMessage(Tile chosenTile, ArrayList<Player> chosenPlayers) {
 		for(Player player: chosenPlayers) {
-			System.out.print("Moving " + player.getName() + " to " + chosenTile.getNameString() +  "...\n");
+			System.out.print("Moving " + player.getName() + " to " + chosenTile.getNameString() +  "...\n"); //no need for this get name string
 		}
 	}
 	
 	public void doSandbag(Scanner inputScanner, Hand playerHand, Card card, Player player) {
-		ArrayList<Tile> listOfFloodedTiles = Board.getInstance().listOfFloodedTiles();
+		ArrayList<Tile> listOfFloodedTiles = Board.getInstance().listOfFloodedTiles(); //Cant do this
 		
 		if(listOfFloodedTiles.size()==0) {
 			System.out.println("Choose another card.");
@@ -419,7 +419,7 @@ public class PlayerView {
 
 			controller.doSandbag(chosenTile, player);
 			controller.removeCard(card, player);
-			System.out.println("Shored up " + chosenTile.getNameString());
+			System.out.println("Shored up " + chosenTile.getNameString()); //No need for get string
 	}
 
 	public void doWaterRise(Player player) {
@@ -438,7 +438,7 @@ public class PlayerView {
 			System.out.println("Your hand is empty.");
 		}
 		else {
-			System.out.println("\nYour hand: ");
+			System.out.println("\nYour hand: "); //Use utility
 			for(int i=0; i<hand.size(); i++) {
 				System.out.println(index + ". " + hand.get(i).getName());
 				index++;
