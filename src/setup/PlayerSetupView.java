@@ -45,6 +45,8 @@ public class PlayerSetupView {
 		System.out.println("Please Enter the Symbol (For example $, makes it easier to identify) you want your pawn to be represented by on the board ");
 		String symbol = inputScanner.nextLine();
 
+		Collections.shuffle(listofRoles);
+		
 		switch(listofRoles.get(0)){
 		case "Diver":
 			Diver diver = Diver.getInstance(playerName, playerNumber, symbol);
@@ -98,18 +100,6 @@ public class PlayerSetupView {
 	        	System.out.println(player);
 	    	}
 	    }
-	  
-//	  public void setUpPlayers(Scanner inputScanner) {
-//		    PlayerSetup model = PlayerSetup.getInstance();
-//			
-//			PlayerSetupController controller = PlayerSetupController.getInstance(model);
-//			
-//			PlayerSetupView view = PlayerSetupView.getInstance();
-//			
-//			view.createPlayers(inputScanner);
-//			
-//	  }	
-		
 	
 }
 
