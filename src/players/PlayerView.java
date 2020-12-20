@@ -294,43 +294,34 @@ public class PlayerView {
 	public void runCardView(Scanner inputScanner, Player player) {
 		Hand playerHand = controller.getPlayerHand(player);
 		ArrayList<TreasureDeckCard> playableCards = playerHand.getPlayableCards(); 
-		ArrayList<Card> allCards = playerHand.getCards();
-		if(cardOptions(playerHand)) {
+		if(cardOptions(player)) {
 			int userInput = Utility.acceptableInput(0, playableCards.size(), inputScanner);
 			if(userInput==playableCards.size()) return; 
 
 			switch(playableCards.get(userInput).getName()) { 
 			case "Helicopter Lift":
-				doHelicopter(inputScanner, playerHand, allCards.get(userInput), player); 
+				doHelicopter(inputScanner, playerHand, playableCards.get(userInput), player); 
 				break;
 			case "Sandbag":
-				doSandbag(inputScanner, playerHand, allCards.get(userInput), player);
+				doSandbag(inputScanner, playerHand, playableCards.get(userInput), player);
 				break;
 			}
 		}
 	}
 	
 	// Used in runCardView
-	private boolean cardOptions(Hand playerHand) {
-		ArrayList<Card> cards = playerHand.getCards();
+	private boolean cardOptions(Player player) {
+		Hand playerHand = controller.getPlayerHand(player);
+		ArrayList<TreasureDeckCard> playableCards = playerHand.getPlayableCards();
 		System.out.println("Playable cards:\n");
-		int i=0, none=0;
-		for(Card card: cards) {
-			if(card instanceof TreasureDeckCard) {
-				System.out.println(card.getName() + " [" + i + "]"); 
-				i++;
-			}
-			else if(card instanceof TreasureCard) {
-				none++;
-			}
+		if(!playableCards.isEmpty()) {
+			Utility.printOptions(playableCards);
+			System.out.println("Enter " + playableCards.size() + " to cancel action");
+			return true;
 		}
-		if(none == cards.size()) {
+		else{
 			System.out.println("No playable cards available...");
 			return false;
-		}
-		else {
-			System.out.println("Enter " + i + " to cancel action");
-			return true;
 		}
 	}
 	
