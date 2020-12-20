@@ -77,7 +77,7 @@ public abstract class Player {
 	 * Gets the list of tiles a player can move to when their tile has been sunk
 	 * @return ForcedMoveableTiles
 	 */
-	public ArrayList<Tile> getFocredMoveableTiles(){ 
+	public ArrayList<Tile> getForcedMoveableTiles(){ 
 		return getStandardMoveableTiles();
 	}
 	

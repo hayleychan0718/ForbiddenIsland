@@ -7,20 +7,32 @@ import island.board.Board;
 import island.board.Tile;
 import pawns.Pawn;
 
+/**
+ * Singleton class to implement the Pilot extends Player
+ * @author Liam Fitzgerald
+ *
+ */
+
 public class Pilot extends Player {
 
 	private static Pilot thePilot;
 
-	private Pilot(String playerName, int playerNumber) {
-		super(playerName,playerNumber); //player class constructor
-		playerPawn=new Pawn(board.getTile("Fool's Landing")); //Gets the Bronze Gate Tile and sets it as pawn starter tile
-		//Hand constructed in super class(player)
+	
+	/**
+	 * Constructed using base Player class and Pawn is constructed on "Fool's Landing"
+	 * @param playerName
+	 * @param playerNumber
+	 * @param symbol represents player on the board
+	 */
+	private Pilot(String playerName, int playerNumber, String symbol) {
+		super(playerName,playerNumber, symbol); 
+		playerPawn=new Pawn(board.getTile("Fool's Landing")); 
 
 	}
 
-	public static Pilot getInstance(String playerName, int playerNumber) {
+	public static Pilot getInstance(String playerName, int playerNumber, String symbol) {
 		if(thePilot == null) {
-			thePilot = new Pilot(playerName ,playerNumber);
+			thePilot = new Pilot(playerName ,playerNumber, symbol);
 		}
 		return thePilot;
 	}
@@ -28,11 +40,14 @@ public class Pilot extends Player {
 	public static Pilot returnInstance() {
 		return thePilot;
 	}
-	
-	public ArrayList<Tile> getFocredMoveableTile(){ //overridden as explorer cans swim diagonal tiles
-		int i=0;
+	@Override
+	/**
+	 * Pilot can move to any present tile when forced movement
+	 * @return
+	 */
+	public ArrayList<Tile> getForcedMoveableTiles(){ 
 		
-		ArrayList<Tile> moveableTiles = board.listOfTiles();
+		ArrayList<Tile> moveableTiles = board.listOfPresentTiles(); 
 		
 		return moveableTiles;
 	}

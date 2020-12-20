@@ -7,19 +7,31 @@ import island.board.Board;
 import island.board.Tile;
 import pawns.Pawn;
 
+/**
+ * Singleton class to implement the Explorer extends Player
+ * @author Liam Fitzgerald
+ *
+ */
+
 public class Explorer extends Player {
 
 	private static Explorer theExplorer;
 
-	private Explorer(String playerName, int playerNumber) {
-		super(playerName,playerNumber); //player class constructor
+	/**
+	 * Constructed using base Player class and Pawn is constructed on "Copper Gate"
+	 * @param playerName
+	 * @param playerNumber
+	 * @param symbol represents player on the board
+	 */
+	private Explorer(String playerName, int playerNumber, String symbol) {
+		super(playerName,playerNumber, symbol); //player class constructor
 		playerPawn=new Pawn(board.getTile("Copper Gate")); //Gets the Bronze Gate Tile and sets it as pawn starter tile
 
 	}
 
-	public static Explorer getInstance(String playerName, int playerNumber) {
+	public static Explorer getInstance(String playerName, int playerNumber, String symbol) {
 		if(theExplorer == null) {
-			theExplorer = new Explorer(playerName ,playerNumber);
+			theExplorer = new Explorer(playerName ,playerNumber, symbol);
 		}
 		return theExplorer;
 	}
@@ -27,16 +39,21 @@ public class Explorer extends Player {
 	public static Explorer returnInstance() {
 		return theExplorer;
 	}
-	
+
 	@Override
-	public ArrayList<Tile> getFocredMoveableTiles(){ //overridden as explorer cans swim diagonal tiles
+	/**
+	 * Override for the Explorer extra ability
+	 */
+	public ArrayList<Tile> getForcedMoveableTiles(){ 
 		Tile pawnTile = getPlayerPawnTile();
-		ArrayList<Tile> moveableTiles = pawnTile.getAdjacentDiagonal();
-		for(Tile tile: moveableTiles) {	//Checks if the tiles are present if not removes them
-			if(tile.isPresent()==false) {
-				moveableTiles.remove(tile);
+		ArrayList<Tile> adjacentDiagonal = pawnTile.getAdjacentDiagonal();
+
+		ArrayList<Tile> moveableTiles =  new ArrayList<Tile>();
+		for(Tile tile: adjacentDiagonal) {	
+			if(tile.isPresent()==true) {
+				moveableTiles.add(tile);
 			}
-			
+
 		}
 		return moveableTiles;
 	}

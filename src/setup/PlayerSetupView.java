@@ -42,31 +42,32 @@ public class PlayerSetupView {
 		System.out.println("You are Player number:"+ playerNumber + "\n");
 		System.out.println("Please Enter Your Name:");
 		String playerName = inputScanner.nextLine();
-
+		System.out.println("Please Enter the Symbol (For example $, makes it easier to identify) you want your pawn to be represented by on the board ");
+		String symbol = inputScanner.nextLine();
 
 		switch(listofRoles.get(0)){
 		case "Diver":
-			Diver diver = Diver.getInstance(playerName, playerNumber);
+			Diver diver = Diver.getInstance(playerName, playerNumber, symbol);
 			controller.addPlayer(diver);
 			break;
 
 		case "Engineer":
-			Engineer engineer = Engineer.getInstance(playerName, playerNumber);
+			Engineer engineer = Engineer.getInstance(playerName, playerNumber, symbol);
 			controller.addPlayer(engineer);
 			break;
 
 		case "Explorer":
-			Explorer explorer = Explorer.getInstance(playerName, playerNumber);
+			Explorer explorer = Explorer.getInstance(playerName, playerNumber, symbol);
 			controller.addPlayer(explorer);
 			break;
 
 		case "Messenger":
-			Messenger messenger = Messenger.getInstance(playerName, playerNumber);
+			Messenger messenger = Messenger.getInstance(playerName, playerNumber, symbol);
 			controller.addPlayer(messenger);
 			break;
 
 		case "Navigator":
-			Navigator navigator = Navigator.getInstance(playerName, playerNumber);
+			Navigator navigator = Navigator.getInstance(playerName, playerNumber, symbol);
 			controller.addPlayer(navigator);
 			break;
 

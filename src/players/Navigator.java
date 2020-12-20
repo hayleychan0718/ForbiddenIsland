@@ -3,19 +3,32 @@ package players;
 import island.board.Board;
 import pawns.Pawn;
 
+/**
+ * Singleton class to implement the Navigator extends Player
+ * @author Liam Fitzgerald
+ *
+ */
+
 public class Navigator extends Player {
 
 	private static Navigator theNavigator;
 
-	private Navigator(String playerName, int playerNumber) {
-		super(playerName,playerNumber); //player class constructor
-		playerPawn=new Pawn(board.getTile("Golden Gate")); //Gets the Bronze Gate Tile and sets it as pawn starter tile
+	/**
+	 * Constructed using base Player class and Pawn is constructed on "Golden Gate"
+	 * @param playerName
+	 * @param playerNumber
+	 * @param symbol represents player on the board
+	 */
+	private Navigator(String playerName, int playerNumber, String symbol) {
+		super(playerName,playerNumber, symbol); 
+		playerPawn=new Pawn(board.getTile("Golden Gate")); 
 
 	}
 
-	public static Navigator getInstance(String playerName, int playerNumber) {
+	
+	public static Navigator getInstance(String playerName, int playerNumber, String symbol) {
 		if(theNavigator == null) {
-			theNavigator = new Navigator(playerName ,playerNumber);
+			theNavigator = new Navigator(playerName ,playerNumber, symbol);
 		}
 		return theNavigator;
 	}

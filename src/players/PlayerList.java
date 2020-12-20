@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-//Do we need insertion order for list are all these methods necessary.
-//Need to figure out player List and how to deal with statics.
-//Write a static method that has return type object of this singleton class. Here, the concept of Lazy initialization is used to write this static method.
+/**
+ * Singleton Class to manage the list of Players
+ * @author Liam Fitzgerald
+ *
+ */
 public class PlayerList {
 
 	
@@ -15,17 +17,10 @@ public class PlayerList {
 	
 	
 	
-	 private PlayerList() { //Constructor private since singleton
-	    	this.playerList = new ArrayList<Player>(); //May need insertion order
+	 private PlayerList() { 
+	    	this.playerList = new ArrayList<Player>(); 
 	    }
-	 //===========================================================
-    // Get Instance of Singleton
-    //===========================================================
-    /**
-     * Get the single instance of the List of Players in the game
-     * @return The PlayerList object
-     */
-	//Static method to create instance of Singleton Class
+	
     public static PlayerList getInstance(){
         if(thePlayerList == null){
         	thePlayerList = new PlayerList();
@@ -36,7 +31,7 @@ public class PlayerList {
     public int getNumPlayers() {
     	return playerList.size();
     }
-    
+    //Since player number starts at 1
     public Player getPlayer(int i) {
     	return playerList.get(i-1);
     }
@@ -53,7 +48,11 @@ public class PlayerList {
     	return playerList;
     }
     
-    //Returns a list of the other players
+   /**
+    * For inputed player get the other players
+    * @param playerNumber
+    * @return otherListOfPlayers
+    */
     public ArrayList<Player> getListOfOtherPlayers(int playerNumber){
     	ArrayList<Player> otherListOfPlayers= new ArrayList<Player>(); 
     	for(Player player: playerList) {
@@ -65,18 +64,11 @@ public class PlayerList {
     	
     }
     
+    //Why is this need?
     public ArrayList<Player> getPlayersForHelicopter(){
     	ArrayList<Player> playersForHelicopter = new ArrayList<>(playerList);
     	return playersForHelicopter;
     }
-    
-	//===========================================================
-	// Singleton destroyer for unit testing ONLY
-	//===========================================================
-	//Not sure what this is for
-	public void destroyMe() {
-	    playerList = null;
-	}
 }
 
 
