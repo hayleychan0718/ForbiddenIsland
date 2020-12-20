@@ -168,7 +168,7 @@ public class Board{
 			if(player.getPlayerPawnTile()==col) {
 				if(col.isFlooded())
 					return player.getSymbol().concat("!")  ;
-				if(col.hasTreasure())
+				if(col.hasTreasure() && !col.getTreasure().isCaptured())  
 					return player.getSymbol().concat("*")  ;
 
 				return player.getSymbol();

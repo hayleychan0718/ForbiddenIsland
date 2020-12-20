@@ -254,7 +254,7 @@ public class Tile{
 				initials.append(name.charAt(i));
 			}
 		}
-		if(hasTreasure()==true) {
+		if(hasTreasure()==true && !getTreasure().isCaptured()) {
 			initials.append("*");
 		}
 		
