@@ -102,6 +102,9 @@ public class PlayerView {
 		if(!canDoTileAction(shoreableTiles, "shore up")) return;
 
 		int userInput=Utility.acceptableInput(0, shoreableTiles.size(), inputScanner); 
+		
+		if(userInput==shoreableTiles.size()) return; //Cancels action
+		
 		Tile SelectedTile=shoreableTiles.get(userInput);
 		controller.shoreUpTile(SelectedTile);
 		shoreableTiles.remove(userInput);
@@ -258,18 +261,6 @@ public class PlayerView {
 	/**
 	 * Prints the board to the user
 	 */
-	public void showBoard() {
-		Tile[][] board = controller.getboard();
-		int[][] islandTiles = controller.getIslandTiles();
-
-		for(int[] x: islandTiles) {
-			System.out.println(board[x[0]][x[1]].getName());
-			System.out.println("Coord: " + Arrays.toString(board[x[0]][x[1]].getLocation()));
-			System.out.println("Flooded: " + board[x[0]][x[1]].isFlooded());
-			System.out.println("Present: " + board[x[0]][x[1]].isPresent());
-			System.out.println();
-		}
-	}
 		
 	public void endTurn(Player player) {
 		controller.emptyActions(player);
@@ -278,7 +269,7 @@ public class PlayerView {
 	public boolean notifyPlayer(Scanner inputScanner, Tile tile, Player player) {
 		System.out.println(tile + " is about to sink! Do you want to save it?");
 		System.out.println("[0] No\n[1] Yes");
-		int userInput = Utility.acceptableInput(0, 1, inputScanner);
+		int userInput = Utility.acceptableInput(0, 1, inputScanner); //0-2 option 
 		if(userInput==1) {
 			controller.decementPlayerAction(player);
 			controller.saveTile(tile);
@@ -295,7 +286,7 @@ public class PlayerView {
 		Hand playerHand = controller.getPlayerHand(player);
 		ArrayList<TreasureDeckCard> playableCards = playerHand.getPlayableCards(); 
 		if(cardOptions(player)) {
-			int userInput = Utility.acceptableInput(0, playableCards.size(), inputScanner);
+			int userInput = Utility.acceptableInput(0, playableCards.size(), inputScanner); //0,1,2   0-3
 			if(userInput==playableCards.size()) return; 
 
 			switch(playableCards.get(userInput).getName()) { 
@@ -330,7 +321,7 @@ public class PlayerView {
 		ArrayList<Tile> listOfTiles = Board.getInstance().listOfTiles();
 
 		if(!helicopterPrompt(inputScanner)) {
-			int tileIndex = Utility.acceptableInput(0, listOfTiles.size(), inputScanner);
+			int tileIndex = Utility.acceptableInput(0, listOfTiles.size(), inputScanner); //-1 if no 
 			Tile chosenTile = listOfTiles.get(tileIndex);
 			ArrayList<Player> chosenPlayers = choosingPlayer(inputScanner, chosenTile, playersForHelicopter);
 				
@@ -398,7 +389,7 @@ public class PlayerView {
 	// Used in doHelicopter()
 	private void movingMessage(Tile chosenTile, ArrayList<Player> chosenPlayers) {
 		for(Player player: chosenPlayers) {
-			System.out.print("Moving " + player.getName() + " to " + chosenTile.getNameString() +  "...\n"); //no need for this get name string
+			System.out.print("Moving " + player + " to " + chosenTile +  "...\n"); //no need for this get name string
 		}
 	}
 	
@@ -419,7 +410,7 @@ public class PlayerView {
 
 			controller.doSandbag(chosenTile, player);
 			controller.removeCard(card, player);
-			System.out.println("Shored up " + chosenTile.getNameString()); //No need for get string
+			System.out.println("Shored up " + chosenTile); //No need for get string
 	}
 
 	public void doWaterRise(Player player) {
@@ -444,6 +435,21 @@ public class PlayerView {
 				index++;
 			}
 		}
+	}
+	public void showBoard() {
+		String board = controller.showBoard();
+
+			System.out.println(board);
+			boardExplanation();
+		}
+	
+	public void boardExplanation() {
+		System.out.println("The initial of the Tiles are shown (Not including of or the)");
+		System.out.println("A * beside the inital means there is a treasure at this tile");
+		System.out.println("A ! beside the inital means the Tile is flooded");
+		System.out.println("A blank [  ] means the tile is no longer present ");
+		System.out.println("Fools landing is in captials [ FL ] ");
+		System.out.println("Your choosen symbol will replace the inital of the Tile ");
 	}
 	
 //	public static void main(String[] args) {
