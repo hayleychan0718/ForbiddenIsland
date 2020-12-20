@@ -202,16 +202,18 @@ public class PlayerView {
 	 * @param inputScanner
 	 * @return selected player or null
 	 */
-	public Player selectPlayerForTreasureCard(Player player, Scanner inputScanner) {
-		ArrayList<Player> playersForTreasureCard =controller.getPlayerForTreasureCard(player);
+	public Player selectPlayerForCard(Player player, Scanner inputScanner) {
+		ArrayList<Player> playersForCard =controller.getPlayerForCard(player);
 
-		if (playersForTreasureCard.isEmpty()) {
+		if (playersForCard.isEmpty()) {
 			System.out.println("There are no players to give treasure cards to");
 			return null;
 		}
-		Utility.printOptions(playersForTreasureCard);
-		int userInput = Utility.acceptableInput(0, playersForTreasureCard.size(), inputScanner); //No option to cancel movement
-		Player selectedPlayer = playersForTreasureCard.get(userInput);
+		System.out.println("You can give a card to the following players:");
+		Utility.printOptions(playersForCard);
+		int userInput = Utility.acceptableInput(0, playersForCard.size(), inputScanner); //No option to cancel movement
+		
+		Player selectedPlayer = playersForCard.get(userInput);
 		return selectedPlayer;
 	}
 
@@ -222,10 +224,10 @@ public class PlayerView {
 	 */
 	public void giveTreasureCard(Player player , Scanner inputScanner) {
 		
-		Player selectedPlayer = selectPlayerForTreasureCard(player,inputScanner);
+		Player selectedPlayer = selectPlayerForCard(player,inputScanner);
 		if(selectedPlayer==null) return;
 		
-		ArrayList<TreasureDeckCard> currentPlayersCards = controller.getPlayerCards(player);
+		ArrayList<Card> currentPlayersCards = controller.getPlayerCards(player);
 
 		
 		Hand selectedPlayerHand = controller.getPlayerHand(selectedPlayer);
@@ -233,7 +235,10 @@ public class PlayerView {
 		if(!canDoCardAction(currentPlayersCards)) return;
 
 		int userInput = Utility.acceptableInput(0, currentPlayersCards.size(), inputScanner);
-		TreasureDeckCard selectedCard = currentPlayersCards.get(userInput);
+		
+		if(userInput == currentPlayersCards.size()) return;
+		
+		Card selectedCard = currentPlayersCards.get(userInput);
 		controller.giveCard(selectedCard, selectedPlayerHand, player);
 		controller.decementPlayerAction(player);
 	}
@@ -243,7 +248,7 @@ public class PlayerView {
 	 * @param cardOptions
 	 * @return
 	 */
-	public boolean canDoCardAction(ArrayList<TreasureDeckCard> cardOptions) {
+	public boolean canDoCardAction(ArrayList<Card> cardOptions) {
 
 		if(cardOptions.isEmpty()) {
 			System.out.println("You have no cards to give");
@@ -252,7 +257,7 @@ public class PlayerView {
 		else {
 			System.out.println("You can give the following cards:");
 			Utility.printOptions(cardOptions);
-			System.out.println("Enter" + cardOptions.size() + " to cancel action");
+			System.out.println("Enter " + cardOptions.size() + " to cancel action");
 			return true;
 		}
 
