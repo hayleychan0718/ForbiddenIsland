@@ -10,6 +10,7 @@ import island.cards.Hand;
 import island.cards.TreasureDeck;
 import players.Player;
 import players.PlayerList;
+import players.PlayerView;
 
 public class GameManager {
 
@@ -68,5 +69,9 @@ public class GameManager {
 
 	public void removeFromHand(Card card, Player player) {
 		player.getHand().removeCard(card);
+	}
+
+	public void runCardView(Scanner inputScanner, Player player) {
+		PlayerView.getInstanace().runCardView(inputScanner, player);
 	}
 }
