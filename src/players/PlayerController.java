@@ -13,7 +13,11 @@ import island.enums.TileNames;
 
 import players.*;
 
-//Class to implement the player controller
+/**
+ * CLass to implement the Player Controller
+ * @author Liam FItzgerald
+ *
+ */
 public class PlayerController {
 
 	private static ArrayList<Player> model;
@@ -43,7 +47,7 @@ public class PlayerController {
 	}
 
 	public ArrayList<Tile> getForcedMovementTiles(Player player){
-		return player.getFocredMoveableTiles();
+		return player.getForcedMoveableTiles();
 	}
 
 	public void decementPlayerAction(Player player) {
@@ -51,7 +55,7 @@ public class PlayerController {
 	}
 
 	public ArrayList<Player> getPlayersForTreasureCard(Player player){
-		return player.getPlayersForTreasureCard();
+		return player.getPlayersForCard();
 	}
 
 	public boolean canCaptureTreasure(Player player) {
@@ -72,8 +76,8 @@ public class PlayerController {
 		return model;
 	}
 
-	public ArrayList<Player> getPlayerForTreasureCard(Player player){
-		return player.getPlayersForTreasureCard();
+	public ArrayList<Player> getPlayerForCard(Player player){
+		return player.getPlayersForCard();
 	}
 
 	public void movePlayerPawn(Player player, Tile tile) {
@@ -89,8 +93,8 @@ public class PlayerController {
 		return player.getHand();
 	}
 
-	public void giveCard(TreasureDeckCard toGive, Hand toRecieve, Player player) {
-		player.giveCard(toGive, toRecieve);
+	public void giveCard(Card selectedCard, Hand toRecieve, Player player) {
+		player.giveCard(selectedCard, toRecieve);
 	}
 
 	public int[][] getIslandTiles(){
@@ -127,5 +131,13 @@ public class PlayerController {
 	
     public void doWaterRise(Player player) {
     	CardLogic.getInstance(player).doWaterRise();
+    }
+    
+    public ArrayList<Card> getPlayerCards(Player player) {
+    	return player.getHand().getCards();
+    }
+    
+    public String showBoard() {
+    	return Board.getInstance().showBoard();
     }
 }
