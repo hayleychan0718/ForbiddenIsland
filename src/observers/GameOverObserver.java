@@ -52,7 +52,7 @@ public class GameOverObserver {
 	
 	public boolean playerBeside(Tile tile) {
 		for(Player player: playersList) {
-			for(Tile t: player.getShoreableTiles()) {
+			for(Tile t: player.getAdjacentSunkTiles()) {
 				if(t == tile) {
 					this.player = player;
 					return true;
