@@ -58,8 +58,8 @@ public class GameManager {
 		return isGameOver;
 	}
 
-	public ArrayList<Card> drawTreasureDeck(Hand playerHand, Player player) {
-		return TreasureDeck.getInstance().drawCard(playerHand, player);
+	public ArrayList<Card> drawTreasureDeck(Player player) {
+		return TreasureDeck.getInstance().drawCard(player);
 	}
 
 	public ArrayList<Tile> drawFloodDeck() {
