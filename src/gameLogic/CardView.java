@@ -13,7 +13,8 @@ import players.Player;
 import players.PlayerList;
 import utility.Utility;
 
-public class CardView {
+//TODO: This class has moved to playerview
+/*public class CardView {
 	public CardController controller;
 	private static CardView cardView = null;
 
@@ -45,14 +46,12 @@ public class CardView {
 				break;
 			}
 		}
-		else
-			System.out.println("Skip.");
 	}
 	
 	// Used in runCardView
 	private boolean cardOptions(Hand playerHand) {
 		ArrayList<Card> cards = playerHand.getCards();
-		System.out.println("Pick one of the cards you wish to play");
+		System.out.println("Playable cards:\n");
 		int i=0, none=0;
 		for(Card card: cards) {
 			if(card instanceof TreasureDeckCard) {
@@ -64,7 +63,7 @@ public class CardView {
 			}
 		}
 		if(none == cards.size()) {
-			System.out.println("No playable cards available...");
+			//System.out.println("No playable cards available...");
 			return false;
 		}
 		else
@@ -175,4 +174,4 @@ public class CardView {
 		System.out.println("Water Level increased.\nCurrent water level: " + waterMeter.getWaterLevel());
 		System.out.println("Flood Deck reshuffled.");
 	}
-}
+}*/

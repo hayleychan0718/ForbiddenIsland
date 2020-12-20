@@ -17,12 +17,20 @@ import utility.Utility;
 
 public class CardLogic {
 	
+    private static CardLogic cardLogic = null;
 	private ArrayList<TreasureDeckCard> playableCards;
 	
 	public CardLogic(Player player) {
 		this.playableCards = player.getHand().getPlayableCards();
 	}
 
+    public static CardLogic getInstance(Player player) {
+    	if(cardLogic == null) {
+    		cardLogic = new CardLogic(player);
+    	}
+    	return cardLogic;
+    }	
+    
 	public void remove(int userInput) {
 		playableCards.remove(userInput);
 	}

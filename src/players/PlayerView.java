@@ -5,12 +5,18 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+import gameLogic.CardController;
+import gameLogic.CardView;
+import gameLogic.WaterMeter;
 import island.board.Board;
 import island.board.Tile;
+import island.cards.Card;
 import island.cards.Hand;
+import island.cards.TreasureCard;
 import island.cards.TreasureDeckCard;
 import island.enums.TileNames;
 import island.enums.TreasureNames;
+import observers.GameOverObserver;
 import players.Engineer;
 import players.Player;
 import utility.Utility;
@@ -45,12 +51,14 @@ public class PlayerView {
 		System.out.println("[3] Give Treasure Card");
 		System.out.println("[4] Capture Treasure");
 		System.out.println("[5] Show Board");
+		System.out.println("[6] Play Cards");
+		System.out.println("[7] Show Hand");
 		System.out.println("[0] End Turn");
 	}
 
 	public void selectOption(Scanner inputScanner, Player player) {
 
-		int userInput = Utility.acceptableInput(0, 6, inputScanner);
+		int userInput = Utility.acceptableInput(0, 7, inputScanner);
 
 		switch(userInput) {
 		case 0:
@@ -70,6 +78,12 @@ public class PlayerView {
 			break;
 		case 5:
 			showBoard();
+			break;
+		case 6:
+			runCardView(inputScanner, player.getHand(), player);
+			break;
+		case 7:
+			printHand(player.getHand());
 			break;
 		}
 	}
@@ -221,26 +235,174 @@ public class PlayerView {
 		if(userInput==1) {
 			controller.decementPlayerAction(player);
 			controller.saveTile(tile);
+			System.out.println(tile + " is saved!");
 			return true;
 		}
 		else
+			System.out.println(tile + " is sunk!");
 			return false;
 	}
 	
-	public void treasureLost() {
-		ArrayList<Tile> sunkTiles = Board.getInstance().listOfSunkTiles();
-		Tile lastTile = sunkTiles.get(sunkTiles.size() - 1);
+	
+	public void runCardView(Scanner inputScanner, Hand playerHand, Player player) {
+		ArrayList<TreasureDeckCard> playableCards = playerHand.getPlayableCards();
+		if(cardOptions(playerHand)) {
+			int userInput = Utility.acceptableInput(0, playableCards.size(), inputScanner);
+			if(userInput==playableCards.size()) return;  //If they want to cancel Movement
+
+			switch(playableCards.get(userInput).getName()) {
+			case "Helicopter Lift":
+				doHelicopter(inputScanner, playerHand, userInput, player);
+				break;
+			case "Sandbag":
+				doSandbag(inputScanner, playerHand, userInput, player);
+				break;
+			}
+		}
+	}
+	
+	// Used in runCardView
+	private boolean cardOptions(Hand playerHand) {
+		ArrayList<Card> cards = playerHand.getCards();
+		System.out.println("Playable cards:\n");
+		int i=0, none=0;
+		for(Card card: cards) {
+			if(card instanceof TreasureDeckCard) {
+				System.out.println(card.getName() + " [" + i + "]");
+				i++;
+			}
+			else if(card instanceof TreasureCard) {
+				none++;
+			}
+		}
+		if(none == cards.size()) {
+			System.out.println("No playable cards available...");
+			return false;
+		}
+		else {
+			System.out.println("Enter " + i + " to cancel action");
+			return true;
+		}
+	}
+	
+	public void doHelicopter(Scanner inputScanner, Hand playerHand, int cardIndex, Player player) {
+		ArrayList<Player> playersForHelicopter = PlayerList.getInstance().getPlayersForHelicopter();
+		ArrayList<Tile> listOfTiles = Board.getInstance().listOfTiles();
+
+		if(!helicopterPrompt(inputScanner)) {
+			int tileIndex = Utility.acceptableInput(0, listOfTiles.size(), inputScanner);
+			Tile chosenTile = listOfTiles.get(tileIndex);
+			ArrayList<Player> chosenPlayers = choosingPlayer(inputScanner, chosenTile, playersForHelicopter);
+				
+			movingMessage(chosenTile, chosenPlayers);
+			controller.doHelicopter(chosenTile, chosenPlayers, player);
+			controller.removeCard(cardIndex);
+		}
+		else {
+			winHelicopter(inputScanner, playerHand, player);
+		}
+	}
+	
+	private void winHelicopter(Scanner inputScanner, Hand playerHand, Player player) {
+		if(controller.canWinHelicopter(player))
+			controller.winHelicopter(player);
+		else{
+			System.out.println("Can't lift off yet!\n");
+			runCardView(inputScanner, playerHand, player);
+		}
+	}
+	
+	// Used in doHelicopter()
+	private boolean helicopterPrompt(Scanner inputScanner) {
+		System.out.println("\nPlay Helicopter Lift card...");
+		System.out.println("Do you want to\nMove one or more pawns to any other tile? [0] or\nLift your team off Fool's Landing for the win? [1]");
+		int helicopterChosen = Utility.acceptableInput(0, 1, inputScanner);
+
+		if(helicopterChosen == 0) {
+			System.out.println("\nTiles you can move to:");
+			Utility.printOptions(Board.getInstance().listOfTiles());
+			System.out.println("Which tile do you want to move to? ");
+			return false;
+		}
+		else {
+			System.out.println("Lifting off Fool's Landing...");
+			return true;
+		}
+	}
+	
+	// Used in doHelicopter()
+	private ArrayList<Player> choosingPlayer(Scanner inputScanner, Tile chosenTile, ArrayList<Player> playersForHelicopter) {	
+		ArrayList<Player> chosenPlayers = new ArrayList<Player>();
+		boolean repeat = true;
 		
-		System.out.println(lastTile.getNameString() + " has sunk before the treasure was captured!");
-		System.out.println("Game over...");
+		while(repeat==true) {
+			System.out.println("Who do you want to move to " + chosenTile.getNameString() + "?");
+			Utility.printOptions(playersForHelicopter);
+			int playerIndex = Utility.acceptableInput(0, playersForHelicopter.size(), inputScanner);
+			chosenPlayers.add(playersForHelicopter.get(playerIndex));	
+			playersForHelicopter.remove(playerIndex);
+			if(!playersForHelicopter.isEmpty()) {
+				System.out.println("Do you want to choose another player?\nYes [0]\nNo [1]");
+				int choice = Utility.acceptableInput(0, 1, inputScanner);
+				if(choice == 0) 
+			    	repeat = true;
+			    else if(choice == 1)
+			    	repeat = false;
+			}
+			else
+				repeat = false;
+		}	
+		return chosenPlayers;
 	}
 	
-	public void foolsLost() {
-		System.out.println("Fool's Landing has sunk!\nGame over...");
+	// Used in doHelicopter()
+	private void movingMessage(Tile chosenTile, ArrayList<Player> chosenPlayers) {
+		for(Player player: chosenPlayers) {
+			System.out.print("Moving " + player.getName() + " to " + chosenTile.getNameString() +  "...\n");
+		}
 	}
 	
-	public void waterLost() {
-		System.out.println("Water meter has reached 5!\nGamer over...");
+	public void doSandbag(Scanner inputScanner, Hand playerHand, int cardIndex, Player player) {
+		ArrayList<Tile> listOfFloodedTiles = Board.getInstance().listOfFloodedTiles();
+		
+		if(listOfFloodedTiles.size()==0) {
+			System.out.println("Choose another card.");
+			runCardView(inputScanner, playerHand, player);
+		}
+		else
+			System.out.println("Play Sandbag Card...\n");
+			System.out.println("Tiles you can shore up:");
+			Utility.printOptions(listOfFloodedTiles);
+			System.out.println("\nChoose the tile: ");
+			int tileIndex = Utility.acceptableInput(0, listOfFloodedTiles.size(), inputScanner);
+			Tile chosenTile = listOfFloodedTiles.get(tileIndex);
+
+			controller.doSandbag(chosenTile, player);
+			controller.removeCard(cardIndex);
+			System.out.println("Shored up " + chosenTile.getNameString());
+	}
+
+	public void doWaterRise(Player player) {
+		WaterMeter waterMeter = WaterMeter.getinstance();
+		System.out.println("Play Water Rise card...");
+		controller.doWaterRise(player);
+		System.out.println("Water Level increased.\nCurrent water level: " + waterMeter.getWaterLevel());
+		System.out.println("Flood Deck reshuffled.");
+	}
+	
+	public void printHand(Hand playerHand) {
+		int index = 0;
+		ArrayList<Card> hand = playerHand.getCards();
+		if(hand.size()==0) {
+			System.out.println("Your hand is empty.");
+		}
+		else {
+			System.out.println("\nYour hand: ");
+			for(int i=0; i<hand.size(); i++) {
+				System.out.println(index + ". " + hand.get(i).getName());
+				index++;
+			}
+		}
 	}
 	
 //	public static void main(String[] args) {
@@ -266,4 +428,4 @@ public class PlayerView {
 	        			System.out.printf("%25s", board[i][j].getName().getString());
 	        	}
 	        } */   	
-	}
+}

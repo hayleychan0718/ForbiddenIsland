@@ -6,7 +6,8 @@ import island.board.Tile;
 import island.cards.TreasureDeckCard;
 import players.Player;
 
-public class CardController {
+//TODO: This class can be deleted
+/*public class CardController {
     private CardLogic model;
     private CardView view;
     private static CardController controller = null;
@@ -21,10 +22,6 @@ public class CardController {
     		controller = new CardController(model, view);
     	return controller;
     }
-    
-  //  public void playCard(int userInput) {
-    //	model.play(userInput);
-    //}
     
     public void removeCard(int userInput) {
     	model.remove(userInput);
@@ -49,4 +46,4 @@ public class CardController {
     public void doWaterRise() {
     	model.doWaterRise();
     }
-}
+}*/

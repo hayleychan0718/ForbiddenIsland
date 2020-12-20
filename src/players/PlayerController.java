@@ -1,5 +1,8 @@
 package players;
 import java.util.ArrayList;
+
+import gameLogic.CardLogic;
+import gameLogic.CardView;
 import island.board.*;
 
 import island.cards.Hand;
@@ -101,4 +104,28 @@ public class PlayerController {
 	public void emptyActions(Player player) {
 		player.emptyActions();
 	}
+	
+    public void removeCard(int userInput) {
+    	model.remove(userInput);
+    }
+    
+    public void doHelicopter(Tile chosenTile, ArrayList<Player> chosenPlayers, Player player){
+    	CardLogic.getInstance(player).playHelicopter(chosenTile, chosenPlayers);
+    }
+
+	public void winHelicopter(Player player) {
+		CardLogic.getInstance(player).winHelicopter();
+	}
+    
+	public boolean canWinHelicopter(Player player) {
+		return CardLogic.getInstance(player).canWinHelicopter();
+	}
+	
+	public void doSandbag(Tile chosenTile, Player player) {
+		CardLogic.getInstance(player).playSandbag(chosenTile);
+	}
+	
+    public void doWaterRise(Player player) {
+    	CardLogic.getInstance(player).doWaterRise();
+    }
 }
