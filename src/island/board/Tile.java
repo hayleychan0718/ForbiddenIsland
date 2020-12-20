@@ -8,12 +8,12 @@ import java.util.Map;
 import observers.PlayerObserver;
 import island.enums.TileNames;
 import island.enums.TreasureNames;
-//import observers.GameOverObserver;
+import observers.GameOverObserver;
 import players.Player;
 import players.PlayerList;
 
 public class Tile{
-	//private GameOverObserver gameOverObserver;
+	private GameOverObserver gameOverObserver = GameOverObserver.getInstance();
 	private boolean isFlooded; // Tile can be "flooded" or "unflooded"
 	private boolean isPresent; // Tile is present or gone
 	private final TileNames name;  // Tile has a name
@@ -235,14 +235,11 @@ public class Tile{
 			if(this==player.getPlayerPawnTile()) {
 				PlayerObserver.getInstance().updateSunk(player);
 			}
-			
-//			if(this.hasTreasure() || name.getString() == TileNames.FoolsLanding.getString()) {
-//				gameOverObserver.update(name);
-//			}
+		}
+		if(this.hasTreasure() || name.getString() == TileNames.FoolsLanding.getString()) {
+			gameOverObserver.update(this);
 		}
 	}
-	
-	
 	
 	public void saveTile() {
 		this.isPresent = true;

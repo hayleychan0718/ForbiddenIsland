@@ -4,39 +4,56 @@ package observers;
 import players.PlayerView;
 import island.board.Board;
 import island.board.Tile;
-import island.enums.TileNames;
 import island.enums.TreasureNames;
 import players.Player;
 import players.PlayerList;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+import gameLogic.GameView;
 
 
 public class GameOverObserver {
-	public java.util.List<Player> playersList = PlayerList.getInstance().getListOfPlayers();
-	public ArrayList<Tile> sunkTiles = new ArrayList<Tile>();
-	public Player player;
-	public Scanner inputScanner;
+	private static GameOverObserver gameOverObserver;
+	private List<Player> playersList = PlayerList.getInstance().getListOfPlayers();
+	private ArrayList<Tile> sunkTiles = new ArrayList<Tile>();
+	private Player player;
+	private Scanner inputScanner = new Scanner(System.in);
+	
+	public static GameOverObserver getInstance() {
+		if(gameOverObserver==null) {
+			gameOverObserver = new GameOverObserver();
+		}
+		return gameOverObserver;
+	}
 	
 	public void update(Tile tile) {
 		PlayerView playerView = PlayerView.getInstanace();
 
 		sunkTiles.add(tile);
 		if(playerBeside(tile)) {
-			if(!playerView.notifyPlayer(inputScanner ,tile, player)) {
-				if(loseCondition())
-					PlayerView.getInstanace().treasureLost();
-				if(tile.getNameString() == "Fool's Landing")
-					PlayerView.getInstanace().foolsLost();
+			if(!playerView.notifyPlayer(inputScanner , tile, player)) {
+				invokeLoseGame(tile);
 			}
 		}
+		else {
+			invokeLoseGame(tile);
+		}
+	}
+	
+	public void invokeLoseGame(Tile tile) {
+		if(loseCondition())
+			GameView.getInstance().treasureLost();
+		if(tile.getNameString() == "Fool's Landing")
+			GameView.getInstance().foolsLost();
 	}
 	
 	public boolean playerBeside(Tile tile) {
 		for(Player player: playersList) {
 			for(Tile t: player.getShoreableTiles()) {
-				if(tile == t) {
+				if(t == tile) {
 					this.player = player;
 					return true;
 				}
@@ -46,7 +63,7 @@ public class GameOverObserver {
 	}
 	
 	public void update() {
-		PlayerView.getInstanace().waterLost();
+		GameView.getInstance().waterLost();
 	}
 	
 	public boolean loseCondition() {
@@ -61,4 +78,7 @@ public class GameOverObserver {
 			return false;
 	}
 	
+	public ArrayList<Tile> getSunkTiles(){
+		return sunkTiles;
+	}
 }

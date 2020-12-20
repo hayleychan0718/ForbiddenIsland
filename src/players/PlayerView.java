@@ -5,8 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import gameLogic.CardController;
-import gameLogic.CardView;
+
 import gameLogic.WaterMeter;
 import island.board.Board;
 import island.board.Tile;
@@ -87,7 +86,7 @@ public class PlayerView {
 			break;
 		}
 	}
-
+	
 	public void shoreUp(Scanner inputScanner, Player player) {
 		ArrayList<Tile> shoreableTiles = controller.getShoreableTiles(player);
 
@@ -246,16 +245,17 @@ public class PlayerView {
 	
 	public void runCardView(Scanner inputScanner, Hand playerHand, Player player) {
 		ArrayList<TreasureDeckCard> playableCards = playerHand.getPlayableCards();
+		ArrayList<Card> allCards = playerHand.getCards();
 		if(cardOptions(playerHand)) {
 			int userInput = Utility.acceptableInput(0, playableCards.size(), inputScanner);
 			if(userInput==playableCards.size()) return;  //If they want to cancel Movement
 
 			switch(playableCards.get(userInput).getName()) {
 			case "Helicopter Lift":
-				doHelicopter(inputScanner, playerHand, userInput, player);
+				doHelicopter(inputScanner, playerHand, allCards.get(userInput), player);
 				break;
 			case "Sandbag":
-				doSandbag(inputScanner, playerHand, userInput, player);
+				doSandbag(inputScanner, playerHand, allCards.get(userInput), player);
 				break;
 			}
 		}
@@ -285,7 +285,7 @@ public class PlayerView {
 		}
 	}
 	
-	public void doHelicopter(Scanner inputScanner, Hand playerHand, int cardIndex, Player player) {
+	public void doHelicopter(Scanner inputScanner, Hand playerHand, Card card, Player player) {
 		ArrayList<Player> playersForHelicopter = PlayerList.getInstance().getPlayersForHelicopter();
 		ArrayList<Tile> listOfTiles = Board.getInstance().listOfTiles();
 
@@ -296,7 +296,7 @@ public class PlayerView {
 				
 			movingMessage(chosenTile, chosenPlayers);
 			controller.doHelicopter(chosenTile, chosenPlayers, player);
-			controller.removeCard(cardIndex);
+			controller.removeCard(card, player);
 		}
 		else {
 			winHelicopter(inputScanner, playerHand, player);
@@ -362,7 +362,7 @@ public class PlayerView {
 		}
 	}
 	
-	public void doSandbag(Scanner inputScanner, Hand playerHand, int cardIndex, Player player) {
+	public void doSandbag(Scanner inputScanner, Hand playerHand, Card card, Player player) {
 		ArrayList<Tile> listOfFloodedTiles = Board.getInstance().listOfFloodedTiles();
 		
 		if(listOfFloodedTiles.size()==0) {
@@ -378,7 +378,7 @@ public class PlayerView {
 			Tile chosenTile = listOfFloodedTiles.get(tileIndex);
 
 			controller.doSandbag(chosenTile, player);
-			controller.removeCard(cardIndex);
+			controller.removeCard(card, player);
 			System.out.println("Shored up " + chosenTile.getNameString());
 	}
 

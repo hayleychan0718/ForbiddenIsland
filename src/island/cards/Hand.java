@@ -14,25 +14,20 @@ public class Hand {
 	
 	public void addCard(Card card){
 		hand.add(card);
-		/*if(hand.size() == 6) {
-			System.out.println("Cannot have more than 5 cards in hand! Remove one.");
-			printHand();
-			System.out.print("\nEnter number of card you want to remove: ");
-		    @SuppressWarnings("resource")
-			Scanner scanner = new Scanner(System.in);  
-		    int chosen = scanner.nextInt();  
-		    hand.remove(chosen);
-		    printHand();
-		}*/
 	}
 	
 	public ArrayList<Card> getCards(){
 		return hand;
 	}
 	
-	public void removeCard(TreasureDeckCard card) {
+	public void removeCard(Card card) {
 		hand.remove(card);
+		TreasureDeck.getInstance().getDiscardPile().add(card);
 	}
+	
+/*	public void removeCard(int cardIndex) {
+		hand.remove(cardIndex);
+	}*/
 	
 	//Give card to another player
 	public void giveCard(TreasureDeckCard given, Hand Recieved) {
@@ -48,6 +43,4 @@ public class Hand {
 		}
 		return playableCards;
 	}
-	
-	
 }

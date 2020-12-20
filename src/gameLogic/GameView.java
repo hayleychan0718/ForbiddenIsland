@@ -3,6 +3,11 @@ package gameLogic;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import island.board.Board;
+import island.board.Tile;
+import island.cards.Card;
+import island.cards.Hand;
+import island.cards.TreasureDeck;
 import players.*;
 import observers.*;
 import utility.Utility;
@@ -57,9 +62,39 @@ public class GameView {
 				Utility.sleep(1500);
 				isTurnOver=controller.isTurnOver(player);	//View uses controller to check if the player still has actions
 			} 
+			treasureDeckTurn(player.getHand(), player, inputScanner);
+			floodDeckTurn();
 		}
+
 	}
 
+	public void treasureDeckTurn(Hand playerHand, Player player, Scanner inputScanner) {
+		System.out.println("\nDrawing 2 cards from treasure deck...");
+		ArrayList<Card> cardsDrawn = controller.treasureDeckTurn(player.getHand(), player);
+		for(Card card: cardsDrawn) {
+			System.out.println("Adding " + card.getName() + " to " + player.getName() + "'s hand...");
+		}
+				
+		if(player.getHand().getCards().size()==6) {
+			System.out.println("Cannot have more than 5 cards in hand! Remove one.");
+			PlayerView.getInstanace().printHand(playerHand);
+			System.out.print("\nEnter index of card you want to remove: ");
+			int userInput = Utility.acceptableInput(0, playerHand.getCards().size(), inputScanner);
+			controller.removeFromHand(playerHand.getCards().get(userInput), player);
+		}
+	}
+	
+	public void floodDeckTurn() {
+		System.out.println("\nDrawing flood cards...");
+		ArrayList<Tile> tilesFlooded = controller.floodDeckTurn();
+		for(Tile tile: tilesFlooded) {
+			if(tile.isFlooded() && tile.isPresent())
+				System.out.println("Flooding " + tile.getNameString());
+			else if(!tile.isPresent())
+				System.out.println("Sinking " + tile.getNameString());
+		}
+	}
+	
 	public void sunkenPlayers(Scanner inputScanner) {	//SunkenPlayers
 		ArrayList<Player> listSunkenPlayers = PlayerObserver.getInstance().getSunkenPlayers();
 		PlayerView playerView = PlayerView.getInstanace();
@@ -81,7 +116,7 @@ public class GameView {
 	} 
 
 	public void doGame(Scanner inputScanner) {
-
+		startGame();
 		while(!controller.isGameOver()) { //Will keep looping over tile game is over
 			doTurn(inputScanner);
 		}
@@ -93,6 +128,30 @@ public class GameView {
 
 	public void gameWin() {
 		System.out.println("Lifting off Fool's Landing...\nYou win!");
+		controller.gameOver();
+		System.exit(0);
+	}
+	
+	public void treasureLost() {
+		ArrayList<Tile> sunkTiles = GameOverObserver.getInstance().getSunkTiles();
+		Tile lastTile = sunkTiles.get(sunkTiles.size() - 1);
+		
+		System.out.println(lastTile.getNameString() + " has sunk before the treasure was captured!");
+		System.out.println("Game over...");
+		controller.gameOver();
+		System.exit(0);
+	}
+	
+	public void foolsLost() {
+		System.out.println("Fool's Landing is sunk!\nGame over...");
+		controller.gameOver();
+		System.exit(0);
+	}
+	
+	public void waterLost() {
+		System.out.println("Water meter has reached 5!\nGamer over...");
+		controller.gameOver();
+		System.exit(0);
 	}
 
 }

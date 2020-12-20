@@ -45,7 +45,8 @@ public class FloodDeck extends Deck{
 	/**
 	 * Draws the number of flood cards equal to water meter level and floods those tiles
 	 */
-	public void drawCard() {
+	public ArrayList<Tile> drawCard() {
+		ArrayList<Tile> list = new ArrayList<Tile>();
 		Board board = Board.getInstance();
 		WaterMeter waterMeter = WaterMeter.getinstance();
 		for(int i=1;i<=waterMeter.getWaterLevel();i++) {
@@ -54,6 +55,7 @@ public class FloodDeck extends Deck{
 			}
 			FloodCard card = (FloodCard) floodStack.pop();
 			Tile tileToFlood = board.getTile(card.getName());
+			list.add(tileToFlood);
 			if(!tileToFlood.isFlooded() && tileToFlood.isPresent()) {
 				tileToFlood.setFlood(true);
 			}
@@ -62,6 +64,7 @@ public class FloodDeck extends Deck{
 			}
 			discardStack.push(card);
 		}
+		return list;
 	}
 	
 	/**

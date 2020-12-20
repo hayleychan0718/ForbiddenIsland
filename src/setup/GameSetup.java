@@ -5,6 +5,8 @@ import java.util.Scanner;
 import gameLogic.GameView;
 import gameLogic.*;
 import island.board.Board;
+import island.board.Tile;
+import island.enums.TileNames;
 import players.*;
 
 public class GameSetup {
@@ -24,8 +26,8 @@ public class GameSetup {
 		Board.getInstance();
 		playerSetup(inputScanner);
 		HandSetup.getInstance().startGame();
+		FloodSetup.getInstance().startGame();
 		playerActions();
-		
 		gameManagerSetup(inputScanner);
 	}
 
@@ -39,10 +41,7 @@ public class GameSetup {
 		view.setController(controller);
 
 		view.createPlayers(inputScanner);
-		PlayerList.getInstance().getPlayer(1).getPlayerPawnTile().sinkTile();
-		PlayerList.getInstance().getPlayer(2).getPlayerPawnTile().sinkTile();
-		//Observer test here, run in the main. Sink the treasure , sink fool landing , one with player able to save and one without
-		}
+	}
 
 	public void playerActions() {
 		PlayerController controller = PlayerController.getInstance();

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import gameLogic.CardLogic;
 import gameLogic.CardView;
 import island.board.*;
-
+import island.cards.Card;
 import island.cards.Hand;
 import island.cards.TreasureDeckCard;
 import island.enums.TreasureNames;
@@ -105,8 +105,8 @@ public class PlayerController {
 		player.emptyActions();
 	}
 	
-    public void removeCard(int userInput) {
-    	model.remove(userInput);
+    public void removeCard(Card card, Player player) {
+		player.getHand().removeCard(card);
     }
     
     public void doHelicopter(Tile chosenTile, ArrayList<Player> chosenPlayers, Player player){

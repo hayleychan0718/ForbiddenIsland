@@ -3,6 +3,11 @@ package gameLogic;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import island.board.Tile;
+import island.cards.Card;
+import island.cards.FloodDeck;
+import island.cards.Hand;
+import island.cards.TreasureDeck;
 import players.Player;
 import players.PlayerList;
 
@@ -53,5 +58,15 @@ public class GameManager {
 		return isGameOver;
 	}
 
+	public ArrayList<Card> drawTreasureDeck(Hand playerHand, Player player) {
+		return TreasureDeck.getInstance().drawCard(playerHand, player);
+	}
 
+	public ArrayList<Tile> drawFloodDeck() {
+		return FloodDeck.getInstance().drawCard();
+	}
+
+	public void removeFromHand(Card card, Player player) {
+		player.getHand().removeCard(card);
+	}
 }

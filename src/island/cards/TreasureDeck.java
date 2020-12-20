@@ -1,10 +1,12 @@
 package island.cards;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Stack;
 
-import gameLogic.CardView;
 import island.enums.TreasureNames;
+import players.Player;
+import players.PlayerView;
 
 
 public class TreasureDeck extends Deck{
@@ -62,17 +64,23 @@ public class TreasureDeck extends Deck{
 	 * Draw a card from the treasure deck and add to hand
 	 * @param hand The player's hand 
 	 */
-	public void drawCard(Hand hand) {
-		if(treasureStack.isEmpty()) {
-			super.reshuffle(treasureStack, discardStack);
+	public ArrayList<Card> drawCard(Hand hand, Player player) {
+		ArrayList<Card> drawnCardList = new ArrayList<Card>();
+		for(int i=1;i<=2;i++) {
+			if(treasureStack.isEmpty()) {
+				super.reshuffle(treasureStack, discardStack);
+			}
+			Card drawnCard = treasureStack.pop();
+			if(drawnCard instanceof WaterRiseCard) {
+				PlayerView.getInstanace().doWaterRise(player);
+				discardStack.add(drawnCard);
+			}
+			else {
+				hand.addCard(drawnCard);
+				drawnCardList.add(drawnCard);
+			}				
 		}
-		Card drawnCard = treasureStack.pop();
-		if(drawnCard instanceof WaterRiseCard) {
-			CardView.getInstance().doWaterRise();
-			discardStack.add(drawnCard);
-		}
-		else
-			hand.addCard(treasureStack.pop());
+		return drawnCardList;
 	}
 	
 	/**
