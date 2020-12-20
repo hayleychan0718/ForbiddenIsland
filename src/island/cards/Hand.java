@@ -8,7 +8,6 @@ public class Hand {
 	
 	public Hand(){
 		this.hand = new ArrayList<Card>();
-		this.playableCards = new ArrayList<TreasureDeckCard>();
 	}
 	
 	public void addCard(Card card){
