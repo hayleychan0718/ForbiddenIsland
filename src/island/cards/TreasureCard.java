@@ -13,4 +13,8 @@ public class TreasureCard extends Card{
 	public String getName() {
 		return Tname.getString();
 	}
+	
+	public String toString() {
+		return this.getName();
+	}
 }
