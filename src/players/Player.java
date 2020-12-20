@@ -76,6 +76,21 @@ public abstract class Player {
 		return shoreableTiles;
 	}
 
+	// For observer
+	public ArrayList<Tile> getAdjacentSunkTiles(){
+		Tile pawnTile  =getPlayerPawnTile();
+		ArrayList<Tile> adjacentTiles = pawnTile.getAdjacentTiles(); 
+		adjacentTiles.add(pawnTile); //Players tile may also be flooded
+		ArrayList<Tile> shoreableTiles = new ArrayList<Tile>();
+
+		for(Tile tile: adjacentTiles) {
+			if(tile.isFlooded() ==true) {
+				shoreableTiles.add(tile);
+			}
+		}
+		return shoreableTiles;
+	}
+	
 	/**
 	 * Gets the list of tiles a player can move to when their tile has been sunk
 	 * @return ForcedMoveableTiles
