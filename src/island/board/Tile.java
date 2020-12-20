@@ -245,4 +245,26 @@ public class Tile{
 		this.isPresent = true;
 	}
 	
+	public String initials() {
+		String name = getNameString();
+		StringBuilder initials = new StringBuilder();
+
+		for(int i=0; i <name.length(); i++) {
+			if(Character.isUpperCase(name.charAt(i))) {
+				initials.append(name.charAt(i));
+			}
+		}
+		if(hasTreasure()==true) {
+			initials.append("*");
+		}
+		
+		if(isFlooded==true) {
+			initials.append("!");
+		}
+		if(getNameString()== "Fool's Landing") {
+			return initials.toString().toUpperCase();
+		}
+		return initials.toString().toLowerCase();
+	}
+	
 }
