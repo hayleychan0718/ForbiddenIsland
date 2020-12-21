@@ -304,6 +304,9 @@ public class PlayerView {
 		}
 	}
 	
+	/**
+	 * Prints out the board when called
+	 */
 	public void showBoard() {
 		String board = controller.showBoard();
 
@@ -311,8 +314,11 @@ public class PlayerView {
 			boardExplanation();
 		}
 	
+	/**
+	 * Prints out an Explaination the board to the user
+	 */
 	public void boardExplanation() {
-		ArrayList<Player> playerList = controller.getModel(); //The model is th list of players
+		ArrayList<Player> playerList = controller.getModel(); //The model is the list of players
 
 		System.out.println("The Players are located at the following:");
 		for(Player player: playerList ) {
