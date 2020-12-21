@@ -42,14 +42,10 @@ public class Board{
         return boardInstance;
     }
 	
-    /*
-     * Just prints out the name of tile followed by coordinates of tile
-     */
- 
     
     public Tile getTile(TileNames name) {
         for(int[] x: islandTiles) {
-        	if(board[x[0]][x[1]].getName() == name) {
+        	if(board[x[0]][x[1]].getName() == name) { //Is this if needed ???Board.
         		return board[x[0]][x[1]];
         	}
         }
@@ -79,16 +75,6 @@ public class Board{
         return list;
     }
     
-//    public ArrayList<Tile> listOfFloodedTiles(){
-//    	ArrayList<Tile> list = new ArrayList<Tile>();
-//    	for(int i=0; i<listOfTiles().size(); i++) {
-//    		if(listOfTiles().get(i).isFlooded() == true) {
-//    			list.add(listOfTiles().get(i));
-//    		}
-//    	}
-//    	return list;
-//    }
-    //How to loop using object
     public ArrayList<Tile> listOfFloodedTiles(){
     	ArrayList<Tile> list = new ArrayList<Tile>();
     	for(Tile tile: listOfTiles()) {
