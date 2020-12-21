@@ -119,14 +119,19 @@ public abstract class Player {
 
 	}
 	
-	//Captures the treasure
+	/**
+	 * Capture the treasure a players pawn is on
+	 */
 	public void captureTreasure() {
 		Tile pawnTile = getPlayerPawnTile();
 		
 		pawnTile.getTreasure().captureTreasure();
 	}
 	
-	//Checks whether on treasure tile This is not working correctly
+	/**
+	 * Checks if the players is on a treausre tile
+	 * @return true/false
+	 */
 	public boolean onTreasureTile() {
 		if(getPlayerPawnTile().hasTreasure()) {
 			return true;
@@ -143,6 +148,9 @@ public abstract class Player {
 		playerHand.giveCard(toGive, toRecieve);
 	}
 	
+	/**
+	 * Ends the players turn by setting actions to zero
+	 */
 	public void endTurn() {
 		playerActions=0;
 	}
@@ -152,16 +160,11 @@ public abstract class Player {
 		return playerName + " (" + this.getClass().getSimpleName() + ")";
 	}
 
-//	public String getRole() {
-//		return this.getClass().getSimpleName();
-//	}
-
-	//Returns players name
 	public String getName() {
 		return playerName;
 	}
 
-	public ArrayList<Card> showHand(){
+	public ArrayList<Card> getCards(){
 		return playerHand.getCards();
 	}
 
@@ -169,45 +172,41 @@ public abstract class Player {
 		return playerHand;
 	}
 
-	//Needs associated pawn class
 	public Tile getPlayerPawnTile() {
 		return 	playerPawn.getPawnTile();
 	}
 	
+	/**
+	 * Gets the name of the treasure the pawn is on
+	 * @return TreasureNames
+	 */
 	public TreasureNames getTreasure() {
 		return getPlayerPawnTile().getTreasure();
 	}
 	
-
+	/**
+	 * Re stocks the players actions
+	 */
 	public void ReStockActions() {
 		playerActions +=3;
 	}
 
-	//Moves the players pawn
+	/**
+	 * moves the player pawn
+	 * @param tile
+	 */
 	public void movePlayerPawn(Tile tile) {
 		playerPawn.movePawn(tile);
-	}
-
-	public int getPlayerNumber() {
-		return playerNumber;
 	}
 
 	public void decrementPlayerActions() {
 		playerActions--;
 	}
-
-	public void reStockActions() {
-		playerActions=3;
-	}
 	
-	public void emptyActions() {
-		playerActions=0;
-	}
-
-	public int getPlayerActions() {
-		return playerActions;
-	}
-	
+	/**
+	 * Returns the chosen symbol to represent the player on the board
+	 * @return
+	 */
 	public String getSymbol() {
 		return symbol;
 	}
