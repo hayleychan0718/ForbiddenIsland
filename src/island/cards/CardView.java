@@ -12,7 +12,7 @@ import players.PlayerList;
 import utility.Utility;
 
 public class CardView {
-	private PlayerController controller;
+	private CardController controller;
 	private static CardView cardView = null;
 
 	public static CardView getInstance() {
@@ -21,7 +21,7 @@ public class CardView {
 		return cardView;
 	}
 	
-	public PlayerController getController() {
+	public CardController getController() {
 		return controller;
 	}
 
@@ -29,11 +29,10 @@ public class CardView {
 	 * Sets the controller for the view
 	 * @param controller
 	 */
-	public void setController(PlayerController controller) {
+	public void setController(CardController controller) {
 		this.controller = controller;
 
 	}
-	
 	
 	public void runCardView(Scanner inputScanner, Player player) {
 		Hand playerHand = controller.getPlayerHand(player);

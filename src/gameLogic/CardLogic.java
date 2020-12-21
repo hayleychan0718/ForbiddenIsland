@@ -1,6 +1,8 @@
 package gameLogic;
 import java.util.ArrayList;
 import island.board.Tile;
+import island.cards.Card;
+import island.cards.Hand;
 import island.cards.HelicopterCard;
 import island.cards.SandbagCard;
 import island.cards.TreasureDeckCard;

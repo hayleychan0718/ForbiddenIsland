@@ -7,6 +7,7 @@ import gameLogic.GameView;
 import gameLogic.*;
 import island.board.Board;
 import island.board.Tile;
+import island.cards.CardController;
 import island.cards.CardView;
 import island.enums.TileNames;
 import island.enums.TreasureNames;
@@ -67,6 +68,25 @@ public class GameSetup {
 		PlayerView view = PlayerView.getInstanace();
 		
 		view.setController(controller);
+		
+		//Testing win,Remove
+		/*Board board = Board.getInstance();
+		ArrayList<Player> players = PlayerList.getInstance().getListOfPlayers();
+		Player player1 = players.get(0);
+		Player player2 = players.get(1);
+		player1.movePlayerPawn(board.getTile("Fool's Landing"));
+		player2.movePlayerPawn(board.getTile("Fool's Landing"));
+		TreasureNames.TheCrystalOfFire.captureTreasure();
+		TreasureNames.TheEarthStone.captureTreasure();
+		TreasureNames.TheOceansChalice.captureTreasure();
+		TreasureNames.TheStatueOfTheWind.captureTreasure();*/
+		//Testing beside a treasure tile sinking
+		/*Tile treasureTile = Board.getInstance().getTile("Cave of Shadows");
+		Tile tileBesideTreasure = treasureTile.getNorthTile();
+		
+		ArrayList<Player> players = PlayerList.getInstance().getListOfPlayers();
+		Player player1 = players.get(0);
+		player1.movePlayerPawn(tileBesideTreasure);*/
 	}
 	
 	/**
@@ -79,16 +99,21 @@ public class GameSetup {
 		GameController controller = GameController.getInstance(model);
 		
 		GameView view = GameView.getInstance();
+		view.setController(controller);
+
+		WaterMeter.getinstance().increaseWaterLevel();
+		WaterMeter.getinstance().increaseWaterLevel();
+		WaterMeter.getinstance().increaseWaterLevel();
 		
-		view.setController(controller);		
+		
 		view.doGame(inputScanner);
 	}
 	
 	/**
 	 * Sets up the playable Cards MVC
 	 */
-	public void playableCardsSetup() {
-		PlayerController controller = PlayerController.getInstance();
+	public void playableCardsSetup() {		
+		CardController controller = CardController.getInstance();
 		
 		CardView view = CardView.getInstance();
 		

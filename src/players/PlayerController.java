@@ -106,26 +106,6 @@ public class PlayerController {
 		player.getHand().removeCard(card);
     }
     
-    public void doHelicopter(Tile chosenTile, ArrayList<Player> chosenPlayers, Player player){
-    	CardLogic.getInstance(player).playHelicopter(chosenTile, chosenPlayers);
-    }
-
-	public void winHelicopter(Player player) {
-		CardLogic.getInstance(player).winHelicopter();
-	}
-    
-	public boolean canWinHelicopter(Player player) {
-		return CardLogic.getInstance(player).canWinHelicopter();
-	}
-	
-	public void doSandbag(Tile chosenTile, Player player) {
-		CardLogic.getInstance(player).playSandbag(chosenTile);
-	}
-	
-    public void doWaterRise(Player player) {
-    	CardLogic.getInstance(player).doWaterRise();
-    }
-    
     public ArrayList<Card> getPlayerCards(Player player) {
     	return player.getHand().getCards();
     }
@@ -140,8 +120,5 @@ public class PlayerController {
     
     public Tile getPawnTile(Player player) {
     	return player.getPlayerPawnTile();
-    }
-
-    
-    
+    }    
 }
