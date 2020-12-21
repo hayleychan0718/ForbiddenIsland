@@ -1,12 +1,15 @@
 package setup;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import gameLogic.GameView;
 import gameLogic.*;
 import island.board.Board;
 import island.board.Tile;
+import island.cards.CardView;
 import island.enums.TileNames;
+import island.enums.TreasureNames;
 import players.*;
 
 public class GameSetup {
@@ -28,6 +31,7 @@ public class GameSetup {
 		HandSetup.getInstance().startGame();
 		FloodSetup.getInstance().startGame();
 		playerActions();
+		playableCardsSetup();
 		gameManagerSetup(inputScanner);
 	}
 
@@ -58,16 +62,16 @@ public class GameSetup {
 		GameController controller = GameController.getInstance(model);
 		
 		GameView view = GameView.getInstance();
-		view.setController(controller);
+		
+		view.setController(controller);		
 		view.doGame(inputScanner);
 	}
 	
-	
-	//Hand set up
-
-//	public static void main(String[] args) {
-//		GameSetUp game = new GameSetUp();
-//
-//		game.setupGame();
-//	}
+	public void playableCardsSetup() {
+		PlayerController controller = PlayerController.getInstance();
+		
+		CardView view = CardView.getInstance();
+		
+		view.setController(controller);
+	}
 }

@@ -72,7 +72,7 @@ public class TreasureDeck extends Deck{
 			}
 			Card drawnCard = treasureStack.pop();
 			if(drawnCard instanceof WaterRiseCard) {
-				PlayerView.getInstanace().doWaterRise(player);
+				CardView.getInstance().doWaterRise(player);
 				discardStack.add(drawnCard);
 			}
 			else {
