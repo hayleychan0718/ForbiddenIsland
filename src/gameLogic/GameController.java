@@ -77,5 +77,9 @@ public class GameController {
 	public boolean loseCondition() {
 		return model.loseCondition();
 	}
+	
+	public boolean canSunkenPlayerMove(Player player) {
+		return model.canSunkenPlayerMove(player);
+	}
 }
 

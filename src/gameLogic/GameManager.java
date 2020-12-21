@@ -78,6 +78,7 @@ public class GameManager {
 		return Board.getInstance();
 	}
 
+
 	public boolean playerBeside(Tile tile) {
 		ArrayList<Player> playersList = PlayerList.getInstance().getListOfPlayers();
 		for(Player player: playersList) {
@@ -95,6 +96,17 @@ public class GameManager {
 		return player;
 	}
 
+	/**
+	 * Returns true if a sunk player can move false otherwise
+	 * @return boolean
+	 */
+	public boolean canSunkenPlayerMove(Player player) {
+		if(player.getForcedMoveableTiles().isEmpty()) {
+			return false;
+		}
+		return true;
+	}
+	
 	public boolean loseCondition() {
 		ArrayList<Tile> sunkTiles = GameOverObserver.getInstance().getSunkTiles();
 		Board board = Board.getInstance();
