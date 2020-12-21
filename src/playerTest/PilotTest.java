@@ -11,6 +11,12 @@ import island.board.Board;
 import island.board.Tile;
 import players.Pilot;
 
+/**
+ * J unit test to test the extra ability for the Pilot
+ * @author liamf
+ *
+ */
+
 public class PilotTest {
 
 	@Test
@@ -19,14 +25,14 @@ public class PilotTest {
 		
 		ArrayList<Tile> presentTiles = Board.getInstance().listOfTiles();
 		
-		ArrayList<Tile> forcedTiles = test.getFocredMoveableTile();
+		ArrayList<Tile> forcedTiles = test.getForcedMoveableTiles();
 		
 		Assert.assertTrue("Should be equal to the present board", forcedTiles.equals(presentTiles));
 		
 		Tile testTile =  presentTiles.get(1);
 		presentTiles.get(1).sinkTile();
 		
-		forcedTiles = test.getFocredMoveableTile();
+		forcedTiles = test.getForcedMoveableTiles();
 		
 		Assert.assertFalse("Tile Should not be contained since it is no longer present", forcedTiles.contains(testTile));
 	}
