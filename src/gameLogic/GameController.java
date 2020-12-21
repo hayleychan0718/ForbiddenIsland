@@ -2,10 +2,13 @@ package gameLogic;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import island.board.Board;
 import island.board.Tile;
 import island.cards.Card;
 import island.cards.Hand;
 import island.cards.TreasureDeck;
+import island.enums.TreasureNames;
+import observers.GameOverObserver;
 import players.*;
 
 public class GameController {
@@ -59,9 +62,20 @@ public class GameController {
 		return player.getHand();
 	}
 
-	public void runCardView(Scanner inputScanner, Player player) {
-		model.runCardView(inputScanner, player);
+	public Board getBoard() {
+		return model.getBoard();
 	}
 
+	public boolean playerBeside(Tile tile) {
+		return model.playerBeside(tile);
+	}
+
+	public Player playerToBeNotified() {
+		return model.getPlayerToNotify();
+	}
+
+	public boolean loseCondition() {
+		return model.loseCondition();
+	}
 }
 

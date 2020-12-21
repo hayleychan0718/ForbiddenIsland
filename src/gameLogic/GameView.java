@@ -9,6 +9,7 @@ import island.cards.Card;
 import island.cards.Hand;
 import island.cards.TreasureDeck;
 import island.cards.TreasureDeckCard;
+import island.enums.TreasureNames;
 import players.*;
 import observers.*;
 import utility.Utility;
@@ -27,11 +28,15 @@ public class GameView {
 
 
 	public  void startGame() {
-		System.out.println("Welcome to Forbidden Island");
+		System.out.println("\n******************************************");
+		System.out.println("**                                      **");
+		System.out.println("**     Welcome to Forbidden Island!     **");
+		System.out.println("**                                      **");
+		System.out.println("******************************************");
 	}
 
-	public void gameOver() {
-		System.out.println("Game Over!");
+	public void setController(GameController controller) {
+		this.controller=controller;
 	}
 
 	public void playerTurn(Player player) {
@@ -43,8 +48,50 @@ public class GameView {
 		gameOver();
 
 	}
+	
+	public void sunkenPlayers(Scanner inputScanner) {	//SunkenPlayers
+		ArrayList<Player> listSunkenPlayers = PlayerObserver.getInstance().getSunkenPlayers();
+		PlayerView playerView = PlayerView.getInstanace();
+		PlayerController playerController = PlayerController.getInstance();
 
-
+		if(listSunkenPlayers.isEmpty()) return; //No players are sunk
+		System.out.println("Test");
+		System.out.println(listSunkenPlayers);
+		for(Player player: listSunkenPlayers) {
+			if(playerController.getForcedMovementTiles(player).isEmpty()) { //This is talking to model
+				sunkenPlayerEnding(player);
+				gameOver();
+				controller.gameOver();
+			}
+			playerView.doForcedMovement(inputScanner, player);
+		}
+		PlayerObserver.getInstance().updateMoved();
+		return;
+	} 
+	
+	public void treasureOrFoolSunk(Scanner inputScanner) {
+		PlayerView playerView = PlayerView.getInstanace();
+		ArrayList<Tile> sunkTiles = GameOverObserver.getInstance().getSunkTiles();
+		if(sunkTiles.size()>0) {
+			Tile tile = sunkTiles.get(sunkTiles.size() - 1);
+			if(controller.playerBeside(tile)) {
+				Player player = controller.playerToBeNotified();
+				if(!playerView.notifyPlayer(inputScanner , tile, player)) {
+					invokeLoseGame(tile);
+				}
+			}
+			else 
+				invokeLoseGame(tile);
+		}
+	}
+	
+	public void invokeLoseGame(Tile tile) {
+		if(controller.loseCondition())
+			treasureLost();
+		if(tile.getNameString() == "Fool's Landing")
+			foolsLost();
+	}
+	
 	public void doTurn(Scanner inputScanner) {
 		boolean isTurnOver;
 		ArrayList<Player> playerList = controller.getListOfPlayers();
@@ -54,6 +101,7 @@ public class GameView {
 			isTurnOver=false;
 			controller.reStockActions(player);
 			sunkenPlayers(inputScanner); //Takes care of sunken Players
+			treasureOrFoolSunk(inputScanner);
 			playerTurn(player);
 			Utility.sleep(1500);
 		
@@ -81,7 +129,11 @@ public class GameView {
 		}
 		ArrayList<TreasureDeckCard> playableCards = playerHand.getPlayableCards();
 		if(!playableCards.isEmpty())
-				controller.runCardView(inputScanner, player);
+			runCardView(inputScanner, player);
+	}
+	
+	public void runCardView(Scanner inputScanner, Player player) {
+		PlayerView.getInstanace().runCardView(inputScanner, player);
 	}
 	
 	public void tooManyCardsPrompt(Player player, Hand playerHand, Scanner inputScanner) {
@@ -109,26 +161,6 @@ public class GameView {
 		}
 	}
 	
-	public void sunkenPlayers(Scanner inputScanner) {	//SunkenPlayers
-		ArrayList<Player> listSunkenPlayers = PlayerObserver.getInstance().getSunkenPlayers();
-		PlayerView playerView = PlayerView.getInstanace();
-		PlayerController playerController = PlayerController.getInstance();
-
-		if(listSunkenPlayers.isEmpty()) return; //No players are sunk
-		System.out.println("Test");
-		System.out.println(listSunkenPlayers);
-		for(Player player: listSunkenPlayers) {
-			if(playerController.getForcedMovementTiles(player).isEmpty()) { //This is talking to model
-				sunkenPlayerEnding(player);
-				gameOver();
-				controller.gameOver();
-			}
-			playerView.doForcedMovement(inputScanner, player);
-		}
-		PlayerObserver.getInstance().updateMoved();
-		return;
-	} 
-
 	public void doGame(Scanner inputScanner) {
 		startGame();
 		while(!controller.isGameOver()) { //Will keep looping over tile game is over
@@ -136,13 +168,18 @@ public class GameView {
 		}
 	}
 
-	public void setController(GameController controller) {
-		this.controller=controller;
+	public void gameOver() {
+		System.out.println("Game Over!");
 	}
-
+	
 	public void gameWin() {
 		System.out.println("Lifting off Fool's Landing...");
-		System.out.println("You win!");
+		
+		System.out.println("\n******************************************");
+		System.out.println("**               You win!               **");
+		System.out.println("**           Congratulations!           **");
+		System.out.println("**                                      **");
+		System.out.println("******************************************");
 		controller.gameOver();
 		System.exit(0);
 	}
@@ -152,22 +189,23 @@ public class GameView {
 		Tile lastTile = sunkTiles.get(sunkTiles.size() - 1);
 		
 		System.out.println(lastTile.getNameString() + " has sunk before the treasure was captured!");
-		gameOver();
-		controller.gameOver();
-		System.exit(0);
+		endGame();
 	}
 	
 	public void foolsLost() {
-		gameOver();
-		controller.gameOver();
-		System.exit(0);
+		endGame();
 	}
 	
 	public void waterLost() {
 		System.out.println("Water meter has reached 5!");
+		endGame();
+	}
+
+	public void endGame() {
 		gameOver();
 		controller.gameOver();
 		System.exit(0);
 	}
-
+	
+	
 }
