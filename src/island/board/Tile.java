@@ -2,8 +2,6 @@ package island.board;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.EnumSet;
-import java.util.Map;
 
 import observers.PlayerObserver;
 import island.enums.TileNames;
@@ -12,22 +10,32 @@ import observers.GameOverObserver;
 import players.Player;
 import players.PlayerList;
 
+/**
+ * Tile class to make the Forbidden Island board
+ * @author Hayley Chan and Liam Fitzgerald
+ *
+ */
 public class Tile{
-	private GameOverObserver gameOverObserver = GameOverObserver.getInstance();
-	private boolean isFlooded; // Tile can be "flooded" or "unflooded"
-	private boolean isPresent; // Tile is present or gone
-	private final TileNames name;  // Tile has a name
-	private int[] location, north, south, east, west; // Coordinates of adjacent tiles
-	private int[] northEast, southEast, southWest, northWest; // Coordinates of diagonal tiles
+	/*
+	 * Instance variables
+	 */
+	private GameOverObserver gameOverObserver = GameOverObserver.getInstance(); 
+	private boolean isFlooded; 
+	private boolean isPresent; 
+	private final TileNames name; 
+	private int[] north, south, east, west; 
+	private int[] northEast, southEast, southWest, northWest;
 	
-	/* When a Tile object is initialised, the tile is present, unflooded, 
-	 * and a random (x,y) coordinate is passed in.	
+	/**
+	 * Tile constructor
+	 * @param name Name of the tile as a TileNames 
+	 * @param x X coordinate of the tile 
+	 * @param y Y coordinate of the tile
 	 */
 	public Tile(TileNames name, int x, int y) {
 		this.isFlooded = false;
 		this.isPresent = true;
 		this.name = name;
-		this.location = new int[] {x, y};
 		this.north = new int[] {x-1, y};
 		this.south = new int[] {x+1, y};
 		this.west = new int[] {x, y-1};
@@ -38,8 +46,9 @@ public class Tile{
 		this.northWest = new int[] {x-1, y-1};
 	}
 	
-	/*
-	 *  Tile getters
+	/**
+	 * Gets the north tile
+	 * @return Top tile 
 	 */
 	public Tile getNorthTile() {
 		if(north[1] >= 6 || north[1] < 0 || north[0] >= 6 || north[0] < 0) {
@@ -48,6 +57,10 @@ public class Tile{
 			return Board.getInstance().getTile(north[0], north[1]);
 	}
 	
+	/**
+	 * Gets the south tile
+	 * @return Bottom tile
+	 */
 	public Tile getSouthTile() {
 		if(south[1] >= 6 || south[1] < 0 || south[0] >= 6 || south[0] < 0) {
 			return null;
@@ -55,6 +68,10 @@ public class Tile{
 			return Board.getInstance().getTile(south[0], south[1]);
 	}
 	
+	/**
+	 * Gets the east tile
+	 * @return Right tile
+	 */
 	public Tile getEastTile() {
 		if(east[1] >= 6 || east[1] < 0 || east[0] >= 6 || east[0] < 0) {
 			return null;
@@ -62,6 +79,10 @@ public class Tile{
 			return Board.getInstance().getTile(east[0], east[1]);
 	}
 	
+	/**
+	 * Gets the west tile
+	 * @return Left tile
+	 */
 	public Tile getWestTile() {
 		if(west[1] >= 6 || west[1] < 0 || west[0] >= 6 || west[0] < 0) {
 			return null;
@@ -69,6 +90,10 @@ public class Tile{
 			return Board.getInstance().getTile(west[0], west[1]);
 	}
 	
+	/**
+	 * Gets the north east tile
+	 * @return Top right tile
+	 */
 	public Tile getNorthEastTile() {
 		if(northEast[1] >= 6 || northEast[1] < 0 || northEast[0] >= 6 || northEast[0] < 0) {
 			return null;
@@ -76,6 +101,10 @@ public class Tile{
 			return Board.getInstance().getTile(northEast[0], northEast[1]);
 	}
 	
+	/**
+	 * Gets the south east tile
+	 * @return Bottom right tile
+	 */
 	public Tile getSouthEastTile() {
 		if(southEast[1] >= 6 || southEast[1] < 0 || southEast[0] >= 6 || southEast[0] < 0) {
 			return null;
@@ -83,6 +112,10 @@ public class Tile{
 			return Board.getInstance().getTile(southEast[0], southEast[1]);
 	}
 	
+	/**
+	 * Gets the south west tile
+	 * @return Bottom left tile
+	 */
 	public Tile getSouthWestTile() {
 		if(southWest[1] >= 6 || southWest[1] < 0 || southWest[0] >= 6 || southWest[0] < 0) {
 			return null;
@@ -90,6 +123,10 @@ public class Tile{
 			return Board.getInstance().getTile(southWest[0], southWest[1]);
 	}
 	
+	/**
+	 * Gets the north west tile 
+	 * @return Top left tile
+	 */
 	public Tile getNorthWestTile() {
 		if(northWest[1] >= 6 || northWest[1] < 0 || northWest[0] >= 6 || northWest[0] < 0) {
 			return null;
@@ -97,6 +134,10 @@ public class Tile{
 			return Board.getInstance().getTile(northWest[0], northWest[1]);
 	}
 	
+	/**
+	 * Gets the tiles on top, bottom, left and right of the tile
+	 * @return ArrayList of adjacent tiles
+	 */
 	public ArrayList<Tile> getAdjacentTiles(){
 		ArrayList<Tile> adjacentTiles = new ArrayList<Tile>();
 		adjacentTiles.add(getNorthTile());
@@ -109,6 +150,10 @@ public class Tile{
 		return adjacentTiles;
 	}
 	
+	/**
+	 * Gets the tiles on top, bottom, left, right, and diagonal of the tile
+	 * @return ArrayList of the surrounding tiles
+	 */
 	public ArrayList<Tile> getAdjacentDiagonal(){
 		ArrayList<Tile> adjacentDiagonalTiles = new ArrayList<Tile>();
 		adjacentDiagonalTiles.add(getNorthTile());
@@ -125,27 +170,49 @@ public class Tile{
 		return adjacentDiagonalTiles;
 	}
 	
+	/**
+	 * Returns String of the tile name
+	 */
 	public String toString() {
 		return getNameString();
 	}
 	
-	
+	/**
+	 * Checks if tile is flooded
+	 * @return True if flooded and false otherwise
+	 */
 	public boolean isFlooded() {
 		return isFlooded;
 	}
 	
+	/**
+	 * Gets name of the tile as a TileName
+	 * @return Tile name
+	 */
 	public TileNames getName() {
 		return name;
 	}
 	
+	/**
+	 * Gets the name of tile as a String
+	 * @return Tile name string
+	 */
 	public String getNameString() {
 		return name.getString();
 	}
 	
+	/**
+	 * Checks if tile is present 
+	 * @return True if tile is present and false if tile is sunk
+	 */
 	public boolean isPresent() {
 		return isPresent;
 	}
 	
+	/**
+	 * Checks if tile is a treasure tile
+	 * @return True if tile is a treasure tile, false otherwise
+	 */
 	public boolean hasTreasure() {
 		if(name==TileNames.TempleOfTheSun || name==TileNames.TempleOfTheMoon || name==TileNames.HowlingGarden ||
 				name == TileNames.WhisperingGarden || name==TileNames.CaveOfShadows || name==TileNames.CaveOfEmbers ||
@@ -154,8 +221,11 @@ public class Tile{
 		} else
 			return false;
 	}
-	
-	// Use this function with hasTreasure() == true
+
+	/**
+	 * Gets the treasure associated with tile. Must be used with hasTreasure()
+	 * @return The treasure of the tile
+	 */
 	public TreasureNames getTreasure() {
 		if(name == TileNames.TempleOfTheMoon || name == TileNames.TempleOfTheSun) {
 			return TreasureNames.TheEarthStone;
@@ -173,41 +243,44 @@ public class Tile{
 			return null;
 	}
 	
-	// Setters
+	/**
+	 * Flood the tile
+	 * @param flood True if flooding tile, false otherwise
+	 */
 	public void setFlood(boolean flood) {
 		this.isFlooded = flood;
 	}
 	
-	
-//	public void sinkTile() {	
-//		this.isPresent = false;
-//		// If a treasure tile or Fool's Landing is being sunk, update observer to notify player(s) if 
-//		// able to save the tile
-//		if(this.hasTreasure() || name.getString() == TileNames.FoolsLanding.getString()) {
-//			gameOverObserver.update(name);
-//		}
-//	}
-	public void sinkTile() { //Set changed
+	/**
+	 * Sink the tile
+	 */
+	public void sinkTile() {
+		PlayerList playerList = PlayerList.getInstance();
+		
+		// Update observer if tile is a treasure tile or a Fool's Landing tile
 		if(this.hasTreasure() || name.getString() == TileNames.FoolsLanding.getString()) {
 			gameOverObserver.update(this);
 			return;
 		}
 		this.isPresent=false;
-		PlayerList playerList = PlayerList.getInstance();
-		
 		for (Player player:playerList.getListOfPlayers()) {
-
 			if(this==player.getPlayerPawnTile()) {
 				PlayerObserver.getInstance().updateSunk(player);
 			}
 		}
-
 	}
 	
+	/**
+	 * Sets the tile as not present. In other words, it is sunken.
+	 */
 	public void setNotPresent() {
 		this.isPresent = false;
 	}
 	
+	/**
+	 * String of the tile as an initial
+	 * @return The name of the tile as an initial
+	 */
 	public String initials() {
 		String name = getNameString();
 		StringBuilder initials = new StringBuilder();
