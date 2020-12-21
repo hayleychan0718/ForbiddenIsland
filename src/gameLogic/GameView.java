@@ -2,17 +2,19 @@ package gameLogic;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import island.board.Board;
 import island.board.Tile;
 import island.cards.Card;
 import island.cards.Hand;
-import island.cards.TreasureDeck;
 import island.cards.TreasureDeckCard;
-import island.enums.TreasureNames;
 import players.*;
 import observers.*;
 import utility.Utility;
+
+/**
+ * CLass for the user INterface for the game manager
+ * @author Liam Fitzgerald
+ *
+ */
 
 public class GameView {
 
@@ -26,7 +28,9 @@ public class GameView {
 		return gameView;
 	}
 
-
+	/**
+	 * Printed statement at start of the game
+	 */
 	public  void startGame() {
 		System.out.println("\n******************************************");
 		System.out.println("**                                      **");
@@ -35,35 +39,49 @@ public class GameView {
 		System.out.println("******************************************");
 	}
 
+	/**
+	 * Sets the controller for the GameView
+	 * @param controller
+	 */
 	public void setController(GameController controller) {
 		this.controller=controller;
 	}
 
+	/**
+	 * Prints out the current players turn
+	 * @param player
+	 */
 	public void playerTurn(Player player) {
 		System.out.println("\nIt is now " + player + " Turn" );
 	}
 
+	/**
+	 * Method called if game has ended due to sunken player unable to move
+	 * @param player
+	 */
 	public void sunkenPlayerEnding(Player player) {
 		System.out.println(player + " has been sunk and cannot move \n");
 		gameOver();
 
 	}
 	
+	/**
+	 * Method called when players have been sunk
+	 * @param inputScanner
+	 */
 	public void sunkenPlayers(Scanner inputScanner) {	//SunkenPlayers
-		ArrayList<Player> listSunkenPlayers = PlayerObserver.getInstance().getSunkenPlayers();
+		ArrayList<Player> listSunkenPlayers = PlayerObserver.getInstance().getSunkenPlayers();	//Gets list of sunken players from player observer
 		PlayerView playerView = PlayerView.getInstanace();
 
-		if(listSunkenPlayers.isEmpty()) return; //No players are sunk
+		if(listSunkenPlayers.isEmpty()) return; //No players have been sunk return
 
-		for(Player player: listSunkenPlayers) {
-			if(!controller.canSunkenPlayerMove(player)) { //This is talking to model
+		for(Player player: listSunkenPlayers) {		
+			if(!controller.canSunkenPlayerMove(player)) {	//If sunken player can't move sunken player ending
 				sunkenPlayerEnding(player);
-				gameOver();
-				controller.gameOver();
 			}
-			playerView.doForcedMovement(inputScanner, player);
+			playerView.doForcedMovement(inputScanner, player); //otherwise player does forced movement
 		}
-		PlayerObserver.getInstance().updateMoved();
+		PlayerObserver.getInstance().updateMoved(); //Update the observer that the sunken players have moved
 		return;
 	} 
 	
@@ -100,16 +118,15 @@ public class GameView {
 		for(Player player:playerList) { //Loops through the players
 			isTurnOver=false;
 			controller.reStockActions(player);
-			sunkenPlayers(inputScanner); //Takes care of sunken Players
+			sunkenPlayers(inputScanner); //Checks for sunken players
 			treasureOrFoolSunk(inputScanner);
+			
 			playerTurn(player);
-			Utility.sleep(1500);
-		
-			while (!isTurnOver) { //Does the turn
+			
+			while (!isTurnOver) { 
 				playerView.printOptions();
-				playerView.selectOption(inputScanner, player);	//Select One of the printed options
-				Utility.sleep(1500);
-				isTurnOver=controller.isTurnOver(player);	//View uses controller to check if the player still has actions
+				playerView.selectOption(inputScanner, player);	//Select one of availabe actions options
+				isTurnOver=controller.isTurnOver(player);	
 			} 
 			treasureDeckTurn(player, inputScanner);
 			floodDeckTurn();
