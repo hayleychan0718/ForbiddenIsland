@@ -232,13 +232,11 @@ public class PlayerView {
 		if(selectedPlayer==null) return;
 		
 		ArrayList<Card> currentPlayersCards = controller.getPlayerCards(player);
-		System.out.println("Test straight from player" + player.getHand().getCards());
-		System.out.println("Test1:" + currentPlayersCards);
 		
 		Hand selectedPlayerHand = controller.getPlayerHand(selectedPlayer);
 
 		if(!canDoCardAction(currentPlayersCards)) return;
-
+		
 		int userInput = Utility.acceptableInput(0, currentPlayersCards.size(), inputScanner);
 		
 		if(userInput == currentPlayersCards.size()) return;
@@ -261,8 +259,9 @@ public class PlayerView {
 			return false;
 		}
 		else {
-			System.out.println("You can give the following cards:");
-			System.out.println("Enter " + cardOptions.size() + " to cancel action");
+			System.out.println("You can give the following cards:\n");
+			Utility.printOptions(cardOptions);
+			System.out.println("\nEnter " + cardOptions.size() + " to cancel action");
 			return true;
 		}
 
