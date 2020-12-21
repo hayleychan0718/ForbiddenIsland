@@ -54,7 +54,7 @@ public class CardLogic {
 	}
 	
 	public void winHelicopter() {
-		HelicopterCard.win();
+		GameView.getInstance().gameWin();
 	}
 	
 	public void playSandbag(Tile chosenTile) {

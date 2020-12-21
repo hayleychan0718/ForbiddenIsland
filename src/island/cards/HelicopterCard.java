@@ -18,8 +18,4 @@ public class HelicopterCard extends TreasureDeckCard{
 			player.movePlayerPawn(chosenTile);
 		}
 	}
-
-	public static void win() {
-		GameView.getInstance().gameWin(); 
-	} 
 }
