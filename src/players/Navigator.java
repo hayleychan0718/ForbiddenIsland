@@ -21,7 +21,7 @@ public class Navigator extends Player {
 	 */
 	private Navigator(String playerName, int playerNumber, String symbol) {
 		super(playerName,playerNumber, symbol); 
-		playerPawn=new Pawn(board.getTile("Golden Gate")); 
+		playerPawn=new Pawn(board.getTile("Gold Gate")); 
 
 	}
 
