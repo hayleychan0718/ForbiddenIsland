@@ -9,6 +9,11 @@ import island.board.Board;
 import island.board.Tile;
 import island.cards.SandbagCard;
 
+/**
+ * Unit testing the sandbag card
+ * @author Hayley Chan and Liam Fitzgerald
+ * 
+ */
 public class SandbagTest {
 	// Tests that sandbag card shores up the tile
 	@SuppressWarnings("static-access")

@@ -16,6 +16,11 @@ import island.cards.TreasureCard;
 import island.enums.TreasureNames;
 import players.Engineer;
 
+/**
+ * Unit testing the player hand
+ * @author Hayley Chan and Liam Fitzgerald
+ *
+ */
 public class HandTest {	
 	@Test
 	public void playerHandTest() {
