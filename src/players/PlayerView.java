@@ -312,6 +312,13 @@ public class PlayerView {
 		}
 	
 	public void boardExplanation() {
+		ArrayList<Player> playerList = controller.getModel(); //The model is th list of players
+
+		System.out.println("The Players are located at the following:");
+		for(Player player: playerList ) {
+			System.out.println(player+ ",  Symbol:" + controller.getSymbol(player) + ", Tile:" + controller.getPawnTile(player));
+		}
+		
 		System.out.println("The initial of the Tiles are shown (Not including of or the)");
 		System.out.println("A * beside the inital means there is a treasure at this tile");
 		System.out.println("A ! beside the inital means the Tile is flooded");
@@ -319,29 +326,4 @@ public class PlayerView {
 		System.out.println("Fools landing is in captials [ FL ] ");
 		System.out.println("Your choosen symbol will replace the inital of the Tile ");
 	}
-
-	
-//	public static void main(String[] args) {
-//		Player Liam = new Player("Liam",1); 
-//		ArrayList<Player> optionList = new ArrayList<Player>();
-//		optionList.add(Liam);
-//
-//		PlayerView view = PlayerView.getInstanace();
-//		Utility.printOptions(optionList);
-//	}
-
-	
-	
-
-
-
-		/*for(int i=0; i<6; i++) {
-	        	System.out.println();
-	        	for(int j=0; j<6; j++) {
-	        		if(board[i][j] == null) 
-	        			System.out.printf("%25s", "blank");
-	        		else 
-	        			System.out.printf("%25s", board[i][j].getName().getString());
-	        	}
-	        } */   	
 }

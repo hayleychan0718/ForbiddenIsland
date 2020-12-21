@@ -2,7 +2,6 @@ package players;
 import java.util.ArrayList;
 
 import gameLogic.CardLogic;
-import gameLogic.CardView;
 import island.board.*;
 import island.cards.Card;
 import island.cards.Hand;
@@ -14,7 +13,7 @@ import island.enums.TileNames;
 import players.*;
 
 /**
- * CLass to implement the Player Controller
+ * Singleton Class to implement the Player Controller
  * @author Liam FItzgerald
  *
  */
@@ -54,7 +53,7 @@ public class PlayerController {
 		player.decrementPlayerActions();
 	}
 
-	public ArrayList<Player> getPlayersForTreasureCard(Player player){
+	public ArrayList<Player> getPlayersForCard(Player player){
 		return player.getPlayersForCard();
 	}
 
@@ -134,4 +133,15 @@ public class PlayerController {
     public String showBoard() {
     	return Board.getInstance().showBoard();
     }
+    
+    public String getSymbol(Player player) {
+    	return player.getSymbol();
+    }
+    
+    public Tile getPawnTile(Player player) {
+    	return player.getPlayerPawnTile();
+    }
+
+    
+    
 }
