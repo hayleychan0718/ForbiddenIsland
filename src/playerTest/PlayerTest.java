@@ -30,7 +30,7 @@ public class PlayerTest {
 		Assert.assertEquals(playerTile.getAdjacentTiles(), test.getStandardMoveableTiles()); //Test that standard moveable tiles is equal to adjacent if all present
 
 		Tile testTile = test.getStandardMoveableTiles().get(1);
-		test.getStandardMoveableTiles().get(1).sinkTile();
+		test.getStandardMoveableTiles().get(1).setNotPresent();;
 
 		Assert.assertFalse(test.getStandardMoveableTiles().contains(testTile)); //Tests that if an adjacent tile is sunk it is no longer in standard moveable Tiles
 	}
@@ -41,8 +41,6 @@ public class PlayerTest {
 		Tile playerTile = test.getPlayerPawnTile();
 
 		Board board = Board.getInstance();
-
-		System.out.println(test.getShoreableTiles());
 
 		Assert.assertTrue("Originally should be no shoreble Tiles", test.getShoreableTiles().isEmpty());
 
