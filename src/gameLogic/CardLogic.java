@@ -1,11 +1,8 @@
 package gameLogic;
 import java.util.ArrayList;
 import island.board.Tile;
-import island.cards.Card;
-import island.cards.Hand;
 import island.cards.HelicopterCard;
 import island.cards.SandbagCard;
-import island.cards.TreasureDeckCard;
 import island.cards.WaterRiseCard;
 import island.enums.TreasureNames;
 import players.Player;
@@ -14,22 +11,18 @@ import players.PlayerList;
 public class CardLogic {
 
     private static CardLogic cardLogic = null;
-	private ArrayList<TreasureDeckCard> playableCards;
 
-	public CardLogic(Player player) {
-		this.playableCards = player.getHand().getPlayableCards();
-	}
-
-    public static CardLogic getInstance(Player player) {
+    public static CardLogic getInstance() {
     	if(cardLogic == null) {
-    		cardLogic = new CardLogic(player);
+    		cardLogic = new CardLogic();
     	}
     	return cardLogic;
     }	
 
-	public void remove(int userInput) {
+/*	public void remove(int userInput, Player player) {
+		ArrayList<TreasureDeckCard> playableCards = player.getHand().getPlayableCards();
 		playableCards.remove(userInput);
-	}
+	}*/
 	
 	public void playHelicopter(Tile chosenTile, ArrayList<Player> chosenPlayers) {
 		HelicopterCard.play(chosenTile, chosenPlayers);

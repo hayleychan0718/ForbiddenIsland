@@ -7,7 +7,6 @@ import gameLogic.WaterMeter;
 import island.board.Board;
 import island.board.Tile;
 import players.Player;
-import players.PlayerController;
 import players.PlayerList;
 import utility.Utility;
 
@@ -78,7 +77,7 @@ public class CardView {
 			ArrayList<Player> chosenPlayers = choosingPlayer(inputScanner, chosenTile, playersForHelicopter);
 				
 			movingMessage(chosenTile, chosenPlayers);
-			controller.doHelicopter(chosenTile, chosenPlayers, player);
+			controller.doHelicopter(chosenTile, chosenPlayers);
 			controller.removeCard(card, player);
 		}
 		else {
@@ -87,8 +86,8 @@ public class CardView {
 	}
 	
 	private void winHelicopter(Scanner inputScanner, Hand playerHand, Player player) {
-		if(controller.canWinHelicopter(player))
-			controller.winHelicopter(player);
+		if(controller.canWinHelicopter())
+			controller.winHelicopter();
 		else{
 			System.out.println("Can't lift off yet!\n");
 			runCardView(inputScanner, player);
@@ -161,7 +160,7 @@ public class CardView {
 			int tileIndex = Utility.acceptableInput(0, listOfFloodedTiles.size()-1, inputScanner);
 			Tile chosenTile = listOfFloodedTiles.get(tileIndex);
 
-			controller.doSandbag(chosenTile, player);
+			controller.doSandbag(chosenTile);
 			controller.removeCard(card, player);
 			System.out.println("Shored up " + chosenTile); //No need for get string
 	}
@@ -169,7 +168,7 @@ public class CardView {
 	public void doWaterRise(Player player) {
 		WaterMeter waterMeter = WaterMeter.getinstance();
 		System.out.println("\nPlay Water Rise card...");
-		controller.doWaterRise(player);
+		controller.doWaterRise();
 		System.out.println("Water Level increased.\nCurrent water level: " + waterMeter.getWaterLevel());
 		System.out.println("Flood Deck reshuffled.\n");
 	}

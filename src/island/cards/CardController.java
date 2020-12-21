@@ -8,10 +8,15 @@ import players.Player;
 
 public class CardController {
 	private static CardController controller = null;
+	private CardLogic model;
 	
-	public static CardController getInstance() {
+    private CardController(CardLogic model) {
+    	this.model = model;        
+    }
+	
+	public static CardController getInstance(CardLogic model) {
 		if(controller == null)
-			controller = new CardController();
+			controller = new CardController(model);
 		return controller;
 	}
 	
@@ -23,23 +28,23 @@ public class CardController {
 		player.getHand().removeCard(card);
     }
 	
-    public void doHelicopter(Tile chosenTile, ArrayList<Player> chosenPlayers, Player player){
-    	CardLogic.getInstance(player).playHelicopter(chosenTile, chosenPlayers);
+    public void doHelicopter(Tile chosenTile, ArrayList<Player> chosenPlayers){
+    	model.playHelicopter(chosenTile, chosenPlayers);
     }
     
-	public void winHelicopter(Player player) {
-		CardLogic.getInstance(player).winHelicopter();
+	public void winHelicopter() {
+		model.winHelicopter();
 	}
     
-	public boolean canWinHelicopter(Player player) {
-		return CardLogic.getInstance(player).canWinHelicopter();
+	public boolean canWinHelicopter() {
+		return model.canWinHelicopter();
 	}
 	
-	public void doSandbag(Tile chosenTile, Player player) {
-		CardLogic.getInstance(player).playSandbag(chosenTile);
+	public void doSandbag(Tile chosenTile) {
+		model.playSandbag(chosenTile);
 	}
 	
-    public void doWaterRise(Player player) {
-    	CardLogic.getInstance(player).doWaterRise();
+    public void doWaterRise() {
+    	model.doWaterRise();
     }
 }
