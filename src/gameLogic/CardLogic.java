@@ -1,5 +1,7 @@
 package gameLogic;
 import java.util.ArrayList;
+
+import island.board.Board;
 import island.board.Tile;
 import island.cards.HelicopterCard;
 import island.cards.SandbagCard;
@@ -18,11 +20,6 @@ public class CardLogic {
     	}
     	return cardLogic;
     }	
-
-/*	public void remove(int userInput, Player player) {
-		ArrayList<TreasureDeckCard> playableCards = player.getHand().getPlayableCards();
-		playableCards.remove(userInput);
-	}*/
 	
 	public void playHelicopter(Tile chosenTile, ArrayList<Player> chosenPlayers) {
 		HelicopterCard.play(chosenTile, chosenPlayers);
@@ -58,5 +55,13 @@ public class CardLogic {
 	
 	public void doWaterRise() {
 		WaterRiseCard.play();
+	}
+
+	public ArrayList<Tile> getListOfTiles() {
+		return Board.getInstance().listOfTiles();
+	}
+
+	public ArrayList<Tile> getListOfFloodedTiles() {
+		return Board.getInstance().listOfFloodedTiles();
 	}
 }

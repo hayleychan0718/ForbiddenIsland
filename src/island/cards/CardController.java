@@ -47,4 +47,12 @@ public class CardController {
     public void doWaterRise() {
     	model.doWaterRise();
     }
+
+	public ArrayList<Tile> getListOfTiles() {
+		return model.getListOfTiles();
+	}
+
+	public ArrayList<Tile> getListOfFloodedTiles() {
+		return model.getListOfFloodedTiles();
+	}
 }

@@ -68,11 +68,11 @@ public class CardView {
 	}
 	
 	public void doHelicopter(Scanner inputScanner, Hand playerHand, Card card, Player player) {
-		ArrayList<Player> playersForHelicopter = PlayerList.getInstance().getPlayersForHelicopter(); //NO need for this method
-		ArrayList<Tile> listOfTiles = Board.getInstance().listOfTiles();
+		ArrayList<Player> playersForHelicopter = PlayerList.getInstance().getPlayersForHelicopter();
+		ArrayList<Tile> listOfTiles = controller.getListOfTiles();
 
 		if(!helicopterPrompt(inputScanner)) {
-			int tileIndex = Utility.acceptableInput(0, listOfTiles.size(), inputScanner); //-1 if no 
+			int tileIndex = Utility.acceptableInput(0, listOfTiles.size(), inputScanner); 
 			Tile chosenTile = listOfTiles.get(tileIndex);
 			ArrayList<Player> chosenPlayers = choosingPlayer(inputScanner, chosenTile, playersForHelicopter);
 				
@@ -102,7 +102,7 @@ public class CardView {
 
 		if(helicopterChosen == 0) {
 			System.out.println("\nTiles you can move to:");
-			Utility.printOptions(Board.getInstance().listOfTiles());
+			Utility.printOptions(controller.getListOfTiles());
 			System.out.println("Which tile do you want to move to? ");
 			return false;
 		}
@@ -118,21 +118,21 @@ public class CardView {
 		boolean repeat = true;
 		
 		while(repeat==true) {
-			System.out.println("Who do you want to move to " + chosenTile.getNameString() + "?");
+			System.out.println("Who do you want to move to " + chosenTile + "?");
 			Utility.printOptions(playersForHelicopter);
 			int playerIndex = Utility.acceptableInput(0, playersForHelicopter.size(), inputScanner);
 			chosenPlayers.add(playersForHelicopter.get(playerIndex));	
 			playersForHelicopter.remove(playerIndex);
 			if(!playersForHelicopter.isEmpty()) { 
 				System.out.println("Do you want to choose another player?\nYes [0]\nNo [1]");
-				int choice = Utility.acceptableInput(0, 1, inputScanner); //Cancel option
+				int choice = Utility.acceptableInput(0, 1, inputScanner); 
 				if(choice == 0) 
-			    	repeat = true;     // no need for this
-			    else if(choice == 1) //CLean this up only need one condition in loop
+			    	repeat = true; 
+			    else 
 			    	repeat = false;     
 			}
 			else
-				repeat = false;  //What is this for//
+				repeat = false;
 		}	
 		return chosenPlayers;
 	}
@@ -140,13 +140,13 @@ public class CardView {
 	// Used in doHelicopter()
 	private void movingMessage(Tile chosenTile, ArrayList<Player> chosenPlayers) {
 		for(Player player: chosenPlayers) {
-			System.out.print("Moving " + player + " to " + chosenTile +  "...\n"); //no need for this get name string
+			System.out.print("Moving " + player + " to " + chosenTile +  "...\n"); 
 		}
 	}
 	
 	
 	public void doSandbag(Scanner inputScanner, Hand playerHand, Card card, Player player) {
-		ArrayList<Tile> listOfFloodedTiles = Board.getInstance().listOfFloodedTiles(); //Cant do this
+		ArrayList<Tile> listOfFloodedTiles = controller.getListOfFloodedTiles();
 		
 		if(listOfFloodedTiles.size()==0) {
 			System.out.println("Choose another card.");
@@ -162,7 +162,7 @@ public class CardView {
 
 			controller.doSandbag(chosenTile);
 			controller.removeCard(card, player);
-			System.out.println("Shored up " + chosenTile); //No need for get string
+			System.out.println("Shored up " + chosenTile);
 	}
 	
 	public void doWaterRise(Player player) {
