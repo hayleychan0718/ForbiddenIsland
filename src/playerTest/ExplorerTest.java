@@ -8,6 +8,12 @@ import org.junit.Test;
 import island.board.Tile;
 import players.Explorer;
 
+/**
+ * J unit test to test the extra ability of the Explorer
+ * @author liamf
+ *
+ */
+
 public class ExplorerTest {
 
 	@Test

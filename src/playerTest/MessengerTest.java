@@ -5,10 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Assert;
 import org.junit.Test;
 
-import players.Diver;
-import players.Engineer;
-import players.Messenger;
-import players.PlayerList;
+import players.*;
+
 
 public class MessengerTest {
 
