@@ -90,16 +90,8 @@ public class PlayerController {
 		player.giveCard(selectedCard, toRecieve);
 	}
 
-	public int[][] getIslandTiles(){
-		return Board.getInstance().getIslandTiles();
-	}
-
-	public Tile[][] getboard(){
-		return Board.getInstance().getBoard();
-	}
-
 	public void emptyActions(Player player) {
-		player.emptyActions();
+		player.endTurn();
 	}
 	
     public void removeCard(Card card, Player player) {

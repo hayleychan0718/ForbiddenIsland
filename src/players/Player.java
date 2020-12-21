@@ -204,6 +204,14 @@ public abstract class Player {
 	}
 	
 	/**
+	 * Returns players actions
+	 * @return players actions
+	 */
+	public int getPlayerActions() {
+		return playerActions;
+	}
+	
+	/**
 	 * Returns the chosen symbol to represent the player on the board
 	 * @return
 	 */

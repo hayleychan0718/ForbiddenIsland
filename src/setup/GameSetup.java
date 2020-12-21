@@ -30,7 +30,9 @@ public class GameSetup {
 		return gameSetup;
 	}
 
-
+	/**
+	 * Sets up and begins the game
+	 */
 	public void setupGame() {
 		Scanner inputScanner = new Scanner(System.in);
 		Board.getInstance();

@@ -70,31 +70,6 @@ public class Diver extends Player {
 		return closestTiles;
 	}
 	
-	public static void main(String[] args) {
-
-		Board board =Board.getInstance();
-		Diver diver = Diver.getInstance("Test", 1, "$");
-		
-		//Assert.assertTrue("Shold be equal as these are the closest tiles",diver.getForcedMoveableTiles().equals(diver.getStandardMoveableTiles()));
-		
-		System.out.println(diver.getStandardMoveableTiles());
-		System.out.println(diver.getForcedMoveableTiles());
-		
-		ArrayList<Tile> listOfPresentTiles = board.listOfPresentTiles();
-		
-		
-		Tile remainingTile = listOfPresentTiles.get(0);
-		
-		for(Tile tile: listOfPresentTiles) {
-			if(tile!=remainingTile)
-				tile.setNotPresent();
-		}
-		diver.getForcedMoveableTiles();
-		System.out.println(diver.getForcedMoveableTiles());
-		 
-		System.out.println(board.showBoard());
-		Assert.assertTrue("Should be able to swim to the one remaining tile whereever it is", diver.getForcedMoveableTiles().contains(remainingTile));
-	}
 }
 
 

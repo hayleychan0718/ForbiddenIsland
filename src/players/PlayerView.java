@@ -193,7 +193,7 @@ public class PlayerView {
 			return;
 		}
 		if(controller.getTileTreasure(player)==null) {
-			System.out.println("Your pawn is not on a treasure tile");   //WHat if treasur eis already captured
+			System.out.println("Your pawn is not on a treasure tile"); 
 			return;
 		}
 		System.out.println("You dont have the required card's to capture the treasure");
@@ -319,18 +319,18 @@ public class PlayerView {
 		}
 	
 	/**
-	 * Prints out an Explaination the board to the user
+	 * Prints out an Explanation the board to the user
 	 */
 	public void boardExplanation() {
 		ArrayList<Player> playerList = controller.getModel(); //The model is the list of players
 
-		System.out.println("The Players are located at the following:");
+		System.out.println("The Players are located at the following:\n");
 		for(Player player: playerList ) {
-			System.out.println(player+ ",  Symbol:" + controller.getSymbol(player) + ", Tile:" + controller.getPawnTile(player));
+			System.out.println(player+ ",  Symbol: " + controller.getSymbol(player) + ", Tile: " + controller.getPawnTile(player));
 		}
 		
-		System.out.println("The initial of the Tiles are shown (Not including of or the)");
-		System.out.println("A * beside the inital means there is a treasure at this tile");
+		System.out.println("\nThe initial of the Tiles are shown (Not including of or the)");
+		System.out.println("A * beside the inital means there is a current a treasure at this tile, when captured it will no longer show");
 		System.out.println("A ! beside the inital means the Tile is flooded");
 		System.out.println("A blank [  ] means the tile is no longer present ");
 		System.out.println("Fools landing is in captials [ FL ] ");

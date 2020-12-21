@@ -58,7 +58,7 @@ public class PlayerSetupView {
 		System.out.println("You are Player number:"+ playerNumber + "\n");
 		System.out.println("Please Enter Your Name:");
 		String playerName = inputScanner.nextLine();
-		System.out.println("Please Enter the Symbol (For example $, makes it easier to identify) you want your pawn to be represented by on the board ");
+		System.out.println("Please Enter the Symbol ( Use { $ , % , & , @} makes it easier to identify) you want your pawn to be represented by on the board ");
 		String symbol = inputScanner.nextLine();
 
 		Collections.shuffle(listofRoles);	//shuffle used to ensure random role selected
