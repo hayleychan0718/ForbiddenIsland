@@ -52,13 +52,11 @@ public class GameView {
 	public void sunkenPlayers(Scanner inputScanner) {	//SunkenPlayers
 		ArrayList<Player> listSunkenPlayers = PlayerObserver.getInstance().getSunkenPlayers();
 		PlayerView playerView = PlayerView.getInstanace();
-		PlayerController playerController = PlayerController.getInstance();
 
 		if(listSunkenPlayers.isEmpty()) return; //No players are sunk
-		System.out.println("Test");
-		System.out.println(listSunkenPlayers);
+
 		for(Player player: listSunkenPlayers) {
-			if(playerController.getForcedMovementTiles(player).isEmpty()) { //This is talking to model
+			if(!controller.canSunkenPlayerMove(player)) { //This is talking to model
 				sunkenPlayerEnding(player);
 				gameOver();
 				controller.gameOver();
