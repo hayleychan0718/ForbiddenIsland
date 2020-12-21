@@ -12,6 +12,12 @@ import island.enums.TileNames;
 import island.enums.TreasureNames;
 import players.*;
 
+/**
+ * Singleton Class responsible for setting up the game
+ * @author Liam FItzgerald
+ *
+ */
+
 public class GameSetup {
 
 	private static GameSetup gameSetup=null;
@@ -35,6 +41,11 @@ public class GameSetup {
 		gameManagerSetup(inputScanner);
 	}
 
+	
+	/**
+	 * Sets up the players list
+	 * @param inputScanner
+	 */
 	public void playerSetup(Scanner inputScanner) {
 		PlayerSetup model = PlayerSetup.getInstance();
 
@@ -47,6 +58,9 @@ public class GameSetup {
 		view.createPlayers(inputScanner);
 	}
 
+	/**
+	 * Sets up the player MVC
+	 */
 	public void playerActions() {
 		PlayerController controller = PlayerController.getInstance();
 		
@@ -55,7 +69,10 @@ public class GameSetup {
 		view.setController(controller);
 	}
 	
-	
+	/**
+	 * Sets up the game Manager
+	 * @param inputScanner
+	 */
 	public void gameManagerSetup(Scanner inputScanner) {
 		GameManager model = GameManager.getInstance();
 		
@@ -67,6 +84,9 @@ public class GameSetup {
 		view.doGame(inputScanner);
 	}
 	
+	/**
+	 * Sets up the playable Cards MVC
+	 */
 	public void playableCardsSetup() {
 		PlayerController controller = PlayerController.getInstance();
 		
