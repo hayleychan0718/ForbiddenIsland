@@ -129,10 +129,7 @@ public class Board{
 		return Math.sqrt(dx*dx + dy*dy);
 
 	}
-    
-    
-
-	
+   
 	public int[][] getIslandTiles() {
 		return islandTiles;
 	}
@@ -149,10 +146,10 @@ public class Board{
 				for(Tile col : row) {
 
 					if(col!=null) {
-						stringTiles.add("[ " +tileForBoard(col) + " ]");
+						stringTiles.add("[  " +tileForBoard(col) + "  ]");
 					}
 					else
-						stringTiles.add("      ");	
+						stringTiles.add("        ");	
 				}
 				stringTiles.add("\n");
 			}
@@ -177,34 +174,11 @@ public class Board{
 
 		if(col.isPresent()==false) {
 			String out;
-			return out = " ";
+			return out = "  ";
 		}
 
 		return col.initials();
 
 	}
-    
-	/*
-	 * Tests
-	 */
-//	public static void main(String[] args) {
-//		Board board = Board.getInstance();
-//		Tile tile = board.getTile(3, 3);
-//		LinkedList<Tile> surrounding = tile.getAdjacentDiagonal();
-//
-//		for(int i=0; i<surrounding.size(); i++) {
-//			surrounding.get(i).setFlood(true);
-//			surrounding.get(i).setPresent(false);
-//		}
-//		
-//		ArrayList<Tile> list = board.listOfNearestTiles(tile);		
-//
-//		for(int i=0; i<list.size();i++) {
-//			System.out.println(list.get(i).getNameString());
-//			System.out.println(Arrays.toString(list.get(i).getLocation()));
-//		}
-//	}
-
-	// Commit test comment
 	
 }
