@@ -84,10 +84,12 @@ public class GameView {
 	}
 	
 	public void invokeLoseGame(Tile tile) {
-		if(controller.loseCondition())
-			treasureLost();
-		if(tile.getNameString() == "Fool's Landing")
-			foolsLost();
+		if(controller.loseCondition()) {
+			if(tile.getNameString() == "Fool's Landing")
+				foolsLost();
+			else
+				treasureLost();
+		}
 	}
 	
 	public void doTurn(Scanner inputScanner) {
