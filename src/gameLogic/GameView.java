@@ -146,7 +146,7 @@ public class GameView {
 		for(Card card: cardsDrawn) {
 			System.out.println("Adding " + card.getName() + " to " + player + "'s hand...");
 		}
-		if(playerHand.getCards().size()>=6) {
+		if(controller.checksHand(playerHand)) {
 			tooManyCardsPrompt(player, playerHand, inputScanner);
 		}
 		ArrayList<TreasureDeckCard> playableCards = playerHand.getPlayableCards();

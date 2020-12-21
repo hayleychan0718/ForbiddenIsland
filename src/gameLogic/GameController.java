@@ -85,5 +85,9 @@ public class GameController {
 	public boolean canSunkenPlayerMove(Player player) {
 		return model.canSunkenPlayerMove(player);
 	}
+
+	public boolean checksHand(Hand playerHand) {
+		return model.checksHand(playerHand);
+	}
 }
 
