@@ -44,7 +44,7 @@ public class Messenger extends Player{
 	/**
 	 * Override to allow the messenger to give card to any player
 	 */
-	public ArrayList<Player> getPlayersForTreasureCard() { 
+	public ArrayList<Player> getPlayersForCard() { 
 		ArrayList<Player> otherPlayerList =   PlayerList.getInstance().getListOfOtherPlayers(playerNumber);
 		return otherPlayerList;
 	}
