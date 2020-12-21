@@ -25,10 +25,6 @@ public class Hand {
 		TreasureDeck.getInstance().getDiscardPile().add(card);
 	}
 	
-	/*public void removeCard(int cardIndex) {
-		hand.remove(cardIndex);
-	}*/
-	
 	//Give card to another player
 	public void giveCard(Card given, Hand Recieved) {
 		removeCard(given);
