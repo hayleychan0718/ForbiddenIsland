@@ -53,6 +53,7 @@ public class Diver extends Player {
 		int i =0;
 		double minDistance =  100.0; //initialised larger than any minimum distance
 
+		presentTiles.remove(getPlayerPawnTile());
 		for(Tile tilej: presentTiles) { 
 			minDistance = Math.min(Board.getDistance(getPlayerPawnTile(), tilej), minDistance); //Stores the minimum distance
 			listOfDistances.add(Board.getDistance(getPlayerPawnTile(), tilej)); //Creates a list of the distances from the players tile to all the other
@@ -63,6 +64,8 @@ public class Diver extends Player {
 				closestTiles.add(tilej);
 			i++;
 		}
+	
+		
 
 		return closestTiles;
 	}
