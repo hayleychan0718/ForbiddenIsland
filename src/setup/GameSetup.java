@@ -70,25 +70,6 @@ public class GameSetup {
 		PlayerView view = PlayerView.getInstanace();
 		
 		view.setController(controller);
-		
-		//Testing win,Remove
-		/*Board board = Board.getInstance();
-		ArrayList<Player> players = PlayerList.getInstance().getListOfPlayers();
-		Player player1 = players.get(0);
-		Player player2 = players.get(1);
-		player1.movePlayerPawn(board.getTile("Fool's Landing"));
-		player2.movePlayerPawn(board.getTile("Fool's Landing"));
-		TreasureNames.TheCrystalOfFire.captureTreasure();
-		TreasureNames.TheEarthStone.captureTreasure();
-		TreasureNames.TheOceansChalice.captureTreasure();
-		TreasureNames.TheStatueOfTheWind.captureTreasure();*/
-		//Testing beside a treasure tile sinking
-		/*Tile treasureTile = Board.getInstance().getTile("Cave of Shadows");
-		Tile tileBesideTreasure = treasureTile.getNorthTile();
-		
-		ArrayList<Player> players = PlayerList.getInstance().getListOfPlayers();
-		Player player1 = players.get(0);
-		player1.movePlayerPawn(tileBesideTreasure);*/
 	}
 	
 	/**
@@ -102,11 +83,6 @@ public class GameSetup {
 		
 		GameView view = GameView.getInstance();
 		view.setController(controller);
-
-		WaterMeter.getinstance().increaseWaterLevel();
-		WaterMeter.getinstance().increaseWaterLevel();
-		WaterMeter.getinstance().increaseWaterLevel();
-		
 		
 		view.doGame(inputScanner);
 	}

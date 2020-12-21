@@ -42,6 +42,10 @@ public class GameController {
 		player.ReStockActions();
 	}
 	
+	public int getPlayerActions(Player player) {
+		return player.getPlayerActions();
+	}
+	
 	public boolean isGameOver() {
 		return model.isGameOver();
 	}

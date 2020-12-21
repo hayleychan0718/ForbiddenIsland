@@ -110,6 +110,10 @@ public class GameView {
 		}
 	}
 	
+	public void printPlayersActions(Player player) {
+		System.out.println("\nYou have " + controller.getPlayerActions(player) + " actions remaining");
+	}
+	
 	public void doTurn(Scanner inputScanner) {
 		boolean isTurnOver;
 		ArrayList<Player> playerList = controller.getListOfPlayers();
@@ -122,6 +126,7 @@ public class GameView {
 			treasureOrFoolSunk(inputScanner);
 			
 			playerTurn(player);
+			printPlayersActions(player);
 			
 			while (!isTurnOver) { 
 				playerView.printOptions();
