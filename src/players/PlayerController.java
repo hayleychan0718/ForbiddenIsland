@@ -65,13 +65,7 @@ public class PlayerController {
 	public void shoreUpTile(Tile tile) {
 		tile.setFlood(false);
 	}
-
 	
-	public void saveTile(Tile tile){
-		tile.saveTile();
-	}
-	
-
 	public ArrayList<Player> getModel(){
 		return model;
 	}
