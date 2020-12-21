@@ -26,13 +26,13 @@ public class playerObserverTest {
 
 		Assert.assertTrue("List of sunken Players should be originally empty", playerObserver.getSunkenPlayers().isEmpty());
 
-		tester1.getPlayerPawnTile().sinkTile();
+		tester1.getPlayerPawnTile().setNotPresent();
 
 		Assert.assertTrue("Tester1 has now been sunk and should be in the list of sunken players", playerObserver.getSunkenPlayers().contains(tester1));
 		
-		tester2.getPlayerPawnTile().sinkTile();
-		tester3.getPlayerPawnTile().sinkTile();
-		tester4.getPlayerPawnTile().sinkTile();
+		tester2.getPlayerPawnTile().setNotPresent();
+		tester3.getPlayerPawnTile().setNotPresent();
+		tester4.getPlayerPawnTile().setNotPresent();
 		
 		Assert.assertTrue("Tester2 has now been sunk and should be in the list of sunken players", playerObserver.getSunkenPlayers().contains(tester2));
 		Assert.assertTrue("Tester3 has now been sunk and should be in the list of sunken players", playerObserver.getSunkenPlayers().contains(tester3));
