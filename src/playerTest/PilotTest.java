@@ -30,7 +30,7 @@ public class PilotTest {
 		Assert.assertTrue("Should be equal to the present board", forcedTiles.equals(presentTiles));
 		
 		Tile testTile =  presentTiles.get(1);
-		presentTiles.get(1).sinkTile();
+		presentTiles.get(1).setNotPresent();
 		
 		forcedTiles = test.getForcedMoveableTiles();
 		

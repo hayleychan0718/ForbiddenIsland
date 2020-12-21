@@ -23,7 +23,7 @@ public class ExplorerTest {
 		
 		Assert.assertTrue("The forced movement Tiles of the Explorer should be equal to the adjacent and diagonal tiles",explorer.getForcedMoveableTiles().equals(pawnTile.getAdjacentDiagonal()));
 		
-	    pawnTile.getAdjacentTiles().get(1).sinkTile(); //Sinks a tile
+	    pawnTile.getAdjacentTiles().get(1).setNotPresent();; //Sinks a tile
 	    
 	    Assert.assertFalse("This sunken Tile should no longer be contained in the forced movement tile",explorer.getForcedMoveableTiles().contains(pawnTile.getAdjacentTiles().get(1)));
 	}
