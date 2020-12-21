@@ -97,45 +97,6 @@ public class Tile{
 			return Board.getInstance().getTile(northWest[0], northWest[1]);
 	}
 	
-	/*
-	 * Coordinates getters (Might not need them)
-	 */
-	public int[] getLocation() {
-		return location;
-	}
-	
-	public int[] getNorth() {
-		return north;
-	}
-	
-	public int[] getSouth() {
-		return south;
-	}
-	
-	public int[] getEast() {
-		return east;
-	}
-	
-	public int[] getWest() {
-		return west;
-	}
-	
-	public int[] getNorthEast() {
-		return northEast;
-	}
-	
-	public int[] getSouthEast() {
-		return southEast;
-	}
-	
-	public int[] getSouthWest() {
-		return southWest;
-	}
-	
-	public int[] getNorthWest() {
-		return northWest;
-	}
-	
 	public ArrayList<Tile> getAdjacentTiles(){
 		ArrayList<Tile> adjacentTiles = new ArrayList<Tile>();
 		adjacentTiles.add(getNorthTile());
