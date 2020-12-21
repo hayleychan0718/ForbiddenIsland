@@ -14,7 +14,7 @@ public class Utility {
 	 * Ensures the users enters an integer within the acceptable range
 	 * @param min , minimum option
 	 * @param max , maximum option
-	 * @param inputScanner TODO
+	 * @param inputScanner Scanner input
 	 * @return , returns a valid input
 	 */
 	public static int acceptableInput(int min,int max, Scanner inputScanner) { //Checks if input is acceptable by using the size of the actions lists //Maybe interface
@@ -56,6 +56,10 @@ public class Utility {
 		}
 	}
 	
+	/**
+	 * User to sleep the console in ms
+	 * @param time ms
+	 */
 	public static void sleep(long time) {
 		try {
 			Thread.sleep(time);
