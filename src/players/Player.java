@@ -103,15 +103,12 @@ public abstract class Player {
 	 * Checks whether a player can capture a treasure, if true captures the treasure
 	 * @return true/false
 	 */
-	//ArrayList<Card> matchingTreasureCards
 	public boolean canCaptureTreasure() {
-         ArrayList<Card> matchingTreasureCards = matchingTreasureCards();
+  
 		if(!onTreasureTile()) {
-			System.out.println("not on treasure tile");
 			return false;
 		}
-		
-		System.out.println(matchingTreasureCards);
+	      ArrayList<Card> matchingTreasureCards = playerHand.matchingTreasureCards(getPlayerPawnTile());
 		
 		if(matchingTreasureCards.size()>=4) {
 			captureTreasure();
@@ -136,24 +133,9 @@ public abstract class Player {
 		}
 		return false;
 	}
-
-	/**
-	 * Returns a list of cards from the players hand that match the current treasure tile
-	 * @return matchingTreasureCards
-	 */
-	public ArrayList<Card> matchingTreasureCards() {
-		ArrayList<Card> matchingTreasureCards = new ArrayList <Card>();
-
-		for(Card cardInHand:playerHand.getCards()) {
-			if(cardInHand.getName() == getPlayerPawnTile().getTreasure().getString()) { //may need null check before 
-				matchingTreasureCards.add(cardInHand);
-			}
-		}
-		return matchingTreasureCards;
-	}
 	
 	/**
-	 * Gives a cad to another player
+	 * Gives a card to another player
 	 * @param toGive
 	 * @param toRecieve
 	 */
@@ -228,53 +210,6 @@ public abstract class Player {
 	
 	public String getSymbol() {
 		return symbol;
-	}
-
-	
-	public static void main (String[] args) {
-
-		
-        Engineer test =  Engineer.getInstance("Test1", 1,"%");
-		
-		PlayerList.getInstance().addPlayer(test);
-		
-		Tile treasureTile=Board.getInstance().getTile("Temple of the Sun");
-//		
-     	test.movePlayerPawn(treasureTile);
-//		
-
-//
-		Board board = Board.getInstance();
-		
-		System.out.println(board.showBoard());
-		
-		for(int i=0; i<=4; i++) {
-			TreasureCard treasure = new TreasureCard(TreasureNames.TheEarthStone);
-			test.getHand().addCard(treasure);
-		}
-		
-		
-		
-		//System.out.println(test.matchingTreasureCards());
-		ArrayList<Card> matchingTreasureCards= test.matchingTreasureCards();
-		System.out.println(test.getHand().getCards());
-		
-		System.out.println(matchingTreasureCards.size());
-		System.out.println(matchingTreasureCards);
-		System.out.println(test.canCaptureTreasure());
-		
-		System.out.println(board.showBoard());
-		
-		System.out.println(test.getTreasure().isCaptured());
-		
-		System.out.println(test.getHand().getCards());
-
-		
-		//System.out.println(test.canCaptureTreasure(test.matchingTreasureCards()));
-
-		
-		
-		
 	}
 
 }
