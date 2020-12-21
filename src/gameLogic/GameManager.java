@@ -1,19 +1,11 @@
 package gameLogic;
 
 import java.util.ArrayList;
-import java.util.Scanner;
-
-import island.board.Board;
-import island.board.Tile;
-import island.cards.Card;
-import island.cards.FloodDeck;
-import island.cards.Hand;
-import island.cards.TreasureDeck;
+import island.board.*;
+import island.cards.*;
 import island.enums.TreasureNames;
 import observers.GameOverObserver;
-import players.Player;
-import players.PlayerList;
-import players.PlayerView;
+import players.*;
 
 public class GameManager {
 
@@ -37,7 +29,11 @@ public class GameManager {
 		return theGameManager;
 	}
 
-
+	/**
+	 * Checks whether a players turn is over
+	 * @param player
+	 * @return boolean
+	 */
 	public boolean isTurnOver(Player player) {
 		int remainingPlayerActions = player.getPlayerActions();
 
@@ -49,15 +45,21 @@ public class GameManager {
 		}
 	}
 
+	/**
+	 * Ends the game
+	 */
 	public void gameOver() {
 		isGameOver=true;
 	}
 	
-	//May remove
 	public ArrayList<Player> getListOfPlayers(){
 		return playerList.getListOfPlayers();
 	}
 	
+	/**
+	 * Checks if the game is over
+	 * @return
+	 */
 	public boolean isGameOver() {
 		return isGameOver;
 	}
