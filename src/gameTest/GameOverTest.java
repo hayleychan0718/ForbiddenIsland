@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import gameLogic.GameController;
@@ -14,6 +15,7 @@ import island.board.Board;
 import island.board.Tile;
 import island.enums.TreasureNames;
 import observers.GameOverObserver;
+import players.Engineer;
 
 public class GameOverTest {
 	GameOverObserver gameOverObserver = GameOverObserver.getInstance();
@@ -77,5 +79,19 @@ public class GameOverTest {
 		WaterMeter.getinstance().increaseWaterLevel();
 		WaterMeter.getinstance().increaseWaterLevel();
 		assertTrue("GameOverObserver is notified when water level reaches 5", gameOverObserver.update());
+	}
+	
+	//Tests sunkenPlayers method
+	public void canSunkenPlayerMove() {
+
+		Engineer engineer = Engineer.getInstance("Test", 1, "$");
+		
+		Assert.assertTrue("Should be able to move, so should be true",gameManager.canSunkenPlayerMove(engineer));
+		
+		for(Tile tile: engineer.getForcedMoveableTiles()) {
+			tile.setNotPresent();
+		}
+		
+		Assert.assertFalse("All of the forced movement tiles are sunk, this should fail", gameManager.canSunkenPlayerMove(engineer));
 	}
 }

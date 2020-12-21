@@ -267,7 +267,11 @@ public class PlayerView {
 		}
 
 	}
-		
+	
+	/**
+	 * Ends current players turn
+	 * @param player
+	 */
 	public void endTurn(Player player) {
 		controller.emptyActions(player);
 	}
