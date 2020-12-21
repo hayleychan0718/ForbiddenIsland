@@ -51,6 +51,7 @@ public class PlayerView {
 		System.out.println("[5] Show Board");
 		System.out.println("[6] Play Cards");
 		System.out.println("[7] Show Hand");
+		System.out.println("[8] Quit Game");
 		System.out.println("[0] End Turn");
 	}
 
@@ -61,7 +62,7 @@ public class PlayerView {
 	 */
 	public void selectOption(Scanner inputScanner, Player player) {
 
-		int userInput = Utility.acceptableInput(0, 7, inputScanner);
+		int userInput = Utility.acceptableInput(0, 8, inputScanner);
 
 		switch(userInput) {
 		case 0:
@@ -87,6 +88,9 @@ public class PlayerView {
 			break;
 		case 7:
 			printHand(player); 
+			break;
+		case 8:
+			System.exit(0);
 			break;
 		}
 	}
@@ -307,7 +311,7 @@ public class PlayerView {
 	private boolean cardOptions(Player player) {
 		Hand playerHand = controller.getPlayerHand(player);
 		ArrayList<TreasureDeckCard> playableCards = playerHand.getPlayableCards();
-		System.out.println("Playable cards:");
+		System.out.println("\nPlayable cards:");
 		if(!playableCards.isEmpty()) {
 			Utility.printOptions(playableCards);
 			System.out.println("Enter " + playableCards.size() + " to cancel action");
@@ -359,7 +363,7 @@ public class PlayerView {
 			return false;
 		}
 		else {
-			System.out.println("Lifting off Fool's Landing...");
+			System.out.println("\nLifting off Fool's Landing...");
 			return true;
 		}
 	}
@@ -418,10 +422,10 @@ public class PlayerView {
 
 	public void doWaterRise(Player player) {
 		WaterMeter waterMeter = WaterMeter.getinstance();
-		System.out.println("Play Water Rise card...");
+		System.out.println("\nPlay Water Rise card...");
 		controller.doWaterRise(player);
 		System.out.println("Water Level increased.\nCurrent water level: " + waterMeter.getWaterLevel());
-		System.out.println("Flood Deck reshuffled.");
+		System.out.println("Flood Deck reshuffled.\n");
 	}
 	
 	public void printHand(Player player) {
