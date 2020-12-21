@@ -9,7 +9,7 @@ import observers.GameOverObserver;
 
 public class WaterMeter {
 	
-	private GameOverObserver gameOverObserver;
+	private GameOverObserver gameOverObserver = GameOverObserver.getInstance();
 	private static WaterMeter theWaterMeter;
 	private int waterLevel;
 	
