@@ -30,8 +30,9 @@ public class GameOverObserver {
 		sunkTiles.add(tile);
 	}
 	
-	public void update() {
+	public boolean update() {
 		GameView.getInstance().waterLost();
+		return true;
 	}
 	
 	public ArrayList<Tile> getSunkTiles(){
