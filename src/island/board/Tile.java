@@ -23,7 +23,7 @@ public class Tile{
 	private boolean isFlooded; 
 	private boolean isPresent; 
 	private final TileNames name; 
-	private int[] north, south, east, west; 
+	private int[] location,north, south, east, west; 
 	private int[] northEast, southEast, southWest, northWest;
 	
 	/**
@@ -36,6 +36,7 @@ public class Tile{
 		this.isFlooded = false;
 		this.isPresent = true;
 		this.name = name;
+		this.location = new int[] {x, y};
 		this.north = new int[] {x-1, y};
 		this.south = new int[] {x+1, y};
 		this.west = new int[] {x, y-1};
@@ -44,6 +45,14 @@ public class Tile{
 		this.southEast = new int[] {x+1, y+1};
 		this.southWest = new int[] {x+1, y-1};
 		this.northWest = new int[] {x-1, y-1};
+	}
+	
+	/**
+	 * Gets location of current tile
+	 * @return Location of current tile
+	 */
+	public int[] getLocation() {
+		return location;
 	}
 	
 	/**
