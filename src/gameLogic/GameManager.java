@@ -3,8 +3,10 @@ package gameLogic;
 import java.util.ArrayList;
 import island.board.*;
 import island.cards.*;
+import island.enums.TileNames;
 import island.enums.TreasureNames;
 import observers.GameOverObserver;
+import observers.PlayerObserver;
 import players.*;
 
 public class GameManager {
