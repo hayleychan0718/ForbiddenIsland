@@ -202,8 +202,7 @@ public class Board{
 		}
 
 		if(col.isPresent()==false) {
-			String out;
-			return out = "  ";
+			return "  ";
 		}
 
 		return col.initials();
