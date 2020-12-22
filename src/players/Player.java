@@ -19,7 +19,7 @@ public abstract class Player {
 	protected int playerNumber;
 	private Hand playerHand;
 	protected Pawn playerPawn;
-	protected int playerActions;
+	private int playerActions;
 	protected Board board;
 	
 

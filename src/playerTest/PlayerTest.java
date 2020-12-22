@@ -1,13 +1,8 @@
 package playerTest;
 
-import static org.junit.Assert.*;
-
-
 import java.util.ArrayList;
-
 import org.junit.Assert;
 import org.junit.Test;
-
 import island.board.Board;
 import island.board.Tile;
 import island.cards.TreasureCard;
@@ -21,6 +16,11 @@ import players.*;
  */
 
 public class PlayerTest {
+
+	@SuppressWarnings("unused")
+	private Tile playerTile;
+	@SuppressWarnings("unused")
+	private Board board;
 
 	@Test
 	public void getStandardMovementTest() {
@@ -38,9 +38,9 @@ public class PlayerTest {
 	@Test
 	public void getShoreableTiles() {
 		Engineer test = Engineer.getInstance("Test", 1,"");
-		Tile playerTile = test.getPlayerPawnTile();
+		playerTile = test.getPlayerPawnTile();
 
-		Board board = Board.getInstance();
+		board = Board.getInstance();
 
 		Assert.assertTrue("Originally should be no shoreble Tiles", test.getShoreableTiles().isEmpty());
 
@@ -63,6 +63,7 @@ public class PlayerTest {
 		playerList.addPlayer(tester2);
 		playerList.addPlayer(tester3);
 
+		@SuppressWarnings("rawtypes")
 		ArrayList testlist = playerList.getListOfOtherPlayers(1);
 
 		Assert.assertTrue("Should be empty since no other player on tile", tester1.getPlayersForCard().isEmpty());

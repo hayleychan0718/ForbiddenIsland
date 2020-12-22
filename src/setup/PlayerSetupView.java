@@ -3,20 +3,12 @@ package setup;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
-
-import players.Diver;
-import players.Engineer;
-import players.Explorer;
-import players.Messenger;
-import players.Navigator;
-import players.Pilot;
-import players.Player;
-import players.PlayerList;
+import players.*;
 import utility.Utility;
 
 /**
  * User interface view for setting up the players at the begining of the game
- * @author Liam Fitzgerald
+ * @author Liam Fitzgerald and Hayley Chand
  *
  */
 public class PlayerSetupView {
@@ -24,6 +16,10 @@ public class PlayerSetupView {
 	private PlayerSetupController controller;
 	private static PlayerSetupView playerSetupView = null;
 
+	/**
+	 * Gets the instance of the PlayerSetupView
+	 * @return
+	 */
 	public static PlayerSetupView getInstance() {
 		if(playerSetupView == null)
 			playerSetupView = new PlayerSetupView();

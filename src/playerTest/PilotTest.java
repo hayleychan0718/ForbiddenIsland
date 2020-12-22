@@ -1,19 +1,15 @@
 package playerTest;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
-
 import org.junit.Assert;
 import org.junit.Test;
-
 import island.board.Board;
 import island.board.Tile;
 import players.Pilot;
 
 /**
  * J unit test to test the extra ability for the Pilot
- * @author liamf
+ * @author Liam Fitzgerald and Hayley Chan
  *
  */
 

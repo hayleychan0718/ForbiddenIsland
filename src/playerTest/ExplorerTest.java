@@ -1,16 +1,12 @@
 package playerTest;
 
-import static org.junit.Assert.*;
-
 import org.junit.Assert;
 import org.junit.Test;
-
 import island.board.Tile;
 import players.Explorer;
 
 /**
  * J unit test to test the extra ability of the Explorer
- * @author liamf
  *
  */
 
