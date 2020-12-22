@@ -52,13 +52,6 @@ public class HelicopterCard extends TreasureDeckCard{
 	}
 
 	/**
-	 * Win the game with the helicopter card
-	 */
-	public static void winHelicopter() {
-		GameView.getInstance().gameWin();
-	}
-
-	/**
 	 * Return a list of options for the helicopter card
 	 * @return List of tiles that are present on the board
 	 */
