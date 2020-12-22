@@ -1,2 +1,137 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sequence-diagram version="1.2.4" icons="true" generate-combined-fragments="true"/>
+<sequence-diagram version="1.2.4" icons="true" generate-combined-fragments="true">  
+  <object id="1" language="java" name="players.Diver" project="ForbiddenIsland" 
+    file="/ForbiddenIsland/src/players/Diver.java" binary="false" label="diver" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="127" y="0"/>    
+    <execution id="2">      
+      <position height="721" width="0" x="0" y="93"/>    
+    </execution>    
+    <execution id="4">      
+      <position height="658" width="0" x="0" y="135"/>    
+    </execution>    
+    <execution id="14">      
+      <position height="21" width="0" x="0" y="355"/>    
+    </execution>    
+    <execution id="18">      
+      <position height="21" width="0" x="0" y="487"/>    
+    </execution>    
+    <execution id="24">      
+      <position height="21" width="0" x="0" y="623"/>    
+    </execution>  
+  </object>  
+  <object id="27" language="java" name="island.board.Board" project="ForbiddenIsland" 
+    file="/ForbiddenIsland/src/island/board/Board.java" binary="false" label="board" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="6">      
+      <position height="21" width="0" x="0" y="166"/>    
+    </execution>  
+  </object>  
+  <object id="28" language="java" name="java.util.ArrayList" project="ForbiddenIsland" 
+    file="C:/Program Files/Java/jdk-11.0.8/lib/jrt-fs.jar" binary="true" label="closestTiles" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="8">      
+      <position height="21" width="0" x="0" y="208"/>    
+    </execution>    
+    <execution id="26">      
+      <position height="21" width="0" x="0" y="751"/>    
+    </execution>  
+  </object>  
+  <object id="29" language="java" name="java.util.ArrayList" project="ForbiddenIsland" 
+    file="C:/Program Files/Java/jdk-11.0.8/lib/jrt-fs.jar" binary="true" label="listOfDistances" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="10">      
+      <position height="21" width="0" x="0" y="250"/>    
+    </execution>    
+    <execution id="20">      
+      <position height="21" width="0" x="0" y="518"/>    
+    </execution>  
+  </object>  
+  <object id="30" language="java" name="java.util.ArrayList" project="ForbiddenIsland" 
+    file="C:/Program Files/Java/jdk-11.0.8/lib/jrt-fs.jar" binary="true" label="presentTiles" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="12">      
+      <position height="21" width="0" x="0" y="292"/>    
+    </execution>  
+  </object>  
+  <object id="31" language="java" name="island.board.Board" project="ForbiddenIsland" 
+    file="/ForbiddenIsland/src/island/board/Board.java" binary="false" label="&lt;static&gt;" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="16">      
+      <position height="21" width="0" x="0" y="424"/>    
+    </execution>    
+    <execution id="22">      
+      <position height="21" width="0" x="0" y="560"/>    
+    </execution>  
+  </object>  
+  <combined-fragment id="32" interaction-operator="LOOP">    
+    <interaction-operand id="33" constraint="for: presentTiles">      
+      <fragment refId="15"/>      
+      <fragment refId="17"/>      
+      <fragment refId="19"/>      
+      <fragment refId="21"/>      
+      <fragment refId="23"/>    
+    </interaction-operand>  
+  </combined-fragment>  
+  <combined-fragment id="34" interaction-operator="LOOP">    
+    <interaction-operand id="35" constraint="for: presentTiles">      
+      <fragment refId="36"/>    
+    </interaction-operand>    
+    <combined-fragment id="36" interaction-operator="OPT">      
+      <interaction-operand id="37" constraint="listOfDistances.get(i)==minDistance">        
+        <fragment refId="25"/>      
+      </interaction-operand>    
+    </combined-fragment>  
+  </combined-fragment>  
+  <message id="3" operation="getForcedMoveableTiles():java.util.ArrayList&lt;Tile&gt;" asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="5" operation="listOfPresentTiles():java.util.ArrayList&lt;Tile&gt;" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="6"/>  
+  </message>  
+  <message id="7" operation="ArrayList()" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="8"/>  
+  </message>  
+  <message id="9" operation="ArrayList()" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="10"/>  
+  </message>  
+  <message id="11" operation="remove(java.lang.Object):boolean" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="12"/>  
+  </message>  
+  <message id="13" operation="getPlayerPawnTile():island.board.Tile" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="14"/>  
+  </message>  
+  <message id="15" operation="getDistance(island.board.Tile,island.board.Tile):java.lang.Double" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="16"/>  
+  </message>  
+  <message id="17" operation="getPlayerPawnTile():island.board.Tile" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="18"/>  
+  </message>  
+  <message id="19" operation="add(E):boolean" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="20"/>  
+  </message>  
+  <message id="21" operation="getDistance(island.board.Tile,island.board.Tile):java.lang.Double" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="22"/>  
+  </message>  
+  <message id="23" operation="getPlayerPawnTile():island.board.Tile" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="24"/>  
+  </message>  
+  <message id="25" operation="add(E):boolean" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="26"/>  
+  </message>
+</sequence-diagram>
