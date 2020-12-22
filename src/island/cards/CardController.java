@@ -56,14 +56,6 @@ public class CardController {
     	HelicopterCard.play(chosenTile, chosenPlayers);
     }
     
-
-    /**
-     * Win the game with the helicopter card
-     */
-	public void winHelicopter() {
-		HelicopterCard.winHelicopter();
-	}
-    
 	/**
 	 * Checks if you can win the game with the helicopter card
 	 * @return True if you can win the game, false otherwise
