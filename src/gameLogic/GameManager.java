@@ -8,11 +8,10 @@ import observers.GameOverObserver;
 import players.*;
 
 /**
- * Singlton Class for the GameManger which runs the games logic
+ * Singleton Class for the GameManger which runs the games logic
  * @author Liam Fitzgerald and Hayley Chan
  *
  */
-
 public class GameManager {
 
 	private static GameManager theGameManager;
@@ -79,22 +78,45 @@ public class GameManager {
 		return isGameOver;
 	}
 
+	/**
+	 * Draws 2 cards from the treasure deck 
+	 * @param player The player
+	 * @return List of cards drawn from the treasure deck
+	 */
 	public ArrayList<Card> drawTreasureDeck(Player player) {
 		return TreasureDeck.getInstance().drawCard(player);
 	}
 
+	/**
+	 * Draws cards from flood deck equal to the number on the water meter 
+	 * @return The list of tiles to flood
+	 */
 	public ArrayList<Tile> drawFloodDeck() {
 		return FloodDeck.getInstance().drawCard();
 	}
 
+	/**
+	 * Remove a card from a player's hand
+	 * @param card The card to be removed
+	 * @param player The player
+	 */
 	public void removeFromHand(Card card, Player player) {
 		player.getHand().removeCard(card);
 	}
 
+	/**
+	 * Get instance of the forbidden island board
+	 * @return Instance of the board
+	 */
 	public Board getBoard() {
 		return Board.getInstance();
 	}
 
+	/**
+	 * Checks if a player is beside a treasure or fool's landing tile that is about to sink
+	 * @param tile The tile that is about to sink
+	 * @return True if a player is beside a treasure or fool's landing tile, false otherwise
+	 */
 	public boolean playerBeside(Tile tile) {
 		ArrayList<Player> playersList = PlayerList.getInstance().getListOfPlayers();
 		for(Player player: playersList) {
@@ -108,6 +130,10 @@ public class GameManager {
 		return false;
 	}
 	
+	/**
+	 * Returns the player that is beside a treasure tile or a fool's landing tile that is about to sink
+	 * @return
+	 */
 	public Player getPlayerToNotify() {
 		return player;
 	}
@@ -123,6 +149,11 @@ public class GameManager {
 		return true;
 	}
 	
+	/**
+	 * Checks the losing conditions i.e. if both treasure tiles have sunk before the associated treasure
+	 * has been captured or when fool's landing is sunk
+	 * @return True if losing conditions satisfied, false otherwise
+	 */
 	public boolean loseCondition() {
 		ArrayList<Tile> sunkTiles = GameOverObserver.getInstance().getSunkTiles();
 		Board board = Board.getInstance();
@@ -136,6 +167,11 @@ public class GameManager {
 			return false;
 	}
 
+	/**
+	 * Checks if a player has more than 5 cards
+	 * @param playerHand The player's hand
+	 * @return True if the player has more than 5 cards in their hand, false otherwise
+	 */
 	public boolean checksHand(Hand playerHand) {
 		if(playerHand.getCards().size()>=6) 
 			return true;
@@ -143,6 +179,10 @@ public class GameManager {
 			return false;
 	}
 
+	/**
+	 * Get the water meter level
+	 * @return The level of the water meter
+	 */
 	public int getWaterMeter() {
 		return WaterMeter.getinstance().getWaterLevel();
 	}
