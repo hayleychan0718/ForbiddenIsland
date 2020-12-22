@@ -7,10 +7,11 @@ import island.board.Board;
 import island.cards.CardController;
 import island.cards.CardView;
 import players.*;
+import utility.Utility;
 
 /**
  * Singleton Class responsible for setting up the game
- * @author Liam FItzgerald
+ * @author Liam Fitzgerald and Hayley Chan
  *
  */
 
@@ -32,6 +33,7 @@ public class GameSetup {
 		Scanner inputScanner = new Scanner(System.in);
 		Board.getInstance();
 		playerSetup(inputScanner);
+		setWaterLevel(inputScanner);
 		HandSetup.getInstance().startGame();
 		FloodSetup.getInstance().startGame();
 		playerActions();
@@ -93,5 +95,18 @@ public class GameSetup {
 		CardView view = CardView.getInstance();
 		
 		view.setController(controller);
+	}
+	
+	/**
+	 * Sets the game water level at the beginning of the game
+	 * @param inputScanner
+	 */
+	public void setWaterLevel(Scanner inputScanner) {
+		System.out.println("\nChoose the water level you want for the game between (1-4) ");
+		
+		
+		int userInput =Utility.acceptableInput(1, 4, inputScanner);
+		
+		WaterMeter.getinstance().setWaterLevel(userInput);
 	}
 }

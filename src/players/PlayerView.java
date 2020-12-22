@@ -118,7 +118,7 @@ public class PlayerView {
 		shoreableTiles.remove(userInput);
 
 		if(player instanceof Engineer && !shoreableTiles.isEmpty()) {	//Engineer is allowed shore up another tile and must check there is another tile to shore up
-			System.out.println("/nYou are an Engineer so you may shore up another tile");
+			System.out.println("You are an Engineer so you may shore up another tile");
 			Utility.printOptions(shoreableTiles);
 			userInput=Utility.acceptableInput(0, shoreableTiles.size()-1, inputScanner); 
 			SelectedTile=shoreableTiles.get(userInput);
@@ -219,7 +219,7 @@ public class PlayerView {
 		}
 		System.out.println("You can give a card to the following players:");
 		Utility.printOptions(playersForCard);
-		int userInput = Utility.acceptableInput(0, playersForCard.size(), inputScanner); //No option to cancel movement
+		int userInput = Utility.acceptableInput(0, playersForCard.size(), inputScanner); 
 		
 		Player selectedPlayer = playersForCard.get(userInput);
 		return selectedPlayer;
