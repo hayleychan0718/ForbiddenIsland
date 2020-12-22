@@ -4,22 +4,37 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import gameLogic.WaterMeter;
-import island.board.Board;
 import island.board.Tile;
 import players.Player;
 import players.PlayerList;
 import utility.Utility;
 
+/**
+ * Card view for playable cards
+ * @author Hayley Chan and Liam Fitzgerald
+ *
+ */
 public class CardView {
+	/*
+	 * Instance variables
+	 */
 	private CardController controller;
 	private static CardView cardView = null;
 
+	/**
+	 * Get instance of the card view
+	 * @return The card view instance
+	 */
 	public static CardView getInstance() {
 		if(cardView == null)
 			cardView = new CardView();
 		return cardView;
 	}
 	
+	/**
+	 * Get the card controller
+	 * @return The card controller
+	 */
 	public CardController getController() {
 		return controller;
 	}
@@ -33,6 +48,11 @@ public class CardView {
 
 	}
 	
+	/**
+	 * Get the player's choice from playable cards
+	 * @param inputScanner Scanner 
+	 * @param player The player
+	 */
 	public void runCardView(Scanner inputScanner, Player player) {
 		Hand playerHand = controller.getPlayerHand(player);
 		ArrayList<TreasureDeckCard> playableCards = playerHand.getPlayableCards();
@@ -51,7 +71,11 @@ public class CardView {
 		}
 	}
 	
-	// Used in runCardView
+	/**
+	 * Prints out the playable card options that the player has
+	 * @param player The player
+	 * @return True if they have cards they can play, false otherwise
+	 */
 	private boolean cardOptions(Player player) {
 		Hand playerHand = controller.getPlayerHand(player);
 		ArrayList<TreasureDeckCard> playableCards = playerHand.getPlayableCards();
@@ -67,6 +91,13 @@ public class CardView {
 		}
 	}
 	
+	/**
+	 * Either move pawn(s) to a chosen tile or to win the game
+	 * @param inputScanner Scanner
+	 * @param playerHand The player's hand 
+	 * @param card The card being played i.e. Helicopter card
+	 * @param player The player
+	 */
 	public void doHelicopter(Scanner inputScanner, Hand playerHand, Card card, Player player) {
 		ArrayList<Player> playersForHelicopter = PlayerList.getInstance().getPlayersForHelicopter();
 		ArrayList<Tile> listOfTiles = controller.getListOfTiles();
@@ -85,6 +116,12 @@ public class CardView {
 		}
 	}
 	
+	/**
+	 * Either win the game or tell the player they can't win yet
+	 * @param inputScanner Scanner
+	 * @param playerHand The player's hand
+	 * @param player The player
+	 */
 	private void winHelicopter(Scanner inputScanner, Hand playerHand, Player player) {
 		if(controller.canWinHelicopter())
 			controller.winHelicopter();
@@ -94,7 +131,11 @@ public class CardView {
 		}
 	}
 	
-	// Used in doHelicopter()
+	/**
+	 * Checks if player wants to move pawns or if player wants to lift off Fool's Landing for the win
+	 * @param inputScanner Scanner
+	 * @return True if player wants to move, false if player wants to lift off
+	 */
 	private boolean helicopterPrompt(Scanner inputScanner) { 
 		System.out.println("\nPlay Helicopter Lift card...");
 		System.out.println("Do you want to\nMove one or more pawns to any other tile? [0] or\nLift your team off Fool's Landing for the win? [1]");
@@ -112,7 +153,13 @@ public class CardView {
 		}
 	}
 	
-	// Used in doHelicopter()
+	/**
+	 * Choose the players to move to a certain tile
+	 * @param inputScanner Scanner
+	 * @param chosenTile The tile to move to
+	 * @param playersForHelicopter The players that you can move
+	 * @return The player(s) chosen to be moved
+	 */
 	private ArrayList<Player> choosingPlayer(Scanner inputScanner, Tile chosenTile, ArrayList<Player> playersForHelicopter) {	
 		ArrayList<Player> chosenPlayers = new ArrayList<Player>();
 		boolean repeat = true;
@@ -137,34 +184,57 @@ public class CardView {
 		return chosenPlayers;
 	}
 	
-	// Used in doHelicopter()
+	/**
+	 * Prints a message that a player is being moved
+	 * @param chosenTile The tile to move to 
+	 * @param chosenPlayers The chosen player(s) to be moved
+	 */
 	private void movingMessage(Tile chosenTile, ArrayList<Player> chosenPlayers) {
 		for(Player player: chosenPlayers) {
 			System.out.print("Moving " + player + " to " + chosenTile +  "...\n"); 
 		}
 	}
 	
-	
+	/**
+	 * Shore up a tile with the sandbag card
+	 * @param inputScanner Scanner 
+	 * @param playerHand The player's hand
+	 * @param card The card being played i.e. Sandbag card
+	 * @param player The player
+	 */
 	public void doSandbag(Scanner inputScanner, Hand playerHand, Card card, Player player) {
 		ArrayList<Tile> listOfFloodedTiles = controller.getListOfFloodedTiles();
-		
 		if(listOfFloodedTiles.size()==0) {
 			System.out.println("Choose another card.");
 			runCardView(inputScanner, player);
 		}
-		else
-			System.out.println("Play Sandbag Card...\n");
-			System.out.println("Tiles you can shore up:");
-			Utility.printOptions(listOfFloodedTiles);
-			System.out.println("\nChoose the tile: ");
-			int tileIndex = Utility.acceptableInput(0, listOfFloodedTiles.size()-1, inputScanner);
-			Tile chosenTile = listOfFloodedTiles.get(tileIndex);
-
+		else {
+			Tile chosenTile = tileToShoreUp(inputScanner, listOfFloodedTiles);
 			controller.doSandbag(chosenTile);
 			controller.removeCard(card, player);
 			System.out.println("Shored up " + chosenTile);
+		}
 	}
 	
+	/**
+	 * Returns the tile that the player wants to shore up from the sandbag card
+	 * @param inputScanner The scanner
+	 * @param listOfFloodedTiles List of tiles that are flooded
+	 * @return The chosen tile the player wants to shore up
+	 */
+	private Tile tileToShoreUp(Scanner inputScanner, ArrayList<Tile> listOfFloodedTiles) {
+		System.out.println("Play Sandbag Card...\n");
+		System.out.println("Tiles you can shore up:");
+		Utility.printOptions(listOfFloodedTiles);
+		System.out.println("\nChoose the tile: ");
+		int tileIndex = Utility.acceptableInput(0, listOfFloodedTiles.size()-1, inputScanner);
+		return listOfFloodedTiles.get(tileIndex);
+	}
+	
+	/**
+	 * Water rise card has increased the water meter level
+	 * @param player The player
+	 */
 	public void doWaterRise(Player player) {
 		WaterMeter waterMeter = WaterMeter.getinstance();
 		System.out.println("\nPlay Water Rise card...");
