@@ -34,7 +34,7 @@ public class PlayerSetupController {
 
 	/**
 	 * Constructs the PlayerSetupController
-	 * @param the model
+	 * @param the model, PLayerSetup
 	 */
 	private PlayerSetupController(PlayerSetup model) {
 		this.model=model;

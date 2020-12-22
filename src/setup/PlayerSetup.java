@@ -59,7 +59,7 @@ public class PlayerSetup {
 	}
 	
 	/**
-	 * adds a player to the player list
+	 * Adds a player to the player list
 	 * @param player
 	 */
 	public void addPlayer(Player player) {
@@ -67,7 +67,7 @@ public class PlayerSetup {
 	}
 	
 	/**
-	 * gets the list of players
+	 * Gets the list of players
 	 * @return list of players
 	 */
 	public ArrayList<Player> getPlayerList(){

@@ -8,7 +8,7 @@ import utility.Utility;
 
 /**
  * View to implement the user interface for Player class
- * @author Liam Fitzgerald
+ * @author Liam Fitzgerald and Hayley Chan
  */
 
 public class PlayerView {
@@ -279,6 +279,15 @@ public class PlayerView {
 		controller.emptyActions(player);
 	}
 
+	/**
+	 * When a player is beside a treasure tile or a fool's landing tile that is about to sink, they are
+	 * given an option to save the tile i.e. to keep it flooded, or don't save the tile i.e. sink the tile.
+	 * 
+	 * @param inputScanner The scanner
+	 * @param tile The tile that is about to sink
+	 * @param player The player
+	 * @return True if the player chooses to save the tile, false otherwise
+	 */
 	public boolean notifyPlayer(Scanner inputScanner, Tile tile, Player player) {
 		System.out.println(tile + " is about to sink! Does " + player + " want to save it?");
 		System.out.println("[0] No\n[1] Yes");
@@ -295,10 +304,19 @@ public class PlayerView {
 		}
 	}
 	
+	/**
+	 * Runs the card view to show the playable card options i.e. sandbag and/or helicopter lift cards
+	 * @param inputScanner The scanner
+	 * @param player The player
+	 */
 	public void runCardView(Scanner inputScanner, Player player) {
 		CardView.getInstance().runCardView(inputScanner, player);
 	}
 	
+	/**
+	 * Prints the cards in the player's hand 
+	 * @param player The player
+	 */
 	public void printHand(Player player) {
 		Hand playerHand = controller.getPlayerHand(player);
 		ArrayList<Card> hand = playerHand.getCards();

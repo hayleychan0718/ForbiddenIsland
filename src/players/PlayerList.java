@@ -13,7 +13,7 @@ public class PlayerList {
 	private ArrayList<Player> playerList;
 	
 	/**
-	 * Constructs the Playerlist
+	 * Constructs the PlayerList
 	 */
 	 private PlayerList() { 
 	    	this.playerList = new ArrayList<Player>(); 
@@ -88,7 +88,7 @@ public class PlayerList {
     }
     
     /**
-     * Gets the players for Helicopter
+     * Gets the players for Helicopter Lift
      * @return playersForHelicopter
      */
     public ArrayList<Player> getPlayersForHelicopter(){

@@ -15,7 +15,7 @@ import players.PlayerList;
 
 /**
  * Unit testing game win condition
- * @author Hayley Chan
+ * @author Hayley Chan and Liam Fitzgerald
  *
  */
 public class GameWinTest {

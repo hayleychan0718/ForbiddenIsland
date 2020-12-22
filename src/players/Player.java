@@ -12,8 +12,9 @@ import island.enums.TreasureNames;
 import pawns.Pawn;
 
 public abstract class Player {
-
-
+	/*
+	 * Instance variables
+	 */
 	private String playerName;
 	private String symbol;
 	protected int playerNumber;
@@ -21,7 +22,6 @@ public abstract class Player {
 	protected Pawn playerPawn;
 	private int playerActions;
 	protected Board board;
-	
 
 	/**
 	 * Creates everything needed for Player class
@@ -62,11 +62,11 @@ public abstract class Player {
 	public ArrayList<Tile> getShoreableTiles() {  
 		Tile pawnTile  =getPlayerPawnTile();
 		ArrayList<Tile> adjacentTiles = pawnTile.getAdjacentTiles(); 
-		adjacentTiles.add(pawnTile); //Players tile may also be flooded
+		adjacentTiles.add(pawnTile); 
 		ArrayList<Tile> shoreableTiles = new ArrayList<Tile>();
 
 		for(Tile tile: adjacentTiles) {
-			if(tile.isFlooded() ==true && tile.isPresent()) {
+			if(tile.isFlooded() ==true && tile.isPresent()) { //Checks if flooded and present
 				shoreableTiles.add(tile);
 			}
 		}
@@ -90,7 +90,7 @@ public abstract class Player {
 		PlayerList playerList = PlayerList.getInstance();
 
 		for (Player otherPlayer:playerList.getListOfOtherPlayers(playerNumber)) { //creates a list of the other players using the current player number
-			if(playerPawn.getPawnTile()==otherPlayer.getPlayerPawnTile())
+			if(playerPawn.getPawnTile()==otherPlayer.getPlayerPawnTile()) //Checks if they are on the same tile
 				playersForCard.add(otherPlayer);
 		}
 		return playersForCard;
@@ -107,9 +107,9 @@ public abstract class Player {
 		}
 	      ArrayList<Card> matchingTreasureCards = playerHand.matchingTreasureCards(getPlayerPawnTile());
 		
-		if(matchingTreasureCards.size()>=4) {
+		if(matchingTreasureCards.size()>=4) { //Has the required number of treasure cards
 			captureTreasure();
-			playerHand.getCards().removeAll(matchingTreasureCards);
+			playerHand.getCards().removeAll(matchingTreasureCards);  //Discards all the matchign cards as treasure has been captured
 			return true;
 		}
 		return false;
@@ -127,7 +127,7 @@ public abstract class Player {
 	
 	/**
 	 * Checks if the players is on a treasure tile
-	 * @return true/false
+	 * @return true/false, ture if on a Treausre Tile
 	 */
 	public boolean onTreasureTile() {
 		if(getPlayerPawnTile().hasTreasure()) {
@@ -157,18 +157,34 @@ public abstract class Player {
 		return playerName + " (" + this.getClass().getSimpleName() + ")";
 	}
 
+	/**
+	 * Gets the the player's name
+	 * @return String of player's name
+	 */
 	public String getName() {
 		return playerName;
 	}
 
+	/**
+	 * Get the cards of a player's hand
+	 * @return List of cards in the player's hand
+	 */
 	public ArrayList<Card> getCards(){
 		return playerHand.getCards();
 	}
 
+	/**
+	 * Gets the player's hand 
+	 * @return The player's hand
+	 */
 	public Hand getHand() {
 		return playerHand;
 	}
 
+	/**
+	 * Gets the tile that the player's pawn is on
+	 * @return
+	 */
 	public Tile getPlayerPawnTile() {
 		return 	playerPawn.getPawnTile();
 	}
@@ -196,6 +212,9 @@ public abstract class Player {
 		playerPawn.movePawn(tile);
 	}
 
+	/**
+	 * Decrease player's actions by one
+	 */
 	public void decrementPlayerActions() {
 		playerActions--;
 	}
@@ -210,7 +229,7 @@ public abstract class Player {
 	
 	/**
 	 * Returns the chosen symbol to represent the player on the board
-	 * @return the choosen symbol
+	 * @return the chosen symbol
 	 */
 	public String getSymbol() {
 		return symbol;
