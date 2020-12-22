@@ -3,6 +3,7 @@ package island.cards;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import gameLogic.GameView;
 import gameLogic.WaterMeter;
 import island.board.Tile;
 import players.Player;
@@ -55,7 +56,7 @@ public class CardView {
 	 */
 	public void runCardView(Scanner inputScanner, Player player) {
 		Hand playerHand = controller.getPlayerHand(player);
-		ArrayList<TreasureDeckCard> playableCards = playerHand.getPlayableCards();
+		ArrayList<TreasureDeckCard> playableCards = playerHand.getPlayableCards(); //Cant do this, use controller to get playable cards
 		if(cardOptions(player)) {
 			int userInput = Utility.acceptableInput(0, playableCards.size(), inputScanner); 
 			if(userInput==playableCards.size()) return; 
@@ -99,8 +100,8 @@ public class CardView {
 	 * @param player The player
 	 */
 	public void doHelicopter(Scanner inputScanner, Hand playerHand, Card card, Player player) {
-		ArrayList<Player> playersForHelicopter = PlayerList.getInstance().getPlayersForHelicopter();
-		ArrayList<Tile> listOfTiles = controller.getListOfTiles();
+		ArrayList<Player> playersForHelicopter = PlayerList.getInstance().getPlayersForHelicopter(); //NO need for this method
+		ArrayList<Tile> listOfTiles = controller.helicopterOptions();
 
 		if(!helicopterPrompt(inputScanner)) {
 			int tileIndex = Utility.acceptableInput(0, listOfTiles.size(), inputScanner); 
@@ -124,7 +125,7 @@ public class CardView {
 	 */
 	private void winHelicopter(Scanner inputScanner, Hand playerHand, Player player) {
 		if(controller.canWinHelicopter())
-			controller.winHelicopter();
+			GameView.getInstance().gameWin();
 		else{
 			System.out.println("Can't lift off yet!\n");
 			runCardView(inputScanner, player);
@@ -143,7 +144,7 @@ public class CardView {
 
 		if(helicopterChosen == 0) {
 			System.out.println("\nTiles you can move to:");
-			Utility.printOptions(controller.getListOfTiles());
+			Utility.printOptions(controller.helicopterOptions());
 			System.out.println("Which tile do you want to move to? ");
 			return false;
 		}
@@ -160,6 +161,9 @@ public class CardView {
 	 * @param playersForHelicopter The players that you can move
 	 * @return The player(s) chosen to be moved
 	 */
+
+	// CLEAN UP THE WHILE LOOP
+
 	private ArrayList<Player> choosingPlayer(Scanner inputScanner, Tile chosenTile, ArrayList<Player> playersForHelicopter) {	
 		ArrayList<Player> chosenPlayers = new ArrayList<Player>();
 		boolean repeat = true;
@@ -172,14 +176,14 @@ public class CardView {
 			playersForHelicopter.remove(playerIndex);
 			if(!playersForHelicopter.isEmpty()) { 
 				System.out.println("Do you want to choose another player?\nYes [0]\nNo [1]");
-				int choice = Utility.acceptableInput(0, 1, inputScanner); 
-				if(choice == 0) 
-			    	repeat = true; 
-			    else 
+
+				int choice = Utility.acceptableInput(0, 1, inputScanner); //Cancel option   // no need for this
+			    
+				if(choice == 1) //CLean this up only need one condition to exit loop
 			    	repeat = false;     
 			}
 			else
-				repeat = false;
+				repeat = false; 
 		}	
 		return chosenPlayers;
 	}
@@ -203,7 +207,8 @@ public class CardView {
 	 * @param player The player
 	 */
 	public void doSandbag(Scanner inputScanner, Hand playerHand, Card card, Player player) {
-		ArrayList<Tile> listOfFloodedTiles = controller.getListOfFloodedTiles();
+		ArrayList<Tile> listOfFloodedTiles = controller.sandBagOptions();
+		
 		if(listOfFloodedTiles.size()==0) {
 			System.out.println("Choose another card.");
 			runCardView(inputScanner, player);
@@ -236,7 +241,7 @@ public class CardView {
 	 * @param player The player
 	 */
 	public void doWaterRise(Player player) {
-		WaterMeter waterMeter = WaterMeter.getinstance();
+		WaterMeter waterMeter = WaterMeter.getinstance(); //use controller for these
 		System.out.println("\nPlay Water Rise card...");
 		controller.doWaterRise();
 		System.out.println("Water Level increased.\nCurrent water level: " + waterMeter.getWaterLevel());

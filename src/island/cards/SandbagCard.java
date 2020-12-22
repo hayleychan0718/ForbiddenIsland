@@ -1,5 +1,8 @@
 package island.cards;
 
+import java.util.ArrayList;
+
+import island.board.Board;
 import island.board.Tile;
 
 /**
@@ -21,5 +24,9 @@ public class SandbagCard extends TreasureDeckCard{
 	 */
 	public static void play(Tile chosenTile) {
 		chosenTile.setFlood(false);
+	}
+
+	public static ArrayList<Tile> sandBagOptions(){
+		return Board.getInstance().listOfFloodedTiles();
 	}
 }

@@ -91,9 +91,9 @@ public class GameSetup {
 	 * Sets up the playable Cards MVC
 	 */
 	public void playableCardsSetup() {	
-		CardLogic model = CardLogic.getInstance();
 		
-		CardController controller = CardController.getInstance(model);
+		
+		CardController controller = CardController.getInstance();
 		
 		CardView view = CardView.getInstance();
 		

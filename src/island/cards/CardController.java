@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import gameLogic.CardLogic;
 import island.board.Tile;
 import players.Player;
+import players.PlayerList;
 
 /**
  * Card controller MVC
@@ -16,24 +17,32 @@ public class CardController {
 	 * Instance variables
 	 */
 	private static CardController controller = null;
-	private CardLogic model;
 	
+<<<<<<< HEAD
 	/**
 	 * CardController constructor
 	 * @param model The card model
 	 */
     private CardController(CardLogic model) {
     	this.model = model;        
+=======
+    private CardController() {    
+>>>>>>> stash
     }
 	
+<<<<<<< HEAD
     /**
      * Gets instance of the card controller
      * @param model The card model
      * @return
      */
 	public static CardController getInstance(CardLogic model) {
+=======
+	public static CardController getInstance() {
+		
+>>>>>>> stash
 		if(controller == null)
-			controller = new CardController(model);
+			controller = new CardController();
 		return controller;
 	}
 	
@@ -61,9 +70,10 @@ public class CardController {
      * @param chosenPlayers The player(s) moving to the tile
      */
     public void doHelicopter(Tile chosenTile, ArrayList<Player> chosenPlayers){
-    	model.playHelicopter(chosenTile, chosenPlayers);
+    	HelicopterCard.play(chosenTile, chosenPlayers);
     }
     
+<<<<<<< HEAD
     /**
      * Win the game with the helicopter card
      */
@@ -75,8 +85,10 @@ public class CardController {
 	 * Checks if you can win the game with the helicopter card
 	 * @return True if you can win the game, false otherwise
 	 */
+=======
+>>>>>>> stash
 	public boolean canWinHelicopter() {
-		return model.canWinHelicopter();
+		return HelicopterCard.canWinHelicopter();
 	}
 	
 	/**
@@ -84,14 +96,22 @@ public class CardController {
 	 * @param chosenTile The tile to shore up
 	 */
 	public void doSandbag(Tile chosenTile) {
-		model.playSandbag(chosenTile);
+		SandbagCard.play(chosenTile);
 	}
 	
 	/**
 	 * Increment water meter level 
 	 */
     public void doWaterRise() {
-    	model.doWaterRise();
+    	WaterRiseCard.play();
+    }
+    
+    public ArrayList<Tile> sandBagOptions(){
+    	return SandbagCard.sandBagOptions();
+    }
+    
+    public ArrayList<Tile> helicopterOptions(){
+    	return HelicopterCard.helicopterOptions();
     }
 
     /**

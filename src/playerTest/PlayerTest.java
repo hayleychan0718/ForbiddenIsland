@@ -87,17 +87,23 @@ public class PlayerTest {
      	test.movePlayerPawn(treasureTile);
      	Assert.assertFalse("Treasure Tile but doesn't have required cards",test.canCaptureTreasure());
 
-     	TreasureCard treasure1 = new TreasureCard(TreasureNames.TheEarthStone);
-		test.getHand().addCard(treasure1);
+     	TreasureCard treasureCard = new TreasureCard(TreasureNames.TheEarthStone);
+		test.getHand().addCard(treasureCard);
      	
 		Assert.assertFalse("Treasure Tile , only has one card",test.canCaptureTreasure());
 		
-		for(int i=0; i<=4; i++) {
+		for(int i=0; i<=2; i++) {
 			TreasureCard treasure = new TreasureCard(TreasureNames.TheEarthStone);
 			test.getHand().addCard(treasure);
 		}
 		
+		System.out.println(test.getHand().matchingTreasureCards(test.getPlayerPawnTile()));
+		
 		Assert.assertTrue("Treasure Tile and has required cards",test.canCaptureTreasure());
+		
+		Assert.assertFalse("The players hand should no longer contain the matching cards", test.getCards().contains(treasureCard));
+		
+		Assert.assertTrue("The treasure should be captured", test.getPlayerPawnTile().getTreasure().isCaptured());
 
 	}
 }

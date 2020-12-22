@@ -22,7 +22,7 @@ public class MessengerTest {
 		playerList.addPlayer(tester2);
 		playerList.addPlayer(tester3);
 		
-		Assert.assertTrue("The list of players for treasure card should be all the oother players", tester1.getPlayersForCard().equals(playerList.getListOfOtherPlayers(1)));
+		Assert.assertTrue("The list of players for treasure card should be all the other players", tester1.getPlayersForCard().equals(playerList.getListOfOtherPlayers(1)));
 		
 	}
 
