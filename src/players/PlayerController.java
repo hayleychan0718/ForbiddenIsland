@@ -6,12 +6,9 @@ import island.cards.Card;
 import island.cards.Hand;
 import island.enums.TreasureNames;
 
-
-import players.*;
-
 /**
  * Singleton Class to implement the Player Controller
- * @author Liam FItzgerald
+ * @author Liam Fitzgerald and Hayley Chan
  *
  */
 public class PlayerController {

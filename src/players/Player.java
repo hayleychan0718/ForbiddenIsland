@@ -3,12 +3,9 @@ package players;
 /**
  * Abstract Class that sets up the base player class
  * Extended by Diver,Engineer,Explorer,Messenger,Navigator,Pilot
- * @author Liam Fitzgerald
+ * @author Liam Fitzgerald and Hayley Chan
  */
 import java.util.*;
-
-import org.junit.Assert;
-
 import island.board.*;
 import island.cards.*;
 import island.enums.TreasureNames;

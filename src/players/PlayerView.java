@@ -1,31 +1,35 @@
-/**
- * View to implement the user interface for Player class
- * @author Liam Fitzgerald
- */
 package players;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
-import gameLogic.WaterMeter;
-import island.board.Board;
 import island.board.Tile;
 import island.cards.*;
 import utility.Utility;
 
+/**
+ * View to implement the user interface for Player class
+ * @author Liam Fitzgerald
+ */
 
 public class PlayerView {
 
 	private PlayerController controller;
 	private static PlayerView playerView = null;
 
-	
+	/**
+	 * gets instance of the PlayerView
+	 * @return playerview
+	 */
 	public static PlayerView getInstanace() {
 		if(playerView == null)
 			playerView = new PlayerView();
 		return playerView;
 	}
 	
+	/**
+	 * Gets the PLayerController
+	 * @return controller
+	 */
 	public PlayerController getController() {
 		return controller;
 	}
@@ -113,7 +117,7 @@ public class PlayerView {
 		controller.shoreUpTile(SelectedTile);
 		shoreableTiles.remove(userInput);
 
-		if(player instanceof Engineer & !shoreableTiles.isEmpty()) {
+		if(player instanceof Engineer && !shoreableTiles.isEmpty()) {	//Engineer is allowed shore up another tile and must check there is another tile to shore up
 			System.out.println("/nYou are an Engineer so you may shore up another tile");
 			Utility.printOptions(shoreableTiles);
 			userInput=Utility.acceptableInput(0, shoreableTiles.size()-1, inputScanner); 
@@ -151,17 +155,17 @@ public class PlayerView {
 	 * @param player
 	 */
 	public void doStandardMovement(Scanner inputScanner, Player player){  
-		ArrayList<Tile> moveableTiles = controller.getStandardMoveTiles(player); //Sand Bag will get tiles you can shore up
+		ArrayList<Tile> moveableTiles = controller.getStandardMoveTiles(player); 
 
-		if(!canDoTileAction(moveableTiles, "move to ")) return; //Make method similar to mine to check if it is empty, if empty return
+		if(!canDoTileAction(moveableTiles, "move to ")) return; 
 
-		int userInput = Utility.acceptableInput(0, moveableTiles.size(), inputScanner); // Get user input for the options
+		int userInput = Utility.acceptableInput(0, moveableTiles.size(), inputScanner); 
 		if(userInput==moveableTiles.size()) return;  //If they want to cancel Movement
 
-		Tile selectedTile = moveableTiles.get(userInput); //What the user selected, so the tile choose to shore up.
-		controller.movePlayerPawn(player, selectedTile);  //Controller then shore up selected tile
-		System.out.println("Your pawn has been moved to " + selectedTile); //The tile shored up
-		controller.decementPlayerAction(player); //Use controller to discard card.
+		Tile selectedTile = moveableTiles.get(userInput); 
+		controller.movePlayerPawn(player, selectedTile);  
+		System.out.println("Your pawn has been moved to " + selectedTile);
+		controller.decementPlayerAction(player); 
 	}
 
 	/**
@@ -174,7 +178,7 @@ public class PlayerView {
 		System.out.println("\n" + player + " must move their tile has been sunk!");
 
 		Utility.printOptions(moveableTiles);
-		int userInput = Utility.acceptableInput(0, moveableTiles.size()-1, inputScanner); //No option to cancel movement
+		int userInput = Utility.acceptableInput(0, moveableTiles.size()-1, inputScanner); //No option to cancel movement as it is forced
 
 		Tile selectedTile = moveableTiles.get(userInput);
 		controller.movePlayerPawn(player, selectedTile);
@@ -196,7 +200,7 @@ public class PlayerView {
 			System.out.println("Your pawn is not on a treasure tile"); 
 			return;
 		}
-		System.out.println("You dont have the required card's to capture the treasure");
+		System.out.println("You dont have the required card's to capture the treasure"); //only other possibility is the players does not have the required cards
 		return;
 	}
 
@@ -239,10 +243,10 @@ public class PlayerView {
 		
 		int userInput = Utility.acceptableInput(0, currentPlayersCards.size(), inputScanner);
 		
-		if(userInput == currentPlayersCards.size()) return;
+		if(userInput == currentPlayersCards.size()) return; //cancels action
 		
 		Card selectedCard = currentPlayersCards.get(userInput);
-		controller.giveCard(selectedCard, selectedPlayerHand, player);
+		controller.giveCard(selectedCard, selectedPlayerHand, player); //Gives the card to the selected player
 		System.out.println("You have given" + selectedCard + "to" + selectedPlayer);
 		controller.decementPlayerAction(player);
 	}

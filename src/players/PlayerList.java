@@ -1,12 +1,9 @@
 package players;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
 /**
  * Singleton Class to manage the list of Players
- * @author Liam Fitzgerald
+ * @author Liam Fitzgerald and Hayley Chan
  *
  */
 public class PlayerList {
@@ -15,12 +12,17 @@ public class PlayerList {
 	private static PlayerList thePlayerList;
 	private ArrayList<Player> playerList;
 	
-	
-	
+	/**
+	 * Constructs the Playerlist
+	 */
 	 private PlayerList() { 
 	    	this.playerList = new ArrayList<Player>(); 
 	    }
 	
+	 /**
+	  * Gets instance of the PlayerList
+	  * @return
+	  */
     public static PlayerList getInstance(){
         if(thePlayerList == null){
         	thePlayerList = new PlayerList();
