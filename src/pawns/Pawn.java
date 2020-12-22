@@ -1,47 +1,47 @@
 package pawns;
 
-
 import island.board.Tile;
-import island.enums.TileNames;
+
+/**
+ * Class to implement the functionality for the players pawns
+ * @author Liam Fitzgerald and Hayley Chan
+ *
+ */
 
 public class Pawn {
 
-	private char mapChar; //How should we do this
 	private Tile pawnTile;
 	
-	//Need tiles using names
+	/**
+	 * Creates a pawn on a starting Tile
+	 * @param startingTile
+	 */
 	public Pawn(Tile startingTile) {
 		pawnTile=startingTile;
 		}
-		//automatically take first character from player role
 	
-	
-	
-	public char getChar() {
-		return mapChar;
-	}
-	
+	/**
+	 * Gets the tile the pawn is on
+	 * @return pawnTile
+	 */
 	public Tile getPawnTile() {
 		return pawnTile;
 	}
 	
-	//Maybe location co-ordinate but Tile class could take care of this
-	
-	public void setPawnTile(Tile newPawnTile) { //Sets the tile the pawn is on
-		pawnTile = newPawnTile;
-	} 
-	
-	//Move pawn on board
+	/**
+	 * Moves the pawn to a specified tile
+	 * @param tile
+	 */
 	public void movePawn(Tile tile) {
 		pawnTile = tile;
 	}
 	
-	public void onOceanTile() { //Is pawn tile on ocean tile
-	}
-	
-	public boolean isPawnTilePresent() {  //Checks if the pawn is on a present tile
+	/**
+	 * Boolean function to check if the Pawn's tile is present
+	 * @return
+	 */
+	public boolean isPawnTilePresent() {  
 		return pawnTile.isPresent();
 	}
-
 
 }
