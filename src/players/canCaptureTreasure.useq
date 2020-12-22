@@ -1,2 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sequence-diagram version="1.2.4" icons="true" generate-combined-fragments="true"/>
+<sequence-diagram version="1.2.4" icons="true" generate-combined-fragments="true">  
+  <object id="1" language="java" name="players.Player" project="ForbiddenIsland" 
+    file="/ForbiddenIsland/src/players/Player.java" binary="false" label="player1" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="2">      
+      <position height="230" width="0" x="0" y="299"/>    
+    </execution>    
+    <execution id="4">      
+      <position height="167" width="0" x="0" y="341"/>    
+    </execution>    
+    <execution id="6">      
+      <position height="21" width="0" x="0" y="393"/>    
+    </execution>  
+  </object>  
+  <object id="11" language="java" name="island.board.Tile" project="ForbiddenIsland" 
+    file="/ForbiddenIsland/src/island/board/Tile.java" binary="false" label="pawnTile" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="8">      
+      <position height="21" width="0" x="0" y="424"/>    
+    </execution>  
+  </object>  
+  <object id="12" language="java" name="island.enums.TreasureNames" project="ForbiddenIsland" 
+    file="/ForbiddenIsland/src/island/enums/TreasureNames.java" binary="false" type="enumeration" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="10">      
+      <position height="21" width="0" x="0" y="466"/>    
+    </execution>  
+  </object>  
+  <message id="3" operation="captureTreasure():void" asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="5" operation="getPlayerPawnTile():island.board.Tile" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="6"/>  
+  </message>  
+  <message id="7" operation="getTreasure():island.enums.TreasureNames" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="8"/>  
+  </message>  
+  <message id="9" operation="captureTreasure():void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="10"/>  
+  </message>
+</sequence-diagram>
