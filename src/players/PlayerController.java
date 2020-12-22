@@ -1,14 +1,11 @@
 package players;
 import java.util.ArrayList;
 
-import gameLogic.CardLogic;
 import island.board.*;
 import island.cards.Card;
 import island.cards.Hand;
-import island.cards.TreasureDeckCard;
 import island.enums.TreasureNames;
 
-import island.enums.TileNames;
 
 import players.*;
 

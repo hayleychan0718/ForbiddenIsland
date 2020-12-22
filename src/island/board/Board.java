@@ -46,14 +46,11 @@ public class Board{
         return boardInstance;
     }
 	
-<<<<<<< HEAD
     /**
      * Gets a tile from the board
      * @param name String name of the tile you want to retrieve
      * @return Return the tile on the board
      */
-=======
-    
     public Tile getTile(TileNames name) {
         for(int[] x: islandTiles) {
         	if(board[x[0]][x[1]].getName() == name) { 
@@ -63,14 +60,13 @@ public class Board{
         return null; 
     }
     
->>>>>>> stash
 	public Tile getTile(String name) {
         for(int[] x: islandTiles) {
         	if(board[x[0]][x[1]].getNameString() == name) {
         		return board[x[0]][x[1]];
         	}
         }
-        return null; // never needed
+        return null; 
     }
     
 	/**

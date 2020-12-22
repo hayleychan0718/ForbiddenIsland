@@ -2,6 +2,8 @@ package island.cards;
 
 import java.util.ArrayList;
 
+import gameLogic.GameView;
+import island.board.Board;
 import island.board.Tile;
 import island.enums.TreasureNames;
 import players.Player;
@@ -31,6 +33,10 @@ public class HelicopterCard extends TreasureDeckCard{
 		}
 	}
 	
+	/**
+	 * Checks if you can win the game with the helicopter card
+	 * @return True if you can win the game, false otherwise
+	 */
 	public static boolean canWinHelicopter() {
 		ArrayList<Player> playersList = PlayerList.getInstance().getListOfPlayers();
 		TreasureNames treasureNames[] = TreasureNames.values();
@@ -50,6 +56,17 @@ public class HelicopterCard extends TreasureDeckCard{
 		return winCondition;
 	}
 	
+    /**
+     * Win the game with the helicopter card
+     */
+	public static void winHelicopter() {
+		GameView.getInstance().gameWin();
+	}
+	
+	/**
+	 * Return a list of options for the helicopter card
+	 * @return List of tiles that are present on the board
+	 */
 	public static ArrayList<Tile> helicopterOptions(){
 		return Board.getInstance().listOfPresentTiles();
 	}

@@ -2,10 +2,8 @@ package island.cards;
 
 import java.util.ArrayList;
 
-import gameLogic.CardLogic;
 import island.board.Tile;
 import players.Player;
-import players.PlayerList;
 
 /**
  * Card controller MVC
@@ -18,29 +16,12 @@ public class CardController {
 	 */
 	private static CardController controller = null;
 	
-<<<<<<< HEAD
-	/**
-	 * CardController constructor
-	 * @param model The card model
-	 */
-    private CardController(CardLogic model) {
-    	this.model = model;        
-=======
-    private CardController() {    
->>>>>>> stash
-    }
-	
-<<<<<<< HEAD
     /**
      * Gets instance of the card controller
      * @param model The card model
      * @return
      */
-	public static CardController getInstance(CardLogic model) {
-=======
 	public static CardController getInstance() {
-		
->>>>>>> stash
 		if(controller == null)
 			controller = new CardController();
 		return controller;
@@ -73,20 +54,18 @@ public class CardController {
     	HelicopterCard.play(chosenTile, chosenPlayers);
     }
     
-<<<<<<< HEAD
+
     /**
      * Win the game with the helicopter card
      */
 	public void winHelicopter() {
-		model.winHelicopter();
+		HelicopterCard.winHelicopter();
 	}
     
 	/**
 	 * Checks if you can win the game with the helicopter card
 	 * @return True if you can win the game, false otherwise
 	 */
-=======
->>>>>>> stash
 	public boolean canWinHelicopter() {
 		return HelicopterCard.canWinHelicopter();
 	}
@@ -106,27 +85,19 @@ public class CardController {
     	WaterRiseCard.play();
     }
     
+    /**
+     * Get the list of options for the sandbag card
+     * @return Sandbag card options i.e. tiles that are flooded
+     */
     public ArrayList<Tile> sandBagOptions(){
     	return SandbagCard.sandBagOptions();
     }
     
+    /**
+     * Get the list of options for the helicopter card
+     * @return Helicoptor card options i.e. present tiles on the board
+     */
     public ArrayList<Tile> helicopterOptions(){
     	return HelicopterCard.helicopterOptions();
     }
-
-    /**
-     * Returns the list of tiles on the board
-     * @return List of present tiles 
-     */
-	public ArrayList<Tile> getListOfTiles() {
-		return model.getListOfTiles();
-	}
-
-	/**
-	 * Returns the list of flooded tiles
-	 * @return List of tiles that are flooded
-	 */
-	public ArrayList<Tile> getListOfFloodedTiles() {
-		return model.getListOfFloodedTiles();
-	}
 }

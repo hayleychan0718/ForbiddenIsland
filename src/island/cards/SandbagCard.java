@@ -26,6 +26,10 @@ public class SandbagCard extends TreasureDeckCard{
 		chosenTile.setFlood(false);
 	}
 
+	/**
+	 * Return a list of options for the sandbag card
+	 * @return A list of all the flooded tiles on the board
+	 */
 	public static ArrayList<Tile> sandBagOptions(){
 		return Board.getInstance().listOfFloodedTiles();
 	}
