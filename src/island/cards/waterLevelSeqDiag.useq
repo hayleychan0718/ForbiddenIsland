@@ -3,12 +3,12 @@
   <object id="1" language="java" name="island.cards.WaterRiseCard" project="ForbiddenIsland" 
     file="/ForbiddenIsland/src/island/cards/WaterRiseCard.java" binary="false" label="waterRiseCard" type="class" 
     autoSize="true">    
-    <position height="-1" width="-1" x="104" y="0"/>    
+    <position height="-1" width="-1" x="177" y="0"/>    
     <execution id="2">      
-      <position height="445" width="0" x="0" y="161"/>    
+      <position height="445" width="0" x="0" y="224"/>    
     </execution>    
     <execution id="4">      
-      <position height="364" width="0" x="0" y="215"/>    
+      <position height="364" width="0" x="0" y="278"/>    
     </execution>  
   </object>  
   <object id="17" language="java" name="gameLogic.WaterMeter" project="ForbiddenIsland" 
@@ -16,7 +16,7 @@
     autoSize="true">    
     <position height="0" width="0" x="0" y="0"/>    
     <execution id="6">      
-      <position height="27" width="0" x="0" y="255"/>    
+      <position height="27" width="0" x="0" y="318"/>    
     </execution>  
   </object>  
   <object id="18" language="java" name="island.cards.FloodDeck" project="ForbiddenIsland" 
@@ -24,27 +24,27 @@
     autoSize="true">    
     <position height="0" width="0" x="0" y="0"/>    
     <execution id="8">      
-      <position height="27" width="0" x="0" y="309"/>    
+      <position height="27" width="0" x="0" y="372"/>    
     </execution>  
   </object>  
   <object id="19" language="java" name="gameLogic.WaterMeter" project="ForbiddenIsland" 
     file="/ForbiddenIsland/src/gameLogic/WaterMeter.java" binary="false" label="waterMeter" type="class" autoSize="true">    
     <position height="0" width="0" x="0" y="0"/>    
     <execution id="10">      
-      <position height="27" width="0" x="0" y="363"/>    
+      <position height="27" width="0" x="0" y="426"/>    
     </execution>  
   </object>  
   <object id="20" language="java" name="island.cards.Deck" project="ForbiddenIsland" 
     file="/ForbiddenIsland/src/island/cards/Deck.java" binary="false" label="floodDeck" type="class" autoSize="true">    
     <position height="0" width="0" x="0" y="0"/>    
     <execution id="12">      
-      <position height="27" width="0" x="0" y="417"/>    
+      <position height="27" width="0" x="0" y="480"/>    
     </execution>    
     <execution id="14">      
-      <position height="27" width="0" x="0" y="471"/>    
+      <position height="27" width="0" x="0" y="534"/>    
     </execution>    
     <execution id="16">      
-      <position height="27" width="0" x="0" y="525"/>    
+      <position height="27" width="0" x="0" y="588"/>    
     </execution>  
   </object>  
   <message id="3" operation="play():void" asynchronous="false">    
