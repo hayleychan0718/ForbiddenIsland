@@ -147,9 +147,9 @@ public class GameView {
 			sunkenPlayers(inputScanner); //Checks for sunken players
 			treasureOrFoolSunk(inputScanner);
 			playerTurn(player);
-			printPlayersActions(player);
 			
 			while (!isTurnOver) { 
+				printPlayersActions(player);
 				playerView.printOptions();
 				playerView.selectOption(inputScanner, player);	//Select one of available actions options
 				isTurnOver=controller.isTurnOver(player);	

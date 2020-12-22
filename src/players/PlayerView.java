@@ -247,7 +247,7 @@ public class PlayerView {
 		
 		Card selectedCard = currentPlayersCards.get(userInput);
 		controller.giveCard(selectedCard, selectedPlayerHand, player); //Gives the card to the selected player
-		System.out.println("You have given" + selectedCard + "to" + selectedPlayer);
+		System.out.println("You have given " + selectedCard + " to " + selectedPlayer);
 		controller.decementPlayerAction(player);
 	}
 
