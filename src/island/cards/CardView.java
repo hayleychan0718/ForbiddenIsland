@@ -165,7 +165,7 @@ public class CardView {
 		while(repeat==true) {
 			System.out.println("Who do you want to move to " + chosenTile + "?");
 			Utility.printOptions(playersForHelicopter);
-			int playerIndex = Utility.acceptableInput(0, playersForHelicopter.size()-1, inputScanner);
+			int playerIndex = Utility.acceptableInput(0, playersForHelicopter.size(), inputScanner);
 			chosenPlayers.add(playersForHelicopter.get(playerIndex));	
 			playersForHelicopter.remove(playerIndex);
 			if(!playersForHelicopter.isEmpty()) { 
