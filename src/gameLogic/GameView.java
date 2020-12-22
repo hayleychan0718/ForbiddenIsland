@@ -18,10 +18,13 @@ import utility.Utility;
  */
 
 public class GameView {
-
 	private GameController controller;
 	private static GameView gameView = null;
 
+	/**
+	 * Creating instance of the game view 
+	 * @return GameView instance
+	 */
 	public static GameView getInstance() {
 		if(gameView==null)
 			gameView = new GameView();
@@ -86,6 +89,11 @@ public class GameView {
 		return;
 	} 
 	
+	/**
+	 * Checks if a player is beside a treasure tile or a fool's tile that is about to sink and asks the 
+	 * player if they want to save it
+	 * @param inputScanner The scanner
+	 */
 	public void treasureOrFoolSunk(Scanner inputScanner) {
 		PlayerView playerView = PlayerView.getInstanace();
 		ArrayList<Tile> sunkTiles = GameOverObserver.getInstance().getSunkTiles();
@@ -102,6 +110,11 @@ public class GameView {
 		}
 	}
 	
+	/**
+	 * The game is lost if player decides to not save the tile that is being sunk or if no player
+	 * is beside that tile
+	 * @param tile The tile being sunk
+	 */
 	public void invokeLoseGame(Tile tile) {
 		if(controller.loseCondition()) {
 			if(tile.getNameString() == "Fool's Landing")
@@ -111,10 +124,18 @@ public class GameView {
 		}
 	}
 	
+	/**
+	 * Prints the player's number of actions remaining
+	 * @param player The player
+	 */
 	public void printPlayersActions(Player player) {
 		System.out.println("\nYou have " + controller.getPlayerActions(player) + " actions remaining");
 	}
 	
+	/**
+	 * Does the player's turn. Able to choose any option from player view.
+	 * @param inputScanner The scanner
+	 */
 	public void doTurn(Scanner inputScanner) {
 		boolean isTurnOver;
 		ArrayList<Player> playerList = controller.getListOfPlayers();
@@ -125,13 +146,12 @@ public class GameView {
 			controller.reStockActions(player);
 			sunkenPlayers(inputScanner); //Checks for sunken players
 			treasureOrFoolSunk(inputScanner);
-			
 			playerTurn(player);
 			printPlayersActions(player);
 			
 			while (!isTurnOver) { 
 				playerView.printOptions();
-				playerView.selectOption(inputScanner, player);	//Select one of availabe actions options
+				playerView.selectOption(inputScanner, player);	//Select one of available actions options
 				isTurnOver=controller.isTurnOver(player);	
 			} 
 			treasureDeckTurn(player, inputScanner);
@@ -140,6 +160,11 @@ public class GameView {
 
 	}
 
+	/**
+	 * After player ends their actions. Two cards are drawn from treasure deck.
+	 * @param player The player
+	 * @param inputScanner The scanner
+	 */
 	public void treasureDeckTurn(Player player, Scanner inputScanner) {
 		System.out.println("\nDrawing 2 cards from treasure deck...");
 		Hand playerHand = controller.getHand(player);
@@ -153,6 +178,11 @@ public class GameView {
 			runCardView(inputScanner, player);
 	}
 	
+	/**
+	 * Prints the cards drawn from the treasure deck to the user
+	 * @param cardsDrawn List of cards drawn from the treasure deck
+	 * @param player The player
+	 */
 	public void printCardsDrawn(ArrayList<Card> cardsDrawn, Player player) {
 		for(Card card: cardsDrawn) {
 			if(card instanceof WaterRiseCard) {
@@ -166,10 +196,21 @@ public class GameView {
 		}
 	}
 	
+	/**
+	 * Run the card view
+	 * @param inputScanner The scanner
+	 * @param player The player
+	 */
 	public void runCardView(Scanner inputScanner, Player player) {
 		PlayerView.getInstanace().runCardView(inputScanner, player);
 	}
 	
+	/**
+	 * Ask the player to remove card(s) if they have more than 5 cards in their hand
+	 * @param player The player
+	 * @param playerHand The player's hand
+	 * @param inputScanner The scanner
+	 */
 	public void tooManyCardsPrompt(Player player, Hand playerHand, Scanner inputScanner) {
 		ArrayList<Card> cards = playerHand.getCards();
 		int numCardsToRemove = cards.size()-5;
@@ -184,6 +225,10 @@ public class GameView {
 		}
 	}
 	
+	/**
+	 * After treasure deck cards are drawn. Flood cards equal to the number of the water meter level are
+	 * drawn. Print to user which tiles have been flooded or sunk.
+	 */
 	public void floodDeckTurn() {
 		System.out.println("\nDrawing flood cards...");
 		ArrayList<Tile> tilesFlooded = controller.floodDeckTurn();
@@ -195,6 +240,10 @@ public class GameView {
 		}
 	}
 	
+	/**
+	 * Starts the game.
+	 * @param inputScanner The scanner
+	 */
 	public void doGame(Scanner inputScanner) {
 		startGame();
 		while(!controller.isGameOver()) { //Will keep looping over tile game is over
@@ -202,10 +251,19 @@ public class GameView {
 		}
 	}
 
+	/**
+	 * Prints game over message
+	 */
 	public void gameOver() {
-		System.out.println("Game Over!");
-	}
+		System.out.println("\n******************************************");
+		System.out.println("**                                      **");
+		System.out.println("**               You lose!              **");
+		System.out.println("**                                      **");
+		System.out.println("******************************************");	}
 	
+	/**
+	 * Prints winning message
+	 */
 	public void gameWin() {
 		System.out.println("Lifting off Fool's Landing...");
 		
@@ -218,6 +276,9 @@ public class GameView {
 		System.exit(0);
 	}
 	
+	/**
+	 * Prints a losing message when both treasure tiles have sunk before the treasure has been captured
+	 */
 	public void treasureLost() {
 		ArrayList<Tile> sunkTiles = GameOverObserver.getInstance().getSunkTiles();
 		Tile lastTile = sunkTiles.get(sunkTiles.size() - 1);
@@ -226,15 +287,24 @@ public class GameView {
 		endGame();
 	}
 	
+	/**
+	 * Ends game when Fool's Landing has sunk
+	 */
 	public void foolsLost() {
 		endGame();
 	}
 	
+	/**
+	 * Prints when water meter has reached level 5
+	 */
 	public void waterLost() {
 		System.out.println("Water meter has reached 5!");
 		endGame();
 	}
 
+	/**
+	 * Method to invoke the end of the game.
+	 */
 	public void endGame() {
 		gameOver();
 		controller.gameOver();
