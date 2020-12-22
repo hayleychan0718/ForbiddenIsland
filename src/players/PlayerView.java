@@ -44,7 +44,7 @@ public class PlayerView {
 	 */
 	public void printOptions() {
 		System.out.println("\nYou have the following available options");
-		System.out.println("[1] Move Pawn");
+		System.out.println("[1] Move Pawn"); 
 		System.out.println("[2] Shore Up Tile");
 		System.out.println("[3] Give Treasure Card");
 		System.out.println("[4] Capture Treasure");

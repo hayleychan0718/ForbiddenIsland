@@ -71,7 +71,8 @@ public class GameView {
 	 * @param inputScanner
 	 */
 	public void sunkenPlayers(Scanner inputScanner) {	//SunkenPlayers
-		ArrayList<Player> listSunkenPlayers = PlayerObserver.getInstance().getSunkenPlayers();	//Gets list of sunken players from player observer
+		PlayerObserver playerObserver=PlayerObserver.getInstance();
+		ArrayList<Player> listSunkenPlayers = playerObserver.getSunkenPlayers();	//Gets list of sunken players from player observer
 		PlayerView playerView = PlayerView.getInstanace();
 
 		if(listSunkenPlayers.isEmpty()) return; //No players have been sunk return
@@ -82,7 +83,7 @@ public class GameView {
 			}
 			playerView.doForcedMovement(inputScanner, player); //otherwise player does forced movement
 		}
-		PlayerObserver.getInstance().updateMoved(); //Update the observer that the sunken players have moved
+		playerObserver.updateMoved(); //Update the observer that the sunken players have moved
 		return;
 	} 
 	

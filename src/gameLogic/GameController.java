@@ -1,14 +1,9 @@
 package gameLogic;
 import java.util.ArrayList;
-import java.util.Scanner;
-
 import island.board.Board;
 import island.board.Tile;
 import island.cards.Card;
 import island.cards.Hand;
-import island.cards.TreasureDeck;
-import island.enums.TreasureNames;
-import observers.GameOverObserver;
 import players.*;
 
 public class GameController {

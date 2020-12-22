@@ -1,4 +1,4 @@
-package island.cards;
+ package island.cards;
 
 import island.enums.TreasureNames;
 

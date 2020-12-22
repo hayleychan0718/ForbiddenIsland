@@ -8,12 +8,10 @@ import players.PlayerList;
 public class PlayerObserver {
 
 		private static PlayerObserver playerObserver;
-		private ArrayList<Player> listOfPlayers;
 		private ArrayList<Player> sunkenPlayers;
 		
 	
 		private PlayerObserver() {
-			listOfPlayers= PlayerList.getInstance().getListOfPlayers();
 			sunkenPlayers = new ArrayList<Player>();
 		}
 		
@@ -37,24 +35,4 @@ public class PlayerObserver {
 		public ArrayList<Player> getSunkenPlayers (){
 			return sunkenPlayers;
 		}
-		
-//		public ArrayList<Player> sunkenPlayers(){
-//			ArrayList<Player> sunkenPlayers= new ArrayList<Player>();
-//			for(Player player:listOfPlayers) {
-//				if(player.update()==true) {
-//					sunkenPlayers.add(player);
-//				}
-//			}
-//			return sunkenPlayers;
-//		}
-//		
-//		public ArrayList<Player> sunkenPlayers(){
-//			ArrayList<Player> sunkenPlayers= new ArrayList<Player>();
-//			for(Player player:listOfPlayers) {
-//				if(player.update()==true) {
-//					sunkenPlayers.add(player);
-//				}
-//			}
-//			return sunkenPlayers;
-//		}
 }
