@@ -51,7 +51,7 @@ public class PlayerObserver {
 
 	/**
 	 * Gets the list of sunken Players
-	 * @return sunkenPlayers
+	 * @return list of sunken Players
 	 */
 	public ArrayList<Player> getSunkenPlayers (){
 		return sunkenPlayers;

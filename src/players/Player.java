@@ -40,7 +40,7 @@ public abstract class Player {
 	
 	/**
 	 * Gets the current list of move able tile for the player
-	 * @return moveableTiles
+	 * @return List of standard moveable Tiles
 	 */
 	public ArrayList<Tile> getStandardMoveableTiles() {  
 		Tile pawnTile  = getPlayerPawnTile();
@@ -57,7 +57,7 @@ public abstract class Player {
 
 	/**
 	 * Gets the current list of tiles that a player can shore up
-	 * @return shoreableTiles
+	 * @return List of Shore able Tiles
 	 */
 	public ArrayList<Tile> getShoreableTiles() {  
 		Tile pawnTile  =getPlayerPawnTile();
@@ -75,7 +75,7 @@ public abstract class Player {
 	
 	/**
 	 * Gets the list of tiles a player can move to when their tile has been sunk
-	 * @return ForcedMoveableTiles
+	 * @return List Forced MoveableTiles
 	 */
 	public ArrayList<Tile> getForcedMoveableTiles(){ 
 		return getStandardMoveableTiles();
@@ -83,7 +83,7 @@ public abstract class Player {
 	
 	/**
 	 * Gets the list the list of Players a player can give a card to
-	 * @return
+	 * @return List of Possible Players for Card
 	 */
 	public ArrayList<Player> getPlayersForCard() { 
 		ArrayList<Player> playersForCard = new ArrayList <Player>();
@@ -126,7 +126,7 @@ public abstract class Player {
 	}
 	
 	/**
-	 * Checks if the players is on a treausre tile
+	 * Checks if the players is on a treasure tile
 	 * @return true/false
 	 */
 	public boolean onTreasureTile() {

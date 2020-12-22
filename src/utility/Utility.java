@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 /**
  * Class uses to hold utility functions
- * @author Liam Fitzgerald
+ * @author Liam Fitzgerald and Hayley Chan
  *
  */
 
@@ -53,19 +53,6 @@ public class Utility {
 		for(Object o: optionList) {
 			System.out.println(o.toString() + " [" + i + "]");
 			i++;
-		}
-	}
-	
-	/**
-	 * User to sleep the console in ms
-	 * @param time ms
-	 */
-	public static void sleep(long time) {
-		try {
-			Thread.sleep(time);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 

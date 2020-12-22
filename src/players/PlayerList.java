@@ -89,7 +89,7 @@ public class PlayerList {
     
     /**
      * Gets the players for Helicopter
-     * @return
+     * @return playersForHelicopter
      */
     public ArrayList<Player> getPlayersForHelicopter(){
     	ArrayList<Player> playersForHelicopter = new ArrayList<>(playerList);

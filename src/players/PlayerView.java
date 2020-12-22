@@ -132,12 +132,12 @@ public class PlayerView {
 	 * Checks whether the user can do a voluntary tile action either shore up or standard movement
 	 * @param tileOptions
 	 * @param typeOfTileAction Either "shore up" or "move to "
-	 * @return
+	 * @return true/false
 	 */
 	public boolean canDoTileAction(ArrayList<Tile> tileOptions, String typeOfTileAction) {
 
 		if(tileOptions.isEmpty()) {
-			System.out.println("There are no Tiles to " + typeOfTileAction);
+			System.out.println("There are no Tiles to " + typeOfTileAction); //Either "shore up" or "move to"
 			return false;
 		}
 		else {

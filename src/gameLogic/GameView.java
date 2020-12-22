@@ -19,7 +19,6 @@ import utility.Utility;
 
 public class GameView {
 
-	//private GameView gameView;
 	private GameController controller;
 	private static GameView gameView = null;
 
