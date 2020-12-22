@@ -61,7 +61,7 @@ public class PlayerController {
 	}
 
 	/**
-	 * Decrements the players actions
+	 * Decrements the players actions by one
 	 * @param player
 	 */
 	public void decementPlayerAction(Player player) {
@@ -80,7 +80,7 @@ public class PlayerController {
 	/**
 	 * Boolean for whether a player can capture a treasure , if true treasure is captured
 	 * @param player
-	 * @return true/false
+	 * @return true/false 
 	 */
 	public boolean canCaptureTreasure(Player player) {
 		return player.canCaptureTreasure();
@@ -103,7 +103,7 @@ public class PlayerController {
 	}
 
 	/**
-	 * Moves pawn to Tile
+	 * Moves pawn to input Tile
 	 * @param player
 	 * @param tile
 	 */
@@ -113,9 +113,9 @@ public class PlayerController {
 
 
 	/**
-	 * Gets the treasure the player is currently in
+	 * Gets the treasure the player's pawn is currently on
 	 * @param player
-	 * @return the treasure
+	 * @return TreasureNames treasure
 	 */
 	public TreasureNames getTileTreasure(Player player) {
 		return player.getTreasure();
@@ -132,9 +132,9 @@ public class PlayerController {
 
 	/**
 	 * Gives a card from input player to another players hand
-	 * @param selectedCard
-	 * @param toRecieve
-	 * @param player
+	 * @param selectedCard card to give
+	 * @param toRecieve hand of player to receive
+	 * @param player players giving the card
 	 */
 	public void giveCard(Card selectedCard, Hand toRecieve, Player player) {
 		player.giveCard(selectedCard, toRecieve);
@@ -168,7 +168,7 @@ public class PlayerController {
     
     /**
      * Gets string representation of the board
-     * @return String Board
+     * @return String of Board
      */
     public String showBoard() {
     	return Board.getInstance().showBoard();
