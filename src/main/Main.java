@@ -4,7 +4,7 @@ import setup.GameSetup;
 
 /**
  * Main class for the game
- * @author Liam Fitzgerald
+ * @author Liam Fitzgerald and Hayley Chan
  *
  */
 public class Main {
