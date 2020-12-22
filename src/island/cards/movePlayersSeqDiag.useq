@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.2.4" icons="true" generate-combined-fragments="true">  
+  <object id="1" language="java" name="island.cards.HelicopterCard" project="ForbiddenIsland" 
+    file="/ForbiddenIsland/src/island/cards/HelicopterCard.java" binary="false" label="helicopterCard" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="97" y="0"/>    
+    <execution id="2">      
+      <position height="209" width="0" x="0" y="127"/>    
+    </execution>    
+    <execution id="4">      
+      <position height="128" width="0" x="0" y="181"/>    
+    </execution>  
+  </object>  
+  <object id="7" language="java" name="players.Player" project="ForbiddenIsland" 
+    file="/ForbiddenIsland/src/players/Player.java" binary="false" label="player" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="6">      
+      <position height="27" width="0" x="0" y="255"/>    
+    </execution>  
+  </object>  
+  <combined-fragment id="8" interaction-operator="LOOP">    
+    <interaction-operand id="9" constraint="for: chosenPlayers">      
+      <fragment refId="5"/>    
+    </interaction-operand>  
+  </combined-fragment>  
+  <message id="3" operation="play(island.board.Tile,java.util.ArrayList&lt;players.Player&gt;):void" 
+    asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="5" operation="movePlayerPawn(island.board.Tile):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="6"/>  
+  </message>
+</sequence-diagram>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.2.4" icons="true" generate-combined-fragments="true">  
+  <object id="1" language="java" name="island.cards.SandbagCard" project="ForbiddenIsland" 
+    file="/ForbiddenIsland/src/island/cards/SandbagCard.java" binary="false" label="sandbagCard" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="69" y="0"/>    
+    <execution id="2">      
+      <position height="175" width="0" x="0" y="128"/>    
+    </execution>    
+    <execution id="4">      
+      <position height="94" width="0" x="0" y="182"/>    
+    </execution>    
+    <execution id="7">      
+      <position height="229" width="0" x="0" y="292"/>    
+    </execution>    
+    <execution id="9">      
+      <position height="148" width="0" x="0" y="346"/>    
+    </execution>  
+  </object>  
+  <object id="14" language="java" name="island.board.Board" project="ForbiddenIsland" 
+    file="/ForbiddenIsland/src/island/board/Board.java" binary="false" label="&lt;static&gt;" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="11">      
+      <position height="27" width="0" x="0" y="386"/>    
+    </execution>  
+  </object>  
+  <object id="15" language="java" name="island.board.Board" project="ForbiddenIsland" 
+    file="/ForbiddenIsland/src/island/board/Board.java" binary="false" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="13">      
+      <position height="27" width="0" x="0" y="440"/>    
+    </execution>  
+  </object>  
+  <object id="16" language="java" name="island.board.Tile" project="ForbiddenIsland" 
+    file="/ForbiddenIsland/src/island/board/Tile.java" binary="false" label="chosenTile" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="6">      
+      <position height="27" width="0" x="0" y="222"/>    
+    </execution>  
+  </object>  
+  <message id="3" operation="play(island.board.Tile):void" asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="5" operation="setFlood(boolean):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="6"/>  
+  </message>  
+  <message id="8" operation="sandBagOptions():java.util.ArrayList&lt;Tile&gt;" asynchronous="false">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="9"/>  
+  </message>  
+  <message id="10" operation="getInstance():island.board.Board" asynchronous="false">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="11"/>  
+  </message>  
+  <message id="12" operation="listOfFloodedTiles():java.util.ArrayList&lt;Tile&gt;" asynchronous="false">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="13"/>  
+  </message>
+</sequence-diagram>

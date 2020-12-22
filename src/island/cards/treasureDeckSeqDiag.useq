@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.2.4" icons="true" generate-combined-fragments="true">  
+  <object id="1" language="java" name="island.cards.TreasureDeck" project="ForbiddenIsland" 
+    file="/ForbiddenIsland/src/island/cards/TreasureDeck.java" binary="false" label="treasureDeck" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="126" y="0"/>    
+    <execution id="2">      
+      <position height="930" width="0" x="0" y="181"/>    
+    </execution>    
+    <execution id="4">      
+      <position height="849" width="0" x="0" y="235"/>    
+    </execution>    
+    <execution id="8">      
+      <position height="27" width="0" x="0" y="434"/>    
+    </execution>  
+  </object>  
+  <object id="23" language="java" name="java.util.ArrayList" project="ForbiddenIsland" 
+    file="C:/Program Files/Java/jdk-11.0.8/lib/jrt-fs.jar" binary="true" label="drawnCardList" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="6">      
+      <position height="27" width="0" x="0" y="275"/>    
+    </execution>    
+    <execution id="14">      
+      <position height="27" width="0" x="0" y="717"/>    
+    </execution>    
+    <execution id="22">      
+      <position height="27" width="0" x="0" y="1030"/>    
+    </execution>  
+  </object>  
+  <object id="24" language="java" name="java.util.Stack" project="ForbiddenIsland" 
+    file="C:/Program Files/Java/jdk-11.0.8/lib/jrt-fs.jar" binary="true" label="treasureStack" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="10">      
+      <position height="27" width="0" x="0" y="555"/>    
+    </execution>  
+  </object>  
+  <object id="25" language="java" name="island.cards.WaterRiseCard" project="ForbiddenIsland" 
+    file="/ForbiddenIsland/src/island/cards/WaterRiseCard.java" binary="false" label="&lt;static&gt;" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="12">      
+      <position height="27" width="0" x="0" y="663"/>    
+    </execution>  
+  </object>  
+  <object id="26" language="java" name="java.util.Vector" project="ForbiddenIsland" 
+    file="C:/Program Files/Java/jdk-11.0.8/lib/jrt-fs.jar" binary="true" label="discardStack" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="16">      
+      <position height="27" width="0" x="0" y="815"/>    
+    </execution>  
+  </object>  
+  <object id="27" language="java" name="players.Player" project="ForbiddenIsland" 
+    file="/ForbiddenIsland/src/players/Player.java" binary="false" label="player" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="18">      
+      <position height="27" width="0" x="0" y="922"/>    
+    </execution>  
+  </object>  
+  <object id="28" language="java" name="island.cards.Hand" project="ForbiddenIsland" 
+    file="/ForbiddenIsland/src/island/cards/Hand.java" binary="false" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="20">      
+      <position height="27" width="0" x="0" y="976"/>    
+    </execution>  
+  </object>  
+  <combined-fragment id="29" interaction-operator="LOOP">    
+    <interaction-operand id="30" constraint="for:i&lt;=2">      
+      <fragment refId="31"/>      
+      <fragment refId="32"/>      
+      <fragment refId="33"/>    
+    </interaction-operand>    
+    <combined-fragment id="33" interaction-operator="OPT">      
+      <interaction-operand id="34" constraint="treasureStack.isEmpty()">        
+        <fragment refId="7"/>      
+      </interaction-operand>    
+    </combined-fragment>    
+    <combined-fragment id="31" interaction-operator="CRITICAL">      
+      <interaction-operand id="35">        
+        <fragment refId="9"/>      
+      </interaction-operand>    
+    </combined-fragment>    
+    <combined-fragment id="32" interaction-operator="ALT">      
+      <interaction-operand id="36" constraint="drawnCard instanceof WaterRiseCard">        
+        <fragment refId="37"/>        
+        <fragment refId="11"/>        
+        <fragment refId="13"/>      
+      </interaction-operand>      
+      <interaction-operand id="38" constraint="else">        
+        <fragment refId="19"/>        
+        <fragment refId="17"/>        
+        <fragment refId="21"/>      
+      </interaction-operand>      
+      <combined-fragment id="37" interaction-operator="CRITICAL">        
+        <interaction-operand id="39">          
+          <fragment refId="15"/>        
+        </interaction-operand>      
+      </combined-fragment>    
+    </combined-fragment>  
+  </combined-fragment>  
+  <message id="3" operation="drawCard(players.Player):java.util.ArrayList&lt;Card&gt;" asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="5" operation="ArrayList()" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="6"/>  
+  </message>  
+  <message id="7" operation="reshuffle(java.util.Stack,java.util.Stack):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="8"/>  
+  </message>  
+  <message id="9" operation="pop():E" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="10"/>  
+  </message>  
+  <message id="11" operation="play():void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="12"/>  
+  </message>  
+  <message id="13" operation="add(E):boolean" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="14"/>  
+  </message>  
+  <message id="15" operation="add(E):boolean" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="16"/>  
+  </message>  
+  <message id="17" operation="getHand():island.cards.Hand" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="18"/>  
+  </message>  
+  <message id="19" operation="addCard(island.cards.Card):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="20"/>  
+  </message>  
+  <message id="21" operation="add(E):boolean" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="22"/>  
+  </message>
+</sequence-diagram>
