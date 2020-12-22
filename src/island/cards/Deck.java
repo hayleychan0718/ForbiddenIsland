@@ -3,6 +3,11 @@ package island.cards;
 import java.util.Collections;
 import java.util.Stack;
 
+/**
+ * Abstract Deck class
+ * @author Hayley Chan and Liam Fitzgerald
+ *
+ */
 public abstract class Deck {
 	/**
 	 * Reshuffles the discard stack and places into the main stack

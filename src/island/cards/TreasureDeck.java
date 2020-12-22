@@ -8,7 +8,11 @@ import island.enums.TreasureNames;
 import players.Player;
 import players.PlayerView;
 
-
+/**
+ * Treasure Deck singleton class
+ * @author Hayley Chan and Liam Fitzgerald
+ *
+ */
 public class TreasureDeck extends Deck{
 	/*
 	 * Instance variables
@@ -21,7 +25,7 @@ public class TreasureDeck extends Deck{
      * TreasureDeck constructor
      */
     /**
-     * Creates the treasure deck 
+     * Constructor creates the treasure deck 
      */
     public TreasureDeck() {
     	// Adding 3 helicopter cards

@@ -2,8 +2,6 @@ package island.cards;
 
 import java.util.ArrayList;
 
-import gameLogic.GameView;
-import island.board.Board;
 import island.board.Tile;
 import players.Player;
 
