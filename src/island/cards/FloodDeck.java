@@ -10,7 +10,11 @@ import island.board.Board;
 import island.board.Tile;
 import island.enums.TileNames;
 
-
+/**
+ * Flood Deck singleton class
+ * @author Hayley Chan and Liam Fitzgerald
+ *
+ */
 public class FloodDeck extends Deck{
 	/*
 	 * Instance variables

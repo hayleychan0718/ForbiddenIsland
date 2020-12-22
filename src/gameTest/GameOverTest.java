@@ -17,6 +17,12 @@ import island.enums.TreasureNames;
 import observers.GameOverObserver;
 import players.Engineer;
 
+
+/**
+ * Unit testing the game over conditions
+ * @author Hayley Chan and Liam Fitzgerald
+ *
+ */
 public class GameOverTest {
 	GameOverObserver gameOverObserver = GameOverObserver.getInstance();
 	GameView gameView = GameView.getInstance();

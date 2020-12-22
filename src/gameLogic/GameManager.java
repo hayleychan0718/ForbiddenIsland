@@ -80,7 +80,6 @@ public class GameManager {
 		return Board.getInstance();
 	}
 
-
 	public boolean playerBeside(Tile tile) {
 		ArrayList<Player> playersList = PlayerList.getInstance().getListOfPlayers();
 		for(Player player: playersList) {
@@ -118,6 +117,13 @@ public class GameManager {
 				sunkTiles.contains(board.getTile("Howling Garden")) && sunkTiles.contains(board.getTile("Whispering Garden")) && !TreasureNames.TheStatueOfTheWind.isCaptured()){
 			return true;
 		}
+		else 
+			return false;
+	}
+
+	public boolean checksHand(Hand playerHand) {
+		if(playerHand.getCards().size()>=6) 
+			return true;
 		else 
 			return false;
 	}

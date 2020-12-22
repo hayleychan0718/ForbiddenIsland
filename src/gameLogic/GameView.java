@@ -144,9 +144,9 @@ public class GameView {
 		Hand playerHand = controller.getHand(player);
 		ArrayList<Card> cardsDrawn = controller.treasureDeckTurn(player);
 		for(Card card: cardsDrawn) {
-			System.out.println("Adding " + card.getName() + " to " + player.getName() + "'s hand...");
+			System.out.println("Adding " + card.getName() + " to " + player + "'s hand...");
 		}
-		if(playerHand.getCards().size()>=6) {
+		if(controller.checksHand(playerHand)) {
 			tooManyCardsPrompt(player, playerHand, inputScanner);
 		}
 		ArrayList<TreasureDeckCard> playableCards = playerHand.getPlayableCards();
@@ -167,7 +167,7 @@ public class GameView {
 			PlayerView.getInstanace().printHand(player);
 			System.out.print("\nEnter index of card you want to remove: ");
 			int userInput = Utility.acceptableInput(0, cards.size()-1, inputScanner);
-			System.out.println("\nRemoved " + cards.get(userInput).getName());
+			System.out.println("\nRemoved " + cards.get(userInput));
 			controller.removeFromHand(cards.get(userInput), player);
 		}
 	}
@@ -177,9 +177,9 @@ public class GameView {
 		ArrayList<Tile> tilesFlooded = controller.floodDeckTurn();
 		for(Tile tile: tilesFlooded) {
 			if(tile.isFlooded() && tile.isPresent())
-				System.out.println("Flooding " + tile.getNameString());
+				System.out.println("Flooding " + tile);
 			else if(!tile.isPresent())
-				System.out.println("Sinking " + tile.getNameString());
+				System.out.println("Sinking " + tile);
 		}
 	}
 	
@@ -210,7 +210,7 @@ public class GameView {
 		ArrayList<Tile> sunkTiles = GameOverObserver.getInstance().getSunkTiles();
 		Tile lastTile = sunkTiles.get(sunkTiles.size() - 1);
 		
-		System.out.println(lastTile.getNameString() + " has sunk before the treasure was captured!");
+		System.out.println(lastTile + " has sunk before the treasure was captured!");
 		endGame();
 	}
 	
