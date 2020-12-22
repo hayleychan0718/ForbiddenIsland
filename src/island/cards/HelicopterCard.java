@@ -40,18 +40,15 @@ public class HelicopterCard extends TreasureDeckCard{
 	public static boolean canWinHelicopter() {
 		ArrayList<Player> playersList = PlayerList.getInstance().getListOfPlayers();
 		TreasureNames treasureNames[] = TreasureNames.values();
-		Boolean winCondition = false;
-
 		for(Player player: playersList) {
 			if(player.getPlayerPawnTile().getNameString() != "Fool's Landing") 
-				return winCondition = false;
+				return false;
 		}
 		for(TreasureNames treasure: treasureNames) {
 			if(!treasure.isCaptured())
-				return winCondition = false;
+				return false;
 		}
-
-		return winCondition = true;
+		return true;
 	}
 
 	/**
