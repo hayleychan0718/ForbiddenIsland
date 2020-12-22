@@ -211,7 +211,7 @@ public class PlayerView {
 	 * @return selected player or null
 	 */
 	public Player selectPlayerForCard(Player player, Scanner inputScanner) {
-		ArrayList<Player> playersForCard =controller.getPlayerForCard(player);
+		ArrayList<Player> playersForCard =controller.getPlayersForCard(player);
 
 		if (playersForCard.isEmpty()) {
 			System.out.println("There are no players to give treasure cards to");

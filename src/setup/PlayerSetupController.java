@@ -33,29 +33,48 @@ public class PlayerSetupController {
 	}
 
 	/**
-	 * COntructs the PlayerSetupController
-	 * @param model
+	 * Constructs the PlayerSetupController
+	 * @param the model
 	 */
 	private PlayerSetupController(PlayerSetup model) {
 		this.model=model;
 	}
 
+	/**
+	 * Gets the list of available roles
+	 * @return list of remaining roles
+	 */
 	public ArrayList<String> getRoleList(){
 		return	model.getRoleList();
 	}
 
+	/**
+	 * Removes role from possible list to prevent more than one players having the same role
+	 * @param zero
+	 */
 	public void removeRole(int zero) {
 		model.removeRole(zero);
 	}
 
+	/**
+	 * Shuffles the role list
+	 */
 	public void shuffleRoles() {
 		model.shuffleRoles();
 	}
 
+	/**
+	 * adds a player to the player list
+	 * @param player
+	 */
 	public void addPlayer(Player player) {
 		model.addPlayer(player);
 	}
 
+	/**
+	 * gets the list of players
+	 * @return list of players
+	 */
 	public ArrayList<Player> getListofPlayers() {
 		return model.getPlayerList();
 	}

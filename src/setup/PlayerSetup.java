@@ -37,12 +37,16 @@ public class PlayerSetup {
 	
 	/**
 	 * Gets the list of available roles
-	 * @return rolelist
+	 * @return list of remaining roles
 	 */
 	public ArrayList<String> getRoleList(){
 		return roleList;
 	}
 	
+	/**
+	 * Removes role from possible list to prevent more than one players having the same role
+	 * @param zero
+	 */
 	public void removeRole(int zero) {
 		roleList.remove(zero);
 	}
@@ -54,10 +58,18 @@ public class PlayerSetup {
 		Collections.shuffle(roleList);
 	}
 	
+	/**
+	 * adds a player to the player list
+	 * @param player
+	 */
 	public void addPlayer(Player player) {
 		playerList.addPlayer(player);
 	}
 	
+	/**
+	 * gets the list of players
+	 * @return list of players
+	 */
 	public ArrayList<Player> getPlayerList(){
 		return playerList.getListOfPlayers();
 	}
