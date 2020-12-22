@@ -3,14 +3,17 @@ package gameLogic;
 import java.util.ArrayList;
 import island.board.*;
 import island.cards.*;
-import island.enums.TileNames;
 import island.enums.TreasureNames;
 import observers.GameOverObserver;
-import observers.PlayerObserver;
 import players.*;
 
-public class GameManager {
+/**
+ * Singlton Class for the GameManger which runs the games logic
+ * @author Liam Fitzgerald and Hayley Chan
+ *
+ */
 
+public class GameManager {
 
 	private static GameManager theGameManager;
 
@@ -18,12 +21,18 @@ public class GameManager {
 	private PlayerList playerList;
 	private Player player;
 	
-	
+	/**
+	 * GameManager constructor
+	 */
 	private GameManager() {
 		isGameOver=false;
 		playerList= PlayerList.getInstance();
 	}
 
+	/**
+	 * Gets the instance of GameManager
+	 * @return theGameManager
+	 */
 	public static GameManager getInstance() {
 		if(theGameManager == null) {
 			theGameManager = new GameManager();
@@ -54,6 +63,10 @@ public class GameManager {
 		isGameOver=true;
 	}
 	
+	/**
+	 * gets the list of players
+	 * @return listOfPlayers
+	 */
 	public ArrayList<Player> getListOfPlayers(){
 		return playerList.getListOfPlayers();
 	}
