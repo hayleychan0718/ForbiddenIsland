@@ -60,6 +60,11 @@ public class Board{
         return null; 
     }
     
+    /**
+     * Gets a tile given a name as input
+     * @param name String name of the tile
+     * @return The tile on the board with the given name
+     */
 	public Tile getTile(String name) {
         for(int[] x: islandTiles) {
         	if(board[x[0]][x[1]].getNameString() == name) {

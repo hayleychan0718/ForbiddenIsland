@@ -13,6 +13,11 @@ import players.Engineer;
 import players.Pilot;
 import players.PlayerList;
 
+/**
+ * Unit testing game win condition
+ * @author Hayley Chan
+ *
+ */
 public class GameWinTest {
 	@Test
 	public void winGameTest() {

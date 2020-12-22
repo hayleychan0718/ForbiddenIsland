@@ -2,7 +2,6 @@ package island.cards;
 
 import java.util.ArrayList;
 
-import gameLogic.GameView;
 import island.board.Board;
 import island.board.Tile;
 import island.enums.TreasureNames;

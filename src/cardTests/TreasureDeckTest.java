@@ -12,6 +12,11 @@ import island.cards.TreasureDeck;
 import island.cards.WaterRiseCard;
 import players.Engineer;
 
+/**
+ * Unit tests for treasure deck
+ * @author Hayley Chan
+ *
+ */
 public class TreasureDeckTest {
 	// Test cards are dealt into the player's hand
 	@Test
