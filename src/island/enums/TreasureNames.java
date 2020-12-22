@@ -1,5 +1,10 @@
 package island.enums;
 
+/**
+ * TreasureNames Enumeration class that represents each treasure
+ * @author Hayley Chan and Liam Fitzgerald
+ *
+ */
 public enum TreasureNames {
 	TheEarthStone ("The Earth Stone", false),
 	TheStatueOfTheWind ("The Statue of The Wind", false),
@@ -41,9 +46,11 @@ public enum TreasureNames {
 	public void captureTreasure() {
 		this.captured = true;
 	}
-	/*
-	 * Overriding the toString Method to return name
+	
+	/**
+	 * Override toString() method to return string of the name of the treasure
 	 */
+	@Override
 	public String toString() {
 		return name;
 	}

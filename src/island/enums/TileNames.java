@@ -1,6 +1,10 @@
 package island.enums; 
 
-//comment
+/**
+ * TileNames Enumeration class of all the tiles on the board
+ * @author Hayley Chan and Liam Fitzgerald
+ *
+ */
 public enum TileNames {
 	Watchtower ("Watch Tower"),
 	Observatory ("Observatory"),
@@ -29,10 +33,18 @@ public enum TileNames {
 	
 	private final String name;
 	
+	/**
+	 * Constructor for TileNames enum
+	 * @param name String of the name of the tile
+	 */
 	private TileNames(String name) {
 		this.name = name;
 	}
 	
+	/**
+	 * Get the name of the tile as a string
+	 * @return String name of the tile
+	 */
 	public String getString() {
 		return name;
 	}
