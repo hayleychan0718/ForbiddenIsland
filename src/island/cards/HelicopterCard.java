@@ -21,7 +21,7 @@ public class HelicopterCard extends TreasureDeckCard{
 	public HelicopterCard() {
 		super.name = "Helicopter Lift";
 	}
-	
+
 	/**
 	 * Play a helicopter card. Move chosen player(s) to a chosen tile on the board.
 	 * @param chosenTile The tile to move to
@@ -32,7 +32,7 @@ public class HelicopterCard extends TreasureDeckCard{
 			player.movePlayerPawn(chosenTile);
 		}
 	}
-	
+
 	/**
 	 * Checks if you can win the game with the helicopter card
 	 * @return True if you can win the game, false otherwise
@@ -41,30 +41,26 @@ public class HelicopterCard extends TreasureDeckCard{
 		ArrayList<Player> playersList = PlayerList.getInstance().getListOfPlayers();
 		TreasureNames treasureNames[] = TreasureNames.values();
 		Boolean winCondition = false;
-		Boolean loseCondition = false;
 
-		while(winCondition ==false && loseCondition==false) {
-			for(Player player: playersList) {
-				if(player.getPlayerPawnTile().getNameString() != "Fool's Landing") {
-					loseCondition = true;
-				}
-			}
-			for(TreasureNames treasure: treasureNames) {
-				if(!treasure.isCaptured())
-					loseCondition = false;
-			}
-			winCondition=true;
+		for(Player player: playersList) {
+			if(player.getPlayerPawnTile().getNameString() != "Fool's Landing") 
+				return winCondition = false;
 		}
-		return winCondition;
+		for(TreasureNames treasure: treasureNames) {
+			if(!treasure.isCaptured())
+				return winCondition = false;
+		}
+
+		return winCondition = true;
 	}
-	
-    /**
-     * Win the game with the helicopter card
-     */
+
+	/**
+	 * Win the game with the helicopter card
+	 */
 	public static void winHelicopter() {
 		GameView.getInstance().gameWin();
 	}
-	
+
 	/**
 	 * Return a list of options for the helicopter card
 	 * @return List of tiles that are present on the board
