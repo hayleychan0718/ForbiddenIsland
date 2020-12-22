@@ -12,7 +12,6 @@ import island.cards.HelicopterCard;
 import players.Engineer;
 import players.Navigator;
 import players.Player;
-import players.PlayerList;
 
 /**
  * Unit test for playing helicopter card
