@@ -12,8 +12,9 @@ import island.enums.TreasureNames;
 import pawns.Pawn;
 
 public abstract class Player {
-
-
+	/*
+	 * Instance variables
+	 */
 	private String playerName;
 	private String symbol;
 	protected int playerNumber;
@@ -21,7 +22,6 @@ public abstract class Player {
 	protected Pawn playerPawn;
 	private int playerActions;
 	protected Board board;
-	
 
 	/**
 	 * Creates everything needed for Player class
@@ -157,18 +157,34 @@ public abstract class Player {
 		return playerName + " (" + this.getClass().getSimpleName() + ")";
 	}
 
+	/**
+	 * Gets the the player's name
+	 * @return String of player's name
+	 */
 	public String getName() {
 		return playerName;
 	}
 
+	/**
+	 * Get the cards of a player's hand
+	 * @return List of cards in the player's hand
+	 */
 	public ArrayList<Card> getCards(){
 		return playerHand.getCards();
 	}
 
+	/**
+	 * Gets the player's hand 
+	 * @return The player's hand
+	 */
 	public Hand getHand() {
 		return playerHand;
 	}
 
+	/**
+	 * Gets the tile that the player's pawn is on
+	 * @return
+	 */
 	public Tile getPlayerPawnTile() {
 		return 	playerPawn.getPawnTile();
 	}
@@ -196,6 +212,9 @@ public abstract class Player {
 		playerPawn.movePawn(tile);
 	}
 
+	/**
+	 * Decrease player's actions by one
+	 */
 	public void decrementPlayerActions() {
 		playerActions--;
 	}
@@ -210,7 +229,7 @@ public abstract class Player {
 	
 	/**
 	 * Returns the chosen symbol to represent the player on the board
-	 * @return the choosen symbol
+	 * @return the chosen symbol
 	 */
 	public String getSymbol() {
 		return symbol;
