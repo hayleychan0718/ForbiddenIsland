@@ -1,12 +1,14 @@
 package playerTest;
 
-import static org.junit.Assert.*;
-
 import org.junit.Assert;
 import org.junit.Test;
-
 import players.*;
 
+/**
+ * Unit test to test the functionality of the Messenger
+ * @author Liam Fitzgerald and Hayley Chan
+ *
+ */
 
 public class MessengerTest {
 

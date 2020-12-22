@@ -1,8 +1,6 @@
 package setup;
 
 import java.util.ArrayList;
-import java.util.Collections;
-
 import players.Diver;
 import players.Engineer;
 import players.Explorer;
@@ -13,7 +11,7 @@ import players.Player;
 
 /**
  * Singleton class to implement the controller needed for the player set up
- * @author liam FItzgerald
+ * @author liam FItzgerald and Hayley Chan
  *
  */
 
@@ -23,13 +21,21 @@ public class PlayerSetupController {
 
 	private static PlayerSetupController controller = null;
 
+	/**
+	 * Gets the instance of the PlayerSetupCOntroller
+	 * @param model
+	 * @return controller
+	 */
 	public static PlayerSetupController getInstance(PlayerSetup model) {
 		if(controller ==null)
 			controller = new PlayerSetupController(model);
 		return controller;
 	}
 
-	//PlayerSetupController constructor
+	/**
+	 * COntructs the PlayerSetupController
+	 * @param model
+	 */
 	private PlayerSetupController(PlayerSetup model) {
 		this.model=model;
 	}

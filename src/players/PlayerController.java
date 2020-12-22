@@ -6,12 +6,9 @@ import island.cards.Card;
 import island.cards.Hand;
 import island.enums.TreasureNames;
 
-
-import players.*;
-
 /**
  * Singleton Class to implement the Player Controller
- * @author Liam FItzgerald
+ * @author Liam Fitzgerald and Hayley Chan
  *
  */
 public class PlayerController {
@@ -21,6 +18,10 @@ public class PlayerController {
 	private static PlayerController controller = null;
 
 
+	/**
+	 * Gets instance of the PlayerController
+	 * @return controller
+	 */
 	public static PlayerController getInstance() {
 		if(controller == null) {
 			model = PlayerList.getInstance().getListOfPlayers();
@@ -30,8 +31,6 @@ public class PlayerController {
 		else {
 			return controller;
 		}
-	}
-	private PlayerController() {;
 	}
 
 	public ArrayList<Tile> getStandardMoveTiles(Player player){

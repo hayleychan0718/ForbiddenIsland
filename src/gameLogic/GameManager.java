@@ -43,7 +43,7 @@ public class GameManager {
 	/**
 	 * Checks whether a players turn is over
 	 * @param player
-	 * @return boolean
+	 * @return true/false
 	 */
 	public boolean isTurnOver(Player player) {
 		int remainingPlayerActions = player.getPlayerActions();
@@ -65,7 +65,7 @@ public class GameManager {
 	
 	/**
 	 * gets the list of players
-	 * @return listOfPlayers
+	 * @return list Of Players
 	 */
 	public ArrayList<Player> getListOfPlayers(){
 		return playerList.getListOfPlayers();
@@ -114,7 +114,7 @@ public class GameManager {
 
 	/**
 	 * Returns true if a sunk player can move false otherwise
-	 * @return boolean
+	 * @return true/false
 	 */
 	public boolean canSunkenPlayerMove(Player player) {
 		if(player.getForcedMoveableTiles().isEmpty()) {

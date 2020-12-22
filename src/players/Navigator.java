@@ -1,6 +1,5 @@
 package players;
 
-import island.board.Board;
 import pawns.Pawn;
 
 /**
@@ -25,7 +24,13 @@ public class Navigator extends Player {
 
 	}
 
-	
+	/**
+	 * Gets the instance of the Navigator
+	 * @param playerName
+	 * @param playerNumber
+	 * @param symbol
+	 * @return theNavigator
+	 */
 	public static Navigator getInstance(String playerName, int playerNumber, String symbol) {
 		if(theNavigator == null) {
 			theNavigator = new Navigator(playerName ,playerNumber, symbol);
@@ -33,7 +38,4 @@ public class Navigator extends Player {
 		return theNavigator;
 	}
 
-	public static Navigator returnInstance() {
-		return theNavigator;
-	}
 }

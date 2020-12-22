@@ -1,16 +1,11 @@
 package setup;
 
-import java.util.ArrayList;
 import java.util.Scanner;
-
 import gameLogic.GameView;
 import gameLogic.*;
 import island.board.Board;
-import island.board.Tile;
 import island.cards.CardController;
 import island.cards.CardView;
-import island.enums.TileNames;
-import island.enums.TreasureNames;
 import players.*;
 
 /**

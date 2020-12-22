@@ -1,15 +1,12 @@
 package players;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-
-import island.board.Board;
 import island.board.Tile;
 import pawns.Pawn;
 
 /**
  * Singleton class to implement the Pilot extends Player
- * @author Liam Fitzgerald
+ * @author Liam Fitzgerald and Hayley Chan
  *
  */
 
@@ -30,6 +27,13 @@ public class Pilot extends Player {
 
 	}
 
+	/**
+	 * Gets instance of Pilot class
+	 * @param playerName
+	 * @param playerNumber
+	 * @param symbol
+	 * @return thePilot
+	 */
 	public static Pilot getInstance(String playerName, int playerNumber, String symbol) {
 		if(thePilot == null) {
 			thePilot = new Pilot(playerName ,playerNumber, symbol);
@@ -37,9 +41,6 @@ public class Pilot extends Player {
 		return thePilot;
 	}
 
-	public static Pilot returnInstance() {
-		return thePilot;
-	}
 	@Override
 	/**
 	 * Pilot can move to any present tile when forced movement

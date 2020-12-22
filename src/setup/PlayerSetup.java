@@ -2,20 +2,11 @@ package setup;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-import javax.tools.DiagnosticCollector;
-
-import island.board.Board;
 import players.*;
-import utility.Utility;
 
 /**
  * Singleton Model used for the player set up at the players at he start of the game 
- * @author Liam Fitzgerald
+ * @author Liam Fitzgerald and Hayley Chan
  *
  */
 
@@ -25,7 +16,10 @@ public class PlayerSetup {
 	private ArrayList<String> roleList;
 	private static PlayerSetup playerSetup;
 
-	
+	/**
+	 * Gets the instance of the PlayerSetup
+	 * @return playerSetup
+	 */
 	public static PlayerSetup getInstance() {
 		if(playerSetup == null)
 			playerSetup = new PlayerSetup();

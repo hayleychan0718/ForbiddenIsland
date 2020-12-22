@@ -1,14 +1,11 @@
 package players;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-
-import island.board.Board;
 import pawns.Pawn;
 
 /**
  * Singleton class to implement the Messenger extends player
- * @author Liam Fitzgerald
+ * @author Liam Fitzgerald and Hayley Chan
  *
  */
 
@@ -29,14 +26,17 @@ public class Messenger extends Player{
 
 	}
 
+	/**
+	 * Gets instance of the Messenger class
+	 * @param playerName
+	 * @param playerNumber
+	 * @param symbol
+	 * @return theMessenger
+	 */
 	public static Messenger getInstance(String playerName, int playerNumber, String symbol) {
 		if(theMessenger == null) {
 			theMessenger = new Messenger(playerName ,playerNumber, symbol);
 		}
-		return theMessenger;
-	}
-
-	public static Messenger returnInstance() {
 		return theMessenger;
 	}
 	

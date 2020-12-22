@@ -3,12 +3,9 @@ package players;
 /**
  * Abstract Class that sets up the base player class
  * Extended by Diver,Engineer,Explorer,Messenger,Navigator,Pilot
- * @author Liam Fitzgerald
+ * @author Liam Fitzgerald and Hayley Chan
  */
 import java.util.*;
-
-import org.junit.Assert;
-
 import island.board.*;
 import island.cards.*;
 import island.enums.TreasureNames;
@@ -22,7 +19,7 @@ public abstract class Player {
 	protected int playerNumber;
 	private Hand playerHand;
 	protected Pawn playerPawn;
-	protected int playerActions;
+	private int playerActions;
 	protected Board board;
 	
 
@@ -43,7 +40,7 @@ public abstract class Player {
 	
 	/**
 	 * Gets the current list of move able tile for the player
-	 * @return moveableTiles
+	 * @return List of standard moveable Tiles
 	 */
 	public ArrayList<Tile> getStandardMoveableTiles() {  
 		Tile pawnTile  = getPlayerPawnTile();
@@ -60,7 +57,7 @@ public abstract class Player {
 
 	/**
 	 * Gets the current list of tiles that a player can shore up
-	 * @return shoreableTiles
+	 * @return List of Shore able Tiles
 	 */
 	public ArrayList<Tile> getShoreableTiles() {  
 		Tile pawnTile  =getPlayerPawnTile();
@@ -78,7 +75,7 @@ public abstract class Player {
 	
 	/**
 	 * Gets the list of tiles a player can move to when their tile has been sunk
-	 * @return ForcedMoveableTiles
+	 * @return List Forced MoveableTiles
 	 */
 	public ArrayList<Tile> getForcedMoveableTiles(){ 
 		return getStandardMoveableTiles();
@@ -86,7 +83,7 @@ public abstract class Player {
 	
 	/**
 	 * Gets the list the list of Players a player can give a card to
-	 * @return
+	 * @return List of Possible Players for Card
 	 */
 	public ArrayList<Player> getPlayersForCard() { 
 		ArrayList<Player> playersForCard = new ArrayList <Player>();
@@ -129,7 +126,7 @@ public abstract class Player {
 	}
 	
 	/**
-	 * Checks if the players is on a treausre tile
+	 * Checks if the players is on a treasure tile
 	 * @return true/false
 	 */
 	public boolean onTreasureTile() {
@@ -213,7 +210,7 @@ public abstract class Player {
 	
 	/**
 	 * Returns the chosen symbol to represent the player on the board
-	 * @return
+	 * @return the choosen symbol
 	 */
 	public String getSymbol() {
 		return symbol;

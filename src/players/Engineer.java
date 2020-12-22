@@ -1,11 +1,10 @@
 package players;
 
-import island.board.Board;
 import pawns.Pawn;
 
 /**
  * Singleton class to implement the Engineer extends player, special ability implemented in player view
- * @author Liam Fitzgerald
+ * @author Liam Fitzgerald and Hayley Chan
  *
  */
 
@@ -24,15 +23,17 @@ public class Engineer extends Player {
 		playerPawn=new Pawn(board.getTile("Bronze Gate")); 
 	}
 
-
+	/**
+	 * Gets the instance of the Engineer Class
+	 * @param playerName
+	 * @param playerNumber
+	 * @param symbol
+	 * @return
+	 */
 	public static Engineer getInstance(String playerName, int playerNumber, String symbol) {
 		if(theEngineer == null) {
 			theEngineer = new Engineer(playerName ,playerNumber, symbol);
 		}
-		return theEngineer;
-	}
-
-	public static Engineer returnInstance() {
 		return theEngineer;
 	}
 

@@ -1,15 +1,12 @@
 package players;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-
-import island.board.Board;
 import island.board.Tile;
 import pawns.Pawn;
 
 /**
  * Singleton class to implement the Explorer extends Player
- * @author Liam Fitzgerald
+ * @author Liam Fitzgerald and Hayley Chan
  *
  */
 
@@ -29,14 +26,17 @@ public class Explorer extends Player {
 
 	}
 
+	/**
+	 * Gets instance of the Explorer class 
+	 * @param playerName
+	 * @param playerNumber
+	 * @param symbol
+	 * @return
+	 */
 	public static Explorer getInstance(String playerName, int playerNumber, String symbol) {
 		if(theExplorer == null) {
 			theExplorer = new Explorer(playerName ,playerNumber, symbol);
 		}
-		return theExplorer;
-	}
-
-	public static Explorer returnInstance() {
 		return theExplorer;
 	}
 
@@ -53,7 +53,6 @@ public class Explorer extends Player {
 			if(tile.isPresent()==true) {
 				moveableTiles.add(tile);
 			}
-
 		}
 		return moveableTiles;
 	}

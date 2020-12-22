@@ -22,7 +22,6 @@ public class DiverTests {
 		Board board =Board.getInstance();
 		Diver diver = Diver.getInstance("Test", 1, "$");
 		
-		//System.out.println(diver.getStandardMoveableTiles());
 		
 		ArrayList<Tile> listOfPresentTiles = board.listOfTiles();
 		
