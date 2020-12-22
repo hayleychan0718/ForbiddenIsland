@@ -12,8 +12,8 @@ import observers.*;
 import utility.Utility;
 
 /**
- * CLass for the user INterface for the game manager
- * @author Liam Fitzgerald
+ * Class for the user Interface for the game manager
+ * @author Liam Fitzgerald and Hayley Chan
  *
  */
 

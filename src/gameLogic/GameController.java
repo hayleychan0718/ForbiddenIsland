@@ -6,11 +6,22 @@ import island.cards.Card;
 import island.cards.Hand;
 import players.*;
 
+/**
+ * Singleton class to implement the GameCOntroller
+ * @author Liam Fitzgerald and Hayley Chan
+ *
+ */
+
 public class GameController {
 
 	private GameManager model;
 	private static GameController controller = null;
 
+	/**
+	 * Get instance of the GameController
+	 * @param model
+	 * @return controller
+	 */
 	public static GameController getInstance(GameManager model) {
 		if(controller == null)
 			controller = new GameController(model);
