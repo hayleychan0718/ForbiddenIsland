@@ -6,9 +6,18 @@ import observers.PlayerObserver;
 import players.*;
 import players.PlayerList;
 
+/**
+ * Tests the functionality of the PlayerObserver, the other observers tests are integrate in the gameOver test
+ * @author Liam Fitzgerald and Hayley Chan
+ *
+ */
+
 public class playerObserverTest {
 
 	@Test
+	/**
+	 * Tests the PlayerObserver
+	 */
 	public void testPlayerObserver() {
 		PlayerList playerList = PlayerList.getInstance();
 
@@ -26,13 +35,13 @@ public class playerObserverTest {
 
 		Assert.assertTrue("List of sunken Players should be originally empty", playerObserver.getSunkenPlayers().isEmpty());
 
-		tester1.getPlayerPawnTile().setNotPresent();
+		tester1.getPlayerPawnTile().sinkTile();;
 
 		Assert.assertTrue("Tester1 has now been sunk and should be in the list of sunken players", playerObserver.getSunkenPlayers().contains(tester1));
 		
-		tester2.getPlayerPawnTile().setNotPresent();
-		tester3.getPlayerPawnTile().setNotPresent();
-		tester4.getPlayerPawnTile().setNotPresent();
+		tester2.getPlayerPawnTile().sinkTile();
+		tester3.getPlayerPawnTile().sinkTile();
+		tester4.getPlayerPawnTile().sinkTile();
 		
 		Assert.assertTrue("Tester2 has now been sunk and should be in the list of sunken players", playerObserver.getSunkenPlayers().contains(tester2));
 		Assert.assertTrue("Tester3 has now been sunk and should be in the list of sunken players", playerObserver.getSunkenPlayers().contains(tester3));

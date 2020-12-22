@@ -210,7 +210,7 @@ public abstract class Player {
 	
 	/**
 	 * Returns the chosen symbol to represent the player on the board
-	 * @return
+	 * @return the choosen symbol
 	 */
 	public String getSymbol() {
 		return symbol;

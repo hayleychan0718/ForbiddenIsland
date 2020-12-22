@@ -18,6 +18,10 @@ public class PlayerController {
 	private static PlayerController controller = null;
 
 
+	/**
+	 * Gets instance of the PlayerController
+	 * @return controller
+	 */
 	public static PlayerController getInstance() {
 		if(controller == null) {
 			model = PlayerList.getInstance().getListOfPlayers();
@@ -27,8 +31,6 @@ public class PlayerController {
 		else {
 			return controller;
 		}
-	}
-	private PlayerController() {;
 	}
 
 	public ArrayList<Tile> getStandardMoveTiles(Player player){
