@@ -2,8 +2,10 @@ package island.cards;
 
 import java.util.ArrayList;
 
+import gameLogic.WaterMeter;
 import island.board.Tile;
 import players.Player;
+import players.PlayerList;
 
 /**
  * Card controller MVC
@@ -100,4 +102,29 @@ public class CardController {
     public ArrayList<Tile> helicopterOptions(){
     	return HelicopterCard.helicopterOptions();
     }
+
+    /**
+     * Get list of players to move with the helicopter card
+     * @return List of players that can move
+     */
+	public ArrayList<Player> playersForHelicopter() {
+		return PlayerList.getInstance().getPlayersForHelicopter();
+	}
+
+	/**
+	 * Get the player's playable cards i.e. sandbag and helicopter cards
+	 * @param player The player
+	 * @return List of cards that player can play
+	 */
+	public ArrayList<TreasureDeckCard> getPlayableCards(Player player) {
+		return player.getHand().getPlayableCards();
+	}
+
+	/**
+	 * Gets the water meter
+	 * @return Instance of water meter
+	 */
+	public WaterMeter getWaterMeter() {
+		return WaterMeter.getinstance();
+	}
 }
