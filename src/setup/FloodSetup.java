@@ -5,6 +5,11 @@ import island.board.Tile;
 import island.cards.FloodCard;
 import island.cards.FloodDeck;
 
+/**
+ * Setting up the game. Flooding 6 tiles at the start of game.
+ * @author Hayley Chan and Liam Fitzgerald
+ * 
+ */
 public class FloodSetup {
 	/*
 	 * Instance variables
@@ -19,6 +24,10 @@ public class FloodSetup {
 		this.floodDeck = FloodDeck.getInstance();
 	}
 	
+	/**
+	 * Creating and instance of the flood setup
+	 * @return
+	 */
     public static FloodSetup getInstance(){
         if(floodSetup == null){
         	floodSetup = new FloodSetup();

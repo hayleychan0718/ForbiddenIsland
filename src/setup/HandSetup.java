@@ -8,6 +8,12 @@ import island.cards.WaterRiseCard;
 import players.Player;
 import players.PlayerList;
 
+/**
+ * Setting up each player's hand at the start of the game. Each player has 2 cards from the 
+ * treasure deck at start of the game.
+ * @author Hayley Chan and Liam Fitzgerald
+ *
+ */
 public class HandSetup {
 	/*
 	 * Instance variables
@@ -16,13 +22,19 @@ public class HandSetup {
 	private List<Player> listOfPlayers;
 	private static HandSetup handSetup;
 	
+	/**
+	 * Creaing instance of hand setup
+	 * @return
+	 */
 	public static HandSetup getInstance() {
 		if(handSetup == null)
 			handSetup = new HandSetup();
 		return handSetup;
 	}
 	
-	
+	/**
+	 * Hand setup constructor
+	 */
 	public HandSetup() {
 		this.treasureDeck = TreasureDeck.getInstance();
 		this.listOfPlayers = PlayerList.getInstance().getListOfPlayers();
