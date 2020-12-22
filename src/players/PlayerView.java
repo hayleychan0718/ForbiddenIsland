@@ -219,7 +219,7 @@ public class PlayerView {
 		}
 		System.out.println("You can give a card to the following players:");
 		Utility.printOptions(playersForCard);
-		int userInput = Utility.acceptableInput(0, playersForCard.size(), inputScanner); //No option to cancel movement
+		int userInput = Utility.acceptableInput(0, playersForCard.size(), inputScanner); 
 		
 		Player selectedPlayer = playersForCard.get(userInput);
 		return selectedPlayer;
