@@ -89,5 +89,9 @@ public class GameController {
 	public boolean checksHand(Hand playerHand) {
 		return model.checksHand(playerHand);
 	}
+
+	public int getWaterMeter() {
+		return model.getWaterMeter();
+	}
 }
 

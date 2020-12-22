@@ -6,7 +6,6 @@ import java.util.Stack;
 
 import island.enums.TreasureNames;
 import players.Player;
-import players.PlayerView;
 
 /**
  * Treasure Deck singleton class
@@ -76,7 +75,8 @@ public class TreasureDeck extends Deck{
 			}
 			Card drawnCard = treasureStack.pop();
 			if(drawnCard instanceof WaterRiseCard) {
-				CardView.getInstance().doWaterRise(player);
+				WaterRiseCard.play();
+				drawnCardList.add(drawnCard);
 				discardStack.add(drawnCard);
 			}
 			else {

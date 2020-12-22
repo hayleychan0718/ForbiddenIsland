@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import gameLogic.GameView;
-import gameLogic.WaterMeter;
 import island.board.Tile;
 import players.Player;
 import utility.Utility;
@@ -166,7 +165,7 @@ public class CardView {
 		while(repeat==true) {
 			System.out.println("Who do you want to move to " + chosenTile + "?");
 			Utility.printOptions(playersForHelicopter);
-			int playerIndex = Utility.acceptableInput(0, playersForHelicopter.size(), inputScanner);
+			int playerIndex = Utility.acceptableInput(0, playersForHelicopter.size()-1, inputScanner);
 			chosenPlayers.add(playersForHelicopter.get(playerIndex));	
 			playersForHelicopter.remove(playerIndex);
 			if(!playersForHelicopter.isEmpty()) { 
@@ -228,18 +227,4 @@ public class CardView {
 		int tileIndex = Utility.acceptableInput(0, listOfFloodedTiles.size()-1, inputScanner);
 		return listOfFloodedTiles.get(tileIndex);
 	}
-	
-	/**
-	 * Water rise card has increased the water meter level
-	 * @param player The player
-	 */
-	public void doWaterRise(Player player) {
-		//WaterMeter waterMeter = WaterMeter.getinstance(); //use controller for these
-		WaterMeter waterMeter = controller.getWaterMeter();
-		System.out.println("\nPlay Water Rise card...");
-		controller.doWaterRise();
-		System.out.println("Water Level increased.\nCurrent water level: " + waterMeter.getWaterLevel());
-		System.out.println("Flood Deck reshuffled.\n");
-	}
-
 }

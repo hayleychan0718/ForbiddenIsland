@@ -6,6 +6,7 @@ import island.board.Tile;
 import island.cards.Card;
 import island.cards.Hand;
 import island.cards.TreasureDeckCard;
+import island.cards.WaterRiseCard;
 import players.*;
 import observers.*;
 import utility.Utility;
@@ -143,15 +144,26 @@ public class GameView {
 		System.out.println("\nDrawing 2 cards from treasure deck...");
 		Hand playerHand = controller.getHand(player);
 		ArrayList<Card> cardsDrawn = controller.treasureDeckTurn(player);
-		for(Card card: cardsDrawn) {
-			System.out.println("Adding " + card.getName() + " to " + player + "'s hand...");
-		}
+		printCardsDrawn(cardsDrawn, player);
 		if(controller.checksHand(playerHand)) {
 			tooManyCardsPrompt(player, playerHand, inputScanner);
 		}
 		ArrayList<TreasureDeckCard> playableCards = playerHand.getPlayableCards();
 		if(!playableCards.isEmpty())
 			runCardView(inputScanner, player);
+	}
+	
+	public void printCardsDrawn(ArrayList<Card> cardsDrawn, Player player) {
+		for(Card card: cardsDrawn) {
+			if(card instanceof WaterRiseCard) {
+				int waterLevel = controller.getWaterMeter();
+				System.out.println("\nPlay Water Rise card...");
+				System.out.println("Water Level increased.\nCurrent water level: " + waterLevel);
+				System.out.println("Flood Deck reshuffled.\n");
+			}
+			else
+				System.out.println("Adding " + card + " to " + player + "'s hand...");
+		}
 	}
 	
 	public void runCardView(Scanner inputScanner, Player player) {

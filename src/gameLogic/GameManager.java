@@ -127,4 +127,8 @@ public class GameManager {
 		else 
 			return false;
 	}
+
+	public int getWaterMeter() {
+		return WaterMeter.getinstance().getWaterLevel();
+	}
 }
