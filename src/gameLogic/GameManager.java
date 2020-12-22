@@ -143,7 +143,7 @@ public class GameManager {
 			return false;
 	}
 
-
-		
-	
+	public int getWaterMeter() {
+		return WaterMeter.getinstance().getWaterLevel();
+	}
 }
