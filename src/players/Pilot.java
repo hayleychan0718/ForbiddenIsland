@@ -43,8 +43,8 @@ public class Pilot extends Player {
 
 	@Override
 	/**
-	 * Pilot can move to any present tile when forced movement
-	 * @return moveableTiles
+	 * Pilot can move to any present tile when forced to move due to their tile sinking
+	 * @return List of tile the player can move to
 	 */
 	public ArrayList<Tile> getForcedMoveableTiles(){ 
 		

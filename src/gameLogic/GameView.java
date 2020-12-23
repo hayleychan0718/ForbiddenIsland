@@ -155,6 +155,7 @@ public class GameView {
 				isTurnOver=controller.isTurnOver(player);	
 			} 
 			treasureDeckTurn(player, inputScanner);
+			playerView.giveTreasureCard(player, inputScanner);
 			floodDeckTurn();
 		}
 

@@ -214,10 +214,10 @@ public class PlayerView {
 		ArrayList<Player> playersForCard =controller.getPlayersForCard(player);
 
 		if (playersForCard.isEmpty()) {
-			System.out.println("There are no players to give treasure cards to");
+			System.out.println("\nThere are no players to give treasure cards to");
 			return null;
 		}
-		System.out.println("You can give a card to the following players:");
+		System.out.println("\nYou can give a card to the following players:");
 		Utility.printOptions(playersForCard);
 		int userInput = Utility.acceptableInput(0, playersForCard.size(), inputScanner); 
 		

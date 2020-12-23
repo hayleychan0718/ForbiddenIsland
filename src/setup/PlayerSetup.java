@@ -67,7 +67,7 @@ public class PlayerSetup {
 	}
 	
 	/**
-	 * Gets the list of players
+	 *   Gets the list of players
 	 * @return list of players
 	 */
 	public ArrayList<Player> getPlayerList(){

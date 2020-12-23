@@ -39,8 +39,8 @@ public abstract class Player {
 	}
 	
 	/**
-	 * Gets the current list of move able tile for the player
-	 * @return List of standard moveable Tiles
+	 * Gets the current list of move able tile for the player's standard movement
+	 * @return List of standard move able Tiles
 	 */
 	public ArrayList<Tile> getStandardMoveableTiles() {  
 		Tile pawnTile  = getPlayerPawnTile();
@@ -75,7 +75,7 @@ public abstract class Player {
 	
 	/**
 	 * Gets the list of tiles a player can move to when their tile has been sunk
-	 * @return List Forced MoveableTiles
+	 * @return List of Forced Moveable Tiles
 	 */
 	public ArrayList<Tile> getForcedMoveableTiles(){ 
 		return getStandardMoveableTiles();
@@ -127,7 +127,7 @@ public abstract class Player {
 	
 	/**
 	 * Checks if the players is on a treasure tile
-	 * @return true/false, ture if on a Treausre Tile
+	 * @return true/false, true if on a Treasure Tile
 	 */
 	public boolean onTreasureTile() {
 		if(getPlayerPawnTile().hasTreasure()) {
@@ -138,8 +138,8 @@ public abstract class Player {
 	
 	/**
 	 * Gives a card to another player
-	 * @param toGive
-	 * @param toRecieve
+	 * @param toGive Card to give
+	 * @param to Receive hand of receiving player
 	 */
 	public void giveCard(Card toGive, Hand toRecieve) {
 		playerHand.giveCard(toGive, toRecieve);
@@ -198,7 +198,7 @@ public abstract class Player {
 	}
 	
 	/**
-	 * Re stocks the players actions
+	 * Re stocks the players actions by adding 3 actions, a player may start turn on two if the saved a tile or gave a card just after their turn
 	 */
 	public void ReStockActions() {
 		playerActions +=3;
